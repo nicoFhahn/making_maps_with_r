@@ -1,0 +1,9 @@
+---
+title: "index"
+author: "Nico Hahn"
+date: "2 8 2019"
+output: html_document
+---
+
+# Intro
+Eine der wichtigsten Aspekte bei der Arbeit mit geographischen Daten ist die Darstellung und Kommunikation der Resultate. Diese sollten möglichst kreativ sein, ohne an Intuitivität zu verlieren. Am häufigsten wird dabei auch statische Karten zurückgegriffen, wofür in R beispielsweise die Funktion `plot()` verwendet werden kann. Ein bessere Möglichkeit ist jedoch, auf Pakete zurückzugreifen, die speziell entwickelt wurden um geograhische Daten zu visualisieren. Ein solches Pakete ist **tmap**, das im folgenden Kapitel behandelt wird.
