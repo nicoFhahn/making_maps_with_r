@@ -18,6 +18,7 @@ library(maps)
 library(raster)
 library(grid)
 library(leaflet)
+tmap_mode("plot")
 # load shapefiles for bavaria
 bavaria <- st_read("datasets/bavaria.shp")
 # keep some data
@@ -67,6 +68,10 @@ cities <- st_intersection(cities, st_union(europe_shape))
 europe_shape <- st_cast(europe_shape, "MULTILINESTRING")
 
 rosenheim <- read_sf("datasets/rosenheim.shp")
+
+us <- read.csv("datasets/us_energy_census.csv")
+honey <- read.csv("honeyproduction.csv")
+abrev <- readxl::read_xlsx("abbrev.xlsx")
 ```
 
 
@@ -245,7 +250,7 @@ tmap_arrange(l1, l2, l3, l4, ncol = 2)
 ```
 
 Außerdem kann Schriftart und -größe geändert werden, sowie mit Hilfe visueller Filter, beispielsweise Sepia oder Schwarz-Weiß, das Aussehen weiter angepasst werden.
-Durch Verwendung von `tm_style()` können vordefinierte Stile verwendet werden, um Karten zum Beispiel einen Old-School-Look zu geben oder sie für Farbenblinde zu optimieren. Einen Überblick über die verfügbaren Stile bietet die Funktion `tmap_style_catalog()`, die im aktuellen Arbeitsverzeichnis einen Ordner anlegt, der verschiedene Karten enthält.
+Durch Verwendung von `tm_style()` können vordefinierte Stile verwendet werden, um Karten zum Beispiel einen Old-School-Look zu geben oder sie für Farbenblinde zu optimieren. Einen ÃÂberblick über die verfügbaren Stile bietet die Funktion `tmap_style_catalog()`, die im aktuellen Arbeitsverzeichnis einen Ordner anlegt, der verschiedene Karten enthält.
 ```{r, eval=FALSE}
 tm_shape(bavaria) + tm_polygons(col = "Art") + tm_style("classic")
 tm_shape(bavaria) + tm_polygons(col = "Art") + tm_style("col_blind")
@@ -287,6 +292,7 @@ us_states_alaska_ratio <- alaska_range / us_states_range
 ```
 
 Anschließend werden die drei Karten erstellt. `legend.is.portrait = FALSE` sorgt dafür, dass die Legende horizontal angeordnet wird, anstatt von vertikal.
+MIT LEGENDE NICHT MEHR SKALIERT DUCK IT I HATE MY LIFE
 
 ```{r}
 us_states_map <- tm_shape(us_states2163) +
@@ -339,6 +345,86 @@ grid.lines(x = c(0, 1), y = c(0.58, 0.58), gp = gpar(lty = 2))
 grid.lines(x = c(0, 0.2), y = c(0.33, 0), gp = gpar(lty = 2))
 ```
 
+## Facettierte und animierte Karten
+Neben der Möglichkeit verschiedene Elemente der Karten basierend auf einer Variablen zu ändern, können Karten basierend auf einer Variable in mehrere Karten unterteilt werden. Was in **ggplot2** mit `facet_wrap()` gemacht wird, wird in **tmap** mit `tm_facets()` erledigt. Soll eine zeitliche Variable dargestellt werden, geht dies schlecht mit einer Karten, da sich die Geometrien häufig überlappen würden. Besonders in diesen Fällen ist die Verwendung facettierter Karten sinnvoll. Die Funktion hat fünf wichtige Argumente:
+    - `by`: Nach welcher Variable soll aufgeteilt werden?
+    - `nrow / ncol`: Die Anzahl der Zeilen beziehungsweise Spalten der Facetten
+    - `free.cords`: Soll jede einezlne Karte ein eigenes Koordinatensystem haben?
+    - `along`: Soll anstatt von Facetten eine Animation erstellt werden?
+```{r, include=FALSE}
+honey0912 <- honey[honey$year > 2008, ]
+honey0912 <- rbind(
+  honey0912,
+  matrix(NA, ncol = ncol(honey0912),
+         nrow = 4 * length(unique(abrev$state)[!unique(abrev$state) %in% unique(honey0912$state)]),
+         dimnames = list(
+           c(seq_len(4 * length(unique(abrev$state)[!unique(abrev$state) %in% unique(honey0912$state)]))),
+           colnames(honey0912)
+         )
+  )
+)
+honey0912$state <- as.character(honey0912$state)
+honey0912[is.na(honey0912$state), ]$state <- sort(rep(unique(abrev$state)[!unique(abrev$state) %in% unique(honey0912$state)], 4))
+honey0912[is.na(honey0912$year), ]$year <- rep(2009:2012, 10)
+honey0912 <-  merge.data.frame(honey0912, abrev, by = "state")
+colnames(honey0912)[c(1, 9)] <- c("short", "State")
+us_states$State <- us_states$NAME
+us_states <- us_states[us_states$NAME != "District of Columbia", ]
+honey0912 <- merge(honey0912, us_states[, 7:8], by = "State", all.y = TRUE)
+honey0912 <- st_as_sf(honey0912)
+```
+```{r, fig.align="center", fig.caption="Kosten eines Pfunds Honig in den USA", message=FALSE}
+tm_shape(honey0912) + tm_polygons(col = "priceperlb", style = "cont",
+                                  pal = viridis(10, direction = -1),
+                                  title = "Price in US$ per lb") +
+  tm_facets(by = "year", ncol = 2) +
+  tm_layout(legend.outside.size = 0.2)
+```
 
+Ein Problem dieser Art von Karten ist, dass mit mehr Ausprägungen einer Variable mehr Karten erstellt werden wodurch es schnell unübersichtlich wird und Unterschiede zwischen den einzelnen Karten nur noch sehr schwer zu erkennen sind. Dieses Problem wird von animierten Karten gelöst. In Papern können diese nicht dargestellt werden, allerdings werden heutzutage immer mehr Informationen online abgerufen, was dieses Problem mindert. Der Autor eines Artikels kann alternativ auch einen Link zu der animierten Karten in seinen Text einbauen. Wie bereits erwähnt kann mit dem Argument `along = TRUE` der Funktion `tm_facets()` eine animierte Karte erstellt werden. Mit Hilfe der Funktion `tmap_animation()` kann die erstellt Animation als GIF Datei abgespeichert werden, allerdings wird dafür die Software **ImageMagick** benötigt. Diese kann mit Hilfe des **installr** Pakets installiert werden.  (`installr::install.imagemagick()`) Die folgende Animation stellt ebenfalls den durchschnittlichen Preis eines Pfunds Honing in US$ dar, dieses mal über einen Zeitraum von 15 Jahren. Mittels `delay` kann angegeben werden, wieviel Millisekunden zwischen den einzelnen Bildern vergehen sollen. Mit `width` und `height` können noch die Maße in Pixel angegeben werden, mit `loop` ob das GIF eine Endlosschleife ist oder nach einer bestimmten Anzahl an Runden endet.
 
-##
+```{r, include = FALSE}
+tab <- table(honey$state)
+no_rows <- sum(15 - tab[tab < 15])
+new_mat <- matrix(NA, nrow = no_rows, ncol = 8)
+colnames(new_mat) <- colnames(honey)
+new_mat <- as.data.frame(new_mat)
+new_mat$state <- unlist(lapply(seq_len(length(tab[tab < 15])),
+                               function(x) {
+                                 rep(names(tab[tab < 15])[x], 15 - tab[tab < 15][x])
+                                 }
+                               )
+                        )
+new_mat$year <- unlist(lapply(seq_len(length(tab[tab < 15])), function(x, ...) {
+  years <- honey[honey$state == names(tab[tab < 15])[x], ]$year
+  all <- 1998:2012
+  all[!all %in% years]
+}))
+honey <- rbind(honey, new_mat)
+honey <- rbind(
+  honey,
+  matrix(NA, ncol = ncol(honey),
+         nrow = 15 * length(unique(abrev$state)[!unique(abrev$state) %in% unique(honey$state)]),
+         dimnames = list(
+           c(seq_len(15 * length(unique(abrev$state)[!unique(abrev$state) %in% unique(honey$state)]))),
+           colnames(honey)
+         )
+  )
+)
+honey$state <- as.character(honey$state)
+honey[is.na(honey$state), ]$state <- sort(rep(unique(abrev$state)[!unique(abrev$state) %in% unique(honey$state)], 15))
+honey[is.na(honey$year), ]$year <- rep(1998:2012, 6)
+honey <-  merge.data.frame(honey, abrev, by = "state")
+colnames(honey)[c(1, 9)] <- c("short", "State")
+us_states$State <- us_states$NAME
+us_states <- us_states[us_states$NAME != "District of Columbia", ]
+honey <- merge(honey, us_states[, 7:8], by = "State", all.y = TRUE)
+honey <- st_as_sf(honey)
+```
+```{r, eval = FALSE}
+honey_animation <- tm_shape(honey) + tm_polygons(col = "priceperlb", style = "cont",
+                                  pal = viridis(10, direction = -1)) +
+  tm_facets(by = "year", along = TRUE)
+tmap_animation(honey_animation, filename = "honey.gif", delay = 25)
+```
+

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4 Karten mit Shiny | Making maps with R</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4 Karten mit Shiny | Making maps with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4 Karten mit Shiny | Making maps with R" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Nico Hahn" />
+
+
+<meta name="date" content="2019-08-17" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="interaktive-karten.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.2/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.1.17/leaflet-providers.js"></script>
+<script src="libs/leaflet-providers-plugin-2.0.2/leaflet-providers-plugin.js"></script>
+<script src="libs/Leaflet.Sync-0.0.5/L.Map.Sync.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Intro</a></li>
+<li class="chapter" data-level="2" data-path="statische-karten.html"><a href="statische-karten.html"><i class="fa fa-check"></i><b>2</b> Statische Karten</a><ul>
+<li class="chapter" data-level="2.1" data-path="statische-karten.html"><a href="statische-karten.html#tmap"><i class="fa fa-check"></i><b>2.1</b> tmap</a></li>
+<li class="chapter" data-level="2.2" data-path="statische-karten.html"><a href="statische-karten.html#karten-objekte"><i class="fa fa-check"></i><b>2.2</b> Karten Objekte</a></li>
+<li class="chapter" data-level="2.3" data-path="statische-karten.html"><a href="statische-karten.html#asthetik"><i class="fa fa-check"></i><b>2.3</b> Ã„sthetik</a></li>
+<li class="chapter" data-level="2.4" data-path="statische-karten.html"><a href="statische-karten.html#layouts"><i class="fa fa-check"></i><b>2.4</b> Layouts</a></li>
+<li class="chapter" data-level="2.5" data-path="statische-karten.html"><a href="statische-karten.html#inset-maps"><i class="fa fa-check"></i><b>2.5</b> Inset maps</a></li>
+<li class="chapter" data-level="2.6" data-path="statische-karten.html"><a href="statische-karten.html#facettierte-und-animierte-karten"><i class="fa fa-check"></i><b>2.6</b> Facettierte und animierte Karten</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="interaktive-karten.html"><a href="interaktive-karten.html"><i class="fa fa-check"></i><b>3</b> Interaktive Karten</a></li>
+<li class="chapter" data-level="4" data-path="karten-mit-shiny.html"><a href="karten-mit-shiny.html"><i class="fa fa-check"></i><b>4</b> Karten mit Shiny</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Making maps with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="karten-mit-shiny" class="section level1">
+<h1><span class="header-section-number">4</span> Karten mit Shiny</h1>
+<p>Interaktive Karten können durch Popups deutlich mehr Informationen überliefern als statische Karten, doch auch sie haben ihre Limitationen:</p>
+<pre><code>- Es gibt nur ein fixes User Interface
+- Es gibt Probleme bei der Darstellung großer Datensätze
+- Die Verknüpfung der Karten mit anderen Graphen ist nur schwer möglich.</code></pre>
+<p>Eine Möglichkeit um diese Probleme anzugehen, stellen Web Apps dar. Das Grundprinzip einer Web App besteht aus zwei Teilen:</p>
+<pre><code>1. Das User Interface: Was sieht der Benutzer? Dies beinhaltet die Karte(n), Auswahlmöglichkeiten um die Karten zu gestalten, zusätzliche Grafiken, ...
+2. Der Server: Auf dem Server findet die Berechnung basierend auf den Inputs aus dem User Interface statt. Diesen Teil sieht der Benutzer nicht.</code></pre>
+<p>In R können diese Apps mit Hilfe des Pakets <strong>shiny</strong> entwickelt werden. Hierfür muss ein Skript mit Namen <code>app.R</code> erstellt werden, dass zwei Elemente enthält: <code>ui</code> und <code>server</code>. Alternativ können auch zwei Skripte <code>ui.R</code> und <code>server.R</code> erstellt werden. Im weiteren Verlauf wird von einem Skript, <code>app.R</code>, ausgegangen. Am Ende dieses Skript muss der Befehl <code>shinyApp(ui = ui, server = server)</code> stehen, damit die App gestartet werden kann.</p>
+<p>Ein einfaches Beispiel für eine App mit den Paketen <strong>shiny</strong> und <strong>leaflet</strong> könnte wie folgt aussehen:</p>
+<p>Zuerst werden die Paketen und der Bienen Datensatz aus Kapitel 2 geladen:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(leaflet)
+<span class="kw">library</span>(RColorBrewer)
+<span class="kw">library</span>(sf)
+<span class="kw">library</span>(shiny)
+<span class="kw">library</span>(stringr)
+honey &lt;-<span class="st"> </span><span class="kw">read_sf</span>(<span class="st">&quot;honey.shp&quot;</span>)
+<span class="kw">colnames</span>(honey)[<span class="dv">3</span><span class="op">:</span><span class="dv">8</span>] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Number_of_colonies&quot;</span>, <span class="st">&quot;Yield_per_colony&quot;</span>,
+                          <span class="st">&quot;Total_production&quot;</span>, <span class="st">&quot;Stocks&quot;</span>,<span class="st">&quot;Price_per_lb&quot;</span>,
+                          <span class="st">&quot;Value_of_production&quot;</span>
+                          )</code></pre></div>
+<p>Als erstes wird das User Interface definiert: Es wird eine <code>fluidPage</code> erstellt, damit sich die App anpasst wenn das Fenster verkleinert oder vergrößert wird. Dann wird eine <code>fluidRow</code> hinzugefügt, in die drei <code>column</code> Elemente hinzugefügt werden, die jeweils einen <code>selectInput</code> enthalten. Eine <code>column</code> gibt an, wieviel Platz ein Element in der Breite einnimt. Dafür wird das Fenster in 12 Spalten unterteilt, 4 nimmt also ein Drittel der Seite ein. Ein <code>selectInput</code> entspricht einer Combobox, also ein Eingabefenster bei dem aus mehreren Vorschlägen ausgewählt werden kann. <code>multiple = FALSE</code> sorgt dafür, dass maximal ein Vorschlag ausgewählt werden kann. Nach der ersten <code>fluidRow</code> wird eine zweite hinzugefügt, die einen <code>leafletOutput</code> enthält, also die Karte auf der später alles dargestellt wird.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ui &lt;-<span class="st"> </span><span class="kw">fluidPage</span>(
+  <span class="kw">fluidRow</span>(
+    <span class="kw">column</span>(
+      <span class="dt">width =</span> <span class="dv">4</span>,
+      <span class="kw">selectInput</span>(
+        <span class="dt">inputId =</span> <span class="st">&quot;year&quot;</span>,
+        <span class="dt">label =</span> <span class="st">&quot;Select year:&quot;</span>,
+        <span class="dt">choices =</span> <span class="dv">1998</span><span class="op">:</span><span class="dv">2012</span>,
+        <span class="dt">multiple =</span> <span class="ot">FALSE</span>
+      )
+    ),
+    <span class="kw">column</span>(
+      <span class="dt">width =</span> <span class="dv">4</span>,
+      <span class="kw">selectInput</span>(
+        <span class="dt">inputId =</span> <span class="st">&quot;variable&quot;</span>,
+        <span class="dt">label =</span> <span class="st">&quot;Select variable:&quot;</span>,
+        <span class="dt">choices =</span> <span class="kw">colnames</span>(honey)[<span class="dv">3</span><span class="op">:</span><span class="dv">8</span>],
+        <span class="dt">multiple =</span> <span class="ot">FALSE</span>
+      )
+    ),
+    <span class="kw">column</span>(
+      <span class="dt">width =</span> <span class="dv">4</span>,
+      <span class="kw">selectInput</span>(
+        <span class="dt">inputId =</span> <span class="st">&quot;palette&quot;</span>,
+        <span class="dt">label =</span> <span class="st">&quot;Select palette:&quot;</span>,
+        <span class="dt">choices =</span> <span class="kw">c</span>(<span class="st">&quot;YlOrRd&quot;</span>, <span class="st">&quot;YlGnBu&quot;</span>, <span class="st">&quot;BuPu&quot;</span>, <span class="st">&quot;Oranges&quot;</span>, <span class="st">&quot;Greys&quot;</span>),
+        <span class="dt">multiple =</span> <span class="ot">FALSE</span>
+      )
+    )
+  ),
+  <span class="kw">fluidRow</span>(
+    <span class="kw">leafletOutput</span>(
+      <span class="dt">outputId =</span> <span class="st">&quot;map&quot;</span>,
+      <span class="dt">height =</span> <span class="st">&quot;80vh&quot;</span>
+    )
+  )
+)</code></pre></div>
+<p>Anschließend muss der Server definiert werden. <code>outmap$map</code> definiert was mit dem Objekt mit der <code>outputId</code> <em>map</em> geschehen soll. Die Funktion <code>renderLeaflet</code> wird verwendet, um eine Leaflet Karte zu rendern. Doch bevor die Karte gerendert werden kann, muss etwas Vorarbeit geleistet werden. Als erstes wird ein Teildatensatz erstellt, der alle Daten aus dem ausgewählten Jahr für die ausgewählte Variable enthält. Die von dem Benutzer ausgewählten Werte werden mit <code>input$inputId</code> abgerufen. In diesem Fall <code>input$year</code>, <code>input$variable</code> und <code>input$palette</code>. Diese haben immer die Klassen <strong>character</strong>, für das Jahr muss dieser Wert also in einen numerischen umgewandelt werden. Die Funktion <code>colorNumeric</code> wird für die Erstellung der Farbpalette verwendet, ehe ein Titel für die Legende erstellt wird und die Karte erstellt wird. Mehr zu der Erstellung der Karte und des Leaflet Pakets in dem nächsten Kapitel.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output, session) {
+  output<span class="op">$</span>map &lt;-<span class="st"> </span><span class="kw">renderLeaflet</span>({
+    honey_data &lt;-<span class="st"> </span>honey[honey<span class="op">$</span>year <span class="op">==</span><span class="st"> </span><span class="kw">as.numeric</span>(input<span class="op">$</span>year), input<span class="op">$</span>variable]
+    pal &lt;-<span class="st"> </span><span class="kw">colorNumeric</span>(<span class="kw">brewer.pal</span>(<span class="dv">9</span>, input<span class="op">$</span>palette),
+                        <span class="kw">st_drop_geometry</span>(honey_data))
+    title &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="kw">str_replace_all</span>(input<span class="op">$</span>variable, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">_&quot;</span>, <span class="st">&quot; &quot;</span>), <span class="st">&quot;:&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+    <span class="kw">leaflet</span>() <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">addTiles</span>() <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">addPolygons</span>(<span class="dt">data =</span> honey_data, <span class="dt">color =</span> <span class="op">~</span><span class="kw">pal</span>(<span class="kw">get</span>(input<span class="op">$</span>variable))) <span class="op">%&gt;%</span>
+<span class="st">      </span><span class="kw">addLegend</span>(<span class="dt">data =</span> honey_data, <span class="dt">pal =</span> pal, <span class="dt">values =</span> <span class="op">~</span><span class="kw">get</span>(input<span class="op">$</span>variable),
+                <span class="dt">title =</span> title, <span class="dt">opacity =</span> <span class="dv">1</span>, <span class="dt">position =</span> <span class="st">&quot;bottomleft&quot;</span>,
+                <span class="dt">na.label =</span> <span class="st">&quot;No data available&quot;</span>)
+  })
+}</code></pre></div>
+<p>Die resultierende App sieht wie folgt aus: <img src="screenshot.png" alt="Simple Shiny Applikation" /></p>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="interaktive-karten.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
