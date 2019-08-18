@@ -425,6 +425,6 @@ honey <- st_as_sf(honey)
 honey_animation <- tm_shape(honey) + tm_polygons(col = "priceperlb", style = "cont",
                                   pal = viridis(10, direction = -1)) +
   tm_facets(along = "year")
-tmap_animation(honey_animation, filename = "honey.gif", delay = 25)
+tmap_animation(honey_animation, filename = "honey.gif", delay = 50)
 ```
 
