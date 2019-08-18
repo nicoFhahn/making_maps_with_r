@@ -350,7 +350,7 @@ Neben der Möglichkeit verschiedene Elemente der Karten basierend auf einer Vari
     - `by`: Nach welcher Variable soll aufgeteilt werden?
     - `nrow / ncol`: Die Anzahl der Zeilen beziehungsweise Spalten der Facetten
     - `free.cords`: Soll jede einezlne Karte ein eigenes Koordinatensystem haben?
-    - `along`: Soll anstatt von Facetten eine Animation erstellt werden?
+    - `along`: Nach welcher Variale soll animiert werden?
 ```{r, include=FALSE}
 honey0912 <- honey[honey$year > 2008, ]
 honey0912 <- rbind(
@@ -381,7 +381,7 @@ tm_shape(honey0912) + tm_polygons(col = "priceperlb", style = "cont",
   tm_layout(legend.outside.size = 0.2)
 ```
 
-Ein Problem dieser Art von Karten ist, dass mit mehr Ausprägungen einer Variable mehr Karten erstellt werden wodurch es schnell unübersichtlich wird und Unterschiede zwischen den einzelnen Karten nur noch sehr schwer zu erkennen sind. Dieses Problem wird von animierten Karten gelöst. In Papern können diese nicht dargestellt werden, allerdings werden heutzutage immer mehr Informationen online abgerufen, was dieses Problem mindert. Der Autor eines Artikels kann alternativ auch einen Link zu der animierten Karten in seinen Text einbauen. Wie bereits erwähnt kann mit dem Argument `along = TRUE` der Funktion `tm_facets()` eine animierte Karte erstellt werden. Mit Hilfe der Funktion `tmap_animation()` kann die erstellt Animation als GIF Datei abgespeichert werden, allerdings wird dafür die Software **ImageMagick** benötigt. Diese kann mit Hilfe des **installr** Pakets installiert werden.  (`installr::install.imagemagick()`) Die folgende Animation stellt ebenfalls den durchschnittlichen Preis eines Pfunds Honing in US$ dar, dieses mal über einen Zeitraum von 15 Jahren. Mittels `delay` kann angegeben werden, wieviel Millisekunden zwischen den einzelnen Bildern vergehen sollen. Mit `width` und `height` können noch die Maße in Pixel angegeben werden, mit `loop` ob das GIF eine Endlosschleife ist oder nach einer bestimmten Anzahl an Runden endet.
+Ein Problem dieser Art von Karten ist, dass mit mehr Ausprägungen einer Variable mehr Karten erstellt werden wodurch es schnell unübersichtlich wird und Unterschiede zwischen den einzelnen Karten nur noch sehr schwer zu erkennen sind. Dieses Problem wird von animierten Karten gelöst. In Papern können diese nicht dargestellt werden, allerdings werden heutzutage immer mehr Informationen online abgerufen, was dieses Problem mindert. Der Autor eines Artikels kann alternativ auch einen Link zu der animierten Karten in seinen Text einbauen. Wie bereits erwähnt kann mit dem Argument `along` der Funktion `tm_facets()` eine animierte Karte erstellt werden. Mit Hilfe der Funktion `tmap_animation()` kann die erstellt Animation als GIF Datei abgespeichert werden, allerdings wird dafür die Software **ImageMagick** benötigt. Diese kann mit Hilfe des **installr** Pakets installiert werden.  (`installr::install.imagemagick()`) Die folgende Animation stellt ebenfalls den durchschnittlichen Preis eines Pfunds Honing in US$ dar, dieses mal über einen Zeitraum von 15 Jahren. Mittels `delay` kann angegeben werden, wieviel Millisekunden zwischen den einzelnen Bildern vergehen sollen. Mit `width` und `height` können noch die Maße in Pixel angegeben werden, mit `loop` ob das GIF eine Endlosschleife ist oder nach einer bestimmten Anzahl an Runden endet.
 
 ```{r, include = FALSE}
 tab <- table(honey$state)
@@ -424,7 +424,7 @@ honey <- st_as_sf(honey)
 ```{r, eval = FALSE}
 honey_animation <- tm_shape(honey) + tm_polygons(col = "priceperlb", style = "cont",
                                   pal = viridis(10, direction = -1)) +
-  tm_facets(by = "year", along = TRUE)
+  tm_facets(along = "year")
 tmap_animation(honey_animation, filename = "honey.gif", delay = 25)
 ```
 
