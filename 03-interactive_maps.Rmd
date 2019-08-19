@@ -98,15 +98,9 @@ tm_shape(bavaria) + tm_polygons(col = "Arbeitslosenquote") + tm_facets(by = "Art
 
 
 Interaktive Karten sind auch gut geeignet, um sich einen ersten Überblick über einen Datensatz zu verschaffen. 
-In dem folgenden Beispiel werden Unfälle in drei Londoner Stadtteilen in 2017 dargestellt. Zuerst wird der Datensatz geladen, Unfälle aus dem Jahr 2017 ausgewählt und Daten ohne bekannten Standort entfernt.
+In dem folgenden Beispiel werden Unfälle in drei Londoner Stadtteilen in 2017 dargestellt. Zunächst wird der Datensatz geladen und in ein `sf` Objekt verwandelt.
 ```{r}
-accidents <- read.csv("datasets/Accident_Information.csv")
-accidents <- accidents[accidents$Year == 2017, ]
-accidents <- accidents[!is.na(accidents$Latitude), ]
-```
-
-Als nächstes wird der Datensatz in ein `sf` Objekt verwandelt.
-```{r}
+accidents <- read.csv("datasets/accidents.csv")
 accidents <- accidents %>%
   st_as_sf(coords = c("Longitude", "Latitude"), crs = 4326) %>%
   st_cast("POINT")
