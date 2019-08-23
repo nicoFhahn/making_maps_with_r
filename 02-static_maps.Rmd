@@ -18,6 +18,7 @@ library(maps)
 library(raster)
 library(grid)
 library(leaflet)
+library(magick)
 tmap_mode("plot")
 # load shapefiles for bavaria
 bavaria <- st_read("datasets/bavaria.shp")
@@ -211,6 +212,9 @@ Bei den Paletten aus den beiden Paketen kann zwischen drei Arten von Paletten un
     - Kategoriale Paletten: Leicht zu unterscheidbare Farben, ideal für kategoriale Daten.
 Alternativ kann auch eine eigenene Palette übergeben werden, hierfür könnten HEX-Codes verwendet werden.
 Bei der Farbwahl sollte auf weiteres geachtet werden: Farben übertragen Gefühle. Beispielhaft wird rot mit negativen Sachen assoziert, während grün mit positiven Dingen in Verbindung gebracht wird. Dieses Beispiel kann auch auf geographische Merkmale erweitert werden. Grün steht für Wälder und blau für Gewässer. Außerdem sollte bei Verwendung eine Palette klar sein, welche Farbe für niedrigere beziehungsweise höhere Werte steht. Damit eine möglichst breite Masse an Menschen eine Karte interpretieren kann, sollte wenn möglich auch darauf geachtet werden, dass farbenblinde Menschen die Unterschiede zwischen den Klassen identifizieren können.
+```{r, fig.align="center",fig.cap="Sequentielle, divergierende und kategoriale Palette", echo=FALSE}
+image_read("palette.png")
+```
 
 ## Layouts
 Außer der Möglichkeit die Karte an sich zu verändern, existiert die Möglichkeit andere Elemente der Grafik zu editieren. Mit Hilfe von Funktionen wie `tm_compass()`, `tm_scale_bar()`, `tm_logo()`, `tm_style()` und `tm_layout` lassen sich   Karten um die verschiedensten Elemente erweitern. Mit Hilfe der ersten drei dieser Funktion lassen sich ein Kompass, eine Maßstabsleiste und Bilder hinzufügen.
@@ -250,7 +254,7 @@ tmap_arrange(l1, l2, l3, l4, ncol = 2)
 ```
 
 Außerdem kann Schriftart und -größe geändert werden, sowie mit Hilfe visueller Filter, beispielsweise Sepia oder Schwarz-Weiß, das Aussehen weiter angepasst werden.
-Durch Verwendung von `tm_style()` können vordefinierte Stile verwendet werden, um Karten zum Beispiel einen Old-School-Look zu geben oder sie für Farbenblinde zu optimieren. Einen ÃÂberblick über die verfügbaren Stile bietet die Funktion `tmap_style_catalog()`, die im aktuellen Arbeitsverzeichnis einen Ordner anlegt, der verschiedene Karten enthält.
+Durch Verwendung von `tm_style()` können vordefinierte Stile verwendet werden, um Karten zum Beispiel einen Old-School-Look zu geben oder sie für Farbenblinde zu optimieren. Einen ÃÂÃÂÃÂÃÂberblick über die verfügbaren Stile bietet die Funktion `tmap_style_catalog()`, die im aktuellen Arbeitsverzeichnis einen Ordner anlegt, der verschiedene Karten enthält.
 ```{r, eval=FALSE}
 tm_shape(bavaria) + tm_polygons(col = "Art") + tm_style("classic")
 tm_shape(bavaria) + tm_polygons(col = "Art") + tm_style("col_blind")
@@ -426,5 +430,8 @@ honey_animation <- tm_shape(honey) + tm_polygons(col = "priceperlb", style = "co
                                   pal = viridis(10, direction = -1)) +
   tm_facets(along = "year")
 tmap_animation(honey_animation, filename = "honey.gif", delay = 50)
+```
+```{r, fig.align="center",fig.cap="Animierte Karte", echo=FALSE}
+image_resize(image_read("honey.gif"), "1181x1181")
 ```
 

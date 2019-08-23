@@ -6,20 +6,20 @@ output: html_document
 ---
 
 # Karten mit Shiny
-Interaktive Karten können durch Popups deutlich mehr Informationen überliefern als statische Karten, doch auch sie haben ihre Limitationen:
+Interaktive Karten kÃ¶nnen durch Popups deutlich mehr Informationen Ã¼berliefern als statische Karten, doch auch sie haben ihre Limitationen:
 
     - Es gibt nur ein fixes User Interface
-    - Es gibt Probleme bei der Darstellung großer Datensätze
-    - Die Verknüpfung der Karten mit anderen Graphen ist nur schwer möglich.
+    - Es gibt Probleme bei der Darstellung groÃŸer DatensÃ¤tze
+    - Die VerknÃ¼pfung der Karten mit anderen Graphen ist nur schwer mÃ¶glich.
 
-Eine Möglichkeit um diese Probleme anzugehen, stellen Web Apps dar. Das Grundprinzip einer Web App besteht aus zwei Teilen:
+Eine MÃ¶glichkeit um diese Probleme anzugehen, stellen Web Apps dar. Das Grundprinzip einer Web App besteht aus zwei Teilen:
 
-    1. Das User Interface: Was sieht der Benutzer? Dies beinhaltet die Karte(n), Auswahlmöglichkeiten um die Karten zu gestalten, zusätzliche Grafiken, ...
+    1. Das User Interface: Was sieht der Benutzer? Dies beinhaltet die Karte(n), AuswahlmÃ¶glichkeiten um die Karten zu gestalten, zusÃ¤tzliche Grafiken, ...
     2. Der Server: Auf dem Server findet die Berechnung basierend auf den Inputs aus dem User Interface statt. Diesen Teil sieht der Benutzer nicht.
     
-In R können diese Apps mit Hilfe des Pakets **shiny** entwickelt werden. Hierfür muss ein Skript mit Namen `app.R` erstellt werden, dass zwei Elemente enthält: `ui` und `server`. Alternativ können auch zwei Skripte `ui.R` und `server.R` erstellt werden. Im weiteren Verlauf wird von einem Skript, `app.R`, ausgegangen. Am Ende dieses Skript muss der Befehl `shinyApp(ui = ui, server = server)` stehen, damit die App gestartet werden kann.
+In R kÃ¶nnen diese Apps mit Hilfe des Pakets **shiny** entwickelt werden. HierfÃ¼r muss ein Skript mit Namen `app.R` erstellt werden, dass zwei Elemente enthÃ¤lt: `ui` und `server`. Alternativ kÃ¶nnen auch zwei Skripte `ui.R` und `server.R` erstellt werden. Im weiteren Verlauf wird von einem Skript, `app.R`, ausgegangen. Am Ende dieses Skript muss der Befehl `shinyApp(ui = ui, server = server)` stehen, damit die App gestartet werden kann.
 
-Ein einfaches Beispiel für eine App mit den Paketen **shiny** und **leaflet** könnte wie folgt aussehen:
+Ein einfaches Beispiel fÃ¼r eine App mit den Paketen **shiny** und **leaflet** kÃ¶nnte wie folgt aussehen:
 
 Zuerst werden die Paketen und der Bienen Datensatz aus Kapitel 2 geladen:
 ```{r, eval = FALSE}
@@ -36,7 +36,7 @@ colnames(honey)[3:8] <- c("Number_of_colonies", "Yield_per_colony",
 ```
 
 Als erstes wird das User Interface definiert: 
-Es wird eine `fluidPage` erstellt, damit sich die App anpasst wenn das Fenster verkleinert oder vergrößert wird. Dann wird eine `fluidRow` hinzugefügt, in die drei `column` Elemente hinzugefügt werden, die jeweils einen `selectInput` enthalten. Eine `column` gibt an, wieviel Platz ein Element in der Breite einnimt. Dafür wird das Fenster in 12 Spalten unterteilt, 4 nimmt also ein Drittel der Seite ein. Ein `selectInput` entspricht einer Combobox, also ein Eingabefenster bei dem aus mehreren Vorschlägen ausgewählt werden kann. `multiple = FALSE` sorgt dafür, dass maximal ein Vorschlag ausgewählt werden kann. Nach der ersten `fluidRow` wird eine zweite hinzugefügt, die einen `leafletOutput` enthält, also die Karte auf der später alles dargestellt wird.
+Es wird eine `fluidPage` erstellt, damit sich die App anpasst wenn das Fenster verkleinert oder vergrÃ¶ÃŸert wird. Dann wird eine `fluidRow` hinzugefÃ¼gt, in die drei `column` Elemente hinzugefÃ¼gt werden, die jeweils einen `selectInput` enthalten. Eine `column` gibt an, wieviel Platz ein Element in der Breite einnimt. DafÃ¼r wird das Fenster in 12 Spalten unterteilt, 4 nimmt also ein Drittel der Seite ein. Ein `selectInput` entspricht einer Combobox, also ein Eingabefenster bei dem aus mehreren VorschlÃ¤gen ausgewÃ¤hlt werden kann. `multiple = FALSE` sorgt dafÃ¼r, dass maximal ein Vorschlag ausgewÃ¤hlt werden kann. Nach der ersten `fluidRow` wird eine zweite hinzugefÃ¼gt, die einen `leafletOutput` enthÃ¤lt, also die Karte auf der spÃ¤ter alles dargestellt wird.
 ```{r, eval = FALSE}
 ui <- fluidPage(
   fluidRow(
@@ -77,9 +77,9 @@ ui <- fluidPage(
 )
 ```
 
-Anschließend muss der Server definiert werden. `outmap$map` definiert was mit dem Objekt mit der `outputId` *map* geschehen soll. Die Funktion `renderLeaflet` wird verwendet, um eine Leaflet Karte zu rendern. Doch bevor die Karte gerendert werden kann, muss etwas Vorarbeit geleistet werden.
-Als erstes wird ein Teildatensatz erstellt, der alle Daten aus dem ausgewählten Jahr für die ausgewählte Variable enthält. Die von dem Benutzer ausgewählten Werte werden mit `input$inputId` abgerufen. In diesem Fall `input$year`, `input$variable` und `input$palette`. Diese haben immer die Klassen **character**, für das Jahr muss dieser Wert also in einen numerischen umgewandelt werden.
-Die Funktion `colorNumeric` wird für die Erstellung der Farbpalette verwendet, ehe ein Titel für die Legende erstellt wird und die Karte erstellt wird. Mehr zu der Erstellung der Karte und des Leaflet Pakets in dem nächsten Kapitel.  
+AnschlieÃŸend muss der Server definiert werden. `outmap$map` definiert was mit dem Objekt mit der `outputId` *map* geschehen soll. Die Funktion `renderLeaflet` wird verwendet, um eine Leaflet Karte zu rendern. Doch bevor die Karte gerendert werden kann, muss etwas Vorarbeit geleistet werden.
+Als erstes wird ein Teildatensatz erstellt, der alle Daten aus dem ausgewÃ¤hlten Jahr fÃ¼r die ausgewÃ¤hlte Variable enthÃ¤lt. Die von dem Benutzer ausgewÃ¤hlten Werte werden mit `input$inputId` abgerufen. In diesem Fall `input$year`, `input$variable` und `input$palette`. Diese haben immer die Klassen **character**, fÃ¼r das Jahr muss dieser Wert also in einen numerischen umgewandelt werden.
+Die Funktion `colorNumeric` wird fÃ¼r die Erstellung der Farbpalette verwendet, ehe ein Titel fÃ¼r die Legende erstellt wird und die Karte erstellt wird. Mehr zu der Erstellung der Karte und des Leaflet Pakets in dem nÃ¤chsten Kapitel.  
 ```{r, eval = FALSE}
 server <- function(input, output, session) {
   output$map <- renderLeaflet({
