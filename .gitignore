@@ -4,5 +4,5 @@
 .Ruserdata
 _book/
 _bookdown_files/
-_flight_data
+flight_data/
 .zip
