@@ -6,3 +6,5 @@ _book/
 _bookdown_files/
 flight_data/
 .zip
+rosm.cache/
+.Rproj
