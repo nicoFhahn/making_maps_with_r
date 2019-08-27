@@ -64,7 +64,7 @@ Das **mapview** Paket wurde mit dem Ziel erstellt schnell interaktive Karten zu 
 mapview(bavaria, zcol = "Arbeitslosenquote")
 ```
 ```{r, echo=FALSE}
-htmltools::tags$iframe(src = "html_plots/mapview_1.html", width = "910px", height = "700px")
+htmltools::tags$iframe(src = "html_plots/mapview_1.html", width = "700px", height = "700px")
 ```
 
 Mit dem Argument `at` könnten noch eigene Intervallgrenzen definiert werden, basierend auf denen eingefärbt werden soll.
@@ -76,7 +76,7 @@ mapview(europe_raster, legend = FALSE) +
   mapview(cities, legend = FALSE, cex = "pop")
 ```
 ```{r, echo=FALSE}
-htmltools::tags$iframe(src = "html_plots/mapview_2.html", width = "910px", height = "700px")
+htmltools::tags$iframe(src = "html_plots/mapview_2.html", width = "700px", height = "700px")
 ```
 
 Bei dieser Karte fallen direkt mehrere Sachen auf. Es wird das komplette Shapefile dargestellt, nicht nur die Gebiete innerhalb des Rasters. So werden unteranderem Spitzbergen und die französischen Überseegebiete dargestellt. Mit `cex` wurde festgelegt, dass die Größe der Punkte auf der Population der jeweiligen Städte basiert und mit `alpha.regions` wurde die Transparenz der Polygone reduziert. Rechts unten kann auf *cities*, *europe_shape* oder *europe_raster* geklickt werden, um einen dieser Bereich zu fokusieren. Mit einem Klick auf eine der Städte oder eines der Länder öffnet sich ein Popup in dem weitere Infos zu der Stadt beziehungsweise dem Land stehen. 
@@ -89,7 +89,7 @@ mapview(autobahn, color = "red", lwd = 3,
   mapview(airports, legend = FALSE, col.regions = "black")
 ```
 ```{r, echo=FALSE}
-htmltools::tags$iframe(src = "html_plots/mapview_3.html", width = "910px", height = "700px")
+htmltools::tags$iframe(src = "html_plots/mapview_3.html", width = "700px", height = "700px")
 ```
 
 Mit den Funktionen `popupTable()` und `popupGraph()` aus dem **leafpop** Paket kann bestimmt werden welche Variablen in dem Popup erscheinen sollen oder einen Graph anzeigen.
@@ -101,7 +101,7 @@ mapview(bavaria, zcol = "Name", col.regions = brewer.pal(7, "Dark2"),
                                              "Haushaltseinkommen")))
 ```
 ```{r, echo=FALSE}
-htmltools::tags$iframe(src = "html_plots/mapview_4.html", width = "910px", height = "700px")
+htmltools::tags$iframe(src = "html_plots/mapview_4.html", width = "700px", height = "700px")
 ```
 
 ```{r, fig.align="center", fig.cap="Grafiken als Popups", fig.height=9, eval=FALSE}
@@ -118,7 +118,7 @@ mapview(bavaria, zcol = "Name", col.regions = brewer.pal(7, "Dark2"),
         popup = popupGraph(p))
 ```
 ```{r, echo=FALSE}
-htmltools::tags$iframe(src = "html_plots/mapview_5.html", width = "910px", height = "700px")
+htmltools::tags$iframe(src = "html_plots/mapview_5.html", width = "700px", height = "700px")
 ```
 
 Da bei den Scatterplots manche x-y Kombinationen mehrmals vorkommen, wird nicht jedes mal ein roter Punkt angezeigt. Mit den Funktionen `leafpop::popupImage()` oder `leafpop:::popupIframe()` können sogar Bilder, Hyperlinks und Youtube-Videos eingebunden werden.

@@ -9,6 +9,9 @@ output: html_document
 **leaflet** ist eine open-source JavaScript-Bibliothek mit der dynamische Onlinekarten erstellt werden. Das gleichnamige R Paket ermöglicht es diese Art von Karten auch in R zu erstellen. Die Syntax ist identisch zur **mapdeck** Syntax. Zuerst wird die Funktion `leaflet()` aufgerufen, gefolgt von verschiedenen Ebenen mit `add*()`. Auch hier wird der Pipe Operator `%>%` verwendet, um die einzelnen Funktionen miteinander zu verknüpfen.
 Um Punktdaten darzustellen können die Funktionen `addMarkers()`, `addCircleMarkers()` und `addAwesomeMarkers()` verwendet werden, für Polygondaten `addPolygons()`, für `LINESTRING` Geometrien `addPolylines()` und für Rasterdaten `addRasterImage()`. Das `label` Argument kann bei diesen verwendet werden, um eine Box über dem Marker anzuzeigen, wenn der Benutzer seinen Mauszeiger darüber bewegt. Mit `addTiles()` und `addProvidersTiles()` können Hintergrundkarten hinzugefügt werden, mit `addLegend()` eine Legende. **leaflet** bietet die Möglichkeit, mehrere Hintergrundkarten zu definieren und eine Auswahlfläche hinzuzufügen, um zwischen diesen zu entscheiden. Dafür müssen mehrere `addProvidersTiles()` Funktionen miteinander verknüpft werden und eine Kontrollbox mit `addLayersControl()` hinzugefügt werden.
 ```{r, include = FALSE}
+library(sf)
+library(readr)
+library(leaflet)
 coords <- read_csv("leaflet_data/coords_1.csv")
 isochrone <- read_sf("leaflet_data/isochrone_1.shp")
 poly_data <- read_sf("leaflet_data/poly_data_1.shp")
@@ -85,8 +88,8 @@ leaflet() %>%
   )
 ```
 
-```{r, include=FALSE}
-htmltools::tags$iframe(src = "html_plots/leaflet_1.html", width = "910px", height = "700px")
+```{r, echo=FALSE}
+htmltools::tags$iframe(src = "html_plots/leaflet_1.html", width = "700px", height = "700px")
 ```
 
 Um eine bestimmte Farbpalette für die Visualisierung einzelner Elemente zu verwenden, können die Helferfunktionen `colorNumeric()`, `colorBin()`, `colorQuantile()` und `colorFactor()` übergeben werden. Diese benötigen die Farbcodes der Palette (`palette`) und alle möglichen Werte die dargestellt werden können (`domain`).
@@ -161,8 +164,8 @@ leaflet() %>%
   addMiniMap(tiles = "CartoDB.DarkMatter")
 ```
 
-```{r, include=FALSE}
-htmltools::tags$iframe(src = "html_plots/leaflet_2.html", width = "910px", height = "700px")
+```{r, echo=FALSE}
+htmltools::tags$iframe(src = "html_plots/leaflet_2.html", width = "700px", height = "700px")
 ```
 
 Eine Erweiterung des **leaflet** Pakets ist **leaflet.extras**. Mit diesem lassen sich beispielsweise Heatmaps darstellen. Mit `addMeasure()` wird hier noch ein Maßband hinzugefügt, mit dem Distanz zwischen zwei Punkten oder die Fläche zwischen mehreren Punkten berechnet werden kann.
@@ -199,17 +202,15 @@ leaflet() %>%
     ) %>%
   addMiniMap("CartoDB.DarkMatter")
 ```
-```{r, include=FALSE}
-htmltools::tags$iframe(src = "html_plots/leaflet_3.html", width = "910px", height = "700px")
+
+```{r, echo=FALSE}
+htmltools::tags$iframe(src = "html_plots/leaflet_3.html", width = "700px", height = "700px")
 ```
 
 Da es sich bei **leaflet** um eine JavaScript Bibliothek handelt, kann auch JavaScript Code eingebunden werden. Werden beispielsweise mehrere Hintergrundkarten und eine MiniMap hinzugefügt, wird standardmäßig nur die erste Karte als MiniMap angezeigt, auch wenn eine andere Hintergrundkarte ausgewählt wird. Um dieses Verhalten zu ändern, kann über die Funktion `htmltools::onRender()` JavaScript eingebunden werden.
 
 ```{r, eval=FALSE}
 leaflet() %>%
-  clearShapes() %>%
-  clearMarkers() %>%
-  clearControls() %>%
   addProviderTiles("OpenStreetMap",
     group = "OpenStreetMap"
   ) %>%
@@ -279,7 +280,7 @@ leaflet() %>%
   )
 ```
 ```{r, echo=FALSE}
-htmltools::tags$iframe(src = "html_plots/leaflet_js.html", width = "910px", height = "700px")
+htmltools::tags$iframe(src = "html_plots/leaflet_js.html", width = "700px", height = "700px")
 ```
 
 JavaScript kann auch verwendet werden um Punktdaten zu Clustern zusammenzufassen, die bei einem Klick auf das jeweilige Cluster expandieren:
@@ -323,5 +324,5 @@ leaflet() %>%
 ```
 
 ```{r, echo=FALSE}
-htmltools::tags$iframe(src = "html_plots/leaflet_js2.html", width = "910px", height = "700px")
+htmltools::tags$iframe(src = "html_plots/leaflet_js2.html", width = "700px", height = "700px")
 ```
