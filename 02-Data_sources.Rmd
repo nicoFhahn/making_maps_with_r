@@ -4,12 +4,6 @@ author: "Nico Hahn"
 date: "25 8 2019"
 output: html_document
 ---
-```{r, echo=FALSE, include=FALSE}
-library(stringr)
-library(sf)
-library(readr)
-library(stplanr)
-```
 
 # Datenherkunft
 Ein Großteil der Daten die in dieser Arbeit verwendet wurden stammen aus OpenStreetMap. Je nach Größe wurden diese entweder mit der beigefügten OSM-App erstellt oder von https://www.geofabrik.de/ heruntergeladen. Bei ZWeiterem wurden die Datensätze mit den Commandline Tools **osmconvert** und **osmfilter** in ein sinnvolles Format konvertiert und gefiltert. Danach war nochmal eine weitere Transformation in das GEOJSON Format nötig, wofür das NodeJS Package **osmtogeojson** verwendet wurde. Zu diesen Datensätze zählen die Bäkereien in Europa und das Hamburger Straßennetzwerk.
@@ -41,11 +35,16 @@ shapes <- st_transform(shapes, 4326)
 # Fehlende Geocodings
 shapes[-unlist(st_intersects(eco, shapes)), ]$BEZ_KRS
 # manuelles Coding
-eco[eco$Raumeinheit == "Amberg, Stadt", ]$geometry <- st_sfc(st_point(x = c(11.857951, 49.453090)), crs = 4326)
-eco[eco$Raumeinheit == "Bayreuth, Stadt", ]$geometry <- st_sfc(st_point(x = c(11.576192, 49.940560)), crs = 4326)
-eco[eco$Raumeinheit == "Hof, Stadt", ]$geometry <- st_sfc(st_point(x = c(11.904340, 50.309311)), crs = 4326)
-eco[str_detect(eco$Raumeinheit, "Erlangen-H"), ]$geometry <- st_sfc(st_point(x = c(10.863692, 49.669239)), crs = 4326)
-eco[str_detect(eco$Raumeinheit, "Augsburg, Stadt"), ]$geometry <- st_sfc(st_point(x = c(10.894387, 48.353622)), crs = 4326)
+eco[eco$Raumeinheit == "Amberg, Stadt", ]$geometry <-
+  st_sfc(st_point(x = c(11.857951, 49.453090)), crs = 4326)
+eco[eco$Raumeinheit == "Bayreuth, Stadt", ]$geometry <-
+  st_sfc(st_point(x = c(11.576192, 49.940560)), crs = 4326)
+eco[eco$Raumeinheit == "Hof, Stadt", ]$geometry <-
+  st_sfc(st_point(x = c(11.904340, 50.309311)), crs = 4326)
+eco[str_detect(eco$Raumeinheit, "Erlangen-H"), ]$geometry <-
+  st_sfc(st_point(x = c(10.863692, 49.669239)), crs = 4326)
+eco[str_detect(eco$Raumeinheit, "Augsburg, Stadt"), ]$geometry <-
+  st_sfc(st_point(x = c(10.894387, 48.353622)), crs = 4326)
 # Check
 shapes[-unlist(st_intersects(eco, shapes)), ]$BEZ_KRS
 # Spatial matching
@@ -61,9 +60,53 @@ write_sf(eco, "datasets/bavaria.shp")
 ```
 
 Im weiteren wurde dieser Datensatz immer als `bavaria.shp` geladen.
-Die honey und Autounfall Datensätze wurde von Kaggle gedownloadet, https://www.kaggle.com/jessicali9530/honey-production und https://www.kaggle.com/tsiaras/uk-road-safety-accidents-and-vehicles. Außerdem wurde ein Datensatz mit den Abkürzungen der Staaten in den USA von Kaggle benutzt. (https://www.kaggle.com/giodev11/usstates-dataset)
-Das europäische Höhenraster stammt von der Europäischen Umweltbehörde, https://www.eea.europa.eu/data-and-maps/data/digital-elevation-model-of-europe.
-Die Flugdaten der USA wurden hier gedownloadet: http://stat-computing.org/dataexpo/2009/the-data.html.
-Von NaturalEarth wurde ein Datensatz mit den ShapeFiles der Welt heruntergealden: https://www.naturalearthdata.com/downloads/50m-cultural-vectors/50m-admin-0-countries-2/.
-Von London Datastore ein Datensatz mit den Shapefiles von London: https://data.london.gov.uk/dataset/statistical-gis-boundary-files-london.
-Alle Datensätze die nicht angesprochen wurden sind entweder von OpenStreetMap gedownloadet oder wurde mit Hilfe der OpenStreetMap App erstellt.
+
+Die honey und Autounfall Datensätze wurde von Kaggle gedownloadet: https://www.kaggle.com/jessicali9530/honey-production und https://www.kaggle.com/tsiaras/uk-road-safety-accidents-and-vehicles
+
+Außerdem wurde ein Datensatz mit den Abkürzungen der Staaten in den USA von Kaggle benutzt: (https://www.kaggle.com/giodev11/usstates-dataset)
+
+Das europäische Höhenraster stammt von der Europäischen Umweltbehörde: https://www.eea.europa.eu/data-and-maps/data/digital-elevation-model-of-europe
+
+Die Flugdaten der USA wurden hier gedownloadet: http://stat-computing.org/dataexpo/2009/the-data.html
+
+Die Daten für Denver wurden daraus wie folgt extrahiert:
+```{r, eval = FALSE}
+# NOT RUN
+# Multiprocessing weil es sehr lang dauert
+plan(multiprocess)
+flights_usa <- future_map(
+  paste("flight_data/", list.files("flight_data", ".csv"), sep = ""), read_csv
+)
+plan(sequential)
+# Aus allen Datensätzen nur Flüge von Denver aus wählen
+flights_denver <- lapply(flights_usa, function(x) {
+  x[x$Origin == "DEN", ]
+})
+# Liste zu data.frame binden
+flights_denver <- do.call(rbind, flights_denver)
+# Nach Zielort zusammenfassen, Anzahl der Flüge zählen
+flights_denver_g <- ddply(flights_denver, .(Dest), summarize,
+                          no_of_flights = length(Dest))
+# Flughäfen laden
+airports <- read_csv("datasets/airports.csv")
+# Spaltennamen für join ändern
+colnames(flights_denver_g)[1] <- "iata"
+# Flughafen und Flüge joinen
+flights_denver_g <- join(flights_denver_g, airports, by = "iata")
+# Nach Staat zusammenfassen, Anzahl der Flüge zu jeweiligem Ziel summieren
+flights_denver_states <- ddply(flights_denver_g, .(state), summarize,
+                               no_of_flights = sum(no_of_flights),
+                               long = mean(long),
+                               lat = mean(lat))
+# Koordinaten für Denver hinzufügen
+flights_denver_states$lat_denver <- airports[airports$iata == "DEN", ]$lat
+flights_denver_states$long_denver <- airports[airports$iata == "DEN", ]$long
+# speichern
+write_csv(flights_denver_states, "datasets/denver.csv")
+```
+
+Von NaturalEarth wurde ein Datensatz mit den ShapeFiles der Welt heruntergealden: https://www.naturalearthdata.com/downloads/50m-cultural-vectors/50m-admin-0-countries-2/
+
+Von London Datastore ein Datensatz mit den Shapefiles von London: https://data.london.gov.uk/dataset/statistical-gis-boundary-files-london
+
+Alle Datensätze die nicht angesprochen wurden sind entweder von OpenStreetMap gedownloadet oder wurden mit Hilfe der OpenStreetMap App erstellt.

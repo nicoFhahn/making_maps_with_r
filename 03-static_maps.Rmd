@@ -4,24 +4,7 @@ author: "Nico Hahn"
 date: "2 8 2019"
 output: html_document
 ---
-# Kaptiel Datensätze und wie diese erstellt wurden.
-
 ```{r, echo=FALSE, include=FALSE}
-library(spData)
-library(spDataLarge)
-library(tmap)
-library(sf)
-library(stringr)
-library(colourpicker)
-library(stringr)
-library(viridis)
-library(maps)
-library(raster)
-library(grid)
-library(leaflet)
-library(magick)
-library(readr)
-library(readxl)
 tmap_mode("plot")
 # load shapefiles for bavaria
 bavaria <- st_read("datasets/bavaria.shp")

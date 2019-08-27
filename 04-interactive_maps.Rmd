@@ -6,18 +6,6 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE, echo=FALSE}
-library(spData)
-library(spDataLarge)
-library(tmap)
-library(sf)
-library(colourpicker)
-library(stringr)
-library(viridis)
-library(maps)
-library(raster)
-library(grid)
-library(readr)
-library(leaflet)
 # load shapefiles for bavaria
 bavaria <- st_read("datasets/bavaria.shp")
 # nicer colnames
@@ -76,11 +64,12 @@ Auch facettierte Karten können im interaktiven Modus dargestellt werden:
 ```{r, warning=FALSE, fig.align="center", fig.cap="Facettierte interaktive Karte"}
 tm_shape(bavaria) + tm_polygons(col = "Arbeitslosenquote") + tm_facets(by = "Art")
 ```
-\
+  
+  
 Interaktive Karten sind auch gut geeignet, um sich einen ersten Überblick über einen Datensatz zu verschaffen. 
 In dem folgenden Beispiel werden Unfälle in drei Londoner Stadtteilen in 2017 dargestellt. Zunächst wird der Datensatz geladen und in ein `sf` Objekt verwandelt.
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 accidents <- read_csv("datasets/accidents.csv")
 accidents <- accidents %>%
   st_as_sf(coords = c("Longitude", "Latitude"), crs = 4326) %>%
@@ -97,7 +86,7 @@ accidents <- accidents[unlist(accidents_m), ]
 ```
 
 Damit es nicht zu unübersichtlich wird, werden nur drei Stadteile ausgewählt.
-```{r}
+```{r, message=FALSE, warning=FALSE}
 london <- london[london$NAME %in% c("City of London", "Westminster", "Camden"), ]
 london <- st_union(london)
 accidents_m <- st_intersects(london, accidents)

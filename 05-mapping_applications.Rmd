@@ -14,8 +14,10 @@ Interaktive Karten können durch Popups deutlich mehr Informationen überliefern
 
 Eine Möglichkeit um diese Probleme anzugehen, stellen Web Apps dar. Das Grundprinzip einer Web App besteht aus zwei Teilen:
 
-    1. Das User Interface: Was sieht der Benutzer? Dies beinhaltet die Karte(n), Auswahlmöglichkeiten um die Karten zu gestalten, zusätzliche Grafiken, ...
-    2. Der Server: Auf dem Server findet die Berechnung basierend auf den Inputs aus dem User Interface statt. Diesen Teil sieht der Benutzer nicht.
+    1. Das User Interface: Was sieht der Benutzer? Dies beinhaltet die Karte(n),
+    Auswahlmöglichkeiten um die Karten zu gestalten, zusätzliche Grafiken, ...
+    2. Der Server: Auf dem Server findet die Berechnung basierend auf den Inputs
+    aus dem User Interface statt. Diesen Teil sieht der Benutzer nicht.
     
 In R können diese Apps mit Hilfe des Pakets **shiny** entwickelt werden. Hierfür muss ein Skript mit Namen `app.R` erstellt werden, dass zwei Elemente enthält: `ui` und `server`. Alternativ können auch zwei Skripte `ui.R` und `server.R` erstellt werden. Im weiteren Verlauf wird von einem Skript, `app.R`, ausgegangen. Am Ende dieses Skript muss der Befehl `shinyApp(ui = ui, server = server)` stehen, damit die App gestartet werden kann.
 

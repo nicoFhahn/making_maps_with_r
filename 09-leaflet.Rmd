@@ -1,0 +1,327 @@
+---
+title: "leaflet"
+author: "Nico Hahn"
+date: "27 8 2019"
+output: html_document
+---
+
+# Karten mit leaflet
+**leaflet** ist eine open-source JavaScript-Bibliothek mit der dynamische Onlinekarten erstellt werden. Das gleichnamige R Paket ermöglicht es diese Art von Karten auch in R zu erstellen. Die Syntax ist identisch zur **mapdeck** Syntax. Zuerst wird die Funktion `leaflet()` aufgerufen, gefolgt von verschiedenen Ebenen mit `add*()`. Auch hier wird der Pipe Operator `%>%` verwendet, um die einzelnen Funktionen miteinander zu verknüpfen.
+Um Punktdaten darzustellen können die Funktionen `addMarkers()`, `addCircleMarkers()` und `addAwesomeMarkers()` verwendet werden, für Polygondaten `addPolygons()`, für `LINESTRING` Geometrien `addPolylines()` und für Rasterdaten `addRasterImage()`. Das `label` Argument kann bei diesen verwendet werden, um eine Box über dem Marker anzuzeigen, wenn der Benutzer seinen Mauszeiger darüber bewegt. Mit `addTiles()` und `addProvidersTiles()` können Hintergrundkarten hinzugefügt werden, mit `addLegend()` eine Legende. **leaflet** bietet die Möglichkeit, mehrere Hintergrundkarten zu definieren und eine Auswahlfläche hinzuzufügen, um zwischen diesen zu entscheiden. Dafür müssen mehrere `addProvidersTiles()` Funktionen miteinander verknüpft werden und eine Kontrollbox mit `addLayersControl()` hinzugefügt werden.
+```{r, include = FALSE}
+coords <- read_csv("leaflet_data/coords_1.csv")
+isochrone <- read_sf("leaflet_data/isochrone_1.shp")
+poly_data <- read_sf("leaflet_data/poly_data_1.shp")
+points <- read_sf("leaflet_data/points_1.shp")
+icon.fa <- makeAwesomeIcon(
+  icon = "flag", markerColor = "red",
+  library = "fa",
+  iconColor = "black"
+)
+```
+
+```{r, eval=FALSE}
+leaflet() %>%
+  # all Karten hinzufügen
+  addProviderTiles("OpenStreetMap",
+    group = "OpenStreetMap"
+  ) %>%
+  addProviderTiles("Stamen.Toner",
+                   group = "Stamen.Toner"
+  ) %>%
+  addProviderTiles("Stamen.Terrain",
+                   group = "Stamen.Terrain"
+  ) %>%
+  addProviderTiles("Esri.WorldStreetMap",
+                   group = "Esri.WorldStreetMap"
+  ) %>%
+  addProviderTiles("Wikimedia",
+                   group = "Wikimedia"
+  ) %>%
+  addProviderTiles("CartoDB.Positron",
+                   group = "CartoDB.Positron"
+  ) %>%
+  addProviderTiles("Esri.WorldImagery",
+                   group = "Esri.WorldImagery"
+  ) %>%
+  # Kontrollbox hinzufügen
+  addLayersControl(
+    baseGroups = c(
+      "OpenStreetMap", "Stamen.Toner",
+      "Stamen.Terrain", "Esri.WorldStreetMap",
+      "Wikimedia", "CartoDB.Positron", "Esri.WorldImagery"
+    ),
+    position = "topleft"
+  ) %>%
+  # Polygon hinzufügen
+  addPolygons(
+    data = poly_data,
+    color = "#E84A5F"
+  ) %>%
+  # Startpunkt hinzufügen
+  addAwesomeMarkers(
+    lat = as.numeric(coords[, 2]), lng = as.numeric(coords[, 1]),
+    label = "Starting point", icon = icon.fa
+  ) %>%
+  # Punkte hinzufügen
+  addMarkers(
+    data = points,
+    label = paste(
+      "Name: ", points$name, "<br>",
+      "Distance from location. ",
+      round(points$dstnc, 1), " meters", "<br>",
+      "Street: ", points$addr_st
+    ) %>%
+      lapply(htmltools::HTML)
+  ) %>%
+  # Legende hinzufügen
+  addLegend(
+    data = isochrone,
+    colors = "#E84A5F",
+    labels = unique(poly_data$labs),
+    title = "Drivetime",
+    opacity = 1, 
+    position = "bottomleft"
+  )
+```
+
+```{r, include=FALSE}
+htmltools::tags$iframe(src = "html_plots/leaflet_1.html", width = "910px", height = "700px")
+```
+
+Um eine bestimmte Farbpalette für die Visualisierung einzelner Elemente zu verwenden, können die Helferfunktionen `colorNumeric()`, `colorBin()`, `colorQuantile()` und `colorFactor()` übergeben werden. Diese benötigen die Farbcodes der Palette (`palette`) und alle möglichen Werte die dargestellt werden können (`domain`).
+Mit `addMiniMap()` kann eine kleine Karte zu der großen hinzugefügt werden.
+
+```{r, include = FALSE}
+intersect <- read_sf("leaflet_data/intersect_2.shp")
+points_df <- read_csv("leaflet_data/points_df_2.csv")
+polygons <- read_sf("leaflet_data/polygons_2.shp")
+```
+```{r, fig.align="center", fig.cap="Clustering der Apotheken in München mit DBSCAN Algorithmus", fig.height=9, eval=FALSE}
+# Farbfunktionen definieren
+pal <- colorNumeric(c("#E1F5C4", "#EDE574", "#F9D423", "#FC913A", "#FF4E50"), domain = points_df$count)
+pal2 <- colorNumeric(
+  brewer.pal(9, "Greens")[3:9],
+  intersect$einwohner
+)
+leaflet() %>%
+  # Hintergrundkarte
+  addProviderTiles("CartoDB.DarkMatter") %>%
+  # PLZ-Daten hinzufügen
+  addPolygons(
+    data = intersect, color = ~ pal2(einwohner),
+    fillColor = ~ pal2(einwohner),
+    # Label hinzufügen
+    label = paste(
+      "ZIP code:", intersect$plz,
+      "<br>", "Residents:",
+      intersect$einwohner
+    ) %>%
+      lapply(htmltools::HTML)
+  ) %>%
+  # Cluster Polygone hinzufügen
+  addPolygons(
+    data = polygons, color = "#E2E2E2",
+    opacity = 0.1
+  ) %>%
+  # Punkte hinzufügen
+  addCircleMarkers(
+    data = points_df, lat = ~latitude,
+    lng = ~longitude,
+    label = paste(
+      "Name:",
+      points_df$name, "<br>",
+      "Cluster:",
+      points_df$cluster, "<br>",
+      "Cluster size:",
+      points_df$count, "<br>",
+      "Street: ",
+      points_df$addr.street
+    ) %>%
+      # Label hinzufügen
+      lapply(htmltools::HTML),
+    color = ~ pal(count),
+    opacity = 0.65, radius = 5
+  ) %>%
+  # Legende für PLZ hinzufügen
+  addLegend(
+    data = intersect, pal = pal2,
+    values = ~einwohner,
+    title = "Number of residents:",
+    opacity = 1,
+    position = "bottomleft"
+  ) %>%
+  # Legende für Punkte hinzufügen
+  addLegend(
+    data = points_df, pal = pal, values = ~count,
+    position = "bottomleft", title = "Cluster size:",
+    opacity = 0.9
+  ) %>%
+  # Mini Map hinzufügen
+  addMiniMap(tiles = "CartoDB.DarkMatter")
+```
+
+```{r, include=FALSE}
+htmltools::tags$iframe(src = "html_plots/leaflet_2.html", width = "910px", height = "700px")
+```
+
+Eine Erweiterung des **leaflet** Pakets ist **leaflet.extras**. Mit diesem lassen sich beispielsweise Heatmaps darstellen. Mit `addMeasure()` wird hier noch ein Maßband hinzugefügt, mit dem Distanz zwischen zwei Punkten oder die Fläche zwischen mehreren Punkten berechnet werden kann.
+
+```{r, include = FALSE}
+points_df <- read_csv("leaflet_data/points_df_3.csv")
+streets_c <- read_sf("leaflet_data/streets_c_3.shp")
+points_df <- points_df %>% st_as_sf(coords = c("longitude", "latitude")) %>% st_set_crs(4326)
+```
+```{r, fig.align="center", fig.cap="Heatmap der Apotheken in München mit Straßennetz", fig.height=9, eval=FALSE}
+leaflet() %>%
+  addProviderTiles("CartoDB.DarkMatter", group = "CartoDB") %>%
+  addProviderTiles("Esri.WorldImagery", group = "WorldImagery") %>%
+  addLayersControl(
+    baseGroups = c(
+      "CartoDB", "WorldImagery"
+    ),
+    position = "topleft"
+  ) %>%
+  addPolylines(
+    data = streets_c, opacity = 0.5, weight = 1,
+    color = "white"
+    ) %>%
+  addWebGLHeatmap(data = points_df, size = 2000,
+                          units = "m", intensity = 0.1,
+                          gradientTexture = "skyline", alphaRange = 1,
+                          opacity = 0.8) %>%
+  addMeasure(
+    position = "bottomleft",
+    primaryLengthUnit = "meters",
+    primaryAreaUnit = "sqmeters",
+    activeColor = "#0bd3d3",
+    completedColor = "#f890e7"
+    ) %>%
+  addMiniMap("CartoDB.DarkMatter")
+```
+```{r, include=FALSE}
+htmltools::tags$iframe(src = "html_plots/leaflet_3.html", width = "910px", height = "700px")
+```
+
+Da es sich bei **leaflet** um eine JavaScript Bibliothek handelt, kann auch JavaScript Code eingebunden werden. Werden beispielsweise mehrere Hintergrundkarten und eine MiniMap hinzugefügt, wird standardmäßig nur die erste Karte als MiniMap angezeigt, auch wenn eine andere Hintergrundkarte ausgewählt wird. Um dieses Verhalten zu ändern, kann über die Funktion `htmltools::onRender()` JavaScript eingebunden werden.
+
+```{r, eval=FALSE}
+leaflet() %>%
+  clearShapes() %>%
+  clearMarkers() %>%
+  clearControls() %>%
+  addProviderTiles("OpenStreetMap",
+    group = "OpenStreetMap"
+  ) %>%
+  addProviderTiles("Stamen.Toner",
+                   group = "Stamen.Toner"
+  ) %>%
+  addProviderTiles("Stamen.Terrain",
+                   group = "Stamen.Terrain"
+  ) %>%
+  addProviderTiles("Esri.WorldStreetMap",
+                   group = "Esri.WorldStreetMap"
+  ) %>%
+  addProviderTiles("Wikimedia",
+                   group = "Wikimedia"
+  ) %>%
+  addProviderTiles("CartoDB.Positron",
+                   group = "CartoDB.Positron"
+  ) %>%
+  addProviderTiles("Esri.WorldImagery",
+                   group = "Esri.WorldImagery"
+  ) %>%
+  addMiniMap(tiles = c("OpenStreetMap", "Stamen.Toner", "Stamen.Terrain",
+                       "Esri.WorldStreetMap", "Wikimedia", "CartoDB.Positron",
+                       "Esri.WorldImagery")[1], toggleDisplay = TRUE) %>%
+  htmlwidgets::onRender("
+    function(el, x) {
+      var myMap = this;
+      myMap.on('baselayerchange',
+        function (e) {
+          myMap.minimap.changeLayer(L.tileLayer.provider(e.name));
+        })
+    }") %>%
+  addLayersControl(
+    baseGroups = c(
+      "OpenStreetMap", "Stamen.Toner",
+      "Stamen.Terrain", "Esri.WorldStreetMap",
+      "Wikimedia", "CartoDB.Positron", "Esri.WorldImagery"
+    ),
+    
+    position = "topleft"
+  ) %>%
+  addPolygons(
+    data = poly_data,
+    color = "#E84A5F"
+  ) %>%
+  addLegend(
+    data = isochrone,
+    colors = "#E84A5F",
+    labels = unique(poly_data$labs),
+    title = "Drivetime",
+    opacity = 1, 
+    position = "bottomleft"
+  ) %>%
+  addAwesomeMarkers(
+    lat = as.numeric(coords[, 2]), lng = as.numeric(coords[, 1]),
+    label = "Starting point", icon = icon.fa
+  ) %>%
+  addMarkers(
+    data = points,
+    label = paste(
+      "Name: ", points$name, "<br>",
+      "Distance from location. ",
+      round(points$dstnc, 1), " meters", "<br>",
+      "Street: ", points$addr_st
+    ) %>%
+      lapply(htmltools::HTML)
+  )
+```
+```{r, echo=FALSE}
+htmltools::tags$iframe(src = "html_plots/leaflet_js.html", width = "910px", height = "700px")
+```
+
+JavaScript kann auch verwendet werden um Punktdaten zu Clustern zusammenzufassen, die bei einem Klick auf das jeweilige Cluster expandieren:
+
+```{r, eval=FALSE}
+leaflet() %>% 
+  addProviderTiles("OpenStreetMap",
+    group = "OpenStreetMap"
+  ) %>%
+  addMarkers(data=points_df,
+             clusterOptions = markerClusterOptions(),
+             clusterId = "pointsCluster") %>%
+  addEasyButton(easyButton(
+    states = list(
+      easyButtonState(
+        stateName="unfrozen-markers",
+        icon="ion-toggle",
+        title="Freeze Clusters",
+        onClick = JS("
+          function(btn, map) {
+            var clusterManager =
+              map.layerManager.getLayer('cluster', 'pointsCluster');
+            clusterManager.freezeAtZoom();
+            btn.state('frozen-markers');
+          }")
+      ),
+      easyButtonState(
+        stateName="frozen-markers",
+        icon="ion-toggle-filled",
+        title="UnFreeze Clusters",
+        onClick = JS("
+          function(btn, map) {
+            var clusterManager =
+              map.layerManager.getLayer('cluster', 'pointsCluster');
+            clusterManager.unfreeze();
+            btn.state('unfrozen-markers');
+          }")
+      )
+    )
+  ))
+```
+
+```{r, echo=FALSE}
+htmltools::tags$iframe(src = "html_plots/leaflet_js2.html", width = "910px", height = "700px")
+```
