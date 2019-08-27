@@ -1,6 +1,4 @@
 Still To Do
-- tmap als html plots reproduzieren
-- mapview als html plots reproduzieren
 - gif einbinden
 - die scheiß legende bei usa karte
 - intro
