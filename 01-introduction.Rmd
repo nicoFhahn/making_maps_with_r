@@ -4,6 +4,47 @@ author: "Nico Hahn"
 date: "2 8 2019"
 output: html_document
 ---
+```{r, include=FALSE}
+library(colourpicker)
+library(dplyr)
+library(furrr)
+library(future)
+library(grid)
+library(ggplot2)
+library(ggspatial)
+library(htmltools)
+library(htmlwidgets)
+library(lattice)
+library(leaflet)
+library(leafpop)
+library(mapdeck)
+library(magick)
+library(maps)
+library(mapview)
+library(plotly)
+library(plyr)
+library(raster)
+library(readr)
+library(readxl)
+library(RColorBrewer)
+library(rgdal)
+library(rgeos)
+library(scico)
+library(sf)
+library(spData)
+library(spDataLarge)
+library(stplanr)
+library(stringr)
+library(tmap)
+library(viridis)
+library(readr)
+library(readxl)
+library(spData)
+library(spDataLarge)
+library(tmap)
+library(sf)
+library(viridis)
+```
 
 # Intro
 Eine der wichtigsten Aspekte bei der Arbeit mit geographischen Daten ist die Darstellung und Kommunikation der Resultate. Diese sollten möglichst kreativ sein, ohne an Intuitivität zu verlieren. Am häufigsten wird dabei auch statische Karten zurückgegriffen, wofür in R beispielsweise die Funktion `plot()` verwendet werden kann. Ein bessere Mölichkeit ist jedoch, auf Pakete zurückzugreifen, die speziell entwickelt wurden um geograhische Daten zu visualisieren. Ein solches Pakete ist **tmap**, das im folgenden Kapitel behandelt wird.

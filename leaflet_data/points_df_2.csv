@@ -1,0 +1,165 @@
+latitude,longitude,cluster,count,name,addr.street
+48.2245948,11.6686808,1,5,Korbinian Apotheke,Korbinianstraße
+48.2252155,11.6711978,1,5,Apotheke Dr. Aurnhammer,Bahnhofstraße
+48.2265436,11.6711835,1,5,Falken Apotheke,Münchener Straße
+48.1548502,11.5668069,2,27,Adelheid-apotheke,Augustenstraße
+48.1380825,11.5612128,3,61,City-apotheke,Schillerstraße
+48.1399858,11.5623796,3,61,Europa-apotheke,Schützenstraße
+48.1487302,11.4602226,4,10,Bahnhofapotheke,Pasinger Bahnhofsplatz
+48.1610736,11.5689431,2,27,Spitzweg Apotheke,Hohenzollernstraße
+48.1614749,11.5678545,2,27,St.-kilian-apotheke,Hohenzollernplatz
+48.1146482,11.5709276,9,9,Schyrenapotheke,NA
+48.1373568,11.5762875,3,61,Rathaus-apotheke,Marienplatz
+48.1313319,11.5763334,3,61,Apotheke Am Gärtnerplatz,Corneliusstraße
+48.1336021,11.5764395,3,61,Rumford Apotheke,Reichenbachstraße
+48.1267604,11.5913744,3,61,Apotheke Im Franziskanerhof,Franziskanerstraße
+48.1287183,11.592958,3,61,Hall'sche Apotheke,NA
+48.1358367,11.5977142,3,61,Klosterapotheke,Max-Planck-Straße
+48.1289741,11.603715,3,61,Ostbahnhof Apotheke,Orleansplatz
+48.128516,11.5993523,3,61,Weißenburger Apotheke,Weißenburger Straße
+48.1295037,11.602067,3,61,Johannis Apotheke,NA
+48.1339035,11.5445475,6,7,Kugelapotheke,Theresienhöhe
+48.1319428,11.5983983,3,61,Preysing-apotheke,Wörthstraße
+48.1442767,11.4609754,4,10,Linden-apotheke,Bäckerstraße
+48.1461437,11.4593421,4,10,Sankt-jakobs-apotheke,Planegger Straße
+48.1483854,11.4613038,4,10,Gesundbrunnen-apotheke,Pasinger Bahnhofsplatz
+48.1626072,11.5745584,2,27,Max-emanuel-apotheke,Belgradstraße
+48.1335039,11.5828647,3,61,Zweibrücken-apotheke,Zweibrückenstraße
+48.1346016,11.575592200000001,3,61,Löwenapotheke,NA
+48.1342073,11.584922,3,61,Drogerie Im Lehel,NA
+48.10948,11.5758386,9,9,Flora Apotheke,NA
+48.1193463,11.5834179,9,9,Salvator Apotheke,Sankt-Bonifatius-Straße
+48.1345818,11.5788694,3,61,Bio-apotheke,Frauenstraße
+48.1339916,11.5834122,3,61,Isartor Apotheke,NA
+48.1364717,11.5738671,3,61,Rosenapotheke,Rosenstraße
+48.1342182,11.5665189,3,61,Regenbogenapotheke,Sonnenstraße
+48.1337028,11.5653075,3,61,Marien Apotheke,Sendlinger-Tor-Platz
+48.1282531,11.5701658,3,61,Isar-apotheke,Klenzestraße
+48.1284466,11.5752151,3,61,Fraunhofer Apotheke,Fraunhoferstraße
+48.1291359,11.558105,5,5,Apotheke Am Goetheplatz,Waltherstraße
+48.1402067,11.6015969,3,61,Troger Apotheke,Prinzregentenstraße
+48.1577743,11.5751376,2,27,Kurfürsten Apotheke,Franz-Joseph-Straße
+48.1374999,11.5348087,6,7,St. Rupertus-apotheke,Trappentreustraße
+48.1495873,11.5492446,7,11,Lori-apotheke,NA
+48.1503872,11.5453365,7,11,Nordstern Apotheke,NA
+48.1510261,11.5393013,7,11,Alpha Apotheke,Nymphenburger Straße
+48.1450768,11.5600474,3,61,St. Blasius Apotheke,Augustenstraße
+48.1447752,11.5603095,3,61,St. Antonius Apotheke,Augustenstraße
+48.1592797,11.5857107,2,27,Von Mendelsche Apotheke,Leopoldstraße
+48.120978,11.5480336,12,6,Bienen-apotheke,NA
+48.1396008,11.5760769,3,61,Engel Apotheke,Theatinerstraße
+48.1258892,11.3678618,8,5,Bosco Apotheke,NA
+48.1275963,11.3658469,8,5,Apotheke Am Bahnhof,NA
+48.1246832,11.3660693,8,5,Stern Apotheke,Otto-Wagner-Straße
+48.1315763,11.3642859,8,5,St.martin Apotheke,Untere Bahnhofstraße
+48.1147935,11.579375,9,9,Walchensee-apotheke,Tegernseer Landstraße
+48.1160757,11.580668,9,9,Heilig-kreuz-apotheke,NA
+48.1382413,11.5704559,3,61,Internationale Ludwigs-apotheke,Neuhauser Straße
+48.1384174,11.558388,3,61,Stadt-apotheke,Goethestraße
+48.1375181,11.563718,3,61,Schwanthaler Apotheke,NA
+48.152992,11.534056,7,11,Winthir Apotheke,Nymphenburger Straße
+48.1362444,11.5792107,3,61,Mohrenapotheke,Tal
+48.1314093,11.5881476,3,61,Mohren-apotheke,Rosenheimer Straße
+48.1343945,11.5978062,3,61,Max-weber-platz-apotheke,Johannisplatz
+48.1340226,11.5400358,6,7,Park-apotheke,Ganghoferstraße
+48.1357149,11.5377505,6,7,Gollierplatz-apotheke,Bergmannstraße
+48.1584205,11.5475107,10,5,Leonrod Apotheke,NA
+48.1370701,11.5787887,3,61,Orlando-apotheke,Ledererstraße
+48.1620681,11.5856934,2,27,Feilitzsch-apotheke,NA
+48.128317,11.5562143,5,5,Oleander Apotheke,Lindwurmstraße
+48.1386377,11.5707993,3,61,Centrum Apotheke,Neuhauser Straße
+48.1153218,11.5793512,9,9,Silberhorn-apotheke,Tegernseer Platz
+48.1538748,11.5752545,2,27,Neureuther-apotheke,Barer Straße
+48.1559483,11.5619911,2,27,St.-josephs-apotheke,Görresstraße
+48.1576911,11.5626086,2,27,Barbara Apotheke,Keuslinstraße
+48.1595824,11.5632754,2,27,Karlstadt Apotheke,Elisabethstraße
+48.1599992,11.580881,2,27,Hohenzollern Apotheke,Hohenzollernstraße
+48.1598885,11.5823699,2,27,Wunderlichs Apotheke,NA
+48.1092191,11.5743578,9,9,Magnus Apotheke,Grünwalder Straße
+48.1610771,11.5824329,2,27,Kaiser Apotheke,NA
+48.1522707,11.5742215,13,4,Barer Apotheke,Blütenstraße
+48.1487065,11.5750991,13,4,Apotheke Maxvorstadt,Türkenstraße
+48.1477924,11.5764455,13,4,Theresien Apotheke,Amalienstraße
+48.1325633,11.5666797,3,61,Blumenapotheke,NA
+48.1396387,11.5629724,3,61,Schützen-apotheke,Schützenstraße
+48.1606315,11.5729507,2,27,St. Raphael-apotheke,Fallmerayerstraße
+48.1601657,11.5760533,2,27,St. Georgs-apotheke,Hohenzollernstraße
+48.1665021,11.5645483,2,27,St. Sebastian-apotheke,NA
+48.163279,11.5638789,2,27,Herzog Apotheke,Schleißheimer Straße
+48.1378244,11.5562375,3,61,Apotheke In Der Postbank,Schwanthalerstraße
+48.1184703,11.5403048,12,6,Behring-apotheke,Plinganserstraße
+48.1506497,11.4625451,4,10,Wensauer Apotheke,August-Exter-Straße
+48.1591015,11.5663522,2,27,Hildegard-apotheke,Elisabethstraße
+48.1345129,11.597465,3,61,Max-weber-platz-apotheke,Innere Wiener Straße
+48.1432811,11.5748358,3,61,Brienner Apotheke,NA
+48.1337594,11.534393,6,7,Heimeran-apotheke,Heimeranplatz
+48.1429092,11.5773469,3,61,Apotheke Am Odeonsplatz,Odeonsplatz
+48.1611886,11.5403498,10,5,Heideck-apotheke,NA
+48.1597998,11.5433611,10,5,Dom-pedro-apotheke,Dom-Pedro-Straße
+48.1529446,11.5319476,7,11,Kranich-apotheke,Wendl-Dietrich-Straße
+48.1349573,11.5033778,11,9,Hahnen Apotheke,Fürstenrieder Straße
+48.1415242,11.5777992,3,61,Hofapotheke In Der Residenz,NA
+48.1398637,11.5667107,3,61,Stachus-apotheke,NA
+48.1326174,11.5653205,3,61,Doc Morris,Lindwurmstraße
+48.1579708,11.5442197,10,5,Tobias-apotheke,NA
+48.1364668,11.5574673,3,61,Rihani Apotheke,Landwehrstraße
+48.1367332,11.558385,3,61,Goethe Apotheke,Goethestraße
+48.1344709,11.5687768,3,61,Asam-apotheke,Sendlinger Straße
+48.1392182,11.5620691,3,61,Ahorn-apotheke,NA
+48.1174459,11.5397601,12,6,Harras Apotheke,Am Harras
+48.1172713,11.5403956,12,6,St. Vitus Apotheke,Plinganserstraße
+48.1566063,11.5304443,7,11,Lachner Apotheke,Nymphenburger Straße
+48.1623879,11.5871518,2,27,St. Ursula Apotheke,Münchner Freiheit
+48.1334574,11.499441,11,9,Maximilian Apotheke,NA
+48.1393558,11.5120857,11,9,Agnes Bernauer Apotheke,NA
+48.1520093,11.5327964,7,11,Rotkreuzplatz-apotheke,Donnersbergerstraße
+48.157542,11.5808705,2,27,Franz-joseph-apotheke,NA
+48.1515364,11.5769797,13,4,Adalbert-apotheke,Türkenstraße
+48.1285994,11.5567878,5,5,Wittelsbacher Apotheke,Lindwurmstraße
+48.1399024,11.5327233,6,7,Apotheke Am Hauptzollamt,Landsberger Straße
+48.1168672,11.5815316,9,9,Tela-apotheke,Tegernseer Landstraße
+48.2293428,11.6726467,1,5,Schloß Apotheke,Schloßstraße
+48.163006,11.543482,10,5,Helios-apotheke,NA
+48.1357516,11.5400994,6,7,Ganghofer-apotheke,Gollierstraße
+48.1283677,11.5955726,3,61,Fleming Apotheke,Weißenburger Straße
+48.1400306,11.5070156,11,9,Veit-stoß-apotheke,Sandrartstraße
+48.1555209,11.5658877,2,27,Hiltensperger-apotheke,Josephsplatz
+48.1539949,11.5841915,2,27,Kaulbach Apotheke,Ohmstraße
+48.1367714,11.5026719,11,9,Stefans Apotheke,NA
+48.1384289,11.50338,11,9,Gloria Apotheke,NA
+48.1400338,11.5028644,11,9,St. Ulrichs Apotheke,Fürstenrieder Straße
+48.1512949,11.5640104,2,27,Robert-koch-apotheke,NA
+48.1491176,11.5631402,2,27,Augusten-apotheke,Augustenstraße
+48.152794,11.565504,2,27,Edelweiß-apotheke,NA
+48.1496075,11.54635,7,11,Wappen-apotheke,Nymphenburger Straße
+48.1477547,11.4612156,4,10,Apotheke Am Pasinger Markt,NA
+48.1164917,11.5333322,12,6,Hellas Apotheke,NA
+48.1370631,11.5981225,3,61,Merzendorfer Orthopädie,NA
+48.129011,11.5585809,5,5,Goetheplatz-apotheke,Goetheplatz
+48.1523656,11.5355781,7,11,Apotheke Im Karl-albrecht-hof,Nymphenburger Straße
+48.1492574,11.4600208,4,10,Bienenapotheke,Kaflerstraße
+48.13387,11.5654089,3,61,Cleemann-apotheke,Sendlinger-Tor-Platz
+48.119419,11.5439575,12,6,Oberländer Apotheke,Daiserstraße
+48.1499837,11.5443593,7,11,Elvira-apotheke,Nymphenburger Straße
+48.1355458,11.5717782,3,61,Adler Apotheke,Dultstraße
+48.1418398,11.5610934,3,61,Inter-apotheke,Elisenstraße
+48.1307043,11.5703982,3,61,Angertor Apotheke,Hans-Sachs-Straße
+48.1496525,11.455563,4,10,Aurora Apotheke,Lortzingstraße
+48.1530212,11.5260818,7,11,Benno Apotheke,Nibelungenstraße
+48.2246517,11.6732023,1,5,Amalien Apotheke,Bahnhofstraße
+48.1311678,11.5025159,11,9,Fürstenrieder Apotheke,Fürstenrieder Straße
+48.1305232,11.364648,8,5,Apotheke Im Germedicum,NA
+48.1383585,11.5805711,3,61,St. Anna Apotheke,NA
+48.136919,11.5712742,3,61,Klösterl-apotheke,Färbergraben
+48.1123885,11.575942,9,9,Monachi Apotheke,NA
+48.1251681,11.579659,3,61,Mariahilf Apotheke,Ohlmüllerstraße
+48.129096,11.5594478,5,5,Klösterl Apotheke,Waltherstraße
+48.1477131,11.4641301,4,10,Saniplus Nachtzugang,NA
+48.13489402242809,11.50960984534641,11,9,Karwendel-apotheke,Zschokkestraße
+48.13878999844559,11.565562882007532,3,61,Dr. Beckers Central Apotheke,Stachus-Einkaufszentrum
+48.13950050170204,11.560262820641306,3,61,Hauptbahnhof Apotheke,NA
+48.127694842935185,11.604192811435542,3,61,Welfen-apotheke,NA
+48.14772513236568,11.464120775531935,4,10,Saniplus,NA
+48.13057990861356,11.59050687641798,3,61,Domos Apotheke,Rosenheimer Straße
+48.16190121145738,11.586342761331272,2,27,,NA
+48.13725773154175,11.574960212310705,3,61,Kranich Apotheke,NA
