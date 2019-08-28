@@ -25,7 +25,7 @@ Zur Visualisierung:
   * htmlwidgets [@htmlwidgets]
   * lattice [@lattice]
   * leaflet [@leaflet]
-  * leaflet.extras
+  * leaflet.extras [@leaflet.extras]
   * leafpop [@leafpop]
   * mapdeck [@mapdeck]
   * mapview [@mapview]
@@ -64,13 +64,16 @@ Pakete in Verwendung mit den ShinyApps:
   * furrr [@furrr]
   * future [@future]
   * geosphere [@geosphere]
+  * openxlsx [@xlsx]
   * osmdata [@osmdata]
   * osrm [@osrm]
   * rlist [@rlist]
   * shiny [@shiny]
   * shinydashboard [@shinydashboard]
+  * shinyjs [@shinyjs]
   * shinyWidgets [@shinyWidgets]
   * sp [@sp]
   * spdep [@spdep]
-  * xlsx [@xlsx]
+  
+# References
     

@@ -102,7 +102,8 @@ polygons <- read_sf("leaflet_data/polygons_2.shp")
 ```
 ```{r, fig.align="center", fig.cap="Clustering der Apotheken in München mit DBSCAN Algorithmus", fig.height=9, eval=FALSE}
 # Farbfunktionen definieren
-pal <- colorNumeric(c("#E1F5C4", "#EDE574", "#F9D423", "#FC913A", "#FF4E50"), domain = points_df$count)
+pal <- colorNumeric(c("#E1F5C4", "#EDE574", "#F9D423", "#FC913A", "#FF4E50"),
+                    domain = points_df$count)
 pal2 <- colorNumeric(
   brewer.pal(9, "Greens")[3:9],
   intersect$einwohner

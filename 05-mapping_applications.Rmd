@@ -23,7 +23,7 @@ In R können diese Apps mit Hilfe des Pakets **shiny** entwickelt werden. Hierf�
 
 Ein einfaches Beispiel für eine App mit den Paketen **shiny** und **leaflet** könnte wie folgt aussehen:
 
-Zuerst werden die Paketen und der Bienen Datensatz aus Kapitel 2 geladen:
+Zuerst werden die Pakete und der Honig Datensatz aus Kapitel 2 geladen:
 ```{r, eval = FALSE}
 library(leaflet)
 library(RColorBrewer)
@@ -38,7 +38,7 @@ colnames(honey)[3:8] <- c("Number_of_colonies", "Yield_per_colony",
 ```
 
 Als erstes wird das User Interface definiert: 
-Es wird eine `fluidPage` erstellt, damit sich die App anpasst wenn das Fenster verkleinert oder vergrößert wird. Dann wird eine `fluidRow` hinzugefügt, in die drei `column` Elemente hinzugefügt werden, die jeweils einen `selectInput` enthalten. Eine `column` gibt an, wieviel Platz ein Element in der Breite einnimt. Dafür wird das Fenster in 12 Spalten unterteilt, 4 nimmt also ein Drittel der Seite ein. Ein `selectInput` entspricht einer Combobox, also ein Eingabefenster bei dem aus mehreren Vorschlägen ausgewählt werden kann. `multiple = FALSE` sorgt dafür, dass maximal ein Vorschlag ausgewählt werden kann. Nach der ersten `fluidRow` wird eine zweite hinzugefügt, die einen `leafletOutput` enthält, also die Karte auf der später alles dargestellt wird.
+Es wird eine `fluidPage` erstellt, damit sich die App anpasst, wenn das Fenster verkleinert oder vergrößert wird. Dann wird eine `fluidRow` hinzugefügt, in die drei `column` Elemente hinzugefügt werden, die jeweils einen `selectInput` enthalten. Eine `column` gibt an, wieviel Platz ein Element in der Breite einnimmt. Dafür wird das Fenster in 12 Spalten unterteilt, 4 nimmt also ein Drittel der Seite ein. Ein `selectInput` entspricht einer Combobox, also ein Eingabefenster bei dem aus mehreren Vorschlägen ausgewählt werden kann. `multiple = FALSE` sorgt dafür, dass maximal ein Vorschlag ausgewählt werden kann. Nach der ersten `fluidRow` wird eine zweite hinzugefügt, die einen `leafletOutput` enthält, also die Karte auf der später alles dargestellt wird.
 ```{r, eval = FALSE}
 ui <- fluidPage(
   fluidRow(
@@ -81,7 +81,7 @@ ui <- fluidPage(
 
 Anschließend muss der Server definiert werden. `outmap$map` definiert was mit dem Objekt mit der `outputId` *map* geschehen soll. Die Funktion `renderLeaflet` wird verwendet, um eine Leaflet Karte zu rendern. Doch bevor die Karte gerendert werden kann, muss etwas Vorarbeit geleistet werden.
 Als erstes wird ein Teildatensatz erstellt, der alle Daten aus dem ausgewählten Jahr für die selektierte Variable enthält. Die von dem Benutzer ausgewählten Werte werden mit `input$inputId` abgerufen. In diesem Fall `input$year`, `input$variable` und `input$palette`. Diese haben immer die Klassen **character**, für das Jahr muss dieser Wert also in einen numerischen umgewandelt werden.
-Die Funktion `colorNumeric` wird für die Erstellung der Farbpalette verwendet, ehe ein Titel für die Legende erstellt wird und die Karte erstellt wird. Mehr zu der Erstellung der Karte und des Leaflet Pakets in dem nächsten Kapitel.  
+Die Funktion `colorNumeric` wird für die Erstellung der Farbpalette verwendet, ehe ein Titel für die Legende erstellt wird und die Karte erstellt wird. Mehr zu der Erstellung der Karte und des Leaflet Pakets in dem entsprechenden Kapitel.  
 ```{r, eval = FALSE}
 server <- function(input, output, session) {
   output$map <- renderLeaflet({

@@ -6,7 +6,7 @@ output: html_document
 ---
 
 # Datenherkunft
-Ein Großteil der Daten die in dieser Arbeit verwendet wurden stammen aus OpenStreetMap. Je nach Größe wurden diese entweder mit der beigefügten OSM-App erstellt oder von https://www.geofabrik.de/ heruntergeladen. Bei ZWeiterem wurden die Datensätze mit den Commandline Tools **osmconvert** und **osmfilter** in ein sinnvolles Format konvertiert und gefiltert. Danach war nochmal eine weitere Transformation in das GEOJSON Format nötig, wofür das NodeJS Package **osmtogeojson** verwendet wurde. Zu diesen Datensätze zählen die Bäkereien in Europa und das Hamburger Straßennetzwerk.
+Ein Großteil der Daten die in dieser Arbeit verwendet wurden stammen aus OpenStreetMap. Je nach Größe wurden diese entweder mit der beigefügten OSM-App erstellt oder von https://www.geofabrik.de/ heruntergeladen. Bei Zweiterem wurden die Datensätze mit den command line Tools **osmconvert** und **osmfilter** in ein sinnvolles Format konvertiert und gefiltert. Danach war nochmal eine weitere Transformation in das GEOJSON Format nötig, wofür das NodeJS Package **osmtogeojson** verwendet wurde. Zu diesen Datensätze zählen die Bäckereien in Europa und das Hamburger Straßennetzwerk.
 Die bayerischen Verwaltungsgebiete wurden von https://opendata.bayern.de gedownloadet. Inkar ist ein Angebot der statistischen Ämter des Bundes und der Länder. Auf https://www.inkar.de/ können Datenbankabfragen zu verschiedenen Kennzahlen und Indikatoren erstellt werden. Diese wurden wie folgt mit den Shapefiles vereint:
 ```{r, eval=FALSE}
 # Inkar Datensatz laden
@@ -59,15 +59,18 @@ eco <- eco[, c(2, 3, 12, 35, 38, 43, 51, 63, 80, 97, 110)]
 write_sf(eco, "datasets/bavaria.shp")
 ```
 
-Im weiteren wurde dieser Datensatz immer als `bavaria.shp` geladen.
+Im Weiteren wurde dieser Datensatz immer als `bavaria.shp` geladen.
 
-Die honey und Autounfall Datensätze wurde von Kaggle gedownloadet: https://www.kaggle.com/jessicali9530/honey-production und https://www.kaggle.com/tsiaras/uk-road-safety-accidents-and-vehicles
-
-Außerdem wurde ein Datensatz mit den Abkürzungen der Staaten in den USA von Kaggle benutzt: (https://www.kaggle.com/giodev11/usstates-dataset)
+Folgende Datensätze wurden von Kaggle gedownloadet:
+  
+  * honey: Daten über die Honigproduktion in den USA von 1998-2012 (https://www.kaggle.com/jessicali9530/honey-production)
+  * accidents: Autounfälle in UK von 2005-2017 (https://www.kaggle.com/tsiaras/uk-road-safety-accidents-and-vehicles)
+  * abbreviations: Abkürzungen der Staaten in den USA (https://www.kaggle.com/giodev11/usstates-dataset)
 
 Das europäische Höhenraster stammt von der Europäischen Umweltbehörde: https://www.eea.europa.eu/data-and-maps/data/digital-elevation-model-of-europe
 
 Die Flugdaten der USA wurden hier gedownloadet: http://stat-computing.org/dataexpo/2009/the-data.html
+Diese enthalten Daten über alle Inlandsflügen in den USA von 1987-2008.
 
 Die Daten für Denver wurden daraus wie folgt extrahiert:
 ```{r, eval = FALSE}
@@ -85,16 +88,16 @@ flights_denver <- lapply(flights_usa, function(x) {
 # Liste zu data.frame binden
 flights_denver <- do.call(rbind, flights_denver)
 # Nach Zielort zusammenfassen, Anzahl der Flüge zählen
-flights_denver_g <- ddply(flights_denver, .(Dest), summarize,
+flights_denver_g <- plyr::ddply(flights_denver, .(Dest), plyr::summarize,
                           no_of_flights = length(Dest))
 # Flughäfen laden
 airports <- read_csv("datasets/airports.csv")
 # Spaltennamen für join ändern
 colnames(flights_denver_g)[1] <- "iata"
 # Flughafen und Flüge joinen
-flights_denver_g <- join(flights_denver_g, airports, by = "iata")
+flights_denver_g <- plyr::join(flights_denver_g, airports, by = "iata")
 # Nach Staat zusammenfassen, Anzahl der Flüge zu jeweiligem Ziel summieren
-flights_denver_states <- ddply(flights_denver_g, .(state), summarize,
+flights_denver_states <- plyr::ddply(flights_denver_g, .(state), plyr::summarize,
                                no_of_flights = sum(no_of_flights),
                                long = mean(long),
                                lat = mean(lat))

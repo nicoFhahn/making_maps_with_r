@@ -86,7 +86,7 @@ ggplot(data = honey2008) +
 
 Timo Grossenbacher zeigt in seinem Blog wie man mit **gplot2** leicht zu interpretierende Karten gestalten kann:
 
-```{r, echo=FALSE,warning=FALSE,message=FALSE,include=FALSE, eval=FALSE}
+```{r, warning=FALSE,message=FALSE,include=FALSE}
 theme_map <- function(...) {
   theme_minimal() +
   theme(
@@ -137,7 +137,7 @@ relief_spdf <- as(relief, "SpatialPixelsDataFrame")
 # SpatialPixelsDataFrame first, and then extract its contents 
 # using as.data.frame
 relief <- as.data.frame(relief_spdf) %>% 
-  rename(value = `X02.relief.georef.clipped.resampled`)
+  dplyr::rename(value = `X02.relief.georef.clipped.resampled`)
 # remove unnecessary variables
 rm(relief_spdf)
 rm(gde_15)
@@ -165,7 +165,7 @@ map_data$brks <- cut(map_data$avg_age_15,
 brks_scale <- levels(map_data$brks)
 labels_scale <- rev(brks_scale)
 ```
-```{r, fig.align="center",fig.cap="Karte der Schweiz in ggplot2", eval=FALSE}
+```{r, fig.align="center",fig.cap="Karte der Schweiz in ggplot2", warning=FALSE,message=FALSE}
 ggplot() +
     # raster comes as the first layer, municipalities on top
     geom_raster(data = relief, aes(x = x, 

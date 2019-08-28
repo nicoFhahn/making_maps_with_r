@@ -64,7 +64,7 @@ Am häufigsten werden geographische Daten mit Hilfe von statischen Karten darges
 
 ## tmap
 Die schnellste Möglichkeit zur Erstellung von Karten in R ist die Verwendung der `plot()` Funktion, mit der Vektor- und Rasterdaten simplistisch dargestellt werden können. Durch die Verwendung mehrerer Argumente, wie beispielsweise `col`, können die Graphiken gestylt werden, um mehr Informationen zu übermitteln. Eine weitere Möglichkeit stellt das Paket **grid** dar, mit dem mehr Kontrolle möglich ist.
-Ein Paket, dass speziell zur Illustration von Geodaten entwickelt wurde, ist **tmap**. Dieses hat eine kompakte Syntax, ähnlich der von **ggplot2**. Des weiteren können statische Karten durch die Verwendung des Befehls `tmap_mode()` schnell in interaktive Karten umgewandelt werden und umgekehrt. Außerdem werden die meißten geographischen Klassen als input akzeptiert, im Vergleich zu anderen Paketen, auch `raster` Daten.
+Ein Paket das speziell zur Illustration von Geodaten entwickelt wurde, ist **tmap**. Dieses hat eine kompakte Syntax, ähnlich der von **ggplot2**. Des Weiteren können statische Karten durch die Verwendung des Befehls `tmap_mode()` schnell in interaktive Karten umgewandelt werden und umgekehrt. Außerdem werden die meißten geographischen Klassen als input akzeptiert, im Vergleich zu anderen Paketen, auch `raster` Daten.
 
 Wie bereits erwähnt ähnelt die Syntax von **tmap** der von **ggplot2**. Dies beinhaltet eine strikte Trennung zwischen den Daten und der Ästhetik. Zu Beginn wird `tm_shape()` ein Datensatz übergeben, gefolgt von ein oder mehreren Ebene, die die Art der Darstellung definieren. Dazu zählen beispielhaft `tm_fill()` und `tm_dots()` um Daten als Polygone beziehungsweise Punkte zu plotten. 
 ```{r, eval=FALSE}
@@ -93,7 +93,7 @@ map_europe <- tm_shape(europe_raster) + tm_raster()
 class(map_europe)
 
 ```
-Das gespeicherte Objekte kann so einfach erweitert werden, oder zu einem späteren Zeitpunkt in der Konsole aufgerufen werden. Des weiteren können zu dem Objekt weitere Ebenen mit `tm_shape()` hinzugefügt werden, wodurch mehrere Karten zu einer kombiniert werden können.
+Das gespeicherte Objekte kann so einfach erweitert werden, oder zu einem späteren Zeitpunkt in der Konsole aufgerufen werden. Des Weiteren können zu dem Objekt weitere Ebenen mit `tm_shape()` hinzugefügt werden, wodurch mehrere Karten zu einer kombiniert werden können.
 Im folgenden Codebeispiel wird auf dem obigen Code, der ein Höhenraster von Europa darstellt, aufgebaut. Dabei werden zunächst die Grenzlinien der einzelnen Staaten hinzugefügt, gefolgt von allen Städten mit über einer Millionen Einwohnern.
 ```{r}
 map_europe2 <- map_europe + tm_shape(europe_shape) + tm_lines(alpha = 0.3)
@@ -102,7 +102,7 @@ map_europe3 <- map_europe2  + tm_shape(cities) + tm_dots(size = 0.3)
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align="center", fig.cap="Verwendung mehrerer Ebenen"}
 map_europe3
 ```
-Durch das speichern der einzelnen Karten als Objekte können diese auch mit Hilfe der Funktion `tmap_arrange()` neben- oder übereinander dargestellt werden. Grafik \ref{fig::chunk1} wurde durch diesen Befehl erstellt.
+Durch das Speichern der einzelnen Karten als Objekte können diese auch mit Hilfe der Funktion `tmap_arrange()` neben- oder übereinander dargestellt werden.
 ```{r, eval=FALSE}
 tmap_arrange(bav_1, bav_2, bav_3, ncol = 3)
 ```
@@ -112,7 +112,7 @@ Der Nutzer ist nicht limitiert in der Anzahl an Ebenen, die er hinzufügen kann.
 Bei den bisherigen Plots wurden die Standard Einstellungen von **tmap** verwendet. Zur Gestaltung visuell ansprechender Karten, können diese überschrieben werden. Dabei gibt es zwei Möglichkeiten:
     - Konstante Ästhetik
     - Ästhetik die sich mit Variablenausprägung ändert
-Im Vergleich zu **ggplot2** wird keine Helferfunktion (`aes()`) verwendet, um die Gestaltung der Karte zu individualisieren. Stattdessen werden die Argumente direkt übergeben. Zu den am häufigsten verwendeten Argumenten zählt die Füllfarbe (`col`), die Transparenz (`alpha`), die Strichstärke (`lwd`) und die Linienart (`lty`).
+Im Vergleich zu **ggplot2** wird keine Helferfunktion (`aes()`) verwendet, um die Gestaltung der Karte zu individualisieren. Stattdessen werden die Argumente direkt übergeben. Zu den nützlichsten Argumenten zählt die Füllfarbe (`col`), die Transparenz (`alpha`), die Strichstärke (`lwd`) und die Linienart (`lty`).
 
 ```{r, fig.align="center",fig.cap="Verwendung verschiedener Argumente"}
 bav1 <- tm_shape(bavaria) + tm_fill(col = "darkgreen")
@@ -139,7 +139,7 @@ tm_shape(bavaria) + tm_polygons(col = "Bevoelkerungsentwicklung",
   tm_layout(legend.outside = TRUE)
 ```
 
-Das `midpoint` Argument wird hier verwendet, um den Wert 0 als natürlichen Mittelpunkt zu verwenden. In der resultierenden Karte ist zu erkennen, dass die Bevölkerung im Norden Bayerns zurückgeht, während vor allem um München herum die Bevölkerung starkt ansteigt. 
+Das `midpoint` Argument wird hier verwendet, um den Wert 0 als natürlichen Mittelpunkt zu verwenden. In der resultierenden Karte ist zu erkennen, dass die Bevölkerung im Norden Bayerns zurückgeht, während vor allem um München herum die Bevölkerung stark ansteigt. 
 ```{r, echo=FALSE, fig.align="center", fig.cap = "Karte in base R"}
 pal <- colorRampPalette(c("orange", "green"))
 bavaria$order <- findInterval(bavaria$Bevoelkerungsentwicklung, sort(bavaria$Bevoelkerungsentwicklung))
@@ -165,7 +165,7 @@ Ein Alternative dazu ist das `style` Argument. Dadurch kann die Klassenbildung m
     - `style = equal`: Teilt die Variable in Intervalle von gleicher Länge auf. Sollte nur benutzt werden, wenn die Variable gleichverteilt ist.
     - `style = quantile`: Teilt die Variable in Quantile auf. Somit sind in jedem Intervall gleich viele Beobachtungen. 
     - `style = jenks`: Identifiziert Gruppen mit ähnlichen Werten und maximiert den Unterschied zwischen ihnen.
-    - `style = cont`: Stellt viele Farben über eine kontinuerliche Palette dar.
+    - `style = cont`: Stellt viele Farben über eine kontinuierliche Palette dar.
     - `style = cat`: Färbt bei kategorialen Daten jede Kategorie individuell ein.
 Weitere Möglichkeiten wären `cat`, `fixed`, `sd`, `kmeans`, `hclust`, `bclust`, und `fisher`.
 
@@ -179,7 +179,7 @@ ba9 <- tm_shape(bavaria) + tm_polygons(col = "Art", style = "cat") + tm_credits(
 tmap_arrange(ba4, ba5, ba6, ba7, ba8, ba9, ncol = 3)
 ```
 
-Eine letzte Möglichkeit um das Aussehen einer Karte zu beeinflussen besteht in der Farbwahl der einzelnen Klassen. Der Nutzer kann über das Argument `palette`. Diesem kann der Name einer bekannte Palette aus dem **RColorBrewer** oder **Viridis** Paket übergeben werden. Soll die Reihenfolge der Palette umgedreht werden, kann zu Beginn des characters ein `-` hinzugefügt werden.
+Eine letzte Möglichkeit um das Aussehen einer Karte zu beeinflussen besteht in der Farbwahl der einzelnen Klassen. Der Nutzer kann über das Argument `palette`. Diesem kann der Name einer Palette aus dem **RColorBrewer** oder **Viridis** Paket übergeben werden. Soll die Reihenfolge der Palette umgedreht werden, kann zu Beginn des characters ein `-` hinzugefügt werden.
 ```{r, eval = FALSE}
 tm_shape(bavaria) + tm_polygons(col = "Arbeitslosenquote", palette = "viridis")
 tm_shape(bavaria) + tm_polygons(col = "Arbeitslosenquote", palette = "-viridis")
@@ -193,8 +193,8 @@ Bei den Paletten aus den beiden Paketen kann zwischen drei Arten von Paletten un
     - Sequentielle Paletten: Folgen einem Farbverlauf von hell zu dunkel. Sollten für stetige Variablen verwendet werden. 
     - Divergierende Paletten: Folgen einem Farbverlauf von dunkel zu hell, zu dunkel. Sollten für stetige Variablen mit einem natürlichen Mittelpunkt (`midpoint`) verwendet werden.
     - Kategoriale Paletten: Leicht zu unterscheidbare Farben, ideal für kategoriale Daten.
-Alternativ kann auch eine eigenene Palette übergeben werden, hierfür könnten HEX-Codes verwendet werden.
-Bei der Farbwahl sollte auf weiteres geachtet werden: Farben übertragen Gefühle. Beispielhaft wird rot mit negativen Sachen assoziert, während grün mit positiven Dingen in Verbindung gebracht wird. Dieses Beispiel kann auch auf geographische Merkmale erweitert werden. Grün steht für Wälder und blau für Gewässer. Außerdem sollte bei Verwendung eine Palette klar sein, welche Farbe für niedrigere beziehungsweise höhere Werte steht. Damit eine möglichst breite Masse an Menschen eine Karte interpretieren kann, sollte wenn möglich auch darauf geachtet werden, dass farbenblinde Menschen die Unterschiede zwischen den Klassen identifizieren können.
+Alternativ kann auch eine eigene Palette übergeben werden, hierfür könnten HEX-Codes verwendet werden.
+Bei der Farbwahl sollte auf weiteres geachtet werden: Farben übertragen Gefühle. Beispielhaft wird rot mit negativen Sachen assoziiert, während grün mit positiven Dingen in Verbindung gebracht wird. Dieses Beispiel kann auch auf geographische Merkmale erweitert werden. Grün steht für Wälder und blau für Gewässer. Außerdem sollte bei Verwendung eine Palette klar sein, welche Farbe für niedrigere beziehungsweise höhere Werte steht. Damit eine möglichst breite Masse an Menschen eine Karte interpretieren kann, sollte wenn möglich auch darauf geachtet werden, dass farbenblinde Menschen die Unterschiede zwischen den Klassen identifizieren können.
 ```{r, fig.align="center",fig.cap="Sequentielle, divergierende und kategoriale Palette", echo=FALSE}
 image_read("datasets/palette.png")
 ```
@@ -250,7 +250,7 @@ tmap_arrange(a1, a2, ncol = 2)
 
 
 ## Inset maps
-Manchmal können nicht alle Informationen effektiv mit nur einer Karte dargestellt werden, beispielsweise um zusätzlichen Informationen zu übermitteln. Mit Hilfe der `print` und `viewport` Funktionen können mehrere kleinere Karten zu einer großen hinzugefügt werden. In dem nachfolgenden Beispiel sind die Städte und Gemeinden des Landkreis Rosenheim dargestellt. Da möglicherweise nicht alle Betrachter wissen, wo sich der Landkreis befindet, wird noch eine Bayern Karte mit einer Bounding Box um den Landkreis herum hinzugefügt.
+Manchmal können nicht alle Informationen effektiv mit nur einer Karte dargestellt werden, beispielsweise um zusätzliche Informationen zu übermitteln. Mit Hilfe der `print` und `viewport` Funktionen können mehrere kleinere Karten zu einer großen hinzugefügt werden. In dem nachfolgenden Beispiel sind die Städte und Gemeinden des Landkreis Rosenheim dargestellt. Da möglicherweise nicht alle Betrachter wissen, wo sich der Landkreis befindet, wird noch eine Bayern Karte mit einer bounding box um den Landkreis herum hinzugefügt.
 ```{r, message=FALSE, echo=FALSE}
 bbox <- st_bbox(rosenheim, crs = 4326) %>% 
   st_as_sfc()
@@ -262,8 +262,8 @@ map_rosenheim
 print(bayern, vp = grid::viewport(0.8, 0.185, width = 0.2, height = 0.45))
 ```
 
-Eine weiteres Anwendungsgebiete dieser Art von Karten ist die Darstellung von Regionen die weit voneinander entfernt sind. Im folgenden Beispiel werden alle 50 Staaten der USA in einer Grafik dargestellt, unter Berücksichtigung der Größen der einzelnen Staaten. Da Hawaii und Alaska zu weit von den restlichen 48 Staaten entfernt sind, wäre eine einzelne Karte nicht die beste Lösung, weswegen drei Karten erstellt und zusammengefügt werden.
-Zuerst wird die Projektion der 48 Staaten in eine equal are projection geändert, die anderen beiden Datensätze haben diese bereits.
+Eine weiteres Anwendungsgebiet dieser Art von Karten ist die Darstellung von Regionen die weit voneinander entfernt sind. Im folgenden Beispiel werden alle 50 Staaten der USA in einer Grafik dargestellt, unter Berücksichtigung der Größen der einzelnen Staaten. Da Hawaii und Alaska zu weit von den restlichen 48 Staaten entfernt sind, wäre eine einzelne Karte nicht die beste Lösung, weswegen drei Karten erstellt und zusammengefügt werden.
+Zuerst wird die Projektion der 48 Staaten in eine equal area projection geändert, die anderen beiden Datensätze haben diese bereits.
 
 ```{r}
 us_states2163 <- st_transform(us_states, 2163)
@@ -279,7 +279,6 @@ us_states_alaska_ratio <- alaska_range / us_states_range
 ```
 
 Anschließend werden die drei Karten erstellt. `legend.is.portrait = FALSE` sorgt dafür, dass die Legende horizontal angeordnet wird, anstatt von vertikal.
-MIT LEGENDE NICHT MEHR SKALIERT DUCK IT I HATE MY LIFE
 
 ```{r}
 us_states_map <- tm_shape(us_states2163) +
@@ -333,11 +332,11 @@ grid.lines(x = c(0, 0.2), y = c(0.33, 0), gp = gpar(lty = 2))
 ```
 
 ## Facettierte und animierte Karten
-Neben der Möglichkeit verschiedene Elemente der Karten basierend auf einer Variablen zu ändern, können Karten basierend auf einer Variable in mehrere Karten unterteilt werden. Was in **ggplot2** mit `facet_wrap()` gemacht wird, wird in **tmap** mit `tm_facets()` erledigt. Soll eine zeitliche Variable dargestellt werden, geht dies schlecht mit einer Karten, da sich die Geometrien häufig überlappen würden. Besonders in diesen Fällen ist die Verwendung facettierter Karten sinnvoll. Die Funktion hat fünf wichtige Argumente:
+Neben der Möglichkeit verschiedene Elemente der Karten basierend auf einer Variable zu ändern, können Karten basierend auf einer Variable in mehrere Karten unterteilt werden. Was in **ggplot2** mit `facet_wrap()` gemacht wird, wird in **tmap** mit `tm_facets()` erledigt. Soll eine zeitliche Variable dargestellt werden, geht dies schlecht mit einer Karte, da sich die Geometrien häufig überlappen würden. Besonders in diesen Fällen ist die Verwendung facettierter Karten sinnvoll. Die Funktion hat fünf wichtige Argumente:
     - `by`: Nach welcher Variable soll aufgeteilt werden?
     - `nrow / ncol`: Die Anzahl der Zeilen beziehungsweise Spalten der Facetten
-    - `free.cords`: Soll jede einezlne Karte ein eigenes Koordinatensystem haben?
-    - `along`: Nach welcher Variale soll animiert werden?
+    - `free.cords`: Soll jede einzelne Karte ein eigenes Koordinatensystem haben?
+    - `along`: Nach welcher Variable soll animiert werden?
 ```{r, include=FALSE}
 honey0912 <- honey[honey$year > 2008, ]
 honey0912 <- rbind(
@@ -368,7 +367,7 @@ tm_shape(honey0912) + tm_polygons(col = "priceperlb", style = "cont",
   tm_layout(legend.outside.size = 0.2)
 ```
 
-Ein Problem dieser Art von Karten ist, dass mit mehr Ausprägungen einer Variable mehr Karten erstellt werden wodurch es schnell unübersichtlich wird und Unterschiede zwischen den einzelnen Karten nur noch sehr schwer zu erkennen sind. Dieses Problem wird von animierten Karten gelöst. In Papern können diese nicht dargestellt werden, allerdings werden heutzutage immer mehr Informationen online abgerufen, was dieses Problem mindert. Der Autor eines Artikels kann alternativ auch einen Link zu der animierten Karten in seinen Text einbauen. Wie bereits erwähnt kann mit dem Argument `along` der Funktion `tm_facets()` eine animierte Karte erstellt werden. Mit Hilfe der Funktion `tmap_animation()` kann die erstellt Animation als GIF Datei abgespeichert werden, allerdings wird dafür die Software **ImageMagick** benötigt. Diese kann mit Hilfe des **installr** Pakets installiert werden.  (`installr::install.imagemagick()`) Die folgende Animation stellt ebenfalls den durchschnittlichen Preis eines Pfunds Honing in US$ dar, dieses mal über einen Zeitraum von 15 Jahren. Mittels `delay` kann angegeben werden, wieviel Millisekunden zwischen den einzelnen Bildern vergehen sollen. Mit `width` und `height` können noch die Maße in Pixel angegeben werden, mit `loop` ob das GIF eine Endlosschleife ist oder nach einer bestimmten Anzahl an Runden endet.
+Ein Problem dieser Art von Karten ist, dass mit mehr Ausprägungen einer Variable mehr Karten erstellt werden wodurch es schnell unübersichtlich wird und Unterschiede zwischen den einzelnen Karten nur noch sehr schwer zu erkennen sind. Dieses Problem wird von animierten Karten gelöst. In Papern können diese nicht dargestellt werden, allerdings werden heutzutage immer mehr Informationen online abgerufen, was dieses Problem mindert. Der Autor eines Artikels kann alternativ auch einen Link zu der animierten Karte in seinen Text einbauen. Wie bereits erwähnt kann mit dem Argument `along` der Funktion `tm_facets()` eine animierte Karte erstellt werden. Mit Hilfe der Funktion `tmap_animation()` kann die erstellt Animation als GIF Datei abgespeichert werden, allerdings wird dafür die Software **ImageMagick** benötigt. Diese kann mit Hilfe des **installr** Pakets installiert werden.  (`installr::install.imagemagick()`) Die folgende Animation stellt ebenfalls den durchschnittlichen Preis eines Pfunds Honing in US$ dar, dieses Mal über einen Zeitraum von 15 Jahren. Mittels `delay` kann angegeben werden, wieviel Millisekunden zwischen den einzelnen Bildern vergehen sollen. Mit `width` und `height` können noch die Maße in Pixel angegeben werden, mit `loop` ob das GIF eine Endlosschleife ist oder nach einer bestimmten Anzahl an Runden endet.
 
 ```{r, include = FALSE, eval=FALSE}
 tab <- table(honey$state)
@@ -416,12 +415,13 @@ colnames(honey)[3:8] <- c("Number_of_colonies", "Yield_per_colony",
                           "Total_production", "Stocks","Price_per_lb",
                           "Value_of_production"
                           )
-honey_animation <- tm_shape(honey) + tm_polygons(col = "priceperlb", style = "cont",
+honey_animation <- tm_shape(honey) + tm_polygons(col = "Price_per_lb", style = "cont",
                                   pal = viridis(10, direction = -1)) +
-  tm_facets(along = "year")
-tmap_animation(honey_animation, filename = "honey.gif", delay = 50)
+  tm_facets(along = "year") +
+  tm_layout(legend.position = c("left", "bottom"))
+tmap_animation(honey_animation, filename = "honey.gif", delay = 50, width = 1181, height = 500)
 ```
 ```{r, fig.align="center",fig.cap="Animierte Karte", echo=FALSE}
-image_resize(image_read("datasets/honey.gif"), "1181x1181")
+image_resize(image_read("datasets/honey.gif"), "700x1181")
 ```
 

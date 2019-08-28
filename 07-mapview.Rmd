@@ -79,7 +79,7 @@ mapview(europe_raster, legend = FALSE) +
 htmltools::tags$iframe(src = "html_plots/mapview_2.html", width = "700px", height = "700px")
 ```
 
-Bei dieser Karte fallen direkt mehrere Sachen auf. Es wird das komplette Shapefile dargestellt, nicht nur die Gebiete innerhalb des Rasters. So werden unteranderem Spitzbergen und die französischen Überseegebiete dargestellt. Mit `cex` wurde festgelegt, dass die Größe der Punkte auf der Population der jeweiligen Städte basiert und mit `alpha.regions` wurde die Transparenz der Polygone reduziert. Rechts unten kann auf *cities*, *europe_shape* oder *europe_raster* geklickt werden, um einen dieser Bereich zu fokusieren. Mit einem Klick auf eine der Städte oder eines der Länder öffnet sich ein Popup in dem weitere Infos zu der Stadt beziehungsweise dem Land stehen. 
+Bei dieser Karte fallen direkt mehrere Sachen auf. Es wird das komplette Shapefile dargestellt, nicht nur die Gebiete innerhalb des Rasters. So werden unteranderem Spitzbergen und die französischen Überseegebiete dargestellt. Mit `cex` wurde festgelegt, dass die Größe der Punkte auf der Population der jeweiligen Städte basiert und mit `alpha.regions` wurde die Transparenz der Polygone reduziert. Rechts unten kann auf *cities*, *europe_shape* oder *europe_raster* geklickt werden, um einen dieser Bereich zu fokusieren. Mit einem Klick auf eine der Städte oder eines der Länder öffnet sich ein Popup in dem weitere Informationen zu der Stadt beziehungsweise dem Land stehen. 
 Wird zusätzlich zu `zcol` das Argument `burst = TRUE` verwendet, wird für jeden einzigartigen Wert der gewählten Variable eine einzelne Ebene erstellt, die fokusiert oder ausgeblendet werden kann. Mit `col.regions` kann eine Palette ausgewählt werden.
 
 ```{r, fig.align="center", fig.cap="Flughäfen und Autobahnen in Bayern", fig.height=9, eval=FALSE}
@@ -121,4 +121,4 @@ mapview(bavaria, zcol = "Name", col.regions = brewer.pal(7, "Dark2"),
 htmltools::tags$iframe(src = "html_plots/mapview_5.html", width = "700px", height = "700px")
 ```
 
-Da bei den Scatterplots manche x-y Kombinationen mehrmals vorkommen, wird nicht jedes mal ein roter Punkt angezeigt. Mit den Funktionen `leafpop::popupImage()` oder `leafpop:::popupIframe()` können sogar Bilder, Hyperlinks und Youtube-Videos eingebunden werden.
+Da bei den Scatterplots manche x-y Kombinationen mehrmals vorkommen, wird nicht jedes Mal ein roter Punkt angezeigt. Mit den Funktionen `leafpop::popupImage()` oder `leafpop:::popupIframe()` können sogar Bilder, Hyperlinks und Youtube-Videos eingebunden werden.

@@ -1,12 +1,4 @@
 Still To Do
-- gif einbinden
-- die scheiß legende bei usa karte
-- intro
 - korrekturlesen
-- alle apps hinzufügen
-- osm abspecken
-- readme
-- packages checken
-- packages installieren
-- leaflet.extras citation
-- kernsmooth citation
+- apps auf bugs checken
+- screenshot der app einfügen vor render
