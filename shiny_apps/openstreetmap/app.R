@@ -48,22 +48,21 @@ input_tidy <- readr::read_csv2("data_sources/census_tidy.csv")
 input_ras <- rasterFromXYZ(input_tidy, crs = st_crs(3035)$proj4string)
 # load the road network of germany
 future::plan(multiprocess)
-# roads <- future_map(
-#  paste("road_network/",
-#    list.files("road_network", pattern = ".shp"),
-#    sep = ""
-#  ),
-#  read_sf
-# )
+roads <- future_map(
+  paste("road_network/",
+    list.files("road_network", pattern = ".shp"),
+    sep = ""
+  ),
+  read_sf
+ )
 # name the roads
-# names(roads) <- c(
-#  "Sachsen-Anhalt", "Baden-Württemberg", "Bayern", "Berlin",
-#  "Brandenburg", "Bremen", "Hamburg", "Hessen",
-#  "Mecklenburg-Vorpommern", "Niedersachsen",
-#  "Nordrhein-Westfalen", "Rheinland-Pfalz", "Saarland",
-#  "Sachsen", "Schleswig-Holstein", "Thüringen"
-#  #  "Bayern", "Berlin"
-# )
+names(roads) <- c(
+  "Sachsen-Anhalt", "Baden-Württemberg", "Bayern", "Berlin",
+  "Brandenburg", "Bremen", "Hamburg", "Hessen",
+  "Mecklenburg-Vorpommern", "Niedersachsen",
+  "Nordrhein-Westfalen", "Rheinland-Pfalz", "Saarland",
+  "Sachsen", "Schleswig-Holstein", "Thüringen"
+ )
 states <- read_sf("data_sources/vg2500_bld.shp")
 st_crs(states) <- 4326
 Encoding(states$GEN) <- "latin"

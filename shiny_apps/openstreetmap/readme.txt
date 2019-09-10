@@ -1,3 +1,7 @@
+﻿WICHTIG: vor beginn die files aus road_network_zipped in road_network extrahieren. 
+AUCH WICHTIG: in road_network darf keine ordner struktur entstehen. alles in den root ordner
+
+
 download und analyses von openstreetmap daten
 tab 1 des panel:
 	download von daten von osm mit osmdata package
