@@ -1,8 +1,14 @@
-library(shiny)
-library(sf)
-library(leaflet)
-library(RColorBrewer)
-library(stringr)
+packages_required <- c(
+  "shiny", "sf", "leaflet", "RColorBrewer", "stringr"
+)
+not_installed <- packages_required[!packages_required %in%
+                                     installed.packages()[, "Package"]]
+not_installed <- not_installed[not_installed != "leafletplugins"]
+if (length(not_installed) > 0) {
+  lapply(not_installed, install.packages, dependencies = TRUE)
+}
+# load them
+lapply(packages_required, library, character.only = TRUE)
 honey <- read_sf("../../datasets/honey.shp")
 colnames(honey)[3:8] <- c("Number_of_colonies", "Yield_per_colony",
                           "Total_production", "Stocks","Price_per_lb",
