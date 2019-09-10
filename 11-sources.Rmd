@@ -60,10 +60,12 @@ Sonstiges:
   * magick [@magick]
     
 Pakete in Verwendung mit den ShinyApps:
-
+  * colourpicker [@colourpicker]
+  * devtools [@devtools]
   * furrr [@furrr]
   * future [@future]
   * geosphere [@geosphere]
+  * leafletplugins [@leafletplugins]
   * openxlsx [@xlsx]
   * osmdata [@osmdata]
   * osrm [@osrm]
