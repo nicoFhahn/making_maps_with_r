@@ -1,0 +1,7 @@
+Fragen:
+  - Wie läuft Abgabe ab?
+  - Was muss alles abgegeben werden?
+  - Flight data auch abgeben? 11 GB immerhin
+  - LRZ Shiny-App Ordner
+  - Evtl R Skript für Pakete installieren einmal kurz durchlaufen lassen
+  - Passt Zitation so wie es jetzt ist?
