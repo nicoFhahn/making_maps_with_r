@@ -7,12 +7,14 @@
 #    http://shiny.rstudio.com/
 #
 # load packages
-packages <- c("colourpicker", "maps", "raster",
-              "RColorBrewer", "shiny", "shinyjs", "shinydashboard", "shinyWidgets",
-              "sf", "spData", "stplanr", "stringr", "tmap", "viridis")
+packages <- c(
+  "colourpicker", "maps", "raster",
+  "RColorBrewer", "shiny", "shinyjs", "shinydashboard", "shinyWidgets",
+  "sf", "spData", "stplanr", "stringr", "tmap", "viridis"
+)
 not_installed <- packages[!packages %in% installed.packages()[, "Package"]]
 if (length(not_installed) > 1) {
-  install.packages(not_installed, repos = "https://cran.rstudio.com/" )
+  install.packages(not_installed, repos = "https://cran.rstudio.com/")
 }
 if (!"spDataLarge" %in% installed.packages()[, "Package"]) {
   install.packages("spDataLarge", repos = "https://nowosad.github.io/drat/", type = "source")
@@ -57,10 +59,11 @@ bavaria$Bevoelkerungsentwicklung <- as.numeric(
 europe_raster <- raster("../../datasets/elevation1x1_new.tif")
 # load europe shapefiles
 europe_shape <- read_sf("../../datasets/ne_50m_admin_0_countries/ne_50m_admin_0_countries.shp")
-europe_shape <- europe_shape[europe_shape$CONTINENT == "Europe",]
+europe_shape <- europe_shape[europe_shape$CONTINENT == "Europe", ]
 # cities above populaiton of 1 million
 cities <- world.cities[world.cities$pop >= 1000000, ]
-cities <- cities %>% st_as_sf(coords = c("long", "lat"), crs = 4326) %>%
+cities <- cities %>%
+  st_as_sf(coords = c("long", "lat"), crs = 4326) %>%
   st_cast("POINT")
 cities <- st_intersection(cities, st_union(europe_shape))
 europe_shape <- st_cast(europe_shape, "MULTILINESTRING")
@@ -636,12 +639,16 @@ server <- function(input, output, session) {
     if (as.numeric(input$addlayer) %% 3 == 0) {
       "tm_shape(europe_raster) +\n tm_raster()"
     } else if (as.numeric(input$addlayer) %% 3 == 1) {
-      paste("tm_shape(europe_raster) +\n tm_raster() +\n",
-        "tm_shape(europe_shape) +\n tm_lines(alpha = 0.3)")
+      paste(
+        "tm_shape(europe_raster) +\n tm_raster() +\n",
+        "tm_shape(europe_shape) +\n tm_lines(alpha = 0.3)"
+      )
     } else {
-      paste("tm_shape(europe_raster) +\n tm_raster() +\n",
+      paste(
+        "tm_shape(europe_raster) +\n tm_raster() +\n",
         "tm_shape(europe_shape) +\n tm_lines(alpha = 0.3) +\n",
-        "tm_shape(cities) +\n tm_dots(size = 0.3)")
+        "tm_shape(cities) +\n tm_dots(size = 0.3)"
+      )
     }
   })
   ########## PLOT PAGE 3 ##########
@@ -1222,10 +1229,12 @@ server <- function(input, output, session) {
         ncol = as.numeric(input$ncol),
         nrow = as.numeric(input$nrow)
       ) +
-      tm_layout(legend.outside.size = 0.1,
-                legend.title.size = 1.2,
-                legend.text.size = 1.2,
-                panel.label.size = 4)
+      tm_layout(
+        legend.outside.size = 0.1,
+        legend.title.size = 1.2,
+        legend.text.size = 1.2,
+        panel.label.size = 4
+      )
   })
 
   ########## PICKER INPUTS ##########

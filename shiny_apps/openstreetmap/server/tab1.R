@@ -114,13 +114,17 @@ observeEvent(list(input$bttn_data_locations, input$names_locations), {
       clearMarkerClusters() %>%
       clearTiles() %>%
       addProviderTiles("OpenStreetMap",
-                       group = "OpenStreetMap") %>%
+        group = "OpenStreetMap"
+      ) %>%
       addProviderTiles("Esri.WorldImagery",
-                       group = "Esri.WorldImagery") %>%
+        group = "Esri.WorldImagery"
+      ) %>%
       addProviderTiles("CartoDB.Positron",
-                       group = "CartoDB.Positron") %>%
+        group = "CartoDB.Positron"
+      ) %>%
       addProviderTiles("CartoDB.DarkMatter",
-                       group = "CartoDB.DarkMatter") %>%
+        group = "CartoDB.DarkMatter"
+      ) %>%
       addLayersControl(
         baseGroups = names(tiles), position = c("topleft")
       ) %>%
@@ -210,13 +214,17 @@ observeEvent(list(input$bttn_data_locations, input$names_locations), {
       clearMarkerClusters() %>%
       clearTiles() %>%
       addProviderTiles("OpenStreetMap",
-                       group = "OpenStreetMap") %>%
+        group = "OpenStreetMap"
+      ) %>%
       addProviderTiles("Esri.WorldImagery",
-                       group = "Esri.WorldImagery") %>%
+        group = "Esri.WorldImagery"
+      ) %>%
       addProviderTiles("CartoDB.Positron",
-                       group = "CartoDB.Positron") %>%
+        group = "CartoDB.Positron"
+      ) %>%
       addProviderTiles("CartoDB.DarkMatter",
-                       group = "CartoDB.DarkMatter") %>%
+        group = "CartoDB.DarkMatter"
+      ) %>%
       addLayersControl(
         baseGroups = names(tiles), position = c("topleft")
       ) %>%
@@ -243,35 +251,35 @@ observeEvent(list(input$bttn_data_locations, input$names_locations), {
           future_map(htmltools::HTML),
         clusterOptions = markerClusterOptions(),
         clusterId = "pointsCluster"
-      ) #%>%
-      #addEasyButton(easyButton(
-      #  states = list(
-      #    easyButtonState(
-      #      stateName = "unfrozen-markers",
-      #      icon = "ion-toggle",
-      #      title = "Freeze Clusters",
-      #      onClick = JS("
-      #    function(btn, map) {
-      #      var clusterManager =
-      #        map.layerManager.getLayer('cluster', 'pointsCluster');
-      #      clusterManager.freezeAtZoom();
-      #      btn.state('frozen-markers');
-      #    }")
-      #    ),
-      #    easyButtonState(
-      #      stateName = "frozen-markers",
-      #      icon = "ion-toggle-filled",
-      #      title = "UnFreeze Clusters",
-      #      onClick = JS("
-      #    function(btn, map) {
-      #      var clusterManager =
-      #        map.layerManager.getLayer('cluster', 'pointsCluster');
-      #      clusterManager.unfreeze();
-      #      btn.state('unfrozen-markers');
-      #    }")
-      #    )
-      #  )
-      # ))
+      ) # %>%
+    # addEasyButton(easyButton(
+    #  states = list(
+    #    easyButtonState(
+    #      stateName = "unfrozen-markers",
+    #      icon = "ion-toggle",
+    #      title = "Freeze Clusters",
+    #      onClick = JS("
+    #    function(btn, map) {
+    #      var clusterManager =
+    #        map.layerManager.getLayer('cluster', 'pointsCluster');
+    #      clusterManager.freezeAtZoom();
+    #      btn.state('frozen-markers');
+    #    }")
+    #    ),
+    #    easyButtonState(
+    #      stateName = "frozen-markers",
+    #      icon = "ion-toggle-filled",
+    #      title = "UnFreeze Clusters",
+    #      onClick = JS("
+    #    function(btn, map) {
+    #      var clusterManager =
+    #        map.layerManager.getLayer('cluster', 'pointsCluster');
+    #      clusterManager.unfreeze();
+    #      btn.state('unfrozen-markers');
+    #    }")
+    #    )
+    #  )
+    # ))
   } else {
     # if no data was found check if the city can be found
     data("world.cities")
@@ -290,13 +298,17 @@ observeEvent(list(input$bttn_data_locations, input$names_locations), {
         clearMarkerClusters() %>%
         clearTiles() %>%
         addProviderTiles("OpenStreetMap",
-                         group = "OpenStreetMap") %>%
+          group = "OpenStreetMap"
+        ) %>%
         addProviderTiles("Esri.WorldImagery",
-                         group = "Esri.WorldImagery") %>%
+          group = "Esri.WorldImagery"
+        ) %>%
         addProviderTiles("CartoDB.Positron",
-                         group = "CartoDB.Positron") %>%
+          group = "CartoDB.Positron"
+        ) %>%
         addProviderTiles("CartoDB.DarkMatter",
-                         group = "CartoDB.DarkMatter") %>%
+          group = "CartoDB.DarkMatter"
+        ) %>%
         addLayersControl(
           baseGroups = names(tiles), position = c("topleft")
         ) %>%
@@ -323,23 +335,26 @@ observeEvent(list(input$bttn_data_locations, input$names_locations), {
         clearPopups() %>%
         clearMarkerClusters() %>%
         clearTiles() %>%
-        
         addLayersControl(
           baseGroups = names(tiles), position = c("topleft")
         ) %>%
         addFullscreenControl() %>%
         leaflet.extras::addSearchOSM(
           options = searchOptions(hideMarkerOnCollapse = TRUE, zoom = 11)
-          ) %>%
+        ) %>%
         setView(data$longitude, data$latitude, zoom = 11) %>%
         addProviderTiles("OpenStreetMap",
-                         group = "OpenStreetMap") %>%
+          group = "OpenStreetMap"
+        ) %>%
         addProviderTiles("Esri.WorldImagery",
-                         group = "Esri.WorldImagery") %>%
+          group = "Esri.WorldImagery"
+        ) %>%
         addProviderTiles("CartoDB.Positron",
-                         group = "CartoDB.Positron") %>%
+          group = "CartoDB.Positron"
+        ) %>%
         addProviderTiles("CartoDB.DarkMatter",
-                         group = "CartoDB.DarkMatter") %>%
+          group = "CartoDB.DarkMatter"
+        ) %>%
         addMiniMap(tiles = tiles[[1]], toggleDisplay = TRUE) %>%
         htmlwidgets::onRender("
     function(el, x) {
@@ -582,7 +597,7 @@ get_isochrone_data <- eventReactive(input$bttn_data_drivetime, {
           }
         }
         if (length(points) == 0 ||
-            length(points) == 1 && nrow(points[[1]]) == 0) {
+          length(points) == 1 && nrow(points[[1]]) == 0) {
           return("No data found for the area")
         }
         all_cols <- unique(unlist(lapply(points, colnames)))
@@ -770,13 +785,17 @@ observeEvent(list(
       clearMarkerClusters() %>%
       clearTiles() %>%
       addProviderTiles("OpenStreetMap",
-                       group = "OpenStreetMap") %>%
+        group = "OpenStreetMap"
+      ) %>%
       addProviderTiles("Esri.WorldImagery",
-                       group = "Esri.WorldImagery") %>%
+        group = "Esri.WorldImagery"
+      ) %>%
       addProviderTiles("CartoDB.Positron",
-                       group = "CartoDB.Positron") %>%
+        group = "CartoDB.Positron"
+      ) %>%
       addProviderTiles("CartoDB.DarkMatter",
-                       group = "CartoDB.DarkMatter") %>%
+        group = "CartoDB.DarkMatter"
+      ) %>%
       addLayersControl(
         baseGroups = names(tiles), position = c("topleft")
       ) %>%
@@ -834,22 +853,25 @@ observeEvent(list(
         clearPopups() %>%
         clearMarkerClusters() %>%
         clearTiles() %>%
-        
         addProviderTiles("OpenStreetMap",
-                         group = "OpenStreetMap") %>%
+          group = "OpenStreetMap"
+        ) %>%
         addProviderTiles("Esri.WorldImagery",
-                         group = "Esri.WorldImagery") %>%
+          group = "Esri.WorldImagery"
+        ) %>%
         addProviderTiles("CartoDB.Positron",
-                         group = "CartoDB.Positron") %>%
+          group = "CartoDB.Positron"
+        ) %>%
         addProviderTiles("CartoDB.DarkMatter",
-                         group = "CartoDB.DarkMatter") %>%
+          group = "CartoDB.DarkMatter"
+        ) %>%
         addLayersControl(
           baseGroups = names(tiles), position = c("topleft")
         ) %>%
         addFullscreenControl() %>%
         leaflet.extras::addSearchOSM(
           options = searchOptions(hideMarkerOnCollapse = TRUE, zoom = 11)
-          ) %>%
+        ) %>%
         setView(
           as.numeric(
             stringr::str_replace(input$longitude, "\\,", "\\.")
@@ -878,22 +900,25 @@ observeEvent(list(
         clearPopups() %>%
         clearMarkerClusters() %>%
         clearTiles() %>%
-        
         addProviderTiles("OpenStreetMap",
-                         group = "OpenStreetMap") %>%
+          group = "OpenStreetMap"
+        ) %>%
         addProviderTiles("Esri.WorldImagery",
-                         group = "Esri.WorldImagery") %>%
+          group = "Esri.WorldImagery"
+        ) %>%
         addProviderTiles("CartoDB.Positron",
-                         group = "CartoDB.Positron") %>%
+          group = "CartoDB.Positron"
+        ) %>%
         addProviderTiles("CartoDB.DarkMatter",
-                         group = "CartoDB.DarkMatter") %>%
+          group = "CartoDB.DarkMatter"
+        ) %>%
         addLayersControl(
           baseGroups = names(tiles), position = c("topleft")
         ) %>%
         addFullscreenControl() %>%
         leaflet.extras::addSearchOSM(
           options = searchOptions(hideMarkerOnCollapse = TRUE, zoom = 11)
-          ) %>%
+        ) %>%
         setView(11.577779, 48.137168, zoom = 11) %>%
         addMiniMap(tiles = tiles[[1]], toggleDisplay = TRUE) %>%
         htmlwidgets::onRender("
@@ -956,22 +981,25 @@ observeEvent(list(
         clearPopups() %>%
         clearMarkerClusters() %>%
         clearTiles() %>%
-        
         addProviderTiles("OpenStreetMap",
-                         group = "OpenStreetMap") %>%
+          group = "OpenStreetMap"
+        ) %>%
         addProviderTiles("Esri.WorldImagery",
-                         group = "Esri.WorldImagery") %>%
+          group = "Esri.WorldImagery"
+        ) %>%
         addProviderTiles("CartoDB.Positron",
-                         group = "CartoDB.Positron") %>%
+          group = "CartoDB.Positron"
+        ) %>%
         addProviderTiles("CartoDB.DarkMatter",
-                         group = "CartoDB.DarkMatter") %>%
+          group = "CartoDB.DarkMatter"
+        ) %>%
         addLayersControl(
           baseGroups = names(tiles), position = c("topleft")
         ) %>%
         addFullscreenControl() %>%
         leaflet.extras::addSearchOSM(
           options = searchOptions(hideMarkerOnCollapse = TRUE, zoom = 11)
-          ) %>%
+        ) %>%
         addMiniMap(tiles = tiles[[1]], toggleDisplay = TRUE) %>%
         htmlwidgets::onRender("
     function(el, x) {
@@ -1008,8 +1036,8 @@ observeEvent(list(
             future_map(htmltools::HTML),
           clusterOptions = markerClusterOptions(),
           clusterId = "pointsCluster"
-        )  #%>%
-      #addEasyButton(easyButton(
+        ) # %>%
+      # addEasyButton(easyButton(
       #  states = list(
       #    easyButtonState(
       #      stateName = "unfrozen-markers",
@@ -1049,22 +1077,25 @@ observeEvent(list(
         clearPopups() %>%
         clearMarkerClusters() %>%
         clearTiles() %>%
-        
         addProviderTiles("OpenStreetMap",
-                         group = "OpenStreetMap") %>%
+          group = "OpenStreetMap"
+        ) %>%
         addProviderTiles("Esri.WorldImagery",
-                         group = "Esri.WorldImagery") %>%
+          group = "Esri.WorldImagery"
+        ) %>%
         addProviderTiles("CartoDB.Positron",
-                         group = "CartoDB.Positron") %>%
+          group = "CartoDB.Positron"
+        ) %>%
         addProviderTiles("CartoDB.DarkMatter",
-                         group = "CartoDB.DarkMatter") %>%
+          group = "CartoDB.DarkMatter"
+        ) %>%
         addLayersControl(
           baseGroups = names(tiles), position = c("topleft")
         ) %>%
         addFullscreenControl() %>%
         leaflet.extras::addSearchOSM(
           options = searchOptions(hideMarkerOnCollapse = TRUE, zoom = 11)
-          ) %>%
+        ) %>%
         addMiniMap(tiles = tiles[[1]], toggleDisplay = TRUE) %>%
         htmlwidgets::onRender("
     function(el, x) {
@@ -1101,8 +1132,8 @@ observeEvent(list(
             future_map(htmltools::HTML),
           clusterOptions = markerClusterOptions(),
           clusterId = "pointsCluster"
-        )  #%>%
-      #addEasyButton(easyButton(
+        ) # %>%
+      # addEasyButton(easyButton(
       #  states = list(
       #    easyButtonState(
       #      stateName = "unfrozen-markers",

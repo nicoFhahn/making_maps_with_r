@@ -29,5 +29,6 @@ tab 2:
 
 	außerdem besteht hier die möglichkeit sich das straßennetzwerk mit anzeigen zu lassen (falls ort in deutschland ist), dauert dann kurz.
 	würde ich nur verwenden wenn eine stadt ausgewählt ist.
-
+	außerdem die anzahl der einwohner nach plz kann als polygon data hinzugefügt werden (census 2011 oder so um den dreh rum)
+	
 am ende von dem panel is n link zur osm wiki für mehre infos über key-value paare

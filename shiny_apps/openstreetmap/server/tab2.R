@@ -347,15 +347,20 @@ observeEvent(list(
       clearMarkers() %>%
       clearImages() %>%
       clearShapes() %>%
-      clearPopups() %>% clearWebGLHeatmap() %>%
+      clearPopups() %>%
+      clearWebGLHeatmap() %>%
       addProviderTiles("OpenStreetMap",
-                       group = "OpenStreetMap") %>%
+        group = "OpenStreetMap"
+      ) %>%
       addProviderTiles("Esri.WorldImagery",
-                       group = "Esri.WorldImagery") %>%
+        group = "Esri.WorldImagery"
+      ) %>%
       addProviderTiles("CartoDB.Positron",
-                       group = "CartoDB.Positron") %>%
+        group = "CartoDB.Positron"
+      ) %>%
       addProviderTiles("CartoDB.DarkMatter",
-                       group = "CartoDB.DarkMatter") %>%
+        group = "CartoDB.DarkMatter"
+      ) %>%
       addLayersControl(
         baseGroups = names(tiles), position = c("topleft")
       ) %>%
@@ -389,17 +394,21 @@ observeEvent(list(
         clearMarkers() %>%
         clearImages() %>%
         clearShapes() %>%
-        clearPopups() %>% clearWebGLHeatmap() %>%
+        clearPopups() %>%
+        clearWebGLHeatmap() %>%
         addProviderTiles("OpenStreetMap",
-                         group = "OpenStreetMap") %>%
-        addProviderTiles("Esri.WorldImagery",
-                         group = "Esri.WorldImagery") %>%
-        addProviderTiles("CartoDB.Positron",
-                         group = "CartoDB.Positron") %>%
-        addProviderTiles("CartoDB.DarkMatter",
-                         group = "CartoDB.DarkMatter") %>%
-        addLayersControl(names(tiles), position = c("topleft")
+          group = "OpenStreetMap"
         ) %>%
+        addProviderTiles("Esri.WorldImagery",
+          group = "Esri.WorldImagery"
+        ) %>%
+        addProviderTiles("CartoDB.Positron",
+          group = "CartoDB.Positron"
+        ) %>%
+        addProviderTiles("CartoDB.DarkMatter",
+          group = "CartoDB.DarkMatter"
+        ) %>%
+        addLayersControl(names(tiles), position = c("topleft")) %>%
         addFullscreenControl() %>%
         leaflet.extras::addSearchOSM(
           options = searchOptions(hideMarkerOnCollapse = TRUE, zoom = 11)
@@ -514,17 +523,21 @@ observeEvent(list(
           clearMarkers() %>%
           clearImages() %>%
           clearShapes() %>%
-          clearPopups() %>% clearWebGLHeatmap() %>%
+          clearPopups() %>%
+          clearWebGLHeatmap() %>%
           addProviderTiles("OpenStreetMap",
-                           group = "OpenStreetMap") %>%
-          addProviderTiles("Esri.WorldImagery",
-                           group = "Esri.WorldImagery") %>%
-          addProviderTiles("CartoDB.Positron",
-                           group = "CartoDB.Positron") %>%
-          addProviderTiles("CartoDB.DarkMatter",
-                           group = "CartoDB.DarkMatter") %>%
-          addLayersControl(names(tiles), position = c("topleft")
+            group = "OpenStreetMap"
           ) %>%
+          addProviderTiles("Esri.WorldImagery",
+            group = "Esri.WorldImagery"
+          ) %>%
+          addProviderTiles("CartoDB.Positron",
+            group = "CartoDB.Positron"
+          ) %>%
+          addProviderTiles("CartoDB.DarkMatter",
+            group = "CartoDB.DarkMatter"
+          ) %>%
+          addLayersControl(names(tiles), position = c("topleft")) %>%
           addFullscreenControl() %>%
           leaflet.extras::addSearchOSM(
             options = searchOptions(hideMarkerOnCollapse = TRUE, zoom = 11)
@@ -576,17 +589,21 @@ observeEvent(list(
           clearMarkers() %>%
           clearImages() %>%
           clearShapes() %>%
-          clearPopups() %>% clearWebGLHeatmap() %>%
+          clearPopups() %>%
+          clearWebGLHeatmap() %>%
           addProviderTiles("OpenStreetMap",
-                           group = "OpenStreetMap") %>%
-          addProviderTiles("Esri.WorldImagery",
-                           group = "Esri.WorldImagery") %>%
-          addProviderTiles("CartoDB.Positron",
-                           group = "CartoDB.Positron") %>%
-          addProviderTiles("CartoDB.DarkMatter",
-                           group = "CartoDB.DarkMatter") %>%
-          addLayersControl(names(tiles), position = c("topleft")
+            group = "OpenStreetMap"
           ) %>%
+          addProviderTiles("Esri.WorldImagery",
+            group = "Esri.WorldImagery"
+          ) %>%
+          addProviderTiles("CartoDB.Positron",
+            group = "CartoDB.Positron"
+          ) %>%
+          addProviderTiles("CartoDB.DarkMatter",
+            group = "CartoDB.DarkMatter"
+          ) %>%
+          addLayersControl(names(tiles), position = c("topleft")) %>%
           addFullscreenControl() %>%
           leaflet.extras::addSearchOSM(
             options = searchOptions(hideMarkerOnCollapse = TRUE, zoom = 11)
@@ -664,17 +681,21 @@ observeEvent(list(
             clearMarkers() %>%
             clearImages() %>%
             clearShapes() %>%
-            clearPopups() %>% clearWebGLHeatmap() %>%
+            clearPopups() %>%
+            clearWebGLHeatmap() %>%
             addProviderTiles("OpenStreetMap",
-                             group = "OpenStreetMap") %>%
-            addProviderTiles("Esri.WorldImagery",
-                             group = "Esri.WorldImagery") %>%
-            addProviderTiles("CartoDB.Positron",
-                             group = "CartoDB.Positron") %>%
-            addProviderTiles("CartoDB.DarkMatter",
-                             group = "CartoDB.DarkMatter") %>%
-            addLayersControl(names(tiles), position = c("topleft")
+              group = "OpenStreetMap"
             ) %>%
+            addProviderTiles("Esri.WorldImagery",
+              group = "Esri.WorldImagery"
+            ) %>%
+            addProviderTiles("CartoDB.Positron",
+              group = "CartoDB.Positron"
+            ) %>%
+            addProviderTiles("CartoDB.DarkMatter",
+              group = "CartoDB.DarkMatter"
+            ) %>%
+            addLayersControl(names(tiles), position = c("topleft")) %>%
             addFullscreenControl() %>%
             leaflet.extras::addSearchOSM(
               options = searchOptions(hideMarkerOnCollapse = TRUE, zoom = 11)
@@ -749,17 +770,21 @@ observeEvent(list(
             clearMarkers() %>%
             clearImages() %>%
             clearShapes() %>%
-            clearPopups() %>% clearWebGLHeatmap() %>%
+            clearPopups() %>%
+            clearWebGLHeatmap() %>%
             addProviderTiles("OpenStreetMap",
-                             group = "OpenStreetMap") %>%
-            addProviderTiles("Esri.WorldImagery",
-                             group = "Esri.WorldImagery") %>%
-            addProviderTiles("CartoDB.Positron",
-                             group = "CartoDB.Positron") %>%
-            addProviderTiles("CartoDB.DarkMatter",
-                             group = "CartoDB.DarkMatter") %>%
-            addLayersControl(names(tiles), position = c("topleft")
+              group = "OpenStreetMap"
             ) %>%
+            addProviderTiles("Esri.WorldImagery",
+              group = "Esri.WorldImagery"
+            ) %>%
+            addProviderTiles("CartoDB.Positron",
+              group = "CartoDB.Positron"
+            ) %>%
+            addProviderTiles("CartoDB.DarkMatter",
+              group = "CartoDB.DarkMatter"
+            ) %>%
+            addLayersControl(names(tiles), position = c("topleft")) %>%
             addFullscreenControl() %>%
             leaflet.extras::addSearchOSM(
               options = searchOptions(hideMarkerOnCollapse = TRUE, zoom = 11)
@@ -800,17 +825,21 @@ observeEvent(list(
             clearMarkers() %>%
             clearImages() %>%
             clearShapes() %>%
-            clearPopups() %>% clearWebGLHeatmap() %>%
+            clearPopups() %>%
+            clearWebGLHeatmap() %>%
             addProviderTiles("OpenStreetMap",
-                             group = "OpenStreetMap") %>%
-            addProviderTiles("Esri.WorldImagery",
-                             group = "Esri.WorldImagery") %>%
-            addProviderTiles("CartoDB.Positron",
-                             group = "CartoDB.Positron") %>%
-            addProviderTiles("CartoDB.DarkMatter",
-                             group = "CartoDB.DarkMatter") %>%
-            addLayersControl(names(tiles), position = c("topleft")
+              group = "OpenStreetMap"
             ) %>%
+            addProviderTiles("Esri.WorldImagery",
+              group = "Esri.WorldImagery"
+            ) %>%
+            addProviderTiles("CartoDB.Positron",
+              group = "CartoDB.Positron"
+            ) %>%
+            addProviderTiles("CartoDB.DarkMatter",
+              group = "CartoDB.DarkMatter"
+            ) %>%
+            addLayersControl(names(tiles), position = c("topleft")) %>%
             addFullscreenControl() %>%
             leaflet.extras::addSearchOSM(
               options = searchOptions(hideMarkerOnCollapse = TRUE, zoom = 11)
@@ -900,17 +929,21 @@ observeEvent(list(
             clearMarkers() %>%
             clearImages() %>%
             clearShapes() %>%
-            clearPopups() %>% clearWebGLHeatmap() %>%
+            clearPopups() %>%
+            clearWebGLHeatmap() %>%
             addProviderTiles("OpenStreetMap",
-                             group = "OpenStreetMap") %>%
-            addProviderTiles("Esri.WorldImagery",
-                             group = "Esri.WorldImagery") %>%
-            addProviderTiles("CartoDB.Positron",
-                             group = "CartoDB.Positron") %>%
-            addProviderTiles("CartoDB.DarkMatter",
-                             group = "CartoDB.DarkMatter") %>%
-            addLayersControl(names(tiles), position = c("topleft")
+              group = "OpenStreetMap"
             ) %>%
+            addProviderTiles("Esri.WorldImagery",
+              group = "Esri.WorldImagery"
+            ) %>%
+            addProviderTiles("CartoDB.Positron",
+              group = "CartoDB.Positron"
+            ) %>%
+            addProviderTiles("CartoDB.DarkMatter",
+              group = "CartoDB.DarkMatter"
+            ) %>%
+            addLayersControl(names(tiles), position = c("topleft")) %>%
             addFullscreenControl() %>%
             leaflet.extras::addSearchOSM(
               options = searchOptions(hideMarkerOnCollapse = TRUE, zoom = 11)
@@ -991,17 +1024,21 @@ observeEvent(list(
             clearMarkers() %>%
             clearImages() %>%
             clearShapes() %>%
-            clearPopups() %>% clearWebGLHeatmap() %>%
+            clearPopups() %>%
+            clearWebGLHeatmap() %>%
             addProviderTiles("OpenStreetMap",
-                             group = "OpenStreetMap") %>%
-            addProviderTiles("Esri.WorldImagery",
-                             group = "Esri.WorldImagery") %>%
-            addProviderTiles("CartoDB.Positron",
-                             group = "CartoDB.Positron") %>%
-            addProviderTiles("CartoDB.DarkMatter",
-                             group = "CartoDB.DarkMatter") %>%
-            addLayersControl(names(tiles), position = c("topleft")
+              group = "OpenStreetMap"
             ) %>%
+            addProviderTiles("Esri.WorldImagery",
+              group = "Esri.WorldImagery"
+            ) %>%
+            addProviderTiles("CartoDB.Positron",
+              group = "CartoDB.Positron"
+            ) %>%
+            addProviderTiles("CartoDB.DarkMatter",
+              group = "CartoDB.DarkMatter"
+            ) %>%
+            addLayersControl(names(tiles), position = c("topleft")) %>%
             addFullscreenControl() %>%
             leaflet.extras::addSearchOSM(
               options = searchOptions(hideMarkerOnCollapse = TRUE, zoom = 11)
@@ -1048,17 +1085,21 @@ observeEvent(list(
             clearMarkers() %>%
             clearImages() %>%
             clearShapes() %>%
-            clearPopups() %>% clearWebGLHeatmap() %>%
+            clearPopups() %>%
+            clearWebGLHeatmap() %>%
             addProviderTiles("OpenStreetMap",
-                             group = "OpenStreetMap") %>%
-            addProviderTiles("Esri.WorldImagery",
-                             group = "Esri.WorldImagery") %>%
-            addProviderTiles("CartoDB.Positron",
-                             group = "CartoDB.Positron") %>%
-            addProviderTiles("CartoDB.DarkMatter",
-                             group = "CartoDB.DarkMatter") %>%
-            addLayersControl(names(tiles), position = c("topleft")
+              group = "OpenStreetMap"
             ) %>%
+            addProviderTiles("Esri.WorldImagery",
+              group = "Esri.WorldImagery"
+            ) %>%
+            addProviderTiles("CartoDB.Positron",
+              group = "CartoDB.Positron"
+            ) %>%
+            addProviderTiles("CartoDB.DarkMatter",
+              group = "CartoDB.DarkMatter"
+            ) %>%
+            addLayersControl(names(tiles), position = c("topleft")) %>%
             addFullscreenControl() %>%
             leaflet.extras::addSearchOSM(
               options = searchOptions(hideMarkerOnCollapse = TRUE, zoom = 11)
@@ -1187,21 +1228,27 @@ observeEvent(list(
                 clearMarkers() %>%
                 clearImages() %>%
                 clearShapes() %>%
-                clearPopups() %>% clearWebGLHeatmap() %>%
+                clearPopups() %>%
+                clearWebGLHeatmap() %>%
                 addProviderTiles("OpenStreetMap",
-                                 group = "OpenStreetMap") %>%
-                addProviderTiles("Esri.WorldImagery",
-                                 group = "Esri.WorldImagery") %>%
-                addProviderTiles("CartoDB.Positron",
-                                 group = "CartoDB.Positron") %>%
-                addProviderTiles("CartoDB.DarkMatter",
-                                 group = "CartoDB.DarkMatter") %>%
-                addLayersControl(names(tiles), position = c("topleft")
+                  group = "OpenStreetMap"
                 ) %>%
+                addProviderTiles("Esri.WorldImagery",
+                  group = "Esri.WorldImagery"
+                ) %>%
+                addProviderTiles("CartoDB.Positron",
+                  group = "CartoDB.Positron"
+                ) %>%
+                addProviderTiles("CartoDB.DarkMatter",
+                  group = "CartoDB.DarkMatter"
+                ) %>%
+                addLayersControl(names(tiles), position = c("topleft")) %>%
                 addFullscreenControl() %>%
                 leaflet.extras::addSearchOSM(
-                  options = searchOptions(hideMarkerOnCollapse = TRUE,
-                                          zoom = 11)
+                  options = searchOptions(
+                    hideMarkerOnCollapse = TRUE,
+                    zoom = 11
+                  )
                 ) %>%
                 setView(11.577779, 48.137168, zoom = 11) %>%
                 addMiniMap(tiles = tiles[[1]], toggleDisplay = TRUE) %>%
@@ -1220,21 +1267,27 @@ observeEvent(list(
                 clearMarkers() %>%
                 clearImages() %>%
                 clearShapes() %>%
-                clearPopups() %>% clearWebGLHeatmap() %>%
+                clearPopups() %>%
+                clearWebGLHeatmap() %>%
                 addProviderTiles("OpenStreetMap",
-                                 group = "OpenStreetMap") %>%
-                addProviderTiles("Esri.WorldImagery",
-                                 group = "Esri.WorldImagery") %>%
-                addProviderTiles("CartoDB.Positron",
-                                 group = "CartoDB.Positron") %>%
-                addProviderTiles("CartoDB.DarkMatter",
-                                 group = "CartoDB.DarkMatter") %>%
-                addLayersControl(names(tiles), position = c("topleft")
+                  group = "OpenStreetMap"
                 ) %>%
+                addProviderTiles("Esri.WorldImagery",
+                  group = "Esri.WorldImagery"
+                ) %>%
+                addProviderTiles("CartoDB.Positron",
+                  group = "CartoDB.Positron"
+                ) %>%
+                addProviderTiles("CartoDB.DarkMatter",
+                  group = "CartoDB.DarkMatter"
+                ) %>%
+                addLayersControl(names(tiles), position = c("topleft")) %>%
                 addFullscreenControl() %>%
                 leaflet.extras::addSearchOSM(
-                  options = searchOptions(hideMarkerOnCollapse = TRUE,
-                                          zoom = 11)
+                  options = searchOptions(
+                    hideMarkerOnCollapse = TRUE,
+                    zoom = 11
+                  )
                 ) %>%
                 setView(points$long[1], points$lat[1], zoom = 11) %>%
                 addMiniMap(tiles = tiles[[1]], toggleDisplay = TRUE) %>%
@@ -1253,17 +1306,21 @@ observeEvent(list(
               clearMarkers() %>%
               clearImages() %>%
               clearShapes() %>%
-              clearPopups() %>% clearWebGLHeatmap() %>%
+              clearPopups() %>%
+              clearWebGLHeatmap() %>%
               addProviderTiles("OpenStreetMap",
-                               group = "OpenStreetMap") %>%
-              addProviderTiles("Esri.WorldImagery",
-                               group = "Esri.WorldImagery") %>%
-              addProviderTiles("CartoDB.Positron",
-                               group = "CartoDB.Positron") %>%
-              addProviderTiles("CartoDB.DarkMatter",
-                               group = "CartoDB.DarkMatter") %>%
-              addLayersControl(names(tiles), position = c("topleft")
+                group = "OpenStreetMap"
               ) %>%
+              addProviderTiles("Esri.WorldImagery",
+                group = "Esri.WorldImagery"
+              ) %>%
+              addProviderTiles("CartoDB.Positron",
+                group = "CartoDB.Positron"
+              ) %>%
+              addProviderTiles("CartoDB.DarkMatter",
+                group = "CartoDB.DarkMatter"
+              ) %>%
+              addLayersControl(names(tiles), position = c("topleft")) %>%
               addFullscreenControl() %>%
               leaflet.extras::addSearchOSM(
                 options = searchOptions(hideMarkerOnCollapse = TRUE, zoom = 11)
@@ -1384,21 +1441,27 @@ observeEvent(list(
                 clearMarkers() %>%
                 clearImages() %>%
                 clearShapes() %>%
-                clearPopups() %>% clearWebGLHeatmap() %>%
+                clearPopups() %>%
+                clearWebGLHeatmap() %>%
                 addProviderTiles("OpenStreetMap",
-                                 group = "OpenStreetMap") %>%
-                addProviderTiles("Esri.WorldImagery",
-                                 group = "Esri.WorldImagery") %>%
-                addProviderTiles("CartoDB.Positron",
-                                 group = "CartoDB.Positron") %>%
-                addProviderTiles("CartoDB.DarkMatter",
-                                 group = "CartoDB.DarkMatter") %>%
-                addLayersControl(names(tiles), position = c("topleft")
+                  group = "OpenStreetMap"
                 ) %>%
+                addProviderTiles("Esri.WorldImagery",
+                  group = "Esri.WorldImagery"
+                ) %>%
+                addProviderTiles("CartoDB.Positron",
+                  group = "CartoDB.Positron"
+                ) %>%
+                addProviderTiles("CartoDB.DarkMatter",
+                  group = "CartoDB.DarkMatter"
+                ) %>%
+                addLayersControl(names(tiles), position = c("topleft")) %>%
                 addFullscreenControl() %>%
                 leaflet.extras::addSearchOSM(
-                  options = searchOptions(hideMarkerOnCollapse = TRUE,
-                                          zoom = 11)
+                  options = searchOptions(
+                    hideMarkerOnCollapse = TRUE,
+                    zoom = 11
+                  )
                 ) %>%
                 setView(11.577779, 48.137168, zoom = 11) %>%
                 addMiniMap(tiles = tiles[[1]], toggleDisplay = TRUE) %>%
@@ -1417,21 +1480,27 @@ observeEvent(list(
                 clearMarkers() %>%
                 clearImages() %>%
                 clearShapes() %>%
-                clearPopups() %>% clearWebGLHeatmap() %>%
+                clearPopups() %>%
+                clearWebGLHeatmap() %>%
                 addProviderTiles("OpenStreetMap",
-                                 group = "OpenStreetMap") %>%
-                addProviderTiles("Esri.WorldImagery",
-                                 group = "Esri.WorldImagery") %>%
-                addProviderTiles("CartoDB.Positron",
-                                 group = "CartoDB.Positron") %>%
-                addProviderTiles("CartoDB.DarkMatter",
-                                 group = "CartoDB.DarkMatter") %>%
-                addLayersControl(names(tiles), position = c("topleft")
+                  group = "OpenStreetMap"
                 ) %>%
+                addProviderTiles("Esri.WorldImagery",
+                  group = "Esri.WorldImagery"
+                ) %>%
+                addProviderTiles("CartoDB.Positron",
+                  group = "CartoDB.Positron"
+                ) %>%
+                addProviderTiles("CartoDB.DarkMatter",
+                  group = "CartoDB.DarkMatter"
+                ) %>%
+                addLayersControl(names(tiles), position = c("topleft")) %>%
                 addFullscreenControl() %>%
                 leaflet.extras::addSearchOSM(
-                  options = searchOptions(hideMarkerOnCollapse = TRUE,
-                                          zoom = 11)
+                  options = searchOptions(
+                    hideMarkerOnCollapse = TRUE,
+                    zoom = 11
+                  )
                 ) %>%
                 setView(points$long[1], points$lat[1], zoom = 11) %>%
                 addMiniMap(tiles = tiles[[1]], toggleDisplay = TRUE) %>%
@@ -1450,17 +1519,21 @@ observeEvent(list(
               clearMarkers() %>%
               clearImages() %>%
               clearShapes() %>%
-              clearPopups() %>% clearWebGLHeatmap() %>%
+              clearPopups() %>%
+              clearWebGLHeatmap() %>%
               addProviderTiles("OpenStreetMap",
-                               group = "OpenStreetMap") %>%
-              addProviderTiles("Esri.WorldImagery",
-                               group = "Esri.WorldImagery") %>%
-              addProviderTiles("CartoDB.Positron",
-                               group = "CartoDB.Positron") %>%
-              addProviderTiles("CartoDB.DarkMatter",
-                               group = "CartoDB.DarkMatter") %>%
-              addLayersControl(names(tiles), position = c("topleft")
+                group = "OpenStreetMap"
               ) %>%
+              addProviderTiles("Esri.WorldImagery",
+                group = "Esri.WorldImagery"
+              ) %>%
+              addProviderTiles("CartoDB.Positron",
+                group = "CartoDB.Positron"
+              ) %>%
+              addProviderTiles("CartoDB.DarkMatter",
+                group = "CartoDB.DarkMatter"
+              ) %>%
+              addLayersControl(names(tiles), position = c("topleft")) %>%
               addFullscreenControl() %>%
               leaflet.extras::addSearchOSM(
                 options = searchOptions(hideMarkerOnCollapse = TRUE, zoom = 11)
@@ -1500,21 +1573,27 @@ observeEvent(list(
                 clearMarkers() %>%
                 clearImages() %>%
                 clearShapes() %>%
-                clearPopups() %>% clearWebGLHeatmap() %>%
+                clearPopups() %>%
+                clearWebGLHeatmap() %>%
                 addProviderTiles("OpenStreetMap",
-                                 group = "OpenStreetMap") %>%
-                addProviderTiles("Esri.WorldImagery",
-                                 group = "Esri.WorldImagery") %>%
-                addProviderTiles("CartoDB.Positron",
-                                 group = "CartoDB.Positron") %>%
-                addProviderTiles("CartoDB.DarkMatter",
-                                 group = "CartoDB.DarkMatter") %>%
-                addLayersControl(names(tiles), position = c("topleft")
+                  group = "OpenStreetMap"
                 ) %>%
+                addProviderTiles("Esri.WorldImagery",
+                  group = "Esri.WorldImagery"
+                ) %>%
+                addProviderTiles("CartoDB.Positron",
+                  group = "CartoDB.Positron"
+                ) %>%
+                addProviderTiles("CartoDB.DarkMatter",
+                  group = "CartoDB.DarkMatter"
+                ) %>%
+                addLayersControl(names(tiles), position = c("topleft")) %>%
                 addFullscreenControl() %>%
                 leaflet.extras::addSearchOSM(
-                  options = searchOptions(hideMarkerOnCollapse = TRUE,
-                                          zoom = 11)
+                  options = searchOptions(
+                    hideMarkerOnCollapse = TRUE,
+                    zoom = 11
+                  )
                 ) %>%
                 setView(11.577779, 48.137168, zoom = 11) %>%
                 addMiniMap(tiles = tiles[[1]], toggleDisplay = TRUE) %>%
@@ -1533,21 +1612,27 @@ observeEvent(list(
                 clearMarkers() %>%
                 clearImages() %>%
                 clearShapes() %>%
-                clearPopups() %>% clearWebGLHeatmap() %>%
+                clearPopups() %>%
+                clearWebGLHeatmap() %>%
                 addProviderTiles("OpenStreetMap",
-                                 group = "OpenStreetMap") %>%
-                addProviderTiles("Esri.WorldImagery",
-                                 group = "Esri.WorldImagery") %>%
-                addProviderTiles("CartoDB.Positron",
-                                 group = "CartoDB.Positron") %>%
-                addProviderTiles("CartoDB.DarkMatter",
-                                 group = "CartoDB.DarkMatter") %>%
-                addLayersControl(names(tiles), position = c("topleft")
+                  group = "OpenStreetMap"
                 ) %>%
+                addProviderTiles("Esri.WorldImagery",
+                  group = "Esri.WorldImagery"
+                ) %>%
+                addProviderTiles("CartoDB.Positron",
+                  group = "CartoDB.Positron"
+                ) %>%
+                addProviderTiles("CartoDB.DarkMatter",
+                  group = "CartoDB.DarkMatter"
+                ) %>%
+                addLayersControl(names(tiles), position = c("topleft")) %>%
                 addFullscreenControl() %>%
                 leaflet.extras::addSearchOSM(
-                  options = searchOptions(hideMarkerOnCollapse = TRUE,
-                                          zoom = 11)
+                  options = searchOptions(
+                    hideMarkerOnCollapse = TRUE,
+                    zoom = 11
+                  )
                 ) %>%
                 setView(points$long[1], points$lat[1], zoom = 11) %>%
                 addMiniMap(tiles = tiles[[1]], toggleDisplay = TRUE) %>%
@@ -1566,17 +1651,21 @@ observeEvent(list(
               clearMarkers() %>%
               clearImages() %>%
               clearShapes() %>%
-              clearPopups() %>% clearWebGLHeatmap() %>%
+              clearPopups() %>%
+              clearWebGLHeatmap() %>%
               addProviderTiles("OpenStreetMap",
-                               group = "OpenStreetMap") %>%
-              addProviderTiles("Esri.WorldImagery",
-                               group = "Esri.WorldImagery") %>%
-              addProviderTiles("CartoDB.Positron",
-                               group = "CartoDB.Positron") %>%
-              addProviderTiles("CartoDB.DarkMatter",
-                               group = "CartoDB.DarkMatter") %>%
-              addLayersControl(names(tiles), position = c("topleft")
+                group = "OpenStreetMap"
               ) %>%
+              addProviderTiles("Esri.WorldImagery",
+                group = "Esri.WorldImagery"
+              ) %>%
+              addProviderTiles("CartoDB.Positron",
+                group = "CartoDB.Positron"
+              ) %>%
+              addProviderTiles("CartoDB.DarkMatter",
+                group = "CartoDB.DarkMatter"
+              ) %>%
+              addLayersControl(names(tiles), position = c("topleft")) %>%
               addFullscreenControl() %>%
               leaflet.extras::addSearchOSM(
                 options = searchOptions(hideMarkerOnCollapse = TRUE, zoom = 11)
@@ -1638,8 +1727,9 @@ observeEvent(list(
         }
         # sentence for legend
         col_moran <- ifelse(test_df[1, 1] < 0.05,
-                            "palegreen",
-                            "lightcoral")
+          "palegreen",
+          "lightcoral"
+        )
         test_df[1, 1] <- ifelse(test_df[1, 1] < 0.05,
           "Significant at 5% level",
           "Not significant at 5% level"
@@ -1675,17 +1765,21 @@ observeEvent(list(
             clearMarkers() %>%
             clearImages() %>%
             clearShapes() %>%
-            clearPopups() %>% clearWebGLHeatmap() %>%
+            clearPopups() %>%
+            clearWebGLHeatmap() %>%
             addProviderTiles("OpenStreetMap",
-                             group = "OpenStreetMap") %>%
-            addProviderTiles("Esri.WorldImagery",
-                             group = "Esri.WorldImagery") %>%
-            addProviderTiles("CartoDB.Positron",
-                             group = "CartoDB.Positron") %>%
-            addProviderTiles("CartoDB.DarkMatter",
-                             group = "CartoDB.DarkMatter") %>%
-            addLayersControl(names(tiles), position = c("topleft")
+              group = "OpenStreetMap"
             ) %>%
+            addProviderTiles("Esri.WorldImagery",
+              group = "Esri.WorldImagery"
+            ) %>%
+            addProviderTiles("CartoDB.Positron",
+              group = "CartoDB.Positron"
+            ) %>%
+            addProviderTiles("CartoDB.DarkMatter",
+              group = "CartoDB.DarkMatter"
+            ) %>%
+            addLayersControl(names(tiles), position = c("topleft")) %>%
             addFullscreenControl() %>%
             leaflet.extras::addSearchOSM(
               options = searchOptions(hideMarkerOnCollapse = TRUE, zoom = 11)
@@ -1764,30 +1858,34 @@ observeEvent(list(
               intersect$einwohner
             )
           }
-          
-            map <- leafletProxy("mymap") %>%
-              clearControls() %>%
-              clearMarkers() %>%
-              clearImages() %>%
-              clearShapes() %>%
-              clearPopups() %>% clearWebGLHeatmap() %>%
-              addProviderTiles("OpenStreetMap",
-                               group = "OpenStreetMap") %>%
-              addProviderTiles("Esri.WorldImagery",
-                               group = "Esri.WorldImagery") %>%
-              addProviderTiles("CartoDB.Positron",
-                               group = "CartoDB.Positron") %>%
-              addProviderTiles("CartoDB.DarkMatter",
-                               group = "CartoDB.DarkMatter") %>%
-              addLayersControl(names(tiles), position = c("topleft")
-              ) %>%
-              addFullscreenControl() %>%
-              leaflet.extras::addSearchOSM(
-                options = searchOptions(hideMarkerOnCollapse = TRUE, zoom = 11)
-              ) %>%
-              addPolygons(data = isochrone, color = "#fcfcfc") %>%
-              addMiniMap(tiles = tiles[[1]], toggleDisplay = TRUE) %>%
-              htmlwidgets::onRender("
+
+          map <- leafletProxy("mymap") %>%
+            clearControls() %>%
+            clearMarkers() %>%
+            clearImages() %>%
+            clearShapes() %>%
+            clearPopups() %>%
+            clearWebGLHeatmap() %>%
+            addProviderTiles("OpenStreetMap",
+              group = "OpenStreetMap"
+            ) %>%
+            addProviderTiles("Esri.WorldImagery",
+              group = "Esri.WorldImagery"
+            ) %>%
+            addProviderTiles("CartoDB.Positron",
+              group = "CartoDB.Positron"
+            ) %>%
+            addProviderTiles("CartoDB.DarkMatter",
+              group = "CartoDB.DarkMatter"
+            ) %>%
+            addLayersControl(names(tiles), position = c("topleft")) %>%
+            addFullscreenControl() %>%
+            leaflet.extras::addSearchOSM(
+              options = searchOptions(hideMarkerOnCollapse = TRUE, zoom = 11)
+            ) %>%
+            addPolygons(data = isochrone, color = "#fcfcfc") %>%
+            addMiniMap(tiles = tiles[[1]], toggleDisplay = TRUE) %>%
+            htmlwidgets::onRender("
     function(el, x) {
       var myMap = this;
       myMap.on('baselayerchange',
@@ -1795,69 +1893,68 @@ observeEvent(list(
           myMap.minimap.changeLayer(L.tileLayer.provider(e.name));
         })
     }")
-            if (input$show_plz == "Yes") {
-              map <- map %>%
-                addPolygons(
-                  data = intersect, color = ~ pal(einwohner),
-                  fillColor = ~ pal(einwohner),
-                  label = paste(
-                    "ZIP code:", intersect$plz,
-                    "<br>", "Residents:",
-                    intersect$einwohner
-                  ) %>%
-                    future_map(htmltools::HTML)
-                )
-            }
+          if (input$show_plz == "Yes") {
             map <- map %>%
-              addPolylines(
-                data = streets_c, opacity = opac, weight = 1,
-                color = "#f53374"
-              ) %>%
-              addAwesomeMarkers(
-                lat = point$lat,
-                lng = point$lon,
-                icon = icon.fa,
-                label = "Starting point"
-              ) %>%
-              addCircleMarkers(
-                data = df2,
-                lat = ~latitude,
-                lng = ~longitude,
+              addPolygons(
+                data = intersect, color = ~ pal(einwohner),
+                fillColor = ~ pal(einwohner),
                 label = paste(
-                  "Name:",
-                  df2$name, "<br>",
-                  "Getis ord:", df2$g1, "<br>",
-                  "Other locations:", df2$V3,
-                  labels1, "<br>",
-                  "Street: ",
-                  df2$addr.street
+                  "ZIP code:", intersect$plz,
+                  "<br>", "Residents:",
+                  intersect$einwohner
                 ) %>%
-                  future_map(htmltools::HTML),
-                color = ~ pal3(g1),
-                opacity = 0.9, radius = 5
-              ) %>%
-              addLegend(
-                data = test_df, labels = test_df$sig,
-                position = "bottomleft", opacity = 0.9,
-                colors = col_moran, title = "Moran's test:"
+                  future_map(htmltools::HTML)
               )
-            if (input$show_plz == "Yes") {
-              map <- map %>%
-                addLegend(
-                  data = intersect, pal = pal,
-                  values = ~einwohner,
-                  title = "Number of residents:",
-                  opacity = 1,
-                  position = "bottomleft"
-                )
-            }
+          }
+          map <- map %>%
+            addPolylines(
+              data = streets_c, opacity = opac, weight = 1,
+              color = "#f53374"
+            ) %>%
+            addAwesomeMarkers(
+              lat = point$lat,
+              lng = point$lon,
+              icon = icon.fa,
+              label = "Starting point"
+            ) %>%
+            addCircleMarkers(
+              data = df2,
+              lat = ~latitude,
+              lng = ~longitude,
+              label = paste(
+                "Name:",
+                df2$name, "<br>",
+                "Getis ord:", df2$g1, "<br>",
+                "Other locations:", df2$V3,
+                labels1, "<br>",
+                "Street: ",
+                df2$addr.street
+              ) %>%
+                future_map(htmltools::HTML),
+              color = ~ pal3(g1),
+              opacity = 0.9, radius = 5
+            ) %>%
+            addLegend(
+              data = test_df, labels = test_df$sig,
+              position = "bottomleft", opacity = 0.9,
+              colors = col_moran, title = "Moran's test:"
+            )
+          if (input$show_plz == "Yes") {
             map <- map %>%
               addLegend(
-                data = df2, pal = pal3, values = ~ g1[!is.na(g1)],
-                position = "bottomleft", title = "Getis ord:",
-                opacity = 0.9
+                data = intersect, pal = pal,
+                values = ~einwohner,
+                title = "Number of residents:",
+                opacity = 1,
+                position = "bottomleft"
               )
-          
+          }
+          map <- map %>%
+            addLegend(
+              data = df2, pal = pal3, values = ~ g1[!is.na(g1)],
+              position = "bottomleft", title = "Getis ord:",
+              opacity = 0.9
+            )
         }
       } else {
         if (input$radio_type_cluster != "Drivetime") {
@@ -1873,17 +1970,21 @@ observeEvent(list(
               clearMarkers() %>%
               clearImages() %>%
               clearShapes() %>%
-              clearPopups() %>% clearWebGLHeatmap() %>%
+              clearPopups() %>%
+              clearWebGLHeatmap() %>%
               addProviderTiles("OpenStreetMap",
-                               group = "OpenStreetMap") %>%
-              addProviderTiles("Esri.WorldImagery",
-                               group = "Esri.WorldImagery") %>%
-              addProviderTiles("CartoDB.Positron",
-                               group = "CartoDB.Positron") %>%
-              addProviderTiles("CartoDB.DarkMatter",
-                               group = "CartoDB.DarkMatter") %>%
-              addLayersControl(names(tiles), position = c("topleft")
+                group = "OpenStreetMap"
               ) %>%
+              addProviderTiles("Esri.WorldImagery",
+                group = "Esri.WorldImagery"
+              ) %>%
+              addProviderTiles("CartoDB.Positron",
+                group = "CartoDB.Positron"
+              ) %>%
+              addProviderTiles("CartoDB.DarkMatter",
+                group = "CartoDB.DarkMatter"
+              ) %>%
+              addLayersControl(names(tiles), position = c("topleft")) %>%
               addFullscreenControl() %>%
               leaflet.extras::addSearchOSM(
                 options = searchOptions(hideMarkerOnCollapse = TRUE, zoom = 11)
@@ -1905,17 +2006,21 @@ observeEvent(list(
               clearMarkers() %>%
               clearImages() %>%
               clearShapes() %>%
-              clearPopups() %>% clearWebGLHeatmap() %>%
+              clearPopups() %>%
+              clearWebGLHeatmap() %>%
               addProviderTiles("OpenStreetMap",
-                               group = "OpenStreetMap") %>%
-              addProviderTiles("Esri.WorldImagery",
-                               group = "Esri.WorldImagery") %>%
-              addProviderTiles("CartoDB.Positron",
-                               group = "CartoDB.Positron") %>%
-              addProviderTiles("CartoDB.DarkMatter",
-                               group = "CartoDB.DarkMatter") %>%
-              addLayersControl(names(tiles), position = c("topleft")
+                group = "OpenStreetMap"
               ) %>%
+              addProviderTiles("Esri.WorldImagery",
+                group = "Esri.WorldImagery"
+              ) %>%
+              addProviderTiles("CartoDB.Positron",
+                group = "CartoDB.Positron"
+              ) %>%
+              addProviderTiles("CartoDB.DarkMatter",
+                group = "CartoDB.DarkMatter"
+              ) %>%
+              addLayersControl(names(tiles), position = c("topleft")) %>%
               addFullscreenControl() %>%
               leaflet.extras::addSearchOSM(
                 options = searchOptions(hideMarkerOnCollapse = TRUE, zoom = 11)
@@ -1937,17 +2042,21 @@ observeEvent(list(
             clearMarkers() %>%
             clearImages() %>%
             clearShapes() %>%
-            clearPopups() %>% clearWebGLHeatmap() %>%
+            clearPopups() %>%
+            clearWebGLHeatmap() %>%
             addProviderTiles("OpenStreetMap",
-                             group = "OpenStreetMap") %>%
-            addProviderTiles("Esri.WorldImagery",
-                             group = "Esri.WorldImagery") %>%
-            addProviderTiles("CartoDB.Positron",
-                             group = "CartoDB.Positron") %>%
-            addProviderTiles("CartoDB.DarkMatter",
-                             group = "CartoDB.DarkMatter") %>%
-            addLayersControl(names(tiles), position = c("topleft")
+              group = "OpenStreetMap"
             ) %>%
+            addProviderTiles("Esri.WorldImagery",
+              group = "Esri.WorldImagery"
+            ) %>%
+            addProviderTiles("CartoDB.Positron",
+              group = "CartoDB.Positron"
+            ) %>%
+            addProviderTiles("CartoDB.DarkMatter",
+              group = "CartoDB.DarkMatter"
+            ) %>%
+            addLayersControl(names(tiles), position = c("topleft")) %>%
             addFullscreenControl() %>%
             leaflet.extras::addSearchOSM(
               options = searchOptions(hideMarkerOnCollapse = TRUE, zoom = 11)
@@ -1998,21 +2107,25 @@ observeEvent(list(
             clearMarkers() %>%
             clearImages() %>%
             clearShapes() %>%
-            clearPopups() %>% clearWebGLHeatmap() %>%
+            clearPopups() %>%
+            clearWebGLHeatmap() %>%
             addProviderTiles("OpenStreetMap",
-                             group = "OpenStreetMap") %>%
+              group = "OpenStreetMap"
+            ) %>%
             addProviderTiles("Esri.WorldImagery",
-                             group = "Esri.WorldImagery") %>%
+              group = "Esri.WorldImagery"
+            ) %>%
             addProviderTiles("CartoDB.Positron",
-                             group = "CartoDB.Positron") %>%
+              group = "CartoDB.Positron"
+            ) %>%
             addProviderTiles("CartoDB.DarkMatter",
-                             group = "CartoDB.DarkMatter") %>%
+              group = "CartoDB.DarkMatter"
+            ) %>%
             addPolylines(
               data = streets_c, opacity = opac, weight = 1,
               color = "#f53374"
             ) %>%
-            addLayersControl(names(tiles), position = c("topleft")
-            ) %>%
+            addLayersControl(names(tiles), position = c("topleft")) %>%
             addFullscreenControl() %>%
             leaflet.extras::addSearchOSM(
               options = searchOptions(hideMarkerOnCollapse = TRUE, zoom = 11)
@@ -2060,17 +2173,21 @@ observeEvent(list(
             clearMarkers() %>%
             clearImages() %>%
             clearShapes() %>%
-            clearPopups() %>% clearWebGLHeatmap() %>%
+            clearPopups() %>%
+            clearWebGLHeatmap() %>%
             addProviderTiles("OpenStreetMap",
-                             group = "OpenStreetMap") %>%
-            addProviderTiles("Esri.WorldImagery",
-                             group = "Esri.WorldImagery") %>%
-            addProviderTiles("CartoDB.Positron",
-                             group = "CartoDB.Positron") %>%
-            addProviderTiles("CartoDB.DarkMatter",
-                             group = "CartoDB.DarkMatter") %>%
-            addLayersControl(names(tiles), position = c("topleft")
+              group = "OpenStreetMap"
             ) %>%
+            addProviderTiles("Esri.WorldImagery",
+              group = "Esri.WorldImagery"
+            ) %>%
+            addProviderTiles("CartoDB.Positron",
+              group = "CartoDB.Positron"
+            ) %>%
+            addProviderTiles("CartoDB.DarkMatter",
+              group = "CartoDB.DarkMatter"
+            ) %>%
+            addLayersControl(names(tiles), position = c("topleft")) %>%
             addFullscreenControl() %>%
             leaflet.extras::addSearchOSM(
               options = searchOptions(hideMarkerOnCollapse = TRUE, zoom = 11)
@@ -2130,17 +2247,21 @@ observeEvent(list(
             clearMarkers() %>%
             clearImages() %>%
             clearShapes() %>%
-            clearPopups() %>% clearWebGLHeatmap() %>%
+            clearPopups() %>%
+            clearWebGLHeatmap() %>%
             addProviderTiles("OpenStreetMap",
-                             group = "OpenStreetMap") %>%
-            addProviderTiles("Esri.WorldImagery",
-                             group = "Esri.WorldImagery") %>%
-            addProviderTiles("CartoDB.Positron",
-                             group = "CartoDB.Positron") %>%
-            addProviderTiles("CartoDB.DarkMatter",
-                             group = "CartoDB.DarkMatter") %>%
-            addLayersControl(names(tiles), position = c("topleft")
+              group = "OpenStreetMap"
             ) %>%
+            addProviderTiles("Esri.WorldImagery",
+              group = "Esri.WorldImagery"
+            ) %>%
+            addProviderTiles("CartoDB.Positron",
+              group = "CartoDB.Positron"
+            ) %>%
+            addProviderTiles("CartoDB.DarkMatter",
+              group = "CartoDB.DarkMatter"
+            ) %>%
+            addLayersControl(names(tiles), position = c("topleft")) %>%
             addFullscreenControl() %>%
             leaflet.extras::addSearchOSM(
               options = searchOptions(hideMarkerOnCollapse = TRUE, zoom = 11)
@@ -2191,17 +2312,21 @@ observeEvent(list(
               clearMarkers() %>%
               clearImages() %>%
               clearShapes() %>%
-              clearPopups() %>% clearWebGLHeatmap() %>%
+              clearPopups() %>%
+              clearWebGLHeatmap() %>%
               addProviderTiles("OpenStreetMap",
-                               group = "OpenStreetMap") %>%
-              addProviderTiles("Esri.WorldImagery",
-                               group = "Esri.WorldImagery") %>%
-              addProviderTiles("CartoDB.Positron",
-                               group = "CartoDB.Positron") %>%
-              addProviderTiles("CartoDB.DarkMatter",
-                               group = "CartoDB.DarkMatter") %>%
-              addLayersControl(names(tiles), position = c("topleft")
+                group = "OpenStreetMap"
               ) %>%
+              addProviderTiles("Esri.WorldImagery",
+                group = "Esri.WorldImagery"
+              ) %>%
+              addProviderTiles("CartoDB.Positron",
+                group = "CartoDB.Positron"
+              ) %>%
+              addProviderTiles("CartoDB.DarkMatter",
+                group = "CartoDB.DarkMatter"
+              ) %>%
+              addLayersControl(names(tiles), position = c("topleft")) %>%
               addFullscreenControl() %>%
               leaflet.extras::addSearchOSM(
                 options = searchOptions(hideMarkerOnCollapse = TRUE, zoom = 11)
@@ -2266,17 +2391,21 @@ observeEvent(list(
               clearMarkers() %>%
               clearImages() %>%
               clearShapes() %>%
-              clearPopups() %>% clearWebGLHeatmap() %>%
+              clearPopups() %>%
+              clearWebGLHeatmap() %>%
               addProviderTiles("OpenStreetMap",
-                               group = "OpenStreetMap") %>%
-              addProviderTiles("Esri.WorldImagery",
-                               group = "Esri.WorldImagery") %>%
-              addProviderTiles("CartoDB.Positron",
-                               group = "CartoDB.Positron") %>%
-              addProviderTiles("CartoDB.DarkMatter",
-                               group = "CartoDB.DarkMatter") %>%
-              addLayersControl(names(tiles), position = c("topleft")
+                group = "OpenStreetMap"
               ) %>%
+              addProviderTiles("Esri.WorldImagery",
+                group = "Esri.WorldImagery"
+              ) %>%
+              addProviderTiles("CartoDB.Positron",
+                group = "CartoDB.Positron"
+              ) %>%
+              addProviderTiles("CartoDB.DarkMatter",
+                group = "CartoDB.DarkMatter"
+              ) %>%
+              addLayersControl(names(tiles), position = c("topleft")) %>%
               addFullscreenControl() %>%
               leaflet.extras::addSearchOSM(
                 options = searchOptions(hideMarkerOnCollapse = TRUE, zoom = 11)
@@ -2335,17 +2464,21 @@ observeEvent(list(
           clearMarkers() %>%
           clearImages() %>%
           clearShapes() %>%
-          clearPopups() %>% clearWebGLHeatmap() %>%
+          clearPopups() %>%
+          clearWebGLHeatmap() %>%
           addProviderTiles("OpenStreetMap",
-                           group = "OpenStreetMap") %>%
-          addProviderTiles("Esri.WorldImagery",
-                           group = "Esri.WorldImagery") %>%
-          addProviderTiles("CartoDB.Positron",
-                           group = "CartoDB.Positron") %>%
-          addProviderTiles("CartoDB.DarkMatter",
-                           group = "CartoDB.DarkMatter") %>%
-          addLayersControl(names(tiles), position = c("topleft")
+            group = "OpenStreetMap"
           ) %>%
+          addProviderTiles("Esri.WorldImagery",
+            group = "Esri.WorldImagery"
+          ) %>%
+          addProviderTiles("CartoDB.Positron",
+            group = "CartoDB.Positron"
+          ) %>%
+          addProviderTiles("CartoDB.DarkMatter",
+            group = "CartoDB.DarkMatter"
+          ) %>%
+          addLayersControl(names(tiles), position = c("topleft")) %>%
           addFullscreenControl() %>%
           leaflet.extras::addSearchOSM(
             options = searchOptions(hideMarkerOnCollapse = TRUE, zoom = 11)
@@ -2367,17 +2500,21 @@ observeEvent(list(
           clearMarkers() %>%
           clearImages() %>%
           clearShapes() %>%
-          clearPopups() %>% clearWebGLHeatmap() %>%
+          clearPopups() %>%
+          clearWebGLHeatmap() %>%
           addProviderTiles("OpenStreetMap",
-                           group = "OpenStreetMap") %>%
-          addProviderTiles("Esri.WorldImagery",
-                           group = "Esri.WorldImagery") %>%
-          addProviderTiles("CartoDB.Positron",
-                           group = "CartoDB.Positron") %>%
-          addProviderTiles("CartoDB.DarkMatter",
-                           group = "CartoDB.DarkMatter") %>%
-          addLayersControl(names(tiles), position = c("topleft")
+            group = "OpenStreetMap"
           ) %>%
+          addProviderTiles("Esri.WorldImagery",
+            group = "Esri.WorldImagery"
+          ) %>%
+          addProviderTiles("CartoDB.Positron",
+            group = "CartoDB.Positron"
+          ) %>%
+          addProviderTiles("CartoDB.DarkMatter",
+            group = "CartoDB.DarkMatter"
+          ) %>%
+          addLayersControl(names(tiles), position = c("topleft")) %>%
           addFullscreenControl() %>%
           leaflet.extras::addSearchOSM(
             options = searchOptions(hideMarkerOnCollapse = TRUE, zoom = 11)
@@ -2399,17 +2536,21 @@ observeEvent(list(
         clearMarkers() %>%
         clearImages() %>%
         clearShapes() %>%
-        clearPopups() %>% clearWebGLHeatmap() %>%
+        clearPopups() %>%
+        clearWebGLHeatmap() %>%
         addProviderTiles("OpenStreetMap",
-                         group = "OpenStreetMap") %>%
-        addProviderTiles("Esri.WorldImagery",
-                         group = "Esri.WorldImagery") %>%
-        addProviderTiles("CartoDB.Positron",
-                         group = "CartoDB.Positron") %>%
-        addProviderTiles("CartoDB.DarkMatter",
-                         group = "CartoDB.DarkMatter") %>%
-        addLayersControl(names(tiles), position = c("topleft")
+          group = "OpenStreetMap"
         ) %>%
+        addProviderTiles("Esri.WorldImagery",
+          group = "Esri.WorldImagery"
+        ) %>%
+        addProviderTiles("CartoDB.Positron",
+          group = "CartoDB.Positron"
+        ) %>%
+        addProviderTiles("CartoDB.DarkMatter",
+          group = "CartoDB.DarkMatter"
+        ) %>%
+        addLayersControl(names(tiles), position = c("topleft")) %>%
         addFullscreenControl() %>%
         leaflet.extras::addSearchOSM(
           options = searchOptions(hideMarkerOnCollapse = TRUE, zoom = 11)
