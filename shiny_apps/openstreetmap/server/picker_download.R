@@ -117,9 +117,7 @@ updatePickerInput(
     "Viridis sequential" = c(
       "viridis", "magma", "plasma", "inferno", "cividis"
     ),
-    "Custom palettes" = c(
-      "pal1", "pal2", "pal3", "pal4"
-    )
+    "Custom palettes" = names(custom_palettes)
   ),
-  selected = "PuRd"
+  selected = "grapefruit"
 )

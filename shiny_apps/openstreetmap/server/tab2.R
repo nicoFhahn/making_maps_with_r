@@ -573,10 +573,8 @@ observeEvent(list(
         pal <- colorNumeric(pal(10, direction = 1),
           domain = points_df$count
         )
-      } else if (input$palette %in% c(
-        "pal1", "pal2", "pal3", "pal4"
-      )) {
-        pal <- get(input$palette)
+      } else if (input$palette %in% names(custom_palettes)) {
+        pal <- custom_palettes[[input$palette]]
         pal <- colorNumeric(pal, domain = points_df$count)
       } else {
         pal <- RColorBrewer::brewer.pal(10, input$palette)

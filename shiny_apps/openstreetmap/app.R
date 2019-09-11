@@ -31,11 +31,6 @@ icon.fa <- makeAwesomeIcon(
   library = "fa",
   iconColor = "black"
 )
-# define some palettes
-pal1 <- c("#A8E6CE", "#DCEDC2", "#FFD3B5", "#FFAAA6", "#FF8C94")
-pal2 <- c("#A7226E", "#EC2049", "#F26B38", "#F7DB4F", "#2F9599")
-pal3 <- c("#E1F5C4", "#EDE574", "#F9D423", "#FC913A", "#FF4E50")
-pal4 <- c("#FE4365", "#FC9D9A", "#F9CDAD", "#C8C8A9", "#83AF9B")
 tiles <- list(
   OpenStreetMap = "OpenStreetMap",
   Esri.WorldImagery = "Esri.WorldImagery",
@@ -72,12 +67,12 @@ ui <- source(file.path("ui", "ui.R"), local = TRUE)$value
 server <- function(input, output, session) {
   source(file.path("server", "tab1.R"), local = TRUE)$value
   source(file.path("server", "tab2.R"), local = TRUE)$value
+  source(file.path("server", "lists.R"), local = TRUE)$value
   source(file.path("server", "error_messages.R"), local = TRUE)$value
   source(file.path("server", "reactive_observer.R"), local = TRUE)$value
   source(file.path("server", "map_basic.R"), local = TRUE)$value
   source(file.path("server", "picker_download.R"), local = TRUE)$value
   source(file.path("server", "ui_outputs.R"), local = TRUE)$value
-  source(file.path("server", "lists.R"), local = TRUE)$value
   source(file.path("server", "functions.R"), local = TRUE)$value
 }
 

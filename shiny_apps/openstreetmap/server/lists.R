@@ -1,3 +1,22 @@
+custom_palettes <- list(
+  "cherry" = colorRampPalette(c("#A8E6CE", "#FFD3B5", "#FF8C94"))(10),
+  "poncho" = colorRampPalette(c("#A7226E", "#F26B38", "#2F9599"))(10),
+  "morning" = colorRampPalette(c("#E1F5C4", "#F9D423", "#FF4E50"))(10),
+  "forest" = colorRampPalette(c("#FE4365", "#F9CDAD", "#83AF9B"))(10),
+  "vice" = colorRampPalette(c("#3494e6", "#ec6ead"))(10),
+  "dawn" = colorRampPalette(c("#f3904f", "#3b4371"))(10),
+  "radar" = colorRampPalette(c("#a770ef", "#cf8bf3", "#fdb99b"))(10),
+  "cosmic" = colorRampPalette(c("#ff00cc", "#333399"))(10),
+  "nepal" = colorRampPalette(c("#de6161", "#2657eb"))(10),
+  "azure" = colorRampPalette(c("#ef32d9", "#89fffd"))(10),
+  "love" = colorRampPalette(c("#3a6186", "#89253e"))(10),
+  "dehli" = colorRampPalette(c("#808080", "#3fada8"))(10),
+  "sherbert" = colorRampPalette(c("#f79d00", "#64f38c"))(10),
+  "dusk" = colorRampPalette(c("#2c3e50", "#fd746c"))(10),
+  "grapefruit" = colorRampPalette(c("#e96443", "#904e95"))(10),
+  "sunset" = colorRampPalette(c("#0b486b", "#f56217"))(10)
+)
+
 keys <- list(
   aeroway =
     c(
