@@ -161,12 +161,14 @@ ba3 <- tm_shape(bavaria) + tm_polygons(col = "Durchschnittsalter", n = 3)
 tmap_arrange(ba1, ba2, ba3, ncol = 3)
 ```
 Ein Alternative dazu ist das `style` Argument. Dadurch kann die Klassenbildung mit Hilfe von Algorithmen erfolgen. Unter anderem können folgende styles übergeben werden:
+
     - `style = pretty`: Rundet Intervallgrenzen zu ganzen Nummern. Ist die Standardeinstellung
     - `style = equal`: Teilt die Variable in Intervalle von gleicher Länge auf. Sollte nur benutzt werden, wenn die Variable gleichverteilt ist.
     - `style = quantile`: Teilt die Variable in Quantile auf. Somit sind in jedem Intervall gleich viele Beobachtungen. 
     - `style = jenks`: Identifiziert Gruppen mit ähnlichen Werten und maximiert den Unterschied zwischen ihnen.
     - `style = cont`: Stellt viele Farben über eine kontinuierliche Palette dar.
     - `style = cat`: Färbt bei kategorialen Daten jede Kategorie individuell ein.
+
 Weitere Möglichkeiten sind `cat`, `fixed`, `sd`, `kmeans`, `hclust`, `bclust`, und `fisher`.
 
 ```{r, fig.align="center",fig.cap="Arbeitslosenquote in Bayern und Verteilung von Städten und Landkreisen", echo = FALSE, fig.width= 8, fig.height= 8, warning=FALSE, message=FALSE}
@@ -250,7 +252,7 @@ tmap_arrange(a1, a2, ncol = 2)
 
 
 ## Inset maps
-Manchmal können nicht alle Informationen effektiv mit nur einer Karte dargestellt werden, beispielsweise um zusätzliche Informationen zu übermitteln. Mit Hilfe der `print` und `viewport` Funktionen können mehrere kleinere Karten zu einer großen zusammengefügt werden. In dem nachfolgenden Beispiel sind die Städte und Gemeinden des Landkreises Rosenheim dargestellt. Da möglicherweise nicht alle Betrachter wissen, wo sich der Landkreis befindet, wird noch eine Bayern Karte mit einer bounding box um den Landkreis herum hinzugefügt.
+Manchmal können nicht alle Informationen effektiv mit nur einer Karte dargestellt werden, beispielsweise um zusätzliche Informationen zu übermitteln. Mit Hilfe der `print()` und `viewport()` Funktionen können mehrere kleinere Karten zu einer großen zusammengefügt werden. In dem nachfolgenden Beispiel sind die Städte und Gemeinden des Landkreises Rosenheim dargestellt. Da möglicherweise nicht alle Betrachter wissen, wo sich der Landkreis befindet, wird noch eine Bayern Karte mit einer bounding box um den Landkreis herum hinzugefügt.
 ```{r, message=FALSE, echo=FALSE}
 bbox <- st_bbox(rosenheim, crs = 4326) %>% 
   st_as_sfc()
@@ -333,10 +335,12 @@ grid.lines(x = c(0, 0.2), y = c(0.33, 0), gp = gpar(lty = 2))
 
 ## Facettierte und animierte Karten
 Neben der Möglichkeit verschiedene Elemente der Karten basierend auf einer Variable zu ändern, können Karten basierend auf einer Variable in mehrere Karten unterteilt werden. Was in **ggplot2** mit `facet_wrap()` gemacht wird, wird in **tmap** mit `tm_facets()` erledigt. Soll eine zeitliche Variable dargestellt werden, geht dies schlecht mit einer Karte, da sich die Geometrien häufig überlappen würden. Besonders in diesen Fällen ist die Verwendung facettierter Karten sinnvoll. Die Funktion hat fünf wichtige Argumente:
+
     - `by`: Nach welcher Variable soll aufgeteilt werden?
     - `nrow / ncol`: Die Anzahl der Zeilen beziehungsweise Spalten der Facetten
     - `free.cords`: Soll jede einzelne Karte ein eigenes Koordinatensystem haben?
     - `along`: Nach welcher Variable soll animiert werden?
+    
 ```{r, include=FALSE}
 honey0912 <- honey[honey$year > 2008, ]
 honey0912 <- rbind(

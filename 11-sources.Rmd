@@ -61,6 +61,7 @@ Sonstiges:
   * magick [@magick]
     
 Pakete in Verwendung mit den ShinyApps:
+
   * colourpicker [@colourpicker]
   * devtools [@devtools]
   * furrr [@furrr]

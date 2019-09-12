@@ -31,10 +31,11 @@ library(sf)
 library(shiny)
 library(stringr)
 honey <- read_sf("datasets/honey.shp")
-colnames(honey)[3:8] <- c("Number_of_colonies", "Yield_per_colony",
-                          "Total_production", "Stocks","Price_per_lb",
-                          "Value_of_production"
-                          )
+colnames(honey)[3:8] <- c(
+  "Number_of_colonies", "Yield_per_colony",
+  "Total_production", "Stocks","Price_per_lb",
+  "Value_of_production"
+  )
 ```
 
 Als erstes wird das User Interface definiert: 
