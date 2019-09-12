@@ -425,3 +425,5 @@ tmap_animation(honey_animation, filename = "honey.gif", delay = 50, width = 1181
 image_resize(image_read("datasets/honey.gif"), "700x1181")
 ```
 
+## Weiterführende Links
+Für mehr Informationen zu der Verwendung von **tmap** siehe https://geocompr.robinlovelace.net/adv-map.html. [@lovelace2019geocomputation]

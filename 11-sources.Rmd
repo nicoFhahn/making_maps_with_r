@@ -11,6 +11,7 @@ Zur Erstellung dieser Arbeit wurden neben den zu Beginn erwähnten Datenquellen 
 
   * tmap: https://geocompr.robinlovelace.net/adv-map.html [@lovelace2019geocomputation]
   * ggplot2: https://ggplot2.tidyverse.org/reference/ggsf.html [@ggplot2link]
+  * ggspatial https://paleolimbot.github.io/ggspatial/ [@ggspatiallink]
   * mapview: https://r-spatial.github.io/mapview/index.html [@mapviewlink]
   * mapdeck: https://symbolixau.github.io/mapdeck/index.html [@mapdecklink]
   * leaflet: https://rstudio.github.io/leaflet/ [@leafletlink]

@@ -327,3 +327,7 @@ leaflet() %>%
 ```{r, echo=FALSE}
 htmltools::tags$iframe(src = "html_plots/leaflet_js2.html", width = "700px", height = "700px")
 ```
+
+
+## Weiterführende Links
+Für mehr Informationen zu der Verwendung von **leaflet** siehe https://rstudio.github.io/leaflet/. [@leafletlink]

@@ -215,3 +215,8 @@ ggplot() +
 ```
 
 [@ggswitz]
+
+
+## Weiterführende Links
+Für mehr Informationen zu der Verwendung von **ggplot** siehe https://ggplot2.tidyverse.org/reference/ggsf.html. [@ggplot2link]
+Für mehr Informationen zu der Verwendung von **ggspatial** siehe https://paleolimbot.github.io/ggspatial/. [@ggspatiallink]

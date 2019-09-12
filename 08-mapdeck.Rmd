@@ -84,3 +84,8 @@ mapdeck(style = ms, pitch = 45, token = token) %>%
 ```{r, echo=FALSE, fig.cap="Bakeries in europe"}
 htmltools::includeHTML("html_plots/bakeries.html")
 ```
+
+
+
+## Weiterführende Links
+Für mehr Informationen zu der Verwendung von **mapdeck** siehe https://symbolixau.github.io/mapdeck/index.html. [@mapdecklink]

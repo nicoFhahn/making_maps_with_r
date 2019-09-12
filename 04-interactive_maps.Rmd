@@ -126,3 +126,5 @@ map_london
 htmltools::tags$iframe(src = "html_plots/tmap_4.html", width = "700px", height = "700px")
 ```
 
+## Weiterführende Links
+Für mehr Informationen zu der Verwendung von **tmap** siehe https://geocompr.robinlovelace.net/adv-map.html. [@lovelace2019geocomputation]

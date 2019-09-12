@@ -122,3 +122,6 @@ htmltools::tags$iframe(src = "html_plots/mapview_5.html", width = "700px", heigh
 ```
 
 Da bei den Scatterplots manche x-y Kombinationen mehrmals vorkommen, wird nicht jedes Mal ein roter Punkt angezeigt. Mit den Funktionen `leafpop::popupImage()` oder `leafpop:::popupIframe()` können sogar Bilder, Hyperlinks und Youtube-Videos eingebunden werden.
+
+## Weiterführende Links
+Für mehr Informationen zu der Verwendung von **mapview** siehe https://r-spatial.github.io/mapview/index.html. [@mapviewlink]
