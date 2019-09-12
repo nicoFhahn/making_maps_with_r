@@ -975,7 +975,7 @@ server <- function(input, output, session) {
         legend.text.size = 1.2
       )
     bavaria_two <- bavaria_basic + tm_layout(title = "Bavaria") +
-      tm_logo("../datasets/bavaria.png", height = 4) +
+      tm_logo("../../datasets/bavaria.png", height = 4) +
       tm_credits(
         paste(
           "... +",
@@ -1168,7 +1168,7 @@ server <- function(input, output, session) {
   output$plot_facets <- renderPlot({
     # load the data
     data("us_states")
-    us <- read.csv("../datasets/us_energy_census.csv")
+    us <- read.csv("../../datasets/us_energy_census.csv")
     choices <- c(
       "Total energy average price",
       "Total energy production",

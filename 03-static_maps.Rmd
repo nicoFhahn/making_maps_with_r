@@ -163,9 +163,12 @@ tmap_arrange(ba1, ba2, ba3, ncol = 3)
 Ein Alternative dazu ist das `style` Argument. Dadurch kann die Klassenbildung mit Hilfe von Algorithmen erfolgen. Unter anderem können folgende styles übergeben werden:
 
     - `style = pretty`: Rundet Intervallgrenzen zu ganzen Nummern. Ist die Standardeinstellung
-    - `style = equal`: Teilt die Variable in Intervalle von gleicher Länge auf. Sollte nur benutzt werden, wenn die Variable gleichverteilt ist.
-    - `style = quantile`: Teilt die Variable in Quantile auf. Somit sind in jedem Intervall gleich viele Beobachtungen. 
-    - `style = jenks`: Identifiziert Gruppen mit ähnlichen Werten und maximiert den Unterschied zwischen ihnen.
+    - `style = equal`: Teilt die Variable in Intervalle von gleicher Länge auf.
+       Sollte nur benutzt werden, wenn die Variable gleichverteilt ist.
+    - `style = quantile`: Teilt die Variable in Quantile auf.
+       Somit sind in jedem Intervall gleich viele Beobachtungen. 
+    - `style = jenks`: Identifiziert Gruppen mit ähnlichen Werten und
+       maximiert den Unterschied zwischen ihnen.
     - `style = cont`: Stellt viele Farben über eine kontinuierliche Palette dar.
     - `style = cat`: Färbt bei kategorialen Daten jede Kategorie individuell ein.
 

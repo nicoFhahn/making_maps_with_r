@@ -66,6 +66,7 @@ Folgende Datensätze wurden von Kaggle gedownloadet:
   * honey: Daten über die Honigproduktion in den USA von 1998-2012 (https://www.kaggle.com/jessicali9530/honey-production)
   * accidents: Autounfälle in UK von 2005-2017 (https://www.kaggle.com/tsiaras/uk-road-safety-accidents-and-vehicles)
   * abbreviations: Abkürzungen der Staaten in den USA (https://www.kaggle.com/giodev11/usstates-dataset)
+  * us_energy_census: Energiedaten über die USA (https://www.kaggle.com/lislejoem/us_energy_census_gdp_10-14)
 
 Das europäische Höhenraster stammt von der Europäischen Umweltbehörde: https://www.eea.europa.eu/data-and-maps/data/digital-elevation-model-of-europe
 

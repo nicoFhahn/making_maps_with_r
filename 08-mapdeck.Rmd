@@ -6,7 +6,6 @@ output: html_document
 ---
 
 ```{r, include=FALSE, eval = FALSE}
-# token <- "pk.eyJ1Ijoibmljb2hhaG4iLCJhIjoiY2p2YzU4ZWNiMWY4ZTQ2cGZsZHB5cDJzZiJ9.Sg3fJKvEhfkuhKx7aBBjZA"
 flights_denver <- as.data.frame(read_csv("datasets/denver.csv"))
 roads_hamburg <- read_sf("datasets/hamburg.shp")
 bakeries <- read_sf("datasets/bakeries.kml")
