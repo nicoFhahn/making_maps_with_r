@@ -58,7 +58,7 @@ cities <- st_intersection(cities, st_union(europe_shape))
 ```
 
 # Karten mit mapview
-Das **mapview** Paket wurde mit dem Ziel erstellt schnell interaktive Karten zu erstellen. Die wichtigste Funktion stellt dabei `mapview()` dar, mit der die Karten erstellt werden. Mit dem Argument `zcol` kann bestimmt werden, nach welcher Variable die Elemente eingefärbt werden sollen. Basierend auf den Farben der einzelnen Elemente der Karte wird automatisch eine Hintergrundkarte ausgewählt.
+Das **mapview** Paket wurde mit dem Ziel erstellt, schnell interaktive Karten zu erstellen. Die wichtigste Funktion stellt dabei `mapview()` dar, mit der die Karten generiert werden. Mit dem Argument `zcol` kann bestimmt werden, nach welcher Variable die Elemente eingefärbt werden sollen. Basierend auf den Farben der einzelnen Elemente der Karte wird automatisch eine Hintergrundkarte ausgewählt.
 
 ```{r, fig.align="center", fig.cap="Arbeitslosenquote in Bayern, 2015", fig.height=9, eval=FALSE}
 mapview(bavaria, zcol = "Arbeitslosenquote")
@@ -67,7 +67,7 @@ mapview(bavaria, zcol = "Arbeitslosenquote")
 htmltools::tags$iframe(src = "html_plots/mapview_1.html", width = "700px", height = "700px")
 ```
 
-Mit dem Argument `at` könnten noch eigene Intervallgrenzen definiert werden, basierend auf denen eingefärbt werden soll.
+Mit dem Argument `at` könnten noch eigene Intervallgrenzen definiert werden, auf denen basierend eingefärbt werden soll.
 Um mehrere Karten gleichzeitig zu visualisieren, können mehrere `mapview()` Funktionen mit `+` verbunden werden. So kann die europäische Höhenrasterkarte aus Kapitel 2 reproduziert werden:
 
 ```{r, fig.align="center", fig.cap="Mehrere Ebenen übereinander", warning=FALSE, message=FALSE, fig.height=9, eval=FALSE}
@@ -79,7 +79,7 @@ mapview(europe_raster, legend = FALSE) +
 htmltools::tags$iframe(src = "html_plots/mapview_2.html", width = "700px", height = "700px")
 ```
 
-Bei dieser Karte fallen direkt mehrere Sachen auf. Es wird das komplette Shapefile dargestellt, nicht nur die Gebiete innerhalb des Rasters. So werden unteranderem Spitzbergen und die französischen Überseegebiete dargestellt. Mit `cex` wurde festgelegt, dass die Größe der Punkte auf der Population der jeweiligen Städte basiert und mit `alpha.regions` wurde die Transparenz der Polygone reduziert. Rechts unten kann auf *cities*, *europe_shape* oder *europe_raster* geklickt werden, um einen dieser Bereich zu fokusieren. Mit einem Klick auf eine der Städte oder eines der Länder öffnet sich ein Popup in dem weitere Informationen zu der Stadt beziehungsweise dem Land stehen. 
+Bei dieser Karte fallen direkt mehrere Sachen auf. Es wird das komplette Shapefile dargestellt, nicht nur die Gebiete innerhalb des Rasters. So werden unter anderem Spitzbergen und die französischen Überseegebiete dargestellt. Mit `cex` wurde festgelegt, dass die Größe der Punkte auf der Population der jeweiligen Städte basiert und mit `alpha.regions` wurde die Transparenz der Polygone reduziert. Rechts unten kann auf *cities*, *europe_shape* oder *europe_raster* geklickt werden, um einen dieser Bereiche zu fokusieren. Mit einem Klick auf eine der Städte oder eines der Länder öffnet sich ein Popup in dem weitere Informationen zu der Stadt beziehungsweise dem Land stehen. 
 Wird zusätzlich zu `zcol` das Argument `burst = TRUE` verwendet, wird für jeden einzigartigen Wert der gewählten Variable eine einzelne Ebene erstellt, die fokusiert oder ausgeblendet werden kann. Mit `col.regions` kann eine Palette ausgewählt werden.
 
 ```{r, fig.align="center", fig.cap="Flughäfen und Autobahnen in Bayern", fig.height=9, eval=FALSE}
@@ -92,7 +92,7 @@ mapview(autobahn, color = "red", lwd = 3,
 htmltools::tags$iframe(src = "html_plots/mapview_3.html", width = "700px", height = "700px")
 ```
 
-Mit den Funktionen `popupTable()` und `popupGraph()` aus dem **leafpop** Paket kann bestimmt werden welche Variablen in dem Popup erscheinen sollen oder einen Graph anzeigen.
+Mit den Funktionen `popupTable()` und `popupGraph()` aus dem **leafpop** Paket kann bestimmt werden, welche Variablen in dem Popup erscheinen sollen oder einen Graph anzeigen.
 
 ```{r, fig.align="center", fig.cap="Benutzerdefinierte Popups", fig.height=9, eval=FALSE}
 mapview(bavaria, zcol = "Name", col.regions = brewer.pal(7, "Dark2"),

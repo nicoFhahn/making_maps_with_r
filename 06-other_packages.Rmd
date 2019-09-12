@@ -69,12 +69,12 @@ bakeries <- read_sf("datasets/bakeries.kml")
 ```
 
 # Karten mit ggplot2 und ggspatial
-**ggplot2** ist eins der am häufigsten benutzten Pakete zur Datenvisualisierung in R. Es wird hauptsächlich in Verbindung mit normalen Daten verwendet, kann aber auch zur Darstellung von geographischen Daten verwendet werden. Um die Funktionalität zu erweitern, kann zusätzlich das Paket **ggspatial** verwendet werden. Dieses wurde entwickelt um  geographische Objekte in **ggplot2** Ebene zu verwandeln. Dies beinhaltet Vektor-, Rasterdaten und Hintergrundkarten. Um Geodaten in **ggplot2** hinzuzufügen können die Funktionen `geom_sf`, `geom_sf_label` und `geom_sf_text` verwendet werden.
+**ggplot2** ist eines der am häufigsten benutzten Pakete zur Datenvisualisierung in R. Es wird hauptsächlich in Verbindung mit normalen Daten verwendet, kann aber auch zur Darstellung von geographischen Daten benutzt werden. Um die Funktionalität zu erweitern, kann zusätzlich das Paket **ggspatial** genutzt werden. Dieses wurde entwickelt, um  geographische Objekte in **ggplot2** Ebene zu verwandeln. Dies beinhaltet Vektor-, Rasterdaten und Hintergrundkarten. Um Geodaten in **ggplot2** hinzuzufügen, können die Funktionen `geom_sf()`, `geom_sf_label()` und `geom_sf_text()` verwendet werden.
 ```{r, fig.align="center", fig.cap="Karte mit ggplot2"}
 ggplot(data = honey2008) +
   geom_sf(aes(fill = Price_per_lb))
 ```
-Mit `ggspatial` kann vorallem das Drumherum der Karte verändert werden. Es kann, wie auch in **tmap**, eine Maßstabsleiste, ein Kompass und eine Hintergrundkarte hinzugefügt werden:
+Mit `ggspatial` kann vorallem das Layout der Karte verändert werden. Es kann, wie auch in **tmap**, eine Maßstabsleiste, ein Kompass und eine Hintergrundkarte hinzugefügt werden:
 ```{r, message=FALSE, warning=FALSE, fig.align="center", fig.cap="Verwendung von ggplot2 und ggspatial"}
 ggplot(data = honey2008) +
   annotation_map_tile(type = "stamenwatercolor") +
@@ -84,7 +84,7 @@ ggplot(data = honey2008) +
   annotation_north_arrow(location = "br", which_north = "true") 
 ```
 
-Timo Grossenbacher zeigt in seinem Blog wie man mit **gplot2** leicht zu interpretierende Karten gestalten kann:
+Timo Grossenbacher zeigt in seinem Blog, wie man mit **gplot2** leicht zu interpretierende Karten gestalten kann:
 
 ```{r, warning=FALSE,message=FALSE,include=FALSE}
 theme_map <- function(...) {
