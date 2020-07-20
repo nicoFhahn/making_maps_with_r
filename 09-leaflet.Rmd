@@ -6,8 +6,8 @@ output: html_document
 ---
 
 # Karten mit leaflet
-**leaflet** ist eine open-source JavaScript-Bibliothek mit der dynamische Onlinekarten erstellt werden. Das gleichnamige R Paket ermöglicht es diese Art von Karten auch in R zu erstellen. Die Syntax ist identisch zur **mapdeck** Syntax. Zuerst wird die Funktion `leaflet()` aufgerufen, gefolgt von verschiedenen Ebenen mit `add*()`. Auch hier wird der Pipe Operator `%>%` verwendet, um die einzelnen Funktionen miteinander zu verknüpfen.
-Um Punktdaten darzustellen können die Funktionen `addMarkers()`, `addCircleMarkers()` und `addAwesomeMarkers()` verwendet werden, für Polygondaten `addPolygons()`, für `LINESTRING` Geometrien `addPolylines()` und für Rasterdaten `addRasterImage()`. Das `label` Argument kann bei diesen verwendet werden, um eine Box über dem Marker anzuzeigen, wenn der Benutzer seinen Mauszeiger darüber bewegt. Mit `addTiles()` und `addProvidersTiles()` können Hintergrundkarten hinzugefügt werden, mit `addLegend()` eine Legende. **leaflet** bietet die Möglichkeit, mehrere Hintergrundkarten zu definieren und eine Auswahlfläche hinzuzufügen, um zwischen diesen zu entscheiden. Dafür müssen mehrere `addProvidersTiles()` Funktionen miteinander verknüpft werden und eine Kontrollbox mit `addLayersControl()` hinzugefügt werden.
+**leaflet** ist eine open-source JavaScript-Bibliothek mit der dynamische Onlinekarten erstellt werden. Das gleichnamige R Paket ermöglicht es, diese Art von Karten auch in R zu erstellen. Die Syntax ist identisch zur **mapdeck** Syntax. Zuerst wird die Funktion `leaflet()` aufgerufen, gefolgt von verschiedenen Ebenen mit `add*()`. Auch hier wird der Pipe Operator `%>%` verwendet, um die einzelnen Funktionen miteinander zu verknüpfen.
+Um Punktdaten darzustellen, können die Funktionen `addMarkers()`, `addCircleMarkers()` und `addAwesomeMarkers()` verwendet werden, für Polygondaten `addPolygons()`, für `LINESTRING` Geometrien `addPolylines()` und für Rasterdaten `addRasterImage()`. Das `label` Argument kann bei diesen verwendet werden, um eine Box über dem Marker anzuzeigen, wenn der Benutzer seinen Mauszeiger darüber bewegt. Mit `addTiles()` und `addProvidersTiles()` können Hintergrundkarten hinzugefügt werden, mit `addLegend()` eine Legende. **leaflet** bietet die Möglichkeit, mehrere Hintergrundkarten zu definieren und eine Auswahlfläche hinzuzufügen, um zwischen diesen zu entscheiden. Dafür müssen mehrere `addProvidersTiles()` Funktionen miteinander verknüpft werden und eine Kontrollbox mit `addLayersControl()` hinzugefügt werden.
 ```{r, include = FALSE}
 library(sf)
 library(readr)
@@ -92,7 +92,7 @@ leaflet() %>%
 htmltools::tags$iframe(src = "html_plots/leaflet_1.html", width = "700px", height = "700px")
 ```
 
-Um eine bestimmte Farbpalette für die Visualisierung einzelner Elemente zu verwenden, können die Helferfunktionen `colorNumeric()`, `colorBin()`, `colorQuantile()` und `colorFactor()` übergeben werden. Diese benötigen die Farbcodes der Palette (`palette`) und alle möglichen Werte die dargestellt werden können (`domain`).
+Um eine bestimmte Farbpalette für die Visualisierung einzelner Elemente zu verwenden, können die Helferfunktionen `colorNumeric()`, `colorBin()`, `colorQuantile()` und `colorFactor()` übergeben werden. Diese benötigen die Farbcodes der Palette (`palette`) und alle möglichen Werte, die dargestellt werden können (`domain`).
 Mit `addMiniMap()` kann eine kleine Karte zu der großen hinzugefügt werden.
 
 ```{r, include = FALSE}
@@ -169,7 +169,7 @@ leaflet() %>%
 htmltools::tags$iframe(src = "html_plots/leaflet_2.html", width = "700px", height = "700px")
 ```
 
-Eine Erweiterung des **leaflet** Pakets ist **leaflet.extras**. Mit diesem lassen sich beispielsweise Heatmaps darstellen. Mit `addMeasure()` wird hier noch ein Maßband hinzugefügt, mit dem Distanz zwischen zwei Punkten oder die Fläche zwischen mehreren Punkten berechnet werden kann.
+Eine Erweiterung des **leaflet** Pakets ist **leaflet.extras**. Mit diesem lassen sich beispielsweise Heatmaps darstellen. Mit `addMeasure()` wird hier noch ein Maßband hinzugefügt, mit dem die Distanz zwischen zwei Punkten oder die Fläche zwischen mehreren Punkten berechnet werden kann.
 
 ```{r, include = FALSE}
 points_df <- read_csv("leaflet_data/points_df_3.csv")
@@ -284,7 +284,7 @@ leaflet() %>%
 htmltools::tags$iframe(src = "html_plots/leaflet_js.html", width = "700px", height = "700px")
 ```
 
-JavaScript kann auch verwendet werden um Punktdaten zu Clustern zusammenzufassen, die bei einem Klick auf das jeweilige Cluster expandieren:
+JavaScript kann auch verwendet werden, um Punktdaten zu Clustern zusammenzufassen, die bei einem Klick auf das jeweilige Cluster expandieren:
 
 ```{r, eval=FALSE}
 leaflet() %>% 
@@ -327,3 +327,7 @@ leaflet() %>%
 ```{r, echo=FALSE}
 htmltools::tags$iframe(src = "html_plots/leaflet_js2.html", width = "700px", height = "700px")
 ```
+
+
+## Weiterführende Links
+Für mehr Informationen zu der Verwendung von **leaflet** siehe https://rstudio.github.io/leaflet/. [@leafletlink]

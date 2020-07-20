@@ -44,7 +44,7 @@ bavaria$Ort <- as.character(bavaria$Ort)
 ```
 
 # Interaktive Karten
-Ein Nachteil von statischen Karten ist, dass diese immer dasselbe abbilden. Damit ist gemeint, es wird nur ein Bereich gezeigt und alle Informationen werden direkt dargestellt. Interaktive Karten verbessern normale Karten dahingegen, dass sie dem Betrachter die Möglichkeit geben das Aussehen der Karten zu beeinflussen und zusätzliche Informationen bereitstellen können. Die am häufigsten vorkommende Art von Interaktivität ist das verschieben und zoomen der dargestellten Karte und das Anzeigen zusätzlicher Informationen bei dem Klick auf einzelne geometrische Objekte. In **tmap** kann durch die Funktion `tmap_mode("view")` zu jeder Karte Interaktivität hinzugefügt werden. Mit `tmap_mode("plot")` wird diese wieder entfernt.
+Ein Nachteil von statischen Karten ist, dass diese immer dasselbe abbilden. Damit ist gemeint, es wird nur ein Bereich gezeigt und alle Informationen werden direkt dargestellt. Interaktive Karten verbessern normale Karten dahingegend, dass sie dem Betrachter die Möglichkeit geben, das Aussehen der Karten zu beeinflussen und zusätzliche Informationen bereitstellen können. Die am häufigsten vorkommende Art von Interaktivität ist das Verschieben und Zoomen der dargestellten Karte und das Anzeigen zusätzlicher Informationen bei dem Klick auf einzelne geometrische Objekte. In **tmap** kann durch die Funktion `tmap_mode("view")` zu jeder Karte Interaktivität hinzugefügt werden. Mit `tmap_mode("plot")` wird diese wieder entfernt.
 ```{r, fig.align="center", fig.cap="Interaktive Bayernkarte",eval=FALSE}
 tmap_mode("view")
 tm_shape(bavaria) + tm_polygons(col = "Bevoelkerungsentwicklung", midpoint = 0)
@@ -52,7 +52,7 @@ tm_shape(bavaria) + tm_polygons(col = "Bevoelkerungsentwicklung", midpoint = 0)
 ```{r, echo=FALSE}
 htmltools::tags$iframe(src = "html_plots/tmap_1.html", width = "700px", height = "700px")
 ```
-Alternativ kann die Karte auch durch `tmap_leaflet()` erstellt werden. Wie zu erkennen ist, kann bei der interaktiven Karten zwischen mehreren Hintergrundkarten gewählt werden. Um eine bestimmte Karten als Hintergrund zu verwenden, kann die Funktion `tm_basemap()` verwendet werden.
+Alternativ kann die Karte auch durch `tmap_leaflet()` erstellt werden. Wie zu erkennen ist, kann bei der interaktiven Karte zwischen mehreren Hintergrundkarten gewählt werden. Um eine bestimmte Karte als Hintergrund zu verwenden, kann die Funktion `tm_basemap()` verwendet werden.
 ```{r, fig.align="center", fig.cap="Andere Hintergrundkarte", eval=FALSE}
 tm_shape(bavaria) + tm_polygons(col = "Bevoelkerungsentwicklung", midpoint = 0) +
   tm_basemap("Stamen.Watercolor")
@@ -101,7 +101,7 @@ accidents_m <- st_intersects(london, accidents)
 accidents <- accidents[unlist(accidents_m), ]
 ```
 
-Jetzt muss nur noch die Karte dargestellt werden. Dafür wird zuerst die Variable `Light_Conditions` für eine schönere Legende sortiert, ehe die Karte geplottet wird. Jeder Punkt stellt einen Unfall dar und bei einem Klick darauf werden mehr Informationen dargestellt.
+Jetzt muss nur noch die Karte dargestellt werden. Dafür wird zuerst die Variable `Light_Conditions` für eine schönere Legende sortiert, ehe die Karte geplottet wird. Jeder Punkt stellt einen Unfall dar und bei einem Klick darauf, werden mehr Informationen dargestellt.
 
 ```{r, fig.align="center", fig.cap="center", eval=FALSE}
 # do some ordering for the legend
@@ -126,3 +126,5 @@ map_london
 htmltools::tags$iframe(src = "html_plots/tmap_4.html", width = "700px", height = "700px")
 ```
 
+## Weiterführende Links
+Für mehr Informationen zu der Verwendung von **tmap** siehe https://geocompr.robinlovelace.net/adv-map.html. [@lovelace2019geocomputation]

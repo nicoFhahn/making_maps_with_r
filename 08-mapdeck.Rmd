@@ -6,15 +6,14 @@ output: html_document
 ---
 
 ```{r, include=FALSE, eval = FALSE}
-token <- "pk.eyJ1Ijoibmljb2hhaG4iLCJhIjoiY2p2YzU4ZWNiMWY4ZTQ2cGZsZHB5cDJzZiJ9.Sg3fJKvEhfkuhKx7aBBjZA"
 flights_denver <- as.data.frame(read_csv("datasets/denver.csv"))
 roads_hamburg <- read_sf("datasets/hamburg.shp")
 bakeries <- read_sf("datasets/bakeries.kml")
 ```
 
 # Karten mit mapdeck
-**mapdeck** ist ein R-Paket mit dem interaktive Karten unter Verwendung von *mapbox GL* und *Deck.gl* erstellt werden können. Mapbox ist eine Standortdaten Plattform mit der verschiedene Applikationen erstellt werden können. Deck.gl ist ein Framework zur Visualisierung großer Datensätze. Für die Verwendung des Pakets wird allerdings ein Mapbox-Token benötigt, der mit `set_token("token")` gesetzt wird. Alternativ kann diese auch bei jeder Grafik manuell gesetzt werden. Um einen solchen Token zu erhalten, muss ein Konto auf https://www.mapbox.com/ eingerichtet werden.
-Die Syntax von **mapdeck** ähnelt der von **ggplot2** im Sinne davon, dass zu Beginn die Funktion `mapdeck()` aufgerufen wird, gefolgt von verschiedenen Ebene mittels `add_*()`. Anstelle des `+` Operators wird allerdings der Pipe Operator `%>%` verwendet. Mit der Funktion `mapdeck_style()` kann eine von sechs verschiedenen Hintergrundkarten ausgewählt werden. `add_arc()` fügt Bögen hinzu, die von einem Punkt zu einem anderen gehen. Die Punkte können dabei entweder `sfc` Objekte oder numerische Werte sein. Mit `stroke_from` und `stroke_to` kann jeweils eine Variable ausgewählt werden nach der eine Hälfte des Bogens eingefärbt werden soll.
+**mapdeck** ist ein R-Paket mit dem interaktive Karten unter Verwendung von *mapbox GL* und *Deck.gl* erstellt werden können. Mapbox ist eine Standortdaten Plattform, mit der verschiedene Applikationen erstellt werden können. Deck.gl ist ein Framework zur Visualisierung großer Datensätze. Für die Verwendung des Pakets wird allerdings ein Mapbox-Token benötigt, der mit `set_token("token")` gesetzt wird. Alternativ kann diese auch bei jeder Grafik manuell gesetzt werden. Um einen solchen Token zu erhalten, muss ein Konto auf https://www.mapbox.com/ eingerichtet werden.
+Die Syntax von **mapdeck** ähnelt der von **ggplot2** im Sinne davon, dass zu Beginn die Funktion `mapdeck()` aufgerufen wird, gefolgt von verschiedenen Ebenen mittels `add_*()`. Anstelle des `+` Operators wird allerdings der Pipe Operator `%>%` verwendet. Mit der Funktion `mapdeck_style()` kann eine von sechs verschiedenen Hintergrundkarten ausgewählt werden. `add_arc()` fügt Bögen hinzu, die von einem Punkt zu einem anderen gehen. Die Punkte können dabei entweder `sfc` Objekte oder numerische Werte sein. Mit `stroke_from` und `stroke_to` kann jeweils eine Variable ausgewählt werden, nach der eine Hälfte des Bogens eingefärbt werden soll.
 ```{r, fig.cap="Flüge von Denver aus in die einzelnen Bundestaaten, 1987-2008",eval=FALSE}
 ms <- mapdeck_style("dark")
 mapdeck(style = ms, pitch = 45, zoom = 1, token = token) %>%
@@ -56,7 +55,7 @@ htmltools::includeHTML("html_plots/roads_hh_1.html")
 ```
 
 
-Mit `stroke_colour` kann wieder eine Farbe für die Einfärbung der Elemente ausgewählt werden. Mit `palette` kann entweder eine der Paletten aus dem `colourvalues` Paket ausgewählt werden. Die verfügbaren können entweder mit `colourvalues::colour_palettes()` oder `colourvalues::show_colours()` angezeigt werden. Alternativ kann auch eine eigene Farbmatrix übergeben werden, wie in dem folgenden Beispiel.
+Mit `stroke_colour` kann wieder eine Farbe für die Einfärbung der Elemente bestimmt werden. Mit `palette` kann entweder eine der Paletten aus dem `colourvalues` Paket ausgewählt werden. Die verfügbaren können entweder mit `colourvalues::colour_palettes()` oder `colourvalues::show_colours()` angezeigt werden. Alternativ kann auch eine eigene Farbmatrix übergeben werden, wie in dem folgenden Beispiel.
 
 ```{r, fig.cap="Straßennetz in Hamburg mit eigener Farbmatrix", eval = FALSE}
 mapdeck(style = ms, token = token) %>%
@@ -71,7 +70,7 @@ htmltools::includeHTML("html_plots/roads_hh_2.html")
 ```
 
 
-Mit `add_grid` kann eine gridbasierte Heatmap erstellt werden. Basierend auf der Anzahl der Elemente innerhalb einzelner Zellen werden verschiedene hohe Balken dargestellt. Die Zellgröße in Metern kann mit `cell_size` festgelegt werden und der Höhenmultiplikator mit `elevation_scale`.
+Mit `add_grid` kann eine gridbasierte Heatmap erstellt werden. Basierend auf der Anzahl der Elemente innerhalb einzelner Zellen werden verschieden hohe Balken dargestellt. Die Zellgröße in Metern kann mit `cell_size` festgelegt werden und der Höhenmultiplikator mit `elevation_scale`.
 
 ```{r, fig.cap="Anzahl Bäckereien in Europa", eval = FALSE}
 mapdeck(style = ms, pitch = 45, token = token) %>%
@@ -84,3 +83,8 @@ mapdeck(style = ms, pitch = 45, token = token) %>%
 ```{r, echo=FALSE, fig.cap="Bakeries in europe"}
 htmltools::includeHTML("html_plots/bakeries.html")
 ```
+
+
+
+## Weiterführende Links
+Für mehr Informationen zu der Verwendung von **mapdeck** siehe https://symbolixau.github.io/mapdeck/index.html. [@mapdecklink]
