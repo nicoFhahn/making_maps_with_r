@@ -10,13 +10,13 @@ Ein Großteil der Daten, die in dieser Arbeit verwendet wurden, stammen aus Open
 Die bayerischen Verwaltungsgebiete wurden von https://opendata.bayern.de gedownloadet. Inkar ist ein Angebot der statistischen Ämter des Bundes und der Länder. Auf https://www.inkar.de/ können Datenbankabfragen zu verschiedenen Kennzahlen und Indikatoren erstellt werden. Diese wurden wie folgt mit den Shapefiles vereint:
 ```{r, eval=FALSE}
 # Inkar Datensatz laden
-eco <- read_csv("datasets/eco.csv")
+eco <- read_csv("../datasets/eco.csv")
 # Shapefiles laden
-shapes <- read_sf("datasets/lkr_ex.shp")
+shapes <- read_sf("../datasets/lkr_ex.shp")
 # Geocoding. Auskommentiert, da es wegen Request Limit ab und zu nicht funktioniert
 # codes <- lapply(eco$Raumeinheit, geo_code)
 # stattdessen environment laden
-load("datasets/codes.RData")
+load("../datasets/codes.RData")
 # In Punkte umwandeln
 points <- lapply(codes, function(x, ...) {
   if (length(x) > 0) {
@@ -56,7 +56,7 @@ all(unlist(lapply(seq_len(nrow(eco)), function(x, ...) {
 # Eco erhält Polygon shapefiles
 st_geometry(eco) <- shapes$geometry
 eco <- eco[, c(2, 3, 12, 35, 38, 43, 51, 63, 80, 97, 110)]
-write_sf(eco, "datasets/bavaria.shp")
+write_sf(eco, "../datasets/bavaria.shp")
 ```
 
 Im Weiteren wurde dieser Datensatz immer als `bavaria.shp` geladen.
@@ -92,7 +92,7 @@ flights_denver <- do.call(rbind, flights_denver)
 flights_denver_g <- plyr::ddply(flights_denver, .(Dest), plyr::summarize,
                           no_of_flights = length(Dest))
 # Flughäfen laden
-airports <- read_csv("datasets/airports.csv")
+airports <- read_csv("../datasets/airports.csv")
 # Spaltennamen für join ändern
 colnames(flights_denver_g)[1] <- "iata"
 # Flughafen und Flüge joinen
@@ -106,7 +106,7 @@ flights_denver_states <- plyr::ddply(flights_denver_g, .(state), plyr::summarize
 flights_denver_states$lat_denver <- airports[airports$iata == "DEN", ]$lat
 flights_denver_states$long_denver <- airports[airports$iata == "DEN", ]$long
 # speichern
-write_csv(flights_denver_states, "datasets/denver.csv")
+write_csv(flights_denver_states, "../datasets/denver.csv")
 ```
 
 Von NaturalEarth wurde ein Datensatz mit den ShapeFiles der Welt heruntergeladen: https://www.naturalearthdata.com/downloads/50m-cultural-vectors/50m-admin-0-countries-2/

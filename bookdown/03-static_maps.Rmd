@@ -7,7 +7,7 @@ output: html_document
 ```{r, echo=FALSE, include=FALSE}
 tmap_mode("plot")
 # load shapefiles for bavaria
-bavaria <- st_read("datasets/bavaria.shp")
+bavaria <- st_read("../datasets/bavaria.shp")
 # nicer colnames
 colnames(bavaria) <- c(
   "Ort", "Art", "BIP je Einwohner", "Durchschnittsalter",
@@ -41,9 +41,9 @@ bavaria$Bevoelkerungsentwicklung <- as.numeric(
   as.character(bavaria$Bevoelkerungsentwicklung)
 )
 # load europe elevation raster
-europe_raster <- raster("datasets/elevation1x1_new.tif")
+europe_raster <- raster("../datasets/elevation1x1_new.tif")
 # load europe shapefiles
-europe_shape <- read_sf("datasets/ne_50m_admin_0_countries/ne_50m_admin_0_countries.shp")
+europe_shape <- read_sf("../datasets/ne_50m_admin_0_countries/ne_50m_admin_0_countries.shp")
 europe_shape <- europe_shape[europe_shape$CONTINENT == "Europe",]
 # cities above populaiton of 1 million
 cities <- world.cities[world.cities$pop >= 1000000, ]
@@ -51,11 +51,11 @@ cities <- cities %>% st_as_sf(coords = c("long", "lat"), crs = 4326) %>%
   st_cast("POINT")
 cities <- st_intersection(cities, st_union(europe_shape))
 europe_shape <- st_cast(europe_shape, "MULTILINESTRING")
-gemeinden <- read_sf("datasets/gmd_ex.shp")
+gemeinden <- read_sf("../datasets/gmd_ex.shp")
 rosenheim <- gemeinden[str_detect(gemeinden$BEZ_KRS, "Rosenheim"), ]
 
-honey <- read_csv("datasets/honeyproduction.csv")
-abrev <- read_xlsx("datasets/abbrev.xlsx")
+honey <- read_csv("../datasets/honeyproduction.csv")
+abrev <- read_xlsx("../datasets/abbrev.xlsx")
 ```
 
 
@@ -201,7 +201,7 @@ Bei den Paletten aus den beiden Paketen kann zwischen drei Arten von Paletten un
 Alternativ kann auch eine eigene Palette übergeben werden, hierfür könnten HEX-Codes verwendet werden.
 Bei der Farbwahl sollte auf weiteres geachtet werden: Farben übertragen Gefühle. Beispielhaft wird rot mit negativen Sachen assoziiert, während grün mit positiven Dingen in Verbindung gebracht wird. Dieses Beispiel kann auch auf geographische Merkmale erweitert werden. Grün steht für Wälder und blau für Gewässer. Außerdem sollte bei Verwendung eine Palette klar sein, welche Farbe für niedrigere beziehungsweise höhere Werte steht. Damit eine möglichst breite Masse an Menschen eine Karte interpretieren kann, sollte wenn möglich auch darauf geachtet werden, dass farbenblinde Menschen die Unterschiede zwischen den Klassen identifizieren können.
 ```{r, fig.align="center",fig.cap="Sequentielle, divergierende und kategoriale Palette", echo=FALSE}
-image_read("datasets/palette.png")
+image_read("../datasets/palette.png")
 ```
 
 ## Layouts
@@ -209,14 +209,14 @@ Außer der Möglichkeit, die Karte an sich zu verändern, existiert die Möglich
 ```{r, eval=FALSE, warning=FALSE}
 tm_shape(bavaria) +
   tm_polygons(col = "Art", pal = c("white", "skyblue")) +
-  tm_logo("datasets/bavaria.png", height = 2) +
+  tm_logo("../datasets/bavaria.png", height = 2) +
   tm_scale_bar(position = c("left", "bottom"), width = 0.15) +
   tm_compass(position = c("left", "top"), size = 2)
 ```
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align="center", fig.cap="Bayernkarte mit zusätzlichen Elementen"}
 tm_shape(bavaria) + tm_polygons(col = "Art", pal = c("white", "skyblue")) +
-  tm_logo("datasets/bavaria.png", height = 2) + tm_scale_bar(position = c("left", "bottom"), width = 0.15) +
+  tm_logo("../datasets/bavaria.png", height = 2) + tm_scale_bar(position = c("left", "bottom"), width = 0.15) +
   tm_compass(position = c("left", "top"), size = 2)
 
 ```
@@ -414,10 +414,10 @@ us_states <- us_states[us_states$NAME != "District of Columbia", ]
 honey <- merge(honey, us_states[, 7:8], by = "State", all.y = TRUE)
 honey <- st_as_sf(honey)
 honey <- st_transform(honey, 4326)
-write_sf(honey, "datasets/honey.shp")
+write_sf(honey, "../datasets/honey.shp")
 ```
 ```{r, eval = FALSE}
-honey <- read_sf("datasets/honey.shp")
+honey <- read_sf("../datasets/honey.shp")
 colnames(honey)[3:8] <- c("Number_of_colonies", "Yield_per_colony",
                           "Total_production", "Stocks","Price_per_lb",
                           "Value_of_production"
@@ -429,7 +429,7 @@ honey_animation <- tm_shape(honey) + tm_polygons(col = "Price_per_lb", style = "
 tmap_animation(honey_animation, filename = "honey.gif", delay = 50, width = 1181, height = 500)
 ```
 ```{r, fig.align="center",fig.cap="Animierte Karte", echo=FALSE}
-image_resize(image_read("datasets/honey.gif"), "700x1181")
+image_resize(image_read("../datasets/honey.gif"), "700x1181")
 ```
 
 ## Weiterführende Links

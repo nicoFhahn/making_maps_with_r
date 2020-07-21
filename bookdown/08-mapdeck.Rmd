@@ -6,9 +6,9 @@ output: html_document
 ---
 
 ```{r, include=FALSE, eval = FALSE}
-flights_denver <- as.data.frame(read_csv("datasets/denver.csv"))
-roads_hamburg <- read_sf("datasets/hamburg.shp")
-bakeries <- read_sf("datasets/bakeries.kml")
+flights_denver <- as.data.frame(read_csv("../datasets/denver.csv"))
+roads_hamburg <- read_sf("../datasets/hamburg.shp")
+bakeries <- read_sf("../datasets/bakeries.kml")
 ```
 
 # Karten mit mapdeck

@@ -56,7 +56,7 @@ output$download_drivetime <- downloadHandler(
 )
 ############## OSM TEXT ##############
 url_osm <- a("OSM Wiki.",
-             href = "https://wiki.openstreetmap.org/wiki/Map_features"
+  href = "https://wiki.openstreetmap.org/wiki/Map_features"
 )
 osm <- "Data downloaded from the OpenStreetMap API.
 For more informations about the API, have a look at the "

@@ -1,5 +1,4 @@
-﻿WICHTIG: vor beginn die files aus road_network_zipped in road_network extrahieren. 
-AUCH WICHTIG: in road_network darf keine ordner struktur entstehen. alles in den root ordner
+﻿Start dauert bisschen, da alles geladen werden muss,
 
 
 download und analyses von openstreetmap daten
@@ -29,7 +28,7 @@ tab 2:
 
 		getis-ord: statistik die angibt ob ein punkt ein hot- order cold-sport ist. also ob sich viele punkte
 		der selben art in der nähe um diesen befinden. die analyse kann mit der auswahl weiterer relevanter gebäude
-		in einem bestimmten umkreis ausgeweitert werden.
+		in einem bestimmten umkreis ausgeweitert werden. Dauert kurz
 
 	außerdem besteht hier die möglichkeit sich das straßennetzwerk mit anzeigen zu lassen (falls ort in deutschland ist), dauert dann kurz.
 	würde ich nur verwenden wenn eine stadt ausgewählt ist.

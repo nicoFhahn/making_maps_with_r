@@ -12,10 +12,10 @@ Um Punktdaten darzustellen, können die Funktionen `addMarkers()`, `addCircleMar
 library(sf)
 library(readr)
 library(leaflet)
-coords <- read_csv("leaflet_data/coords_1.csv")
-isochrone <- read_sf("leaflet_data/isochrone_1.shp")
-poly_data <- read_sf("leaflet_data/poly_data_1.shp")
-points <- read_sf("leaflet_data/points_1.shp")
+coords <- read_csv("../datasets/leaflet_data/coords_1.csv")
+isochrone <- read_sf("../datasets/leaflet_data/isochrone_1.shp")
+poly_data <- read_sf("../datasets/leaflet_data/poly_data_1.shp")
+points <- read_sf("../datasets/leaflet_data/points_1.shp")
 icon.fa <- makeAwesomeIcon(
   icon = "flag", markerColor = "red",
   library = "fa",
@@ -96,9 +96,9 @@ Um eine bestimmte Farbpalette für die Visualisierung einzelner Elemente zu verw
 Mit `addMiniMap()` kann eine kleine Karte zu der großen hinzugefügt werden.
 
 ```{r, include = FALSE}
-intersect <- read_sf("leaflet_data/intersect_2.shp")
-points_df <- read_csv("leaflet_data/points_df_2.csv")
-polygons <- read_sf("leaflet_data/polygons_2.shp")
+intersect <- read_sf("../datasets/leaflet_data/intersect_2.shp")
+points_df <- read_csv("../datasets/leaflet_data/points_df_2.csv")
+polygons <- read_sf("../datasets/leaflet_data/polygons_2.shp")
 ```
 ```{r, fig.align="center", fig.cap="Clustering der Apotheken in München mit DBSCAN Algorithmus", fig.height=9, eval=FALSE}
 # Farbfunktionen definieren
@@ -172,8 +172,8 @@ htmltools::tags$iframe(src = "html_plots/leaflet_2.html", width = "700px", heigh
 Eine Erweiterung des **leaflet** Pakets ist **leaflet.extras**. Mit diesem lassen sich beispielsweise Heatmaps darstellen. Mit `addMeasure()` wird hier noch ein Maßband hinzugefügt, mit dem die Distanz zwischen zwei Punkten oder die Fläche zwischen mehreren Punkten berechnet werden kann.
 
 ```{r, include = FALSE}
-points_df <- read_csv("leaflet_data/points_df_3.csv")
-streets_c <- read_sf("leaflet_data/streets_c_3.shp")
+points_df <- read_csv("../datasets/leaflet_data/points_df_3.csv")
+streets_c <- read_sf("../datasets/leaflet_data/streets_c_3.shp")
 points_df <- points_df %>% st_as_sf(coords = c("longitude", "latitude")) %>% st_set_crs(4326)
 ```
 ```{r, fig.align="center", fig.cap="Heatmap der Apotheken in München mit Straßennetz", fig.height=9, eval=FALSE}

@@ -7,7 +7,7 @@ output: html_document
 
 ```{r setup, include=FALSE, echo=FALSE}
 # load shapefiles for bavaria
-bavaria <- st_read("datasets/bavaria.shp")
+bavaria <- st_read("../datasets/bavaria.shp")
 # nicer colnames
 colnames(bavaria) <- c(
   "Ort", "Art", "BIP je Einwohner", "Durchschnittsalter",
@@ -78,7 +78,7 @@ Interaktive Karten sind auch gut geeignet, um sich einen ersten Überblick über
 In dem folgenden Beispiel werden Unfälle in drei Londoner Stadtteilen in 2017 dargestellt. Zunächst wird der Datensatz geladen und in ein `sf` Objekt verwandelt.
 
 ```{r, message=FALSE, warning=FALSE}
-accidents <- read_csv("datasets/accidents.csv")
+accidents <- read_csv("../datasets/accidents.csv")
 accidents <- accidents %>%
   st_as_sf(coords = c("Longitude", "Latitude"), crs = 4326) %>%
   st_cast("POINT")
@@ -86,7 +86,7 @@ accidents <- accidents %>%
 
 Danach werden Londoner Shapefiles geladen und die Intersections zwischen den beiden Datensätze gesucht.
 ```{r, message=FALSE, warning=FALSE}
-london <- read_sf("datasets/London_Borough_Excluding_MHW.shp") %>%
+london <- read_sf("../datasets/London_Borough_Excluding_MHW.shp") %>%
   st_transform(4326)
 london_union <- st_union(london)
 accidents_m <- st_intersects(london_union, accidents)

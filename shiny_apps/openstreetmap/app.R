@@ -54,7 +54,7 @@ roads <- future_map(
     sep = ""
   ),
   read_sf
- )
+)
 # name the roads
 names(roads) <- c(
   "Sachsen-Anhalt", "Baden-Württemberg", "Bayern", "Berlin",
@@ -62,7 +62,7 @@ names(roads) <- c(
   "Mecklenburg-Vorpommern", "Niedersachsen",
   "Nordrhein-Westfalen", "Rheinland-Pfalz", "Saarland",
   "Sachsen", "Schleswig-Holstein", "Thüringen"
- )
+)
 states <- read_sf("data_sources/vg2500_bld.shp")
 st_crs(states) <- 4326
 Encoding(states$GEN) <- "latin"
