@@ -1,9 +1,3 @@
----
-title: "index"
-author: "Nico Hahn"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
-output: html_document
----
 ```{r, include=FALSE}
 # packages we need
 packages <- c("colourpicker", "plyr", "dplyr", "furrr", "future", "ggplot2", "ggspatial",
