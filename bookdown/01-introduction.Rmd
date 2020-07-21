@@ -1,16 +1,19 @@
 ---
 title: "index"
 author: "Nico Hahn"
-date: "2 8 2019"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: html_document
 ---
 ```{r, include=FALSE}
+# packages we need
 packages <- c("colourpicker", "plyr", "dplyr", "furrr", "future", "ggplot2", "ggspatial",
               "htmltools", "htmlwidgets", "lattice", "leaflet", "leaflet.extras", "leafpop",
               "mapdeck", "magick", "maps", "mapview", "raster", "readr", "readxl",
               "RColorBrewer", "rgdal", "rgeos", "scico", "sf", "spData",
               "stplanr", "stringr", "tmap", "viridis", "bookdown")
+# check which packages are not installed
 not_installed <- packages[!packages %in% installed.packages()[, "Package"]]
+# install missing packages
 if (length(not_installed) > 1) {
   install.packages(not_installed, repos = "https://cran.rstudio.com/" )
 }
@@ -18,11 +21,10 @@ if (!"spDataLarge" %in% installed.packages()[, "Package"]) {
   install.packages("spDataLarge", repos = "https://nowosad.github.io/drat/", type = "source")
 }
 packages <- c(packages, "spDataLarge", "grid")
+# load the packages
 lapply(packages, library, character.only = TRUE)
 ```
 
-# Einführung
-Mit die wichtigsten Aspekte bei der Arbeit mit geographischen Daten sind die Darstellung und Kommunikation der Resultate. Ersteres sollte möglichst kreativ sein, ohne an Intuitivität zu verlieren. Visuelle Effekte helfen dabei, Trends zu verstehen, Ausreißer zu entdecken und Muster aufzudecken. Datenvisualisierung ist essentiell, um große Mengen an Informationen zu analysieren und basierend auf Daten Entscheidungen zu treffen. Bereits bei einem kurzen Blick auf eine Grafik können Trends und Ausreißer gesehen werden. Im Vergleich zu einer großen Excel-Tabelle oder ähnlichem sind visuelle Elemente deutlich effektiver um Trends zu entdecken. Ein wichtiges Teilgebiet der Datenanalyse ist die georäumliche Analyse, also geographische Daten. Um diese zu visualisieren, können in **R** verschiedene Pakete verwendet werden.
-In dieser Arbeit soll es um diese Pakete gehen und auf welche Art und Weise sie Daten darstellen können.
-Bevor es um die einzelnen Pakete geht, werden zunächst die verwendeten Daten vorgestellt und wie diese eventuell manipuliert wurden. In den beiden darauffolgenden Kapiteln wird vorgestellt, wie mit Hilfe des Pakets **tmap** statische und interaktive Karten dargestellt werden können. Danach wird thematisiert, wie mit Hilfe von **shiny** Web-Applikationen erstellt werden können, die bei der Visualisierung geographischer Daten unterstützen. Anschließend werden vier weitere Pakete, mit denen geographische Daten visualisiert werden können, präsentiert: **ggplot2**, **mapview**, **mapdeck** und **leaflet**. Abschließend wird ein kurzes Fazit gezogen, welches Paket für welche Anwendung am besten ist.
-Dieser Arbeit beiliegend sind drei mit **shiny** erstellte Applikationen, mit denen geographische Daten visualisiert werden können.
+# Introduction
+One of the most important aspects of working with geographical data is the presentation and communication of the results. The former should be as creative as possible without losing intuitiveness. Visual effects help to understand trends, discover outliers and uncover patterns. Data visualization is essential for analyzing large amounts of information and making decisions based on data. Trends and outliers can be seen with just a quick glance at a graph. In comparison to a large Excel spreadsheet or similar, visual elements are much more effective in detecting trends. An important part of data analysis is geospatial analysis, i.e. the analysis of geographical data. In order to visualize this data, different packages can be used in **R**.
+This book will deal with these packages and how they can be used to represent geospatial data.
