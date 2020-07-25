@@ -1,8 +1,0 @@
-Fragen:
-  - Wie läuft Abgabe ab?
-  - Was muss alles abgegeben werden?
-  - Flight data auch abgeben? 11 GB immerhin
-  - Passt Zitation so wie es jetzt ist?
-  
-  read me für ganzen ordner reihenfolge z.b.
-  am ende von jedem kapitel link zu hilfeseiten

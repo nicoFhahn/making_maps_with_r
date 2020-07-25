@@ -1,0 +1,428 @@
+```{r, echo=FALSE, include=FALSE}
+tmap_mode("plot")
+# load shapefiles for bavaria
+bavaria <- st_read("../datasets/bavaria.shp")
+# nicer colnames
+colnames(bavaria) <- c(
+  "place", "type", "gdp_per_capita", "mean_age",
+  "pop_density", "unemployment_rate",
+  "employment_rate", "household_income",
+  "students", "pop_development", "geometry"
+)
+# turn values into numeric
+bavaria$gdp_per_capita <- as.numeric(as.character(
+  bavaria$gdp_per_capita
+))
+bavaria$mean_age <- as.numeric(as.character(
+  bavaria$mean_age
+))
+bavaria$pop_density <- as.numeric(as.character(
+  bavaria$pop_density
+))
+bavaria$unemployment_rate <- as.numeric(as.character(
+  bavaria$unemployment_rate
+))
+bavaria$employment_rate <- as.numeric(as.character(
+  bavaria$employment_rate
+))
+bavaria$household_income <- as.numeric(as.character(
+  bavaria$household_income
+))
+bavaria$students <- as.numeric(as.character(
+  bavaria$students
+))
+bavaria$pop_development <- as.numeric(
+  as.character(bavaria$pop_development)
+)
+# load europe elevation raster
+europe_raster <- raster("../datasets/elevation1x1_new.tif")
+# load europe shapefiles
+europe_shape <- read_sf("../datasets/ne_50m_admin_0_countries/ne_50m_admin_0_countries.shp")
+europe_shape <- europe_shape[europe_shape$CONTINENT == "Europe",]
+# cities above populaiton of 1 million
+cities <- world.cities[world.cities$pop >= 1000000, ]
+cities <- cities %>% st_as_sf(coords = c("long", "lat"), crs = 4326) %>%
+  st_cast("POINT")
+cities <- st_intersection(cities, st_union(europe_shape))
+europe_shape <- st_cast(europe_shape, "MULTILINESTRING")
+gemeinden <- read_sf("../datasets/gmd_ex.shp")
+rosenheim <- gemeinden[str_detect(gemeinden$BEZ_KRS, "Rosenheim"), ]
+
+honey <- read_csv("../datasets/honeyproduction.csv")
+abrev <- read_xlsx("../datasets/abbrev.xlsx")
+```
+
+
+# tmap
+Thematic maps are geographical maps in which spatial data distributions are visualized. This pack-age offers a flexible, layer-based, and easy to use approach to create thematic maps, such as choropleths and bubble maps. It is based on the grammar of graphics, and resembles the syntax of **ggplot2**.
+
+## Static Maps with tmap
+Most often, geographical data are displayed using static maps that can be saved as .png or .pdf files. Originally, data could only be visualized in this way in R, but the development of new packages, especially **sp**, has created new possibilities for displaying this data. Despite new methods like interactive maps, static maps are still the main focus of geospatial data visualization in R.
+
+As mentioned above, the syntax of **tmap** is similar to that of **ggplot2**. This includes a strict separation between data and aesthetics. At the beginning, `tm_shape()` is passed a dataset, followed by one or more levels that define the type of display. Examples are `tm_fill()` and `tm_dots()` to plot data as polygons or points.
+```{r, eval=FALSE}
+tm_shape(bavaria) + tm_fill()
+tm_shape(bavaria) + tm_borders()
+tm_shape(bavaria) + tm_polygons()
+```
+```{r, echo=FALSE, fig.cap="A simple example", fig.align="center"}
+bav_1 <- tm_shape(bavaria) +
+  tm_fill()
+
+bav_2 <- tm_shape(bavaria) +
+  tm_borders()
+
+bav_3 <- tm_shape(bavaria) +
+  tm_polygons()
+tmap_arrange(bav_1, bav_2, bav_3, ncol = 3)
+```
+
+The passed object 'bavaria' has the class 'sf' and represents the individual cities and districts of Bavaria. `tm_fill()` fills the individual polygons, resulting in a filled outline of Bavaria. `tm_borders()` draws the borders of the individual polygons and `tm_polygons()` combines the two functions and displays both at the same time. The `+` operator can be used to add additional layers to visualize different types of geospatial data.
+
+With **tmap** objects can not only be plotted but can also be saved as objects of the class 'tmap'.
+```{r}
+# save map as an object
+map_europe <- tm_shape(europe_raster) + tm_raster()
+class(map_europe)
+
+```
+The saved object can be easily extended or retrieved at a later time in the console. Furthermore, additional layers can be added to the object with `tm_shape()`, which allows several maps to be combined into one.
+The following code example is based on the above code, which represents a height grid of Europe. First the border lines of the individual states are added, followed by all cities with more than one million inhabitants.
+```{r}
+map_europe2 <- map_europe + tm_shape(europe_shape) + tm_lines(alpha = 0.3)
+map_europe3 <- map_europe2  + tm_shape(cities) + tm_dots(size = 0.3)
+```
+```{r, echo=FALSE}
+map_europe3 <- map_europe3 + tm_legend(show = FALSE)
+```
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align="center", fig.cap="Use of several layers"}
+map_europe3
+```
+By saving individual maps as objects, they can also be displayed next to or on top of each other using the 'map_arrange()` function.
+```{r, eval=FALSE}
+tmap_arrange(bav_1, bav_2, bav_3, ncol = 3)
+```
+The user is not limited in the number of layers he is able to add. It should be noted, however, that too much information can quickly overwhelm the viewer.
+
+For the previous plots the default aesthetic settings of **tmap** were used. To create visually appealing maps, these can be overwritten. Two main types of map aesthetics exist:
+    - Those that change with the data
+    - Those that do not change with data
+Compared to **ggplot2** no helper function (`aes()`) is used to customize the design of the map. Instead, the arguments are passed directly. Some of the most useful arguments are the fill color (`col`), transparency (`alpha`), line width (`lwd`) and line style (`lty`).
+
+```{r, fig.align="center",fig.cap="Use of various arguments"}
+bav1 <- tm_shape(bavaria) + tm_fill(col = "aquamarine")
+bav2 <- tm_shape(bavaria) + tm_fill(col = "aquamarine", alpha = 0.5)
+bav3 <- tm_shape(bavaria) + tm_polygons(col = "aquamarine", border.col = "darkolivegreen")
+bav4 <- tm_shape(bavaria) + tm_borders(lwd = 2)
+bav5 <- tm_shape(bavaria) + tm_borders(lty = 4)
+bav6 <- tm_shape(bavaria) + tm_polygons(col = "#E2E2E2", border.alpha = 0.5, lwd = 3)
+tmap_arrange(bav1, bav1, bav3, bav4, bav5, bav6, ncol = 3)
+```
+
+Another difference to **ggplot2** is that the variable names must be passed as characters and the `$' operator cannot be used.
+```{r, error=TRUE}
+tm_shape(bavaria) + tm_polygons(col = bavaria$pop_development)
+```
+
+The desired graphic is obtained with the following code:
+```{r, eval=FALSE}
+tm_shape(bavaria) + tm_polygons(col = "pop_development", midpoint = 0)
+```
+```{r, fig.align="center",fig.cap="Population development in Bavaria from 2011 to 2015", echo=FALSE}
+tm_shape(bavaria) + tm_polygons(col = "pop_development",
+                                midpoint = 0) +
+  tm_layout(legend.outside = TRUE)
+```
+
+The `midpoint' argument is used here to use the value 0 as the natural midpoint. The resulting map shows that the population in northern Bavaria is decreasing, while the population around Munich in particular is increasing rapidly.
+```{r, echo=FALSE, fig.align="center", fig.cap = "The same map in base R"}
+pal <- colorRampPalette(c("orange", "green"))
+bavaria$order <- findInterval(bavaria$pop_development, sort(bavaria$pop_development))
+plot(st_geometry(bavaria), col = pal(nrow(bavaria))[bavaria$order])  # works
+
+```
+
+The example of the last two maps shows that **tmap** automatically selects a color palette and intervals. To use other intervals, you can either pass manual bins to the `breaks' argument or use `n' to specify the number of bins.
+```{r, eval = FALSE}
+tm_shape(bavaria) + tm_polygons(col = "mean_age")
+tm_shape(bavaria) + tm_polygons(col = "mean_age", breaks = c(40, 42, 46, 54))
+tm_shape(bavaria) + tm_polygons(col = "mean_age", n = 3)
+```
+```{r, echo = FALSE, fig.align="center",fig.cap="Use of the breaks and n arguments"}
+ba1 <- tm_shape(bavaria) + tm_polygons(col = "mean_age")
+ba2 <- tm_shape(bavaria) + tm_polygons(col = "mean_age",
+                                       breaks = c(40, 42, 46, 54))
+ba3 <- tm_shape(bavaria) + tm_polygons(col = "mean_age", n = 3)
+tmap_arrange(ba1, ba2, ba3, ncol = 3)
+```
+
+An alternative is the 'style' argument. This allows the user to automatically create breaks by specifying algorithms. Among others, the following styles can be passed:
+
+- `style = pretty`: Rounds interval boundaries to whole numbers. Default setting.
+- `style = equal`: Splits the variable into intervals of equal length.
+       Should only be used if the variable follows an uniform distribution.
+- `style = quantile`: Splits the variable into quantiles.
+       Consequently there are the same number of observations in each interval.
+- `style = jenks`: Identifies groups with similar values and
+       maximizes the difference between them.
+- `style = cont`: Displays many colors over a continuous palette.
+- `style = cat`: Colors each category individually for categorical data.
+
+Other possibilities are `cat`, `fixed`, `sd`, `kmeans`, `hclust`, `bclust`, and `fisher`.
+
+```{r, fig.align="center",fig.cap="Unemployment rate in Bayern und Verteilung von Städten und Landkreisen", echo = FALSE, fig.width= 8, fig.height= 8, warning=FALSE, message=FALSE}
+ba4 <- tm_shape(bavaria) + tm_polygons(col = "unemployment_rate", style = "pretty", title = "Aq") + tm_credits('style = "pretty"', size = 1) + tm_layout(inner.margins = 0.1)
+ba5 <- tm_shape(bavaria) + tm_polygons(col = "unemployment_rate", style = "equal", title = "Aq") + tm_credits('style = "equal"', size = 1) + tm_layout(inner.margins = 0.1)
+ba6 <- tm_shape(bavaria) + tm_polygons(col = "unemployment_rate", style = "quantile", title = "Aq") + tm_credits('style = "quantile"', size = 1) + tm_layout(inner.margins = 0.1)
+ba7 <- tm_shape(bavaria) + tm_polygons(col = "unemployment_rate", style = "jenks", title = "Aq") + tm_credits('style = "jenks"', size = 1) + tm_layout(inner.margins = 0.1)
+ba8 <- tm_shape(bavaria) + tm_polygons(col = "unemployment_rate", style = "cont", title = "Aq") + tm_credits('style = "cont"', size = 1) + tm_layout(inner.margins = 0.1)
+ba9 <- tm_shape(bavaria) + tm_polygons(col = "type", style = "cat") + tm_credits('style = "cat"', size = 1) + tm_layout(inner.margins = 0.1)
+tmap_arrange(ba4, ba5, ba6, ba7, ba8, ba9, ncol = 3)
+```
+
+A further possibility to influence the appearance of a map is to choose the colour of the individual classes. The user can do this using the `palette` argument. The name of a palette from the **RColorBrewer** or **Viridis** package can be passed to this argument. If the order of the palette should be reversed, a `-` can be added at the beginning of the character.
+```{r, eval = FALSE}
+tm_shape(bavaria) + tm_polygons(col = "unemployment_rate", palette = "viridis")
+tm_shape(bavaria) + tm_polygons(col = "unemployment_rate", palette = "-viridis")
+```
+```{r, fig.align="center",fig.cap="Reversing a palette", echo = FALSE, warning=FALSE, message=FALSE}
+b1 <- tm_shape(bavaria) + tm_polygons(col = "unemployment_rate", palette = "viridis")
+b2 <- tm_shape(bavaria) + tm_polygons(col = "unemployment_rate", palette = "-viridis")
+tmap_arrange(b1, b2, ncol = 2)
+```
+The palettes from these packages can be divided into three types of palettes:
+    - Sequential pallets: Follow a gradient from light to dark. Should be used for continuous variables.
+    - Diverging pallets: Follow a gradient from dark to light, to dark. Should be used for continuous variables with a natural midpoint (`midpoint`).
+    - Categorical palettes: Easily distinguishable colors, ideal for categorical data
+Alternatively, a custom palette can be passed, for this purpose HEX codes may be used.
+You should pay attention to the selection of your colours: Colors transfer feelings. For example, red is associated with negative things, while green is associated with positive things. This example can also be extended to geographical features. Green is associated with forests and blue with bodies of water. In addition, when using a palette, it should be clear which colour stands for lower or higher values. In order for the widest possible range of people to be able to interpret a map, care should also be taken, if possible, to ensure that colour-blind people can identify the differences between classes.
+```{r, fig.align="center",fig.cap="Sequential, diverging and categorical palettes", echo=FALSE}
+image_read("../datasets/palette.png")
+```
+
+Besides the possibility of changing the map itself, there is also the option of editing other elements of the graphic. With the help of functions like `tm_compass()`, `tm_scale_bar()`, `tm_logo()`, `tm_style()` and `tm_layout()`, maps can be extended by various elements. The first three of these functions can be used to add a compass, a scale bar and images.
+```{r, eval=FALSE, warning=FALSE}
+tm_shape(bavaria) +
+  tm_polygons(col = "type", pal = c("white", "skyblue")) +
+  tm_logo("../datasets/bavaria.png", height = 2) +
+  tm_scale_bar(position = c("left", "bottom"), width = 0.15) +
+  tm_compass(position = c("left", "top"), size = 2)
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align="center", fig.cap="Map of Bavaria with additional elements"}
+tm_shape(bavaria) + tm_polygons(col = "type", pal = c("white", "skyblue")) +
+  tm_logo("../datasets/bavaria.png", height = 2) + tm_scale_bar(position = c("left", "bottom"), width = 0.15) +
+  tm_compass(position = c("left", "top"), size = 2)
+
+```
+
+With the help of `tm_layout()` a variety of properties of the maps can be changed. You can add a title or a background color, change the scaling or remove the border and the legend.
+```{r, eval = FALSE}
+tm_shape(bavaria) + tm_polygons()
+    + tm_layout(title = "Bavaria", bg.color = "#228B22")
+tm_shape(bavaria) + tm_polygons()
+    + tm_layout(scale = 3, frame = FALSE)
+tm_shape(bavaria) + tm_polygons(col = "type")
+    + tm_layout(frame.lwd = 3, legend.position = c("left", "bottom"))
+tm_shape(bavaria) + tm_polygons(col = "type") +
+      tm_layout(inner.margins = 0.2, legend.show = FALSE)
+```
+
+```{r, echo=FALSE, fig.align="center", fig.cap="Some layout settings"}
+l1 <- tm_shape(bavaria) + tm_polygons() + tm_layout(title = "Bavaria", bg.color = "#228B22")
+l2 <- tm_shape(bavaria) + tm_polygons() + tm_layout(scale = 3, frame = FALSE)
+l3 <- tm_shape(bavaria) + tm_polygons(col = "type") + tm_layout(frame.lwd = 3, legend.position = c("left", "bottom"))
+l4 <- tm_shape(bavaria) + tm_polygons(col = "type") + tm_layout(inner.margins = 0.2, legend.show = FALSE)
+tmap_arrange(l1, l2, l3, l4, ncol = 2)
+```
+
+You can also change the font and font size, as well as further customize the look using visual filters, such as sepia or black and white.
+By using `tm_style()`, predefined styles can be used to give cards an old-school look, or to optimize them for color-blind people, for example. An overview of the available styles is provided by the `tmap_style_catalog()` function, which creates a folder containing different maps in the current working directory.
+```{r, eval=FALSE}
+tm_shape(bavaria) + tm_polygons(col = "type") + tm_style("classic")
+tm_shape(bavaria) + tm_polygons(col = "type") + tm_style("col_blind")
+```
+```{r, echo=FALSE, fig.align="center", fig.cap="Classic and colour-blind style"}
+a1 <- tm_shape(bavaria) + tm_polygons(col = "type") + tm_style("classic")
+a2 <- tm_shape(bavaria) + tm_polygons(col = "type") + tm_style("col_blind")
+tmap_arrange(a1, a2, ncol = 2)
+```
+
+Sometimes not all information can be displayed effectively with a single map. With the help of the `print()` and `viewport()` functions, several smaller maps can be combined to form one large one. In the following example, the cities and municipalities of the Rosenheim district are shown. Since not all viewers may know where the county is located, a map of Bavaria with a bounding box around the county is added.
+```{r, message=FALSE, echo=FALSE}
+bbox <- st_bbox(rosenheim, crs = 4326) %>%
+  st_as_sfc()
+map_rosenheim <- tm_shape(rosenheim) + tm_polygons()
+bayern <- tm_shape(bavaria) + tm_polygons() + tm_shape(bbox) + tm_polygons(alpha = 0, border.col = "red", lwd = 3)
+```
+```{r, include=TRUE, echo=TRUE, fig.align="center", fig.cap="Towns and communities of the County of Rosenheim"}
+map_rosenheim
+print(bayern, vp = grid::viewport(0.8, 0.185, width = 0.2, height = 0.45))
+```
+
+Another field of application for this type of map is the representation of regions that are situated far away from each other. In the following example, all 50 states of the USA are displayed in one graphic, taking into account the sizes of the individual states. Since Hawaii and Alaska are too far away from the remaining 48 states, a single map would not be the best solution, thus three maps are created and merged.
+First, the projection of the 48 states is changed to an equal area projection, which the other two datasets already have.
+
+```{r}
+us_states2163 <- st_transform(us_states, 2163)
+```
+To display the maps as true to their size as possible, the difference between the largest and smallest y-value is calculated for each of the three maps. For this purpose, bounding boxes are used. Then the factors by which the maps of Alaska and Hawaii are larger or smaller than those of the remaining 48 states are calculated.
+
+```{r}
+us_states_range <- st_bbox(us_states2163)[4] - st_bbox(us_states2163)[2]
+hawaii_range <- st_bbox(hawaii)[4] - st_bbox(hawaii)[2]
+alaska_range <- st_bbox(alaska)[4] - st_bbox(alaska)[2]
+us_states_hawaii_ratio <- hawaii_range / us_states_range
+us_states_alaska_ratio <- alaska_range / us_states_range
+```
+
+Next, the three maps are created. `legend.is.portrait = FALSE` ensures that the legend is arranged horizontally instead of vertically.
+```{r}
+us_states_map <- tm_shape(us_states2163) +
+  tm_polygons(col = "total_pop_15",
+              breaks = c(0, 5000000, 10000000,
+                         15000000, 20000000,
+                         25000000, 30000000,
+                         35000000, 40000000),
+              title = "Population 2015 in millions",
+              pal = c("#E1F5C4", "#EDE574", "#F9D423", "#FC913A", "#FF4E50"),
+              labels = c("0-5", "5-10", "10-15", "15-20", "20-25",
+                         "25-30", "30-35", "35-40"),
+              legend.is.portrait = FALSE) +
+  tm_layout(frame = FALSE,
+            legend.outside = TRUE, legend.outside.position = "bottom")
+hawaii_map <- tm_shape(hawaii) +
+  tm_polygons(col = "total_pop_15",
+              breaks = c(0, 5000000, 10000000,
+                         15000000, 20000000,
+                         25000000, 30000000,
+                         35000000, 40000000),
+              pal = c("#E1F5C4", "#EDE574", "#F9D423", "#FC913A", "#FF4E50")) +
+  tm_layout(title = "Hawaii", frame = FALSE, bg.color = NA,
+            legend.show = FALSE, title.position = c("LEFT", "BOTTOM"))
+alaska_map <- tm_shape(alaska) +
+  tm_polygons(col = "total_pop_15",
+              breaks = c(0, 5000000, 10000000,
+                         15000000, 20000000,
+                         25000000, 30000000,
+                         35000000, 40000000),
+              pal = c("#E1F5C4", "#EDE574", "#F9D423", "#FC913A", "#FF4E50")) +
+  tm_layout(title = "Alaska", frame = FALSE, bg.color = NA, legend.show = FALSE,
+            title.position = c("LEFT", "TOP"))
+```
+
+With 'grid.layout', a window with two rows and one column is defined. The height of each row depends on the ratio of the "height" of Alaska and the 48 states. After that the three maps are inserted, for Hawaii the "height" again depends on the ratio of the "height" of Alaska to the 48 states. With 'grid.lines', lines are added to better separate the maps from each other.
+
+```{r, fig.align="center",fig.cap="State population in the USA"}
+pushViewport(viewport(
+  layout =
+    grid.layout(2, 1,
+                heights = unit(c(us_states_alaska_ratio, 1), "null")
+                )
+  ))
+print(alaska_map, vp = viewport(layout.pos.row = 1))
+print(us_states_map, vp = viewport(layout.pos.row = 2))
+print(hawaii_map, vp = viewport(x = 0.1, y = 0.07,
+                                height = us_states_hawaii_ratio / sum(c(us_states_alaska_ratio, 1))))
+grid.lines(x = c(0, 1), y = c(0.58, 0.58), gp = gpar(lty = 2))
+grid.lines(x = c(0, 0.2), y = c(0.33, 0), gp = gpar(lty = 2))
+```
+
+Besides the possibility to change different elements of the maps based on a variable, maps can be divided into several maps depending on a variable. What is done in **ggplot2** with `facet_wrap()` is done in **tmap** with `tm_facets()`. If a temporal variable is to be plotted, this is difficult to do with a map, because the geometries would often overlap. Especially in these cases the use of faceted maps is useful. The function has five important arguments:
+
+- `by`: According to which variable should be split?
+- `nrow / ncol`: The number of rows or columns of the facets
+- `free.cords`: Should each individual map have its own coordinate system?
+- `along`: Which variable should be used for animation?
+
+```{r, include=FALSE}
+honey0912 <- honey[honey$year > 2008, ]
+honey0912 <- rbind(
+  honey0912,
+  matrix(NA, ncol = ncol(honey0912),
+         nrow = 4 * length(unique(abrev$state)[!unique(abrev$state) %in% unique(honey0912$state)]),
+         dimnames = list(
+           c(seq_len(4 * length(unique(abrev$state)[!unique(abrev$state) %in% unique(honey0912$state)]))),
+           colnames(honey0912)
+         )
+  )
+)
+honey0912$state <- as.character(honey0912$state)
+honey0912[is.na(honey0912$state), ]$state <- sort(rep(unique(abrev$state)[!unique(abrev$state) %in% unique(honey0912$state)], 4))
+honey0912[is.na(honey0912$year), ]$year <- rep(2009:2012, 10)
+honey0912 <-  merge.data.frame(honey0912, abrev, by = "state")
+colnames(honey0912)[c(1, 9)] <- c("short", "State")
+us_states$State <- us_states$NAME
+us_states <- us_states[us_states$NAME != "District of Columbia", ]
+honey0912 <- merge(honey0912, us_states[, 7:8], by = "State", all.y = TRUE)
+honey0912 <- st_as_sf(honey0912)
+```
+```{r, fig.align="center", fig.caption="Cost of a pound of honey in the USA", message=FALSE}
+tm_shape(honey0912) + tm_polygons(col = "priceperlb", style = "cont",
+                                  pal = viridis(10, direction = -1),
+                                  title = "Price in US$ per lb") +
+  tm_facets(by = "year", ncol = 2) +
+  tm_layout(legend.outside.size = 0.2)
+```
+
+One problem with this type of maps is that with more values of a variable, more maps are created, which quickly becomes confusing and makes it very difficult to distinguish between the individual maps. This problem is solved by using animated maps. They cannot be displayed in papers, but nowadays more and more information is being retrieved online, which reduces this problem. The author of an article can alternatively include a link to the animated map in his text. As already mentioned, an animated map can be created with the  'along' argument of the function `tm_facets()`. With the help of the function `tmap_animation()` the created animation can be saved as a GIF file, however, the software **ImageMagick** is required for this. The software can be installed using the **installr** package.  (`installr::install.imagemagick()`) The following animation also shows the average price of a pound of honing in US$, this time over a period of 15 years. You can use `delay` to specify how many milliseconds should elapse between each image. With `width` and `height` you can also specify the dimensions in pixels, with `loop` whether the GIF is an endless loop or ends after a certain number of rounds.
+
+```{r, include = FALSE, eval=FALSE}
+tab <- table(honey$state)
+no_rows <- sum(15 - tab[tab < 15])
+new_mat <- matrix(NA, nrow = no_rows, ncol = 8)
+colnames(new_mat) <- colnames(honey)
+new_mat <- as.data.frame(new_mat)
+new_mat$state <- unlist(lapply(seq_len(length(tab[tab < 15])),
+                               function(x) {
+                                 rep(names(tab[tab < 15])[x], 15 - tab[tab < 15][x])
+                                 }
+                               )
+                        )
+new_mat$year <- unlist(lapply(seq_len(length(tab[tab < 15])), function(x, ...) {
+  years <- honey[honey$state == names(tab[tab < 15])[x], ]$year
+  all <- 1998:2012
+  all[!all %in% years]
+}))
+honey <- rbind(honey, new_mat)
+honey <- rbind(
+  honey,
+  matrix(NA, ncol = ncol(honey),
+         nrow = 15 * length(unique(abrev$state)[!unique(abrev$state) %in% unique(honey$state)]),
+         dimnames = list(
+           c(seq_len(15 * length(unique(abrev$state)[!unique(abrev$state) %in% unique(honey$state)]))),
+           colnames(honey)
+         )
+  )
+)
+honey$state <- as.character(honey$state)
+honey[is.na(honey$state), ]$state <- sort(rep(unique(abrev$state)[!unique(abrev$state) %in% unique(honey$state)], 15))
+honey[is.na(honey$year), ]$year <- rep(1998:2012, 6)
+honey <-  merge.data.frame(honey, abrev, by = "state")
+colnames(honey)[c(1, 9)] <- c("short", "State")
+us_states$State <- us_states$NAME
+us_states <- us_states[us_states$NAME != "District of Columbia", ]
+honey <- merge(honey, us_states[, 7:8], by = "State", all.y = TRUE)
+honey <- st_as_sf(honey)
+honey <- st_transform(honey, 4326)
+write_sf(honey, "../datasets/honey.shp")
+```
+```{r, eval = FALSE}
+honey <- read_sf("../datasets/honey.shp")
+colnames(honey)[3:8] <- c("Number_of_colonies", "Yield_per_colony",
+                          "Total_production", "Stocks","Price_per_lb",
+                          "Value_of_production"
+                          )
+honey_animation <- tm_shape(honey) + tm_polygons(col = "Price_per_lb", style = "cont",
+                                  pal = viridis(10, direction = -1)) +
+  tm_facets(along = "year") +
+  tm_layout(legend.position = c("left", "bottom"))
+tmap_animation(honey_animation, filename = "../datasets/honey.gif", delay = 50,
+               width = 2400, height = 1200)
+```
+```{r, fig.align="center",fig.cap="Animated map", echo=FALSE}
+image_resize(image_read("../datasets/honey.gif"), "1200x2400")
+```
+
+## Weiterführende Links
+For more information on the use of **tmap** see https://geocompr.robinlovelace.net/adv-map.html. [@lovelace2019geocomputation]

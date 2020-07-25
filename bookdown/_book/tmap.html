@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 tmap | Making Maps with R</title>
+  <meta name="description" content="2 tmap | Making Maps with R" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 tmap | Making Maps with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 tmap | Making Maps with R" />
+  
+  
+  
+
+<meta name="author" content="Nico Hahn" />
+
+
+<meta name="date" content="2020-07-21" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introduction.html"/>
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="tmap.html"><a href="tmap.html"><i class="fa fa-check"></i><b>2</b> tmap</a><ul>
+<li class="chapter" data-level="2.1" data-path="tmap.html"><a href="tmap.html#static-maps-with-tmap"><i class="fa fa-check"></i><b>2.1</b> Static Maps with tmap</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Making Maps with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="tmap" class="section level1">
+<h1><span class="header-section-number">2</span> tmap</h1>
+<p>Thematic maps are geographical maps in which spatial data distributions are visualized. This pack-age offers a flexible, layer-based, and easy to use approach to create thematic maps, such as choropleths and bubble maps. It is based on the grammar of graphics, and resembles the syntax of <strong>ggplot2</strong>.</p>
+<div id="static-maps-with-tmap" class="section level2">
+<h2><span class="header-section-number">2.1</span> Static Maps with tmap</h2>
+<p>Most often, geographical data are displayed using static maps that can be saved as .png or .pdf files. Originally, data could only be visualized in this way in R, but the development of new packages, especially <strong>sp</strong>, has created new possibilities for displaying this data. Despite new methods like interactive maps, static maps are still the main focus of geospatial data visualization in R.</p>
+<p>As mentioned above, the syntax of <strong>tmap</strong> is similar to that of <strong>ggplot2</strong>. This includes a strict separation between data and aesthetics. At the beginning, <code>tm_shape()</code> is passed a dataset, followed by one or more levels that define the type of display. Examples are <code>tm_fill()</code> and <code>tm_dots()</code> to plot data as polygons or points.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="tmap.html#cb1-1"></a><span class="kw">tm_shape</span>(bavaria) <span class="op">+</span><span class="st"> </span><span class="kw">tm_fill</span>()</span>
+<span id="cb1-2"><a href="tmap.html#cb1-2"></a><span class="kw">tm_shape</span>(bavaria) <span class="op">+</span><span class="st"> </span><span class="kw">tm_borders</span>()</span>
+<span id="cb1-3"><a href="tmap.html#cb1-3"></a><span class="kw">tm_shape</span>(bavaria) <span class="op">+</span><span class="st"> </span><span class="kw">tm_polygons</span>()</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-4"></span>
+<img src="_main_files/figure-html/unnamed-chunk-4-1.png" alt="A simple example" width="672" />
+<p class="caption">
+Figure 2.1: A simple example
+</p>
+</div>
+<p>The passed object ‘bavaria’ has the class ‘sf’ and represents the individual cities and districts of Bavaria. <code>tm_fill()</code> fills the individual polygons, resulting in a filled outline of Bavaria. <code>tm_borders()</code> draws the borders of the individual polygons and <code>tm_polygons()</code> combines the two functions and displays both at the same time. The <code>+</code> operator can be used to add additional layers to visualize different types of geospatial data.</p>
+<p>With <strong>tmap</strong> objects can not only be plotted but can also be saved as objects of the class ‘tmap’.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="tmap.html#cb2-1"></a><span class="co"># save map as an object</span></span>
+<span id="cb2-2"><a href="tmap.html#cb2-2"></a>map_europe &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(europe_raster) <span class="op">+</span><span class="st"> </span><span class="kw">tm_raster</span>()</span>
+<span id="cb2-3"><a href="tmap.html#cb2-3"></a><span class="kw">class</span>(map_europe)</span></code></pre></div>
+<pre><code>## [1] &quot;tmap&quot;</code></pre>
+<p>The saved object can be easily extended or retrieved at a later time in the console. Furthermore, additional layers can be added to the object with <code>tm_shape()</code>, which allows several maps to be combined into one.
+The following code example is based on the above code, which represents a height grid of Europe. First the border lines of the individual states are added, followed by all cities with more than one million inhabitants.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="tmap.html#cb4-1"></a>map_europe2 &lt;-<span class="st"> </span>map_europe <span class="op">+</span><span class="st"> </span><span class="kw">tm_shape</span>(europe_shape) <span class="op">+</span><span class="st"> </span><span class="kw">tm_lines</span>(<span class="dt">alpha =</span> <span class="fl">0.3</span>)</span>
+<span id="cb4-2"><a href="tmap.html#cb4-2"></a>map_europe3 &lt;-<span class="st"> </span>map_europe2  <span class="op">+</span><span class="st"> </span><span class="kw">tm_shape</span>(cities) <span class="op">+</span><span class="st"> </span><span class="kw">tm_dots</span>(<span class="dt">size =</span> <span class="fl">0.3</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-8"></span>
+<img src="_main_files/figure-html/unnamed-chunk-8-1.png" alt="Use of several layers" width="672" />
+<p class="caption">
+Figure 2.2: Use of several layers
+</p>
+</div>
+<!-- By saving individual maps as objects, they can also be displayed next to or on top of each other using the 'map_arrange()` function. -->
+<!-- ```{r, eval=FALSE} -->
+<!-- tmap_arrange(bav_1, bav_2, bav_3, ncol = 3) -->
+<!-- ``` -->
+<!-- The user is not limited in the number of layers he is able to add. It should be noted, however, that too much information can quickly overwhelm the viewer.   -->
+<!-- For the previous plots the default aesthetic settings of **tmap** were used. To create visually appealing maps, these can be overwritten. Two main types of map aesthetics exist: -->
+<!--     - Those that change with the data -->
+<!--     - Those that do not change with data -->
+<!-- Compared to **ggplot2** no helper function (`aes()`) is used to customize the design of the map. Instead, the arguments are passed directly. Some of the most useful arguments are the fill color (`col`), transparency (`alpha`), line width (`lwd`) and line style (`lty`). -->
+<!-- ```{r, fig.align="center",fig.cap="Use of various arguments"} -->
+<!-- bav1 <- tm_shape(bavaria) + tm_fill(col = "aquamarine") -->
+<!-- bav2 <- tm_shape(bavaria) + tm_fill(col = "aquamarine", alpha = 0.5) -->
+<!-- bav3 <- tm_shape(bavaria) + tm_polygons(col = "aquamarine", border.col = "darkolivegreen") -->
+<!-- bav4 <- tm_shape(bavaria) + tm_borders(lwd = 2) -->
+<!-- bav5 <- tm_shape(bavaria) + tm_borders(lty = 4) -->
+<!-- bav6 <- tm_shape(bavaria) + tm_polygons(col = "#E2E2E2", border.alpha = 0.5, lwd = 3) -->
+<!-- tmap_arrange(bav1, bav1, bav3, bav4, bav5, bav6, ncol = 3) -->
+<!-- ``` -->
+<!-- Another difference to **ggplot2** is that the variable names must be passed as characters and the `$' operator cannot be used. -->
+<!-- ```{r, error=TRUE} -->
+<!-- tm_shape(bavaria) + tm_polygons(col = bavaria$pop_development) -->
+<!-- ``` -->
+<!-- The desired graphic is obtained with the following code: -->
+<!-- ```{r, eval=FALSE} -->
+<!-- tm_shape(bavaria) + tm_polygons(col = "pop_development", midpoint = 0) -->
+<!-- ``` -->
+<!-- ```{r, fig.align="center",fig.cap="Population development in Bavaria from 2011 to 2015", echo=FALSE} -->
+<!-- tm_shape(bavaria) + tm_polygons(col = "pop_development", -->
+<!--                                 midpoint = 0) + -->
+<!--   tm_layout(legend.outside = TRUE) -->
+<!-- ``` -->
+<!-- The `midpoint' argument is used here to use the value 0 as the natural midpoint. The resulting map shows that the population in northern Bavaria is decreasing, while the population around Munich in particular is increasing rapidly.  -->
+<!-- ```{r, echo=FALSE, fig.align="center", fig.cap = "The same map in base R"} -->
+<!-- pal <- colorRampPalette(c("orange", "green")) -->
+<!-- bavaria$order <- findInterval(bavaria$pop_development, sort(bavaria$pop_development)) -->
+<!-- plot(st_geometry(bavaria), col = pal(nrow(bavaria))[bavaria$order])  # works -->
+<!-- ``` -->
+<!-- The example of the last two maps shows that **tmap** automatically selects a color palette and intervals. To use other intervals, you can either pass manual bins to the `breaks' argument or use `n' to specify the number of bins. -->
+<!-- ```{r, eval = FALSE} -->
+<!-- tm_shape(bavaria) + tm_polygons(col = "mean_age") -->
+<!-- tm_shape(bavaria) + tm_polygons(col = "mean_age", breaks = c(40, 42, 46, 54)) -->
+<!-- tm_shape(bavaria) + tm_polygons(col = "mean_age", n = 3) -->
+<!-- ``` -->
+<!-- ```{r, echo = FALSE, fig.align="center",fig.cap="Use of the breaks and n arguments"} -->
+<!-- ba1 <- tm_shape(bavaria) + tm_polygons(col = "mean_age") -->
+<!-- ba2 <- tm_shape(bavaria) + tm_polygons(col = "mean_age", -->
+<!--                                        breaks = c(40, 42, 46, 54)) -->
+<!-- ba3 <- tm_shape(bavaria) + tm_polygons(col = "mean_age", n = 3) -->
+<!-- tmap_arrange(ba1, ba2, ba3, ncol = 3) -->
+<!-- ``` -->
+<!-- An alternative is the 'style' argument. This allows the user to automatically create breaks by specifying algorithms. Among others, the following styles can be passed: -->
+<!-- - `style = pretty`: Rounds interval boundaries to whole numbers. Default setting. -->
+<!-- - `style = equal`: Splits the variable into intervals of equal length. -->
+<!--        Should only be used if the variable follows an uniform distribution. -->
+<!-- - `style = quantile`: Splits the variable into quantiles. -->
+<!--        Consequently there are the same number of observations in each interval.  -->
+<!-- - `style = jenks`: Identifies groups with similar values and -->
+<!--        maximizes the difference between them. -->
+<!-- - `style = cont`: Displays many colors over a continuous palette. -->
+<!-- - `style = cat`: Colors each category individually for categorical data. -->
+<!-- Weitere Möglichkeiten sind `cat`, `fixed`, `sd`, `kmeans`, `hclust`, `bclust`, und `fisher`. -->
+<!-- ```{r, fig.align="center",fig.cap="unemployment_rate in Bayern und Verteilung von Städten und Landkreisen", echo = FALSE, fig.width= 8, fig.height= 8, warning=FALSE, message=FALSE} -->
+<!-- ba4 <- tm_shape(bavaria) + tm_polygons(col = "unemployment_rate", style = "pretty", title = "Aq") + tm_credits('style = "pretty"', size = 1) + tm_layout(inner.margins = 0.1) -->
+<!-- ba5 <- tm_shape(bavaria) + tm_polygons(col = "unemployment_rate", style = "equal", title = "Aq") + tm_credits('style = "equal"', size = 1) + tm_layout(inner.margins = 0.1) -->
+<!-- ba6 <- tm_shape(bavaria) + tm_polygons(col = "unemployment_rate", style = "quantile", title = "Aq") + tm_credits('style = "quantile"', size = 1) + tm_layout(inner.margins = 0.1) -->
+<!-- ba7 <- tm_shape(bavaria) + tm_polygons(col = "unemployment_rate", style = "jenks", title = "Aq") + tm_credits('style = "jenks"', size = 1) + tm_layout(inner.margins = 0.1) -->
+<!-- ba8 <- tm_shape(bavaria) + tm_polygons(col = "unemployment_rate", style = "cont", title = "Aq") + tm_credits('style = "cont"', size = 1) + tm_layout(inner.margins = 0.1) -->
+<!-- ba9 <- tm_shape(bavaria) + tm_polygons(col = "type", style = "cat") + tm_credits('style = "cat"', size = 1) + tm_layout(inner.margins = 0.1) -->
+<!-- tmap_arrange(ba4, ba5, ba6, ba7, ba8, ba9, ncol = 3) -->
+<!-- ``` -->
+<!-- Eine letzte Möglichkeit, um das Aussehen einer Karte zu beeinflussen, besteht in der Farbwahl der einzelnen Klassen. Der Nutzer kann dies über das Argument `palette`. Diesem kann der Name einer Palette aus dem **RColorBrewer** oder **Viridis** Paket übergeben werden. Soll die Reihenfolge der Palette umgedreht werden, kann zu Beginn des characters ein `-` hinzugefügt werden. -->
+<!-- ```{r, eval = FALSE} -->
+<!-- tm_shape(bavaria) + tm_polygons(col = "unemployment_rate", palette = "viridis") -->
+<!-- tm_shape(bavaria) + tm_polygons(col = "unemployment_rate", palette = "-viridis") -->
+<!-- ``` -->
+<!-- ```{r, fig.align="center",fig.cap="Umdrehen einer Palette", echo = FALSE, warning=FALSE, message=FALSE} -->
+<!-- b1 <- tm_shape(bavaria) + tm_polygons(col = "unemployment_rate", palette = "viridis") -->
+<!-- b2 <- tm_shape(bavaria) + tm_polygons(col = "unemployment_rate", palette = "-viridis") -->
+<!-- tmap_arrange(b1, b2, ncol = 2) -->
+<!-- ``` -->
+<!-- Bei den Paletten aus den beiden Paketen kann zwischen drei Arten von Paletten unterschieden werden: -->
+<!--     - Sequentielle Paletten: Folgen einem Farbverlauf von hell zu dunkel. Sollten für stetige Variablen verwendet werden.  -->
+<!--     - Divergierende Paletten: Folgen einem Farbverlauf von dunkel zu hell, zu dunkel. Sollten für stetige Variablen mit einem natürlichen Mittelpunkt (`midpoint`) verwendet werden. -->
+<!--     - Kategoriale Paletten: Leicht unterscheidbare Farben, ideal für kategoriale Daten. -->
+<!-- Alternativ kann auch eine eigene Palette übergeben werden, hierfür könnten HEX-Codes verwendet werden. -->
+<!-- Bei der Farbwahl sollte auf weiteres geachtet werden: Farben übertragen Gefühle. Beispielhaft wird rot mit negativen Sachen assoziiert, während grün mit positiven Dingen in Verbindung gebracht wird. Dieses Beispiel kann auch auf geographische Merkmale erweitert werden. Grün steht für Wälder und blau für Gewässer. Außerdem sollte bei Verwendung eine Palette klar sein, welche Farbe für niedrigere beziehungsweise höhere Werte steht. Damit eine möglichst breite Masse an Menschen eine Karte interpretieren kann, sollte wenn möglich auch darauf geachtet werden, dass farbenblinde Menschen die Unterschiede zwischen den Klassen identifizieren können. -->
+<!-- ```{r, fig.align="center",fig.cap="Sequentielle, divergierende und kategoriale Palette", echo=FALSE} -->
+<!-- image_read("../datasets/palette.png") -->
+<!-- ``` -->
+<!-- ## Layouts -->
+<!-- Außer der Möglichkeit, die Karte an sich zu verändern, existiert die Möglichkeit andere Elemente der Grafik zu editieren. Mit Hilfe von Funktionen wie `tm_compass()`, `tm_scale_bar()`, `tm_logo()`, `tm_style()` und `tm_layout` lassen sich   Karten um die verschiedensten Elemente erweitern. Mit Hilfe der ersten drei dieser Funktion lassen sich ein Kompass, eine Maßstabsleiste und Bilder hinzufügen. -->
+<!-- ```{r, eval=FALSE, warning=FALSE} -->
+<!-- tm_shape(bavaria) + -->
+<!--   tm_polygons(col = "type", pal = c("white", "skyblue")) + -->
+<!--   tm_logo("../datasets/bavaria.png", height = 2) + -->
+<!--   tm_scale_bar(position = c("left", "bottom"), width = 0.15) + -->
+<!--   tm_compass(position = c("left", "top"), size = 2) -->
+<!-- ``` -->
+<!-- ```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align="center", fig.cap="Bayernkarte mit zusätzlichen Elementen"} -->
+<!-- tm_shape(bavaria) + tm_polygons(col = "type", pal = c("white", "skyblue")) + -->
+<!--   tm_logo("../datasets/bavaria.png", height = 2) + tm_scale_bar(position = c("left", "bottom"), width = 0.15) + -->
+<!--   tm_compass(position = c("left", "top"), size = 2) -->
+<!-- ``` -->
+<!-- Mit Hilfe von `tm_layout()` kann eine Vielzahl an Eigenschaften der Karten geändert werden. So kann ein Titel oder eine Hintergrundfarbe hinzugefügt werden, die Skalierung geändert werden oder der Rahmen und die Legende entfernt werden. -->
+<!-- ```{r, eval = FALSE} -->
+<!-- tm_shape(bavaria) + tm_polygons() -->
+<!--     + tm_layout(title = "Bayern", bg.color = "#228B22") -->
+<!-- tm_shape(bavaria) + tm_polygons() -->
+<!--     + tm_layout(scale = 3, frame = FALSE) -->
+<!-- tm_shape(bavaria) + tm_polygons(col = "type") -->
+<!--     + tm_layout(frame.lwd = 3, legend.position = c("left", "bottom")) -->
+<!-- tm_shape(bavaria) + tm_polygons(col = "type") + -->
+<!--       tm_layout(inner.margins = 0.2, legend.show = FALSE) -->
+<!-- ``` -->
+<!-- ```{r, echo=FALSE, fig.align="center", fig.cap="Einige Layout Einstellungen"} -->
+<!-- l1 <- tm_shape(bavaria) + tm_polygons() + tm_layout(title = "Bayern", bg.color = "#228B22") -->
+<!-- l2 <- tm_shape(bavaria) + tm_polygons() + tm_layout(scale = 3, frame = FALSE) -->
+<!-- l3 <- tm_shape(bavaria) + tm_polygons(col = "type") + tm_layout(frame.lwd = 3, legend.position = c("left", "bottom")) -->
+<!-- l4 <- tm_shape(bavaria) + tm_polygons(col = "type") + tm_layout(inner.margins = 0.2, legend.show = FALSE) -->
+<!-- tmap_arrange(l1, l2, l3, l4, ncol = 2) -->
+<!-- ``` -->
+<!-- Außerdem können Schriftart und -größe geändert werden, sowie mit Hilfe visueller Filter, beispielsweise Sepia oder Schwarz-Weiß, das Aussehen weiter angepasst werden. -->
+<!-- Durch Verwendung von `tm_style()` können vordefinierte Stile verwendet werden, um Karten zum Beispiel einen Old-School-Look zu geben oder sie für Farbenblinde zu optimieren. Einen Überblick über die verfügbaren Stile bietet die Funktion `tmap_style_catalog()`, die im aktuellen Arbeitsverzeichnis einen Ordner anlegt, der verschiedene Karten enthält. -->
+<!-- ```{r, eval=FALSE} -->
+<!-- tm_shape(bavaria) + tm_polygons(col = "type") + tm_style("classic") -->
+<!-- tm_shape(bavaria) + tm_polygons(col = "type") + tm_style("col_blind") -->
+<!-- ``` -->
+<!-- ```{r, echo=FALSE, fig.align="center", fig.cap="Klassicher und farbenblinder Stil"} -->
+<!-- a1 <- tm_shape(bavaria) + tm_polygons(col = "type") + tm_style("classic") -->
+<!-- a2 <- tm_shape(bavaria) + tm_polygons(col = "type") + tm_style("col_blind") -->
+<!-- tmap_arrange(a1, a2, ncol = 2) -->
+<!-- ``` -->
+<!-- ## Inset maps -->
+<!-- Manchmal können nicht alle Informationen effektiv mit nur einer Karte dargestellt werden, beispielsweise um zusätzliche Informationen zu übermitteln. Mit Hilfe der `print()` und `viewport()` Funktionen können mehrere kleinere Karten zu einer großen zusammengefügt werden. In dem nachfolgenden Beispiel sind die Städte und Gemeinden des Landkreises Rosenheim dargestellt. Da möglicherweise nicht alle Betrachter wissen, wo sich der Landkreis befindet, wird noch eine Bayern Karte mit einer bounding box um den Landkreis herum hinzugefügt. -->
+<!-- ```{r, message=FALSE, echo=FALSE} -->
+<!-- bbox <- st_bbox(rosenheim, crs = 4326) %>%  -->
+<!--   st_as_sfc() -->
+<!-- map_rosenheim <- tm_shape(rosenheim) + tm_polygons() -->
+<!-- bayern <- tm_shape(bavaria) + tm_polygons() + tm_shape(bbox) + tm_polygons(alpha = 0, border.col = "red", lwd = 3) -->
+<!-- ``` -->
+<!-- ```{r, include=TRUE, echo=TRUE, fig.align="center", fig.cap="Städte und Gemeinden des Landkreis Rosenheim"} -->
+<!-- map_rosenheim -->
+<!-- print(bayern, vp = grid::viewport(0.8, 0.185, width = 0.2, height = 0.45)) -->
+<!-- ``` -->
+<!-- Ein weiteres Anwendungsgebiet dieser Art von Karten ist die Darstellung von Regionen, die weit voneinander entfernt sind. Im folgenden Beispiel werden alle 50 Staaten der USA in einer Grafik dargestellt, unter Berücksichtigung der Größen der einzelnen Staaten. Da Hawaii und Alaska zu weit von den restlichen 48 Staaten entfernt sind, wäre eine einzelne Karte nicht die beste Lösung, weswegen drei Karten erstellt und zusammengefügt werden. -->
+<!-- Zuerst wird die Projektion der 48 Staaten in eine equal area projection geändert, die anderen beiden Datensätze haben diese bereits. -->
+<!-- ```{r} -->
+<!-- us_states2163 <- st_transform(us_states, 2163) -->
+<!-- ``` -->
+<!-- Um die Karten möglichst getreu ihrer Größe darzustellen, wird für jede der drei Karten die Differenz zwischen dem größten und kleinsten y-Wert berechnet. Dafür werden bounding boxes verwendet. Anschließend werden die Faktoren berechnet, um die die Karten von Alaska und Hawaii größer beziehungsweise kleiner sind, als die der restlichen 48 Staaten. -->
+<!-- ```{r} -->
+<!-- us_states_range <- st_bbox(us_states2163)[4] - st_bbox(us_states2163)[2] -->
+<!-- hawaii_range <- st_bbox(hawaii)[4] - st_bbox(hawaii)[2] -->
+<!-- alaska_range <- st_bbox(alaska)[4] - st_bbox(alaska)[2] -->
+<!-- us_states_hawaii_ratio <- hawaii_range / us_states_range -->
+<!-- us_states_alaska_ratio <- alaska_range / us_states_range -->
+<!-- ``` -->
+<!-- Anschließend werden die drei Karten erstellt. `legend.is.portrait = FALSE` sorgt dafür, dass die Legende horizontal angeordnet wird, anstatt von vertikal. -->
+<!-- ```{r} -->
+<!-- us_states_map <- tm_shape(us_states2163) + -->
+<!--   tm_polygons(col = "total_pop_15", -->
+<!--               breaks = c(0, 5000000, 10000000, -->
+<!--                          15000000, 20000000, -->
+<!--                          25000000, 30000000, -->
+<!--                          35000000, 40000000), -->
+<!--               title = "Population 2015 in Millionen", -->
+<!--               pal = c("#E1F5C4", "#EDE574", "#F9D423", "#FC913A", "#FF4E50"), -->
+<!--               labels = c("0-5", "5-10", "10-15", "15-20", "20-25", -->
+<!--                          "25-30", "30-35", "35-40"), -->
+<!--               legend.is.portrait = FALSE) +  -->
+<!--   tm_layout(frame = FALSE, -->
+<!--             legend.outside = TRUE, legend.outside.position = "bottom") -->
+<!-- hawaii_map <- tm_shape(hawaii) + -->
+<!--   tm_polygons(col = "total_pop_15", -->
+<!--               breaks = c(0, 5000000, 10000000, -->
+<!--                          15000000, 20000000, -->
+<!--                          25000000, 30000000, -->
+<!--                          35000000, 40000000), -->
+<!--               pal = c("#E1F5C4", "#EDE574", "#F9D423", "#FC913A", "#FF4E50")) +  -->
+<!--   tm_layout(title = "Hawaii", frame = FALSE, bg.color = NA, -->
+<!--             legend.show = FALSE, title.position = c("LEFT", "BOTTOM")) -->
+<!-- alaska_map <- tm_shape(alaska) + -->
+<!--   tm_polygons(col = "total_pop_15", -->
+<!--               breaks = c(0, 5000000, 10000000, -->
+<!--                          15000000, 20000000, -->
+<!--                          25000000, 30000000, -->
+<!--                          35000000, 40000000), -->
+<!--               pal = c("#E1F5C4", "#EDE574", "#F9D423", "#FC913A", "#FF4E50")) +  -->
+<!--   tm_layout(title = "Alaska", frame = FALSE, bg.color = NA, legend.show = FALSE, -->
+<!--             title.position = c("LEFT", "TOP")) -->
+<!-- ``` -->
+<!-- Mit `grid.layout` wird ein Fenster mit zwei Reihen und einer Spalte definiert. Die Höhe der einzelnen Reihen hängt vom Verhältnis der "Höhe" von Alaska und den 48 Staaten ab. Danach werden die drei Karten eingefügt, bei Hawaii hängt die "Höhe" wieder vom Verhältnis zu den 48 Staaten ab. Mit `grid.lines` werden noch Linien hinzugefügt um die Karten besser voneinander abzutrennen. -->
+<!-- ```{r, fig.align="center",fig.cap="Einwohnerzahlen der Bundesstaaten in den USA"} -->
+<!-- pushViewport(viewport( -->
+<!--   layout = -->
+<!--     grid.layout(2, 1, -->
+<!--                 heights = unit(c(us_states_alaska_ratio, 1), "null") -->
+<!--                 ) -->
+<!--   )) -->
+<!-- print(alaska_map, vp = viewport(layout.pos.row = 1)) -->
+<!-- print(us_states_map, vp = viewport(layout.pos.row = 2)) -->
+<!-- print(hawaii_map, vp = viewport(x = 0.1, y = 0.07, -->
+<!--                                 height = us_states_hawaii_ratio / sum(c(us_states_alaska_ratio, 1)))) -->
+<!-- grid.lines(x = c(0, 1), y = c(0.58, 0.58), gp = gpar(lty = 2)) -->
+<!-- grid.lines(x = c(0, 0.2), y = c(0.33, 0), gp = gpar(lty = 2)) -->
+<!-- ``` -->
+<!-- ## Facettierte und animierte Karten -->
+<!-- Neben der Möglichkeit verschiedene Elemente der Karten basierend auf einer Variable zu ändern, können Karten basierend auf einer Variable in mehrere Karten unterteilt werden. Was in **ggplot2** mit `facet_wrap()` gemacht wird, wird in **tmap** mit `tm_facets()` erledigt. Soll eine zeitliche Variable dargestellt werden, geht dies schlecht mit einer Karte, da sich die Geometrien häufig überlappen würden. Besonders in diesen Fällen ist die Verwendung facettierter Karten sinnvoll. Die Funktion hat fünf wichtige Argumente: -->
+<!--     - `by`: Nach welcher Variable soll aufgeteilt werden? -->
+<!--     - `nrow / ncol`: Die Anzahl der Zeilen beziehungsweise Spalten der Facetten -->
+<!--     - `free.cords`: Soll jede einzelne Karte ein eigenes Koordinatensystem haben? -->
+<!--     - `along`: Nach welcher Variable soll animiert werden? -->
+<!-- ```{r, include=FALSE} -->
+<!-- honey0912 <- honey[honey$year > 2008, ] -->
+<!-- honey0912 <- rbind( -->
+<!--   honey0912, -->
+<!--   matrix(NA, ncol = ncol(honey0912), -->
+<!--          nrow = 4 * length(unique(abrev$state)[!unique(abrev$state) %in% unique(honey0912$state)]), -->
+<!--          dimnames = list( -->
+<!--            c(seq_len(4 * length(unique(abrev$state)[!unique(abrev$state) %in% unique(honey0912$state)]))), -->
+<!--            colnames(honey0912) -->
+<!--          ) -->
+<!--   ) -->
+<!-- ) -->
+<!-- honey0912$state <- as.character(honey0912$state) -->
+<!-- honey0912[is.na(honey0912$state), ]$state <- sort(rep(unique(abrev$state)[!unique(abrev$state) %in% unique(honey0912$state)], 4)) -->
+<!-- honey0912[is.na(honey0912$year), ]$year <- rep(2009:2012, 10) -->
+<!-- honey0912 <-  merge.data.frame(honey0912, abrev, by = "state") -->
+<!-- colnames(honey0912)[c(1, 9)] <- c("short", "State") -->
+<!-- us_states$State <- us_states$NAME -->
+<!-- us_states <- us_states[us_states$NAME != "District of Columbia", ] -->
+<!-- honey0912 <- merge(honey0912, us_states[, 7:8], by = "State", all.y = TRUE) -->
+<!-- honey0912 <- st_as_sf(honey0912) -->
+<!-- ``` -->
+<!-- ```{r, fig.align="center", fig.caption="Kosten eines Pfunds Honig in den USA", message=FALSE} -->
+<!-- tm_shape(honey0912) + tm_polygons(col = "priceperlb", style = "cont", -->
+<!--                                   pal = viridis(10, direction = -1), -->
+<!--                                   title = "Price in US$ per lb") + -->
+<!--   tm_facets(by = "year", ncol = 2) + -->
+<!--   tm_layout(legend.outside.size = 0.2) -->
+<!-- ``` -->
+<!-- Ein Problem dieser Art von Karten ist, dass mit mehr Ausprägungen einer Variable mehr Karten erstellt werden, wodurch es schnell unübersichtlich wird und Unterschiede zwischen den einzelnen Karten nur noch sehr schwer zu erkennen sind. Dieses Problem wird von animierten Karten gelöst. In Papern können diese nicht dargestellt werden, allerdings werden heutzutage immer mehr Informationen online abgerufen, was dieses Problem mindert. Der Autor eines Artikels kann alternativ auch einen Link zu der animierten Karte in seinen Text einbauen. Wie bereits erwähnt, kann mit dem Argument `along` der Funktion `tm_facets()` eine animierte Karte erstellt werden. Mit Hilfe der Funktion `tmap_animation()` kann die erstellte Animation als GIF Datei abgespeichert werden, allerdings wird dafür die Software **ImageMagick** benötigt. Diese kann mit Hilfe des **installr** Pakets installiert werden.  (`installr::install.imagemagick()`) Die folgende Animation stellt ebenfalls den durchschnittlichen Preis eines Pfunds Honing in US$ dar, dieses Mal über einen Zeitraum von 15 Jahren. Mittels `delay` kann angegeben werden, wieviele Millisekunden zwischen den einzelnen Bildern vergehen sollen. Mit `width` und `height` können noch die Maße in Pixel angegeben werden, mit `loop`, ob das GIF eine Endlosschleife ist, oder nach einer bestimmten Anzahl an Runden endet. -->
+<!-- ```{r, include = FALSE, eval=FALSE} -->
+<!-- tab <- table(honey$state) -->
+<!-- no_rows <- sum(15 - tab[tab < 15]) -->
+<!-- new_mat <- matrix(NA, nrow = no_rows, ncol = 8) -->
+<!-- colnames(new_mat) <- colnames(honey) -->
+<!-- new_mat <- as.data.frame(new_mat) -->
+<!-- new_mat$state <- unlist(lapply(seq_len(length(tab[tab < 15])), -->
+<!--                                function(x) { -->
+<!--                                  rep(names(tab[tab < 15])[x], 15 - tab[tab < 15][x]) -->
+<!--                                  } -->
+<!--                                ) -->
+<!--                         ) -->
+<!-- new_mat$year <- unlist(lapply(seq_len(length(tab[tab < 15])), function(x, ...) { -->
+<!--   years <- honey[honey$state == names(tab[tab < 15])[x], ]$year -->
+<!--   all <- 1998:2012 -->
+<!--   all[!all %in% years] -->
+<!-- })) -->
+<!-- honey <- rbind(honey, new_mat) -->
+<!-- honey <- rbind( -->
+<!--   honey, -->
+<!--   matrix(NA, ncol = ncol(honey), -->
+<!--          nrow = 15 * length(unique(abrev$state)[!unique(abrev$state) %in% unique(honey$state)]), -->
+<!--          dimnames = list( -->
+<!--            c(seq_len(15 * length(unique(abrev$state)[!unique(abrev$state) %in% unique(honey$state)]))), -->
+<!--            colnames(honey) -->
+<!--          ) -->
+<!--   ) -->
+<!-- ) -->
+<!-- honey$state <- as.character(honey$state) -->
+<!-- honey[is.na(honey$state), ]$state <- sort(rep(unique(abrev$state)[!unique(abrev$state) %in% unique(honey$state)], 15)) -->
+<!-- honey[is.na(honey$year), ]$year <- rep(1998:2012, 6) -->
+<!-- honey <-  merge.data.frame(honey, abrev, by = "state") -->
+<!-- colnames(honey)[c(1, 9)] <- c("short", "State") -->
+<!-- us_states$State <- us_states$NAME -->
+<!-- us_states <- us_states[us_states$NAME != "District of Columbia", ] -->
+<!-- honey <- merge(honey, us_states[, 7:8], by = "State", all.y = TRUE) -->
+<!-- honey <- st_as_sf(honey) -->
+<!-- honey <- st_transform(honey, 4326) -->
+<!-- write_sf(honey, "../datasets/honey.shp") -->
+<!-- ``` -->
+<!-- ```{r, eval = FALSE} -->
+<!-- honey <- read_sf("../datasets/honey.shp") -->
+<!-- colnames(honey)[3:8] <- c("Number_of_colonies", "Yield_per_colony", -->
+<!--                           "Total_production", "Stocks","Price_per_lb", -->
+<!--                           "Value_of_production" -->
+<!--                           ) -->
+<!-- honey_animation <- tm_shape(honey) + tm_polygons(col = "Price_per_lb", style = "cont", -->
+<!--                                   pal = viridis(10, direction = -1)) + -->
+<!--   tm_facets(along = "year") + -->
+<!--   tm_layout(legend.position = c("left", "bottom")) -->
+<!-- tmap_animation(honey_animation, filename = "honey.gif", delay = 50, width = 1181, height = 500) -->
+<!-- ``` -->
+<!-- ```{r, fig.align="center",fig.cap="Animierte Karte", echo=FALSE} -->
+<!-- image_resize(image_read("../datasets/honey.gif"), "700x1181") -->
+<!-- ``` -->
+<!-- ## Weiterführende Links -->
+<!-- Für mehr Informationen zu der Verwendung von **tmap** siehe https://geocompr.robinlovelace.net/adv-map.html. [@lovelace2019geocomputation] -->
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

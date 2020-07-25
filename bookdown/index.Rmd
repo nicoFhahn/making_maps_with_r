@@ -1,0 +1,9 @@
+--- 
+title: "Making Maps with R"
+author: "Nico Hahn"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output:
+  bookdown::gitbook
+bibliography: bibliography.bib
+---
