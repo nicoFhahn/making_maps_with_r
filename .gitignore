@@ -3,3 +3,15 @@
 *.Rproj
 rsconnect/
 *.txt
+bookdown/_book/
+bookdown/_bookdown_files/
+.RData
+_book/
+_main.html
+flight_data/
+packages
+rosm.cache/
+shiny_apps/
+shiny_apps.zip
+bookdown/ggplot2.r
+bookdown/rosm.cache/
