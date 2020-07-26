@@ -1,6 +1,6 @@
 ```{r, include=FALSE}
 # packages we need
-packages <- c("colourpicker", "plyr", "dplyr", "extrafonts", "furrr", "future", "ggplot2", "ggspatial",
+packages <- c("colourpicker", "plyr", "dplyr", "extrafont", "furrr", "future", "ggplot2", "ggspatial",
               "htmltools", "htmlwidgets", "lattice", "leaflet", "leaflet.extras", "leafpop",
               "mapdeck", "magick", "maps", "mapview", "raster", "readr", "readxl",
               "RColorBrewer", "rgdal", "rgeos", "scico", "sf", "spData",
