@@ -444,7 +444,7 @@ tmap_mode("view")
 tm_shape(bavaria) + tm_polygons(col = "pop_development", midpoint = 0)
 ```
 ```{r, echo=FALSE}
-htmltools::tags$iframe(src = "html_plots/tmap_1.html", width = "700px", height = "700px")
+htmltools::tags$iframe(src = "html_plots/chapter_2/tmap_1.html", width = "700px", height = "700px")
 ```
 Alternatively, the map can also be created by `tmap_leaflet()`. As can be seen, there are several background maps to choose from for the map. To use a specific map as background, the function `tm_basemap()` can be used.
 
@@ -453,7 +453,7 @@ tm_shape(bavaria) + tm_polygons(col = "pop_development", midpoint = 0) +
   tm_basemap("Stamen.Watercolor")
 ```
 ```{r, echo=FALSE}
-htmltools::tags$iframe(src = "html_plots/tmap_2.html", width = "700px", height = "400px")
+htmltools::tags$iframe(src = "html_plots/chapter_2/tmap_2.html", width = "700px", height = "400px")
 ```
 
 All cards and their names can be viewed under the following link:
@@ -465,7 +465,7 @@ Even faceted maps can be displayed in interactive mode:
 tm_shape(bavaria) + tm_polygons(col = "unemployment_rate") + tm_facets(by = "Art")
 ```
 ```{r, echo=FALSE}
-htmltools::tags$iframe(src = "html_plots/tmap_3.html", width = "700px", height = "700px")
+htmltools::tags$iframe(src = "html_plots/chapter_2/tmap_3.html", width = "700px", height = "700px")
 ```
   
   
@@ -473,7 +473,7 @@ Interactive maps are also well suited to get a first overview of a dataset.
 The following example shows accidents in three London boroughs in 2017. First, the dataset is loaded and transformed into an `sf` object.
 
 ```{r, message=FALSE, warning=FALSE}
-accidents <- read_csv("../datasets/accidents.csv")
+accidents <- read_csv("../datasets/chapter_2/accidents.csv")
 accidents <- accidents %>%
   st_as_sf(coords = c("Longitude", "Latitude"), crs = 4326) %>%
   st_cast("POINT")
@@ -481,7 +481,7 @@ accidents <- accidents %>%
 
 Then the London shapefiles are loaded and the intersections between the two datasets are calculated.
 ```{r, message=FALSE, warning=FALSE}
-london <- read_sf("../datasets/London_Borough_Excluding_MHW.shp") %>%
+london <- read_sf("../datasets/chapter_2/London_Borough_Excluding_MHW.shp") %>%
   st_transform(4326)
 london_union <- st_union(london)
 accidents_m <- st_intersects(london_union, accidents)
@@ -518,7 +518,7 @@ map_london <- tm_shape(accidents) +
 map_london
 ```
 ```{r, echo=FALSE}
-htmltools::tags$iframe(src = "html_plots/tmap_4.html", width = "700px", height = "700px")
+htmltools::tags$iframe(src = "html_plots/chapter_2/tmap_4.html", width = "700px", height = "700px")
 ```
 
 =======
