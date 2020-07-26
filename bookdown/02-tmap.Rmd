@@ -1,7 +1,7 @@
 ```{r, echo=FALSE, include=FALSE}
 tmap_mode("plot")
 # load shapefiles for bavaria
-bavaria <- st_read("../datasets/bavaria.shp")
+bavaria <- st_read("../datasets/chapter_2/bavaria.shp")
 # nicer colnames
 colnames(bavaria) <- c(
   "place", "type", "gdp_per_capita", "mean_age",
@@ -34,10 +34,11 @@ bavaria$students <- as.numeric(as.character(
 bavaria$pop_development <- as.numeric(
   as.character(bavaria$pop_development)
 )
+bavaria$type <- ifelse(bavaria$type == "Landkreis", "District", "City")
 # load europe elevation raster
-europe_raster <- raster("../datasets/elevation1x1_new.tif")
+europe_raster <- raster("../datasets/chapter_2/elevation1x1_new.tif")
 # load europe shapefiles
-europe_shape <- read_sf("../datasets/ne_50m_admin_0_countries/ne_50m_admin_0_countries.shp")
+europe_shape <- read_sf("../datasets/chapter_2/ne_50m_admin_0_countries/ne_50m_admin_0_countries.shp")
 europe_shape <- europe_shape[europe_shape$CONTINENT == "Europe",]
 # cities above populaiton of 1 million
 cities <- world.cities[world.cities$pop >= 1000000, ]
@@ -45,16 +46,28 @@ cities <- cities %>% st_as_sf(coords = c("long", "lat"), crs = 4326) %>%
   st_cast("POINT")
 cities <- st_intersection(cities, st_union(europe_shape))
 europe_shape <- st_cast(europe_shape, "MULTILINESTRING")
-gemeinden <- read_sf("../datasets/gmd_ex.shp")
+gemeinden <- read_sf("../datasets/chapter_2/gmd_ex.shp")
 rosenheim <- gemeinden[str_detect(gemeinden$BEZ_KRS, "Rosenheim"), ]
 
-honey <- read_csv("../datasets/honeyproduction.csv")
-abrev <- read_xlsx("../datasets/abbrev.xlsx")
+honey <- read_csv("../datasets/chapter_2/honeyproduction.csv")
+abbrev <- read_xlsx("../datasets/chapter_2/abbrev.xlsx")
 ```
 
 
 # tmap
-Thematic maps are geographical maps in which spatial data distributions are visualized. This pack-age offers a flexible, layer-based, and easy to use approach to create thematic maps, such as choropleths and bubble maps. It is based on the grammar of graphics, and resembles the syntax of **ggplot2**.
+Thematic maps are geographical maps in which spatial data distributions are visualized. This pack-age offers a flexible, layer-based, and easy to use approach to create thematic maps, such as choropleths and bubble maps. It is based on the grammar of graphics, and resembles the syntax of **ggplot2**. For this chapter we will mainly be using the `tmap` package.
+```{r, eval=FALSE}
+# for loading and wrangling our data
+library(raster)
+library(readr)
+library(readxl)
+library(sf)
+# for creating animations
+library(magick)
+# for plotting
+library(tmap)
+library(viridis)
+```
 
 ## Static maps with tmap
 Most often, geographical data are displayed using static maps that can be saved as .png or .pdf files. Originally, data could only be visualized in this way in R, but the development of new packages, especially **sp**, has created new possibilities for displaying this data. Despite new methods like interactive maps, static maps are still the main focus of geospatial data visualization in R.
@@ -170,7 +183,7 @@ An alternative is the 'style' argument. This allows the user to automatically cr
 
 Other possibilities are `cat`, `fixed`, `sd`, `kmeans`, `hclust`, `bclust`, and `fisher`.
 
-```{r, fig.align="center",fig.cap="Unemployment rate in Bayern und Verteilung von Städten und Landkreisen", echo = FALSE, fig.width= 8, fig.height= 8, warning=FALSE, message=FALSE}
+```{r, fig.align="center",fig.cap="Unemployment rate in Bavaria and distribution of cities and districts", echo = FALSE, fig.width= 8, fig.height= 8, warning=FALSE, message=FALSE}
 ba4 <- tm_shape(bavaria) + tm_polygons(col = "unemployment_rate", style = "pretty", title = "Aq") + tm_credits('style = "pretty"', size = 1) + tm_layout(inner.margins = 0.1)
 ba5 <- tm_shape(bavaria) + tm_polygons(col = "unemployment_rate", style = "equal", title = "Aq") + tm_credits('style = "equal"', size = 1) + tm_layout(inner.margins = 0.1)
 ba6 <- tm_shape(bavaria) + tm_polygons(col = "unemployment_rate", style = "quantile", title = "Aq") + tm_credits('style = "quantile"', size = 1) + tm_layout(inner.margins = 0.1)
@@ -197,21 +210,21 @@ The palettes from these packages can be divided into three types of palettes:
 Alternatively, a custom palette can be passed, for this purpose HEX codes may be used.
 You should pay attention to the selection of your colours: Colors transfer feelings. For example, red is associated with negative things, while green is associated with positive things. This example can also be extended to geographical features. Green is associated with forests and blue with bodies of water. In addition, when using a palette, it should be clear which colour stands for lower or higher values. In order for the widest possible range of people to be able to interpret a map, care should also be taken, if possible, to ensure that colour-blind people can identify the differences between classes.
 ```{r, fig.align="center",fig.cap="Sequential, diverging and categorical palettes", echo=FALSE}
-image_read("../datasets/palette.png")
+image_read("../datasets/chapter_2/palette.png")
 ```
 
 Besides the possibility of changing the map itself, there is also the option of editing other elements of the graphic. With the help of functions like `tm_compass()`, `tm_scale_bar()`, `tm_logo()`, `tm_style()` and `tm_layout()`, maps can be extended by various elements. The first three of these functions can be used to add a compass, a scale bar and images.
 ```{r, eval=FALSE, warning=FALSE}
 tm_shape(bavaria) +
   tm_polygons(col = "type", pal = c("white", "skyblue")) +
-  tm_logo("../datasets/bavaria.png", height = 2) +
+  tm_logo("../datasets/chapter_2/bavaria.png", height = 2) +
   tm_scale_bar(position = c("left", "bottom"), width = 0.15) +
   tm_compass(position = c("left", "top"), size = 2)
 ```
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align="center", fig.cap="Map of Bavaria with additional elements"}
 tm_shape(bavaria) + tm_polygons(col = "type", pal = c("white", "skyblue")) +
-  tm_logo("../datasets/bavaria.png", height = 2) + tm_scale_bar(position = c("left", "bottom"), width = 0.15) +
+  tm_logo("../datasets/chapter_2/bavaria.png", height = 2) + tm_scale_bar(position = c("left", "bottom"), width = 0.15) +
   tm_compass(position = c("left", "top"), size = 2)
 
 ```
@@ -340,17 +353,17 @@ honey0912 <- honey[honey$year > 2008, ]
 honey0912 <- rbind(
   honey0912,
   matrix(NA, ncol = ncol(honey0912),
-         nrow = 4 * length(unique(abrev$state)[!unique(abrev$state) %in% unique(honey0912$state)]),
+         nrow = 4 * length(unique(abbrev$state)[!unique(abbrev$state) %in% unique(honey0912$state)]),
          dimnames = list(
-           c(seq_len(4 * length(unique(abrev$state)[!unique(abrev$state) %in% unique(honey0912$state)]))),
+           c(seq_len(4 * length(unique(abbrev$state)[!unique(abbrev$state) %in% unique(honey0912$state)]))),
            colnames(honey0912)
          )
   )
 )
 honey0912$state <- as.character(honey0912$state)
-honey0912[is.na(honey0912$state), ]$state <- sort(rep(unique(abrev$state)[!unique(abrev$state) %in% unique(honey0912$state)], 4))
+honey0912[is.na(honey0912$state), ]$state <- sort(rep(unique(abbrev$state)[!unique(abbrev$state) %in% unique(honey0912$state)], 4))
 honey0912[is.na(honey0912$year), ]$year <- rep(2009:2012, 10)
-honey0912 <-  merge.data.frame(honey0912, abrev, by = "state")
+honey0912 <-  merge.data.frame(honey0912, abbrev, by = "state")
 colnames(honey0912)[c(1, 9)] <- c("short", "State")
 us_states$State <- us_states$NAME
 us_states <- us_states[us_states$NAME != "District of Columbia", ]
@@ -388,27 +401,27 @@ honey <- rbind(honey, new_mat)
 honey <- rbind(
   honey,
   matrix(NA, ncol = ncol(honey),
-         nrow = 15 * length(unique(abrev$state)[!unique(abrev$state) %in% unique(honey$state)]),
+         nrow = 15 * length(unique(abbrev$state)[!unique(abbrev$state) %in% unique(honey$state)]),
          dimnames = list(
-           c(seq_len(15 * length(unique(abrev$state)[!unique(abrev$state) %in% unique(honey$state)]))),
+           c(seq_len(15 * length(unique(abbrev$state)[!unique(abbrev$state) %in% unique(honey$state)]))),
            colnames(honey)
          )
   )
 )
 honey$state <- as.character(honey$state)
-honey[is.na(honey$state), ]$state <- sort(rep(unique(abrev$state)[!unique(abrev$state) %in% unique(honey$state)], 15))
+honey[is.na(honey$state), ]$state <- sort(rep(unique(abbrev$state)[!unique(abbrev$state) %in% unique(honey$state)], 15))
 honey[is.na(honey$year), ]$year <- rep(1998:2012, 6)
-honey <-  merge.data.frame(honey, abrev, by = "state")
+honey <-  merge.data.frame(honey, abbrev, by = "state")
 colnames(honey)[c(1, 9)] <- c("short", "State")
 us_states$State <- us_states$NAME
 us_states <- us_states[us_states$NAME != "District of Columbia", ]
 honey <- merge(honey, us_states[, 7:8], by = "State", all.y = TRUE)
 honey <- st_as_sf(honey)
 honey <- st_transform(honey, 4326)
-write_sf(honey, "../datasets/honey.shp")
+# write_sf(honey, "../datasets/chapter_2/honey.shp")
 ```
 ```{r, eval = FALSE}
-honey <- read_sf("../datasets/honey.shp")
+honey <- read_sf("../datasets/chapter_2/honey.shp")
 colnames(honey)[3:8] <- c("Number_of_colonies", "Yield_per_colony",
                           "Total_production", "Stocks","Price_per_lb",
                           "Value_of_production"
@@ -417,11 +430,11 @@ honey_animation <- tm_shape(honey) + tm_polygons(col = "Price_per_lb", style = "
                                   pal = viridis(10, direction = -1)) +
   tm_facets(along = "year") +
   tm_layout(legend.position = c("left", "bottom"))
-tmap_animation(honey_animation, filename = "../datasets/honey.gif", delay = 50,
+tmap_animation(honey_animation, filename = "../datasets/chapter_2/honey.gif", delay = 50,
                width = 2400, height = 1200)
 ```
 ```{r, fig.align="center",fig.cap="Animated map", echo=FALSE}
-image_resize(image_read("../datasets/honey.gif"), "1200x2400")
+image_resize(image_read("../datasets/chapter_2/honey.gif"), "1200x2400")
 ```
 
 ## Interactive maps with tmap
@@ -508,5 +521,6 @@ map_london
 htmltools::tags$iframe(src = "html_plots/tmap_4.html", width = "700px", height = "700px")
 ```
 
+=======
 ## Related links
 For more information on the use of **tmap** see https://geocompr.robinlovelace.net/adv-map.html. [@lovelace2019geocomputation]
