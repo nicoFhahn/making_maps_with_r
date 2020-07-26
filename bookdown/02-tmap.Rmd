@@ -56,7 +56,7 @@ abrev <- read_xlsx("../datasets/abbrev.xlsx")
 # tmap
 Thematic maps are geographical maps in which spatial data distributions are visualized. This pack-age offers a flexible, layer-based, and easy to use approach to create thematic maps, such as choropleths and bubble maps. It is based on the grammar of graphics, and resembles the syntax of **ggplot2**.
 
-## Static Maps with tmap
+## Static maps with tmap
 Most often, geographical data are displayed using static maps that can be saved as .png or .pdf files. Originally, data could only be visualized in this way in R, but the development of new packages, especially **sp**, has created new possibilities for displaying this data. Despite new methods like interactive maps, static maps are still the main focus of geospatial data visualization in R.
 
 As mentioned above, the syntax of **tmap** is similar to that of **ggplot2**. This includes a strict separation between data and aesthetics. At the beginning, `tm_shape()` is passed a dataset, followed by one or more levels that define the type of display. Examples are `tm_fill()` and `tm_dots()` to plot data as polygons or points.
@@ -424,5 +424,89 @@ tmap_animation(honey_animation, filename = "../datasets/honey.gif", delay = 50,
 image_resize(image_read("../datasets/honey.gif"), "1200x2400")
 ```
 
-## Weiterführende Links
+## Interactive maps with tmap
+A disadvantage of static maps is that they always depict the same thing. This means that only one area is shown and the entire information is displayed directly. Interactive maps improve normal maps in that they allow the viewer to influence the look of the maps and provide additional information. The most common type of interactivity is panning and zooming the displayed map and displaying supplementary information when clicking on individual geometric objects. In **tmap**, interactivity can be added to each map using the function 'map_mode("view")`. With `tmap_mode("plot")` this interactivity is removed again.
+```{r, fig.align="center", fig.cap="Interactive map of Bavaria",eval=FALSE}
+tmap_mode("view")
+tm_shape(bavaria) + tm_polygons(col = "pop_development", midpoint = 0)
+```
+```{r, echo=FALSE}
+htmltools::tags$iframe(src = "html_plots/tmap_1.html", width = "700px", height = "700px")
+```
+Alternatively, the map can also be created by `tmap_leaflet()`. As can be seen, there are several background maps to choose from for the map. To use a specific map as background, the function `tm_basemap()` can be used.
+
+```{r, fig.align="center", fig.cap="Using a different background map", eval=FALSE}
+tm_shape(bavaria) + tm_polygons(col = "pop_development", midpoint = 0) +
+  tm_basemap("Stamen.Watercolor")
+```
+```{r, echo=FALSE}
+htmltools::tags$iframe(src = "html_plots/tmap_2.html", width = "700px", height = "400px")
+```
+
+All cards and their names can be viewed under the following link:
+\centering https://leaflet-extras.github.io/leaflet-providers/preview/
+\flushleft
+Even faceted maps can be displayed in interactive mode:
+
+```{r, warning=FALSE, fig.align="center", fig.cap="Faceted interactive map", eval = FALSE}
+tm_shape(bavaria) + tm_polygons(col = "unemployment_rate") + tm_facets(by = "Art")
+```
+```{r, echo=FALSE}
+htmltools::tags$iframe(src = "html_plots/tmap_3.html", width = "700px", height = "700px")
+```
+  
+  
+Interactive maps are also well suited to get a first overview of a dataset. 
+The following example shows accidents in three London boroughs in 2017. First, the dataset is loaded and transformed into an `sf` object.
+
+```{r, message=FALSE, warning=FALSE}
+accidents <- read_csv("../datasets/accidents.csv")
+accidents <- accidents %>%
+  st_as_sf(coords = c("Longitude", "Latitude"), crs = 4326) %>%
+  st_cast("POINT")
+```
+
+Then the London shapefiles are loaded and the intersections between the two datasets are calculated.
+```{r, message=FALSE, warning=FALSE}
+london <- read_sf("../datasets/London_Borough_Excluding_MHW.shp") %>%
+  st_transform(4326)
+london_union <- st_union(london)
+accidents_m <- st_intersects(london_union, accidents)
+accidents <- accidents[unlist(accidents_m), ]
+```
+
+To avoid making things too confusing, only three city districts are selected.
+```{r, message=FALSE, warning=FALSE}
+london <- london[london$NAME %in% c("City of London", "Westminster", "Camden"), ]
+london <- st_union(london)
+accidents_m <- st_intersects(london, accidents)
+accidents <- accidents[unlist(accidents_m), ]
+```
+
+Now only the map needs to be displayed. For this purpose, the variable 'Light_Conditions' is first sorted for a neater legend before the map is plotted. Each point represents an accident and by clicking on it, more information is displayed.
+
+```{r, fig.align="center", fig.cap="center", eval=FALSE}
+# do some ordering for the legend
+accidents$Light_Conditions <- ordered(accidents$Light_Conditions,
+                                      levels = c(
+                                        "Daylight",
+                                        "Darkness - lights lit",
+                                        "Darkness - lighting unknown",
+                                        "Darkness - lights unlit",
+                                        "Darkness - no lighting",
+                                        "Data missing or out of range"
+                                      ))
+# define the map
+map_london <- tm_shape(accidents) +
+  tm_dots(group = "2017", col = "Light_Conditions", palette = "Dark2",
+          popup.vars = TRUE) +
+  tm_view(alpha = 1,
+          basemaps = "Esri.WorldTopoMap")
+map_london
+```
+```{r, echo=FALSE}
+htmltools::tags$iframe(src = "html_plots/tmap_4.html", width = "700px", height = "700px")
+```
+
+## Related links
 For more information on the use of **tmap** see https://geocompr.robinlovelace.net/adv-map.html. [@lovelace2019geocomputation]
