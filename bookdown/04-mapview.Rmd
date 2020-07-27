@@ -1,10 +1,26 @@
-```{r, include=FALSE}
-
-```
 
 # mapview
 Nowadays maps are often integrated into websites. There are also packages in R for this type of application. The `mapview` package was created with the goal of quickly creating interactive maps. The most important function is `mapview()` which is used to generate the maps.
 
+```{r, eval=FALSE}
+# for loading our data
+library(sf)
+# for plotting
+library(lattice)
+library(leafpop)
+library(mapview)
+library(vapoRwave)
+library(viridis)
+```
+
+## Data used
+In this chapter we will only be using the bavaria dataset. So let's load that real quick.
+```{r, eval=FALSE}
+bavaria <- read_sf("bavaria.shp")
+```
+
+
+## Using mapview to create maps
 ```{r, fig.align="center", fig.cap="A basic map using mapview", fig.height=9, eval=FALSE}
 mapview(bavaria)
 ```
@@ -25,7 +41,7 @@ htmltools::tags$iframe(src = "html_plots/chapter_4/mapview_2.html", width = "700
 If we want to use a custom palette, we can define one and then use the `col.regions` argument.
 
 ```{r, fig.align="center", fig.cap="Using a custom palette", fig.height=9, eval=FALSE}
-pal <- viridis::magma(n = length(unique(bavaria$employment_rate)), direction = -1)
+pal <- magma(n = length(unique(bavaria$employment_rate)), direction = -1)
 mapview(bavaria, zcol = "unemployment_rate", col.regions = pal)
 ```
 ```{r, echo=FALSE}
@@ -35,7 +51,7 @@ htmltools::tags$iframe(src = "html_plots/chapter_4/mapview_6.html", width = "700
 The `at` argument can be used to define your own breakpoints.
 
 ```{r, fig.align="center", fig.cap="Defining breakpoints manually", fig.height=9, eval=FALSE}
-mapview(bavaria, zcol = "unemployment_rate", col.regions = vapoRwave::jazzCup_pal(), at = c(0, 2, 4, 6, 8))
+mapview(bavaria, zcol = "unemployment_rate", col.regions = jazzCup_pal(), at = c(0, 2, 4, 6, 8))
 ```
 ```{r, echo=FALSE}
 htmltools::tags$iframe(src = "html_plots/chapter_4/mapview_7.html", width = "700px", height = "700px")

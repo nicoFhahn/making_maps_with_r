@@ -1,10 +1,10 @@
 ```{r, echo=FALSE, include=FALSE}
-honey <- read_sf("../datasets/chapter_3/honey.shp")
-colnames(honey)[3:8] <- c("Number_of_colonies", "Yield_per_colony",
+honey_sf <- read_sf("../datasets/chapter_3/honey.shp")
+colnames(honey_sf)[3:8] <- c("Number_of_colonies", "Yield_per_colony",
                           "Total_production", "Stocks","Price_per_lb",
                           "Value_of_production"
 )
-honey2008 <- honey[honey$year == 2008, ]
+honey2008 <- honey_sf[honey_sf$year == 2008, ]
 state_capitals <- fromJSON("https://raw.githubusercontent.com/vega/vega/master/docs/data/us-state-capitals.json")
 state_capitals_sf <- st_as_sf(state_capitals, coords = c("lon", "lat"), crs = 4326)
 state_capitals_sf <- state_capitals_sf[!state_capitals_sf$state %in% c("Alaska", "Hawaii"), ]
@@ -13,13 +13,37 @@ honey2008_multiline <- st_cast(honey2008, "MULTILINESTRING")
 # ggplot2
 `ggplot2` excels at visualizing all kinds of data and is the "go to package" for most applications, so it should come as no surprise that you can also visualize spatial data with it. For this chapter we will use several extensions to `ggplot2' to create our plots.
 ```{r, eval=FALSE}
+# for loading our data
+library(jsonlite)
+library(rgdal)
+library(sf)
+# for plotting
+library(extrafont)
 library(ggplot2)
 library(ggspatial)
-library(extrafont)
 library(patchwork)
+library(scico)
 library(vapoRwave)
 ```
 
+## Data used
+We won't be using a lot of data in this chapter.
+```{r, eval=FALSE}
+# load honey shapefile
+honey_sf <- read_sf("honey.shp")
+# get the data for 2008
+honey2008 <- honey_sf[honey_sf$year == 2008, ]
+# create a MULTILINESTRING object
+honey2008_multiline <- st_cast(honey2008, "MULTILINESTRING")
+# load state capitals of the US
+state_capitals <- fromJSON("https://raw.githubusercontent.com/vega/vega/master/docs/data/us-state-capitals.json")
+# turn it into an sf object
+state_capitals_sf <- st_as_sf(state_capitals, coords = c("lon", "lat"), crs = 4326)
+# remove alaska and hawaii
+state_capitals_sf <- state_capitals_sf[!state_capitals_sf$state %in% c("Alaska", "Hawaii"), ]
+```
+
+## Using ggplot2 to create maps
 The easiest way to create spatial plots with ggplot is to use the `geom_sf()` function. By default there is no aesthetic mapping, but we can use arguments like `fill' to easily create choropleth maps.
 
 ```{r, fig.cap="Basic use of ggplot2 for spatial data"}
