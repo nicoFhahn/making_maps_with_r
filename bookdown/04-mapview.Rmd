@@ -1,0 +1,108 @@
+```{r, include=FALSE}
+
+```
+
+# mapview
+Nowadays maps are often integrated into websites. There are also packages in R for this type of application. The `mapview` package was created with the goal of quickly creating interactive maps. The most important function is `mapview()` which is used to generate the maps.
+
+```{r, fig.align="center", fig.cap="A basic map using mapview", fig.height=9, eval=FALSE}
+mapview(bavaria)
+```
+```{r, echo=FALSE}
+htmltools::tags$iframe(src = "html_plots/chapter_4/mapview_1.html", width = "700px", height = "700px")
+```
+
+This map already contains some basic functionality. We can select different basemaps, and when we click on one of the polygons, a table displays additional information about the city or district.
+  
+We can use the 'zcol' argument to color our polygons depending on the value of a variable.
+```{r, fig.align="center", fig.cap="zcol for coloring", fig.height=9, eval=FALSE}
+mapview(bavaria, zcol = "unemployment_rate")
+```
+```{r, echo=FALSE}
+htmltools::tags$iframe(src = "html_plots/chapter_4/mapview_2.html", width = "700px", height = "700px")
+```
+
+If we want to use a custom palette, we can define one and then use the `col.regions` argument.
+
+```{r, fig.align="center", fig.cap="Using a custom palette", fig.height=9, eval=FALSE}
+pal <- viridis::magma(n = length(unique(bavaria$employment_rate)), direction = -1)
+mapview(bavaria, zcol = "unemployment_rate", col.regions = pal)
+```
+```{r, echo=FALSE}
+htmltools::tags$iframe(src = "html_plots/chapter_4/mapview_6.html", width = "700px", height = "700px")
+```
+
+The `at` argument can be used to define your own breakpoints.
+
+```{r, fig.align="center", fig.cap="Defining breakpoints manually", fig.height=9, eval=FALSE}
+mapview(bavaria, zcol = "unemployment_rate", col.regions = vapoRwave::jazzCup_pal(), at = c(0, 2, 4, 6, 8))
+```
+```{r, echo=FALSE}
+htmltools::tags$iframe(src = "html_plots/chapter_4/mapview_7.html", width = "700px", height = "700px")
+```
+
+To visualize several maps at the same time, several `mapview()` functions can be connected with `+`. This way the European elevation raster map from chapter 2 can be reproduced. We use `alpha.regions` so that only the outlines of the countries are visible, and make the size of the circles dependent on the `pop` variable by using the `cex` argument.
+
+```{r, fig.align="center", fig.cap="Using multiple layers", warning=FALSE, message=FALSE, fig.height=9, eval=FALSE}
+mapview(europe_raster, legend = FALSE) +
+  mapview(europe_shape, legend = FALSE, alpha.regions = 0) +
+  mapview(cities, legend = FALSE, cex = "pop")
+```
+```{r, echo=FALSE}
+htmltools::tags$iframe(src = "html_plots/chapter_4/mapview_3.html", width = "700px", height = "700px")
+```
+
+With this card several things stand out immediately. The complete shapefile is shown, not only the areas within the grid. For example, Svalbard and the French overseas territories are shown. In the lower right corner you can click on *cities*, *europe_shape* or *europe_raster* to focus on one of these areas. By clicking on one of the cities or countries, a popup opens with further information about the city or country. 
+  
+If the argument `burst = TRUE` is used in addition to `zcol`, a single layer is created for each unique value of the selected variable, which can be focused or hidden. To focus on a layer, you can click on any of the names in the lower right corner. To hide a layer, you can use the layer controls in the upper left corner.
+
+```{r, fig.align="center", fig.cap="Focusing on layers", fig.height=9, eval=FALSE}
+mapview(highways, color = "red", lwd = 3,
+        layer.name = "highways", legend = FALSE) +
+  mapview(bavaria, zcol = "admin_district", burst = TRUE, col.regions = brewer.pal(7, "Dark2")) +
+  mapview(airports, legend = FALSE, col.regions = "black")
+```
+```{r, echo=FALSE}
+htmltools::tags$iframe(src = "html_plots/chapter_4/mapview_4.html", width = "700px", height = "700px")
+```
+
+The functions `popupTable()` and `popupGraph()` from the `leafpop` package can be used to specify which variables should appear in the popup or to display a graph. In the following example we are only interested in the unemployment rate, household income and population density. So we only include these variables in the tables that are displayed when you click on a polygon.
+
+```{r, fig.align="center", fig.cap="Custom popups", fig.height=9, eval=FALSE}
+mapview(bavaria, zcol = "admin_district", col.regions = brewer.pal(7, "Dark2"),
+        popup = popupTable(bavaria, zcol = c("unemployment_rate",
+                                             "household_income",
+                                             "pop_density")))
+```
+```{r, echo=FALSE}
+htmltools::tags$iframe(src = "html_plots/chapter_4/mapview_5.html", width = "700px", height = "700px")
+```
+
+To display a custom plot when you click on a polygon, we must first create a plot for each city and district. For each point in our dataset, we create a scatterplot in which the current data point is displayed in red, while the remaining points are grey.
+```{r, eval=FALSE}
+p <- xyplot(pop_density ~ unemployment_rate, data = bavaria, col = "grey", pch = 20, cex = 2)
+p <- mget(rep("p", nrow(bavaria)))
+
+clr <- rep("grey", nrow(bavaria))
+alp <- rep(0.2, nrow(bavaria))
+p <- lapply(1:length(p), function(i) {
+  clr[i] <- "red"
+  alp[i] <- 1
+  update(p[[i]], col = clr, alpha = alp)
+})
+
+```
+
+We then use the `popup` argument to use our custom plots as popups.
+
+```{r, fig.align="center", fig.cap="Using plots as popups", fig.height=9, eval=FALSE}
+mapview(bavaria, zcol = "unemployment_rate", col.regions = pal, popup = popupGraph(p))
+```
+```{r, echo=FALSE}
+htmltools::tags$iframe(src = "html_plots/chapter_4/mapview_9.html", width = "700px", height = "700px")
+```
+
+With the functions `leafpop::popupImage()` or `leafpop:::popupIframe()` even images, hyperlinks and YouTube videos can be integrated.
+
+## Related links
+For more information on the use of `mapview` see https://r-spatial.github.io/mapview/index.html. [@mapviewlink]
