@@ -1,5 +1,17 @@
+```{r, echo=FALSE, include=FALSE}
+honey <- read_sf("../datasets/chapter_3/honey.shp")
+colnames(honey)[3:8] <- c("Number_of_colonies", "Yield_per_colony",
+                          "Total_production", "Stocks","Price_per_lb",
+                          "Value_of_production"
+)
+honey2008 <- honey[honey$year == 2008, ]
+state_capitals <- fromJSON("https://raw.githubusercontent.com/vega/vega/master/docs/data/us-state-capitals.json")
+state_capitals_sf <- st_as_sf(state_capitals, coords = c("lon", "lat"), crs = 4326)
+state_capitals_sf <- state_capitals_sf[!state_capitals_sf$state %in% c("Alaska", "Hawaii"), ]
+honey2008_multiline <- st_cast(honey2008, "MULTILINESTRING")
+```
 # ggplot2
-`ggplot2` excels at visualizing all kinds of data and is the go to package for most applications, so it should come as no surprise, that you can visualize spatial data with `ggplot2` as well. For this chapter we will be using multiple extensions of ggplot2 to create our visualizations.
+`ggplot2` excels at visualizing all kinds of data and is the "go to package" for most applications, so it should come as no surprise that you can also visualize spatial data with it. For this chapter we will use several extensions to `ggplot2' to create our plots.
 ```{r, eval=FALSE}
 library(ggplot2)
 library(ggspatial)
@@ -8,9 +20,9 @@ library(patchwork)
 library(vapoRwave)
 ```
 
-The easiest way to generate spatial plots with ggplot is by using the `geom_spatial()` function. Per default no aesthetic mapping is done, but we can use arguments like `fill` to easily create choropleth maps.
+The easiest way to create spatial plots with ggplot is to use the `geom_sf()` function. By default there is no aesthetic mapping, but we can use arguments like `fill' to easily create choropleth maps.
 
-```{r}
+```{r, fig.cap="Basic use of ggplot2 for spatial data"}
 usa_1 <- ggplot(data = honey2008) +
   geom_sf()
 usa_2 <- ggplot(data = honey2008) +
@@ -19,9 +31,9 @@ usa_2 <- ggplot(data = honey2008) +
 usa_1 / usa_2
 ```
 
-By using the `annotation_*()` functions from `ggspatial` we can customize our maps by adding a basemap or other elements to our map.
+Using the `annotation_*()`` functions of `ggspatial` we can customize our maps by adding a base map or other elements to our map.
 
-```{r}
+```{r, fig.cap="Adding a basemap and some elements"}
 ggplot(data = honey2008) +
   annotation_map_tile("stamenwatercolor") +
   geom_sf(aes(fill = Price_per_lb), alpha = 0.8) +
@@ -29,6 +41,34 @@ ggplot(data = honey2008) +
   scale_fill_viridis_c() +
   ggtitle(label = "The Honey crisis of 2008", subtitle = "Price per lb")
 ```
+
+We can also use the packages `vapoRwave` and `extrafonts`, do some magic and then create some vibey maps.
+
+```{r,fig.cap= "A E S T H E T I C"}
+ggplot(data = honey2008_multiline) +
+  geom_sf(color = "#FF6B58", alpha = 0.1,  size = 4) +
+  geom_sf(color = "#FF6B58", alpha = 0.1,  size = 3) +
+  geom_sf(color = "#FF6B58", alpha = 0.2,  size = 2) +
+  geom_sf(color = "#FF6B58", alpha = 0.2,  size = 1) +
+  geom_sf(color = "#FF6B58", alpha = 1,  size = 0.5) +
+  geom_sf(color = "#F8B660", alpha = 0.1, size = 6, data = state_capitals_sf) +
+  geom_sf(color = "#F8B660", alpha = 0.1, size = 5, data = state_capitals_sf) +
+  geom_sf(color = "#F8B660", alpha = 0.2, size = 4, data = state_capitals_sf) +
+  geom_sf(color = "#F8B660", alpha = 0.2, size = 3, data = state_capitals_sf) +
+  geom_sf(color = "#F8B660", alpha = 0.4, size = 2, data = state_capitals_sf) +
+  geom_sf(color = "#F8B660", alpha = 1, size = 1, data = state_capitals_sf) +
+  labs(subtitle="An aesthetic look",
+       title="US States and their Captials", 
+       caption = "Excluding Alaska and Hawaii") + 
+  new_retro() + 
+  scale_colour_newRetro() +
+  guides(size = guide_legend(override.aes = list(colour = "#FA5F70FF"))) +
+  theme(
+    panel.grid.major = element_blank()
+  )
+```
+
+You can also go completely crazy, as Timo Grossenbacher did in his blog, and create maps like the one below.
 
 ```{r, warning=FALSE,message=FALSE,include=FALSE}
 theme_map <- function(...) {
@@ -106,7 +146,7 @@ map_data$brks <- cut(map_data$avg_age_15,
 brks_scale <- levels(map_data$brks)
 labels_scale <- rev(brks_scale)
 ```
-```{r, fig.align="center",fig.cap="Karte der Schweiz in ggplot2", warning=FALSE,message=FALSE}
+```{r, fig.align="center",fig.cap="Map of Switzerland using ggplot2", warning=FALSE,message=FALSE}
 ggplot() +
     # raster comes as the first layer, municipalities on top
     geom_raster(data = relief, aes(x = x, 
@@ -129,11 +169,13 @@ ggplot() +
     theme_map() +
     theme(legend.position = "bottom", plot.title = element_text(hjust = 0.5),
           plot.subtitle = element_text(hjust = 0.5)) +
-    labs(x = NULL, 
-         y = NULL, 
-         title = "Switzerland's regional demographics", 
-         subtitle = "Average age in Swiss municipalities, 2015", 
-         caption = "Geometries: ThemaKart, BFS; Data: BFS, 2016; Relief: swisstopo, 2016") + 
+    labs(
+      x = NULL, 
+      y = NULL, 
+      title = "Switzerland's regional demographics", 
+      subtitle = "Average age in Swiss municipalities, 2015", 
+      caption = "Geometries: ThemaKart, BFS; Data: BFS, 2016; Relief: swisstopo, 2016"
+      ) + 
     scale_fill_manual(
       values = rev(scico(8, palette = "davos")[2:7]),
       breaks = rev(brks_scale),
@@ -154,5 +196,7 @@ ggplot() +
       )
     )
 ```
+
+Overall, `ggplot2` is a great way to easily create geographic maps if you don't want to learn a new plotting package.
 
 [@ggswitz]
