@@ -1,0 +1,650 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Folder><name>airports</name>
+  <Placemark>
+	<name>Schweinfurt-Süd</name>
+      <Point><coordinates>10.2448633,50.0111981</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Lager Hammelburg</name>
+      <Point><coordinates>9.8811976,50.0980165</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Aero Club Bad Königshofen</name>
+      <Point><coordinates>10.4199975,50.2874925</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Segelfluggelände Altenbachtal</name>
+      <Point><coordinates>9.1525911,49.9219302</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Sonderlandeplatz Ochsenfurt</name>
+      <Point><coordinates>10.0705639,49.6735069</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Sonderlandeplatz Kitzingen</name>
+      <Point><coordinates>10.203997,49.7411556</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Verkehrslandeplatz Giebelstadt</name>
+      <Point><coordinates>9.96792407165141,49.6484483728209</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Verkehrslandeplatz Herzogenaurach</name>
+      <Point><coordinates>10.8780936451775,49.5822536026318</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Bad Kissingen</name>
+      <Point><coordinates>10.0690408292094,50.210021474137</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Verkehrslandeplatz Mainbullau</name>
+      <Point><coordinates>9.18173992980621,49.6947228094585</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Segelflieger-Gemeinschaft Ostheim v.d. Rhön</name>
+      <Point><coordinates>10.2531981798324,50.4482315568588</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Schenkenturm</name>
+      <Point><coordinates>9.89779199491971,49.8175648273534</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Segelfluggelände am Kreuzberg</name>
+      <Point><coordinates>10.3723779292635,50.3093188413511</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Segelsportverein Mellrichstadt</name>
+      <Point><coordinates>10.2839100462591,50.4322172680662</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Aschaffenburg</name>
+      <Point><coordinates>9.06177479796142,49.9393838792348</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Ultraleichtflugplatz Burgebrach</name>
+      <Point><coordinates>10.7789015328064,49.8384043364836</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Bad Brückenau-Oberleichtersbach</name>
+      <Point><coordinates>9.82371701160403,50.2717671325723</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Karlstadt-Saupurzel</name>
+      <Point><coordinates>9.79054804928922,49.9712281480483</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Haßfurt-Schweinfurt</name>
+      <Point><coordinates>10.5289389115098,50.0176138860027</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Segelflugplatz Fürth-Seckendorf</name>
+      <Point><coordinates>10.8598249576103,49.4813719707369</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Sonderlandeplatz Neustadt/Aisch</name>
+      <Point><coordinates>10.577315889251,49.5874395284585</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Ippesheim-UL</name>
+      <Point><coordinates>10.2247069448094,49.6101428976516</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Ebern-Sendelbach</name>
+      <Point><coordinates>10.8220008422957,50.0400385618422</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Hettstadt</name>
+      <Point><coordinates>9.83651449238612,49.7985755113573</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Bad Neustadt/Saale-Grasberg</name>
+      <Point><coordinates>10.2266753704936,50.3064298374619</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Altfeld</name>
+      <Point><coordinates>9.53862386676696,49.8319082090052</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Sonderlandeplatz Bad Windsheim</name>
+      <Point><coordinates>10.3662767441146,49.5104776967332</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Kulmbach</name>
+      <Point><coordinates>11.4605121,50.1345387</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Verkehrslandeplatz Burg Feuerstein</name>
+      <Point><coordinates>11.1311445,49.7937551</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Verkehrslandeplatz Lichtenfels</name>
+      <Point><coordinates>11.046371,50.147685</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Zell-Haidberg</name>
+      <Point><coordinates>11.7965697,50.1375249</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Segelflugplatz Friesen</name>
+      <Point><coordinates>11.0473259,49.8374991</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>GSD Flugplatz</name>
+      <Point><coordinates>11.2823564,50.3283961</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>UL Frankendorf</name>
+      <Point><coordinates>11.0890816,49.8365058</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Segelflugplatz Dobenreuth</name>
+      <Point><coordinates>11.1412303,49.6972212</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Siegritz</name>
+      <Point><coordinates>11.2225342,49.8574641</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Segelfluggelände Kronach</name>
+      <Point><coordinates>11.3578593,50.243847</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Grafenwöhr Army Airfield</name>
+      <Point><coordinates>11.9400527699386,49.6977736889308</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Sonderlandeplatz Lauf-Lillinghof</name>
+      <Point><coordinates>11.2835651578789,49.6052114273325</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Pegnitz-Zipser Berg</name>
+      <Point><coordinates>11.5740519314288,49.7622752065443</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Segelflugplatz Erbendorf</name>
+      <Point><coordinates>12.0673845780119,49.8439384627689</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Coburg-Brandensteinsebene</name>
+      <Point><coordinates>10.9960071035734,50.2627394163062</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Coburg-Steinrücken</name>
+      <Point><coordinates>10.9948665344481,50.2306446680437</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Rosenthal Airfield Speichersdorf</name>
+      <Point><coordinates>11.786857714012,49.8635125841496</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Sonderlandeplatz Ottengrüner Heide</name>
+      <Point><coordinates>11.7313908720323,50.2259650486177</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Segelflugplatz Tröstau</name>
+      <Point><coordinates>11.930649742834,50.0200865136275</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Verkehrslandeplatz Bayreuth</name>
+      <Point><coordinates>11.6396409190916,49.9857112913483</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Verkehrslandeplatz Weiden-Latsch</name>
+      <Point><coordinates>12.1171628259548,49.6787882579758</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Verkehrslandeplatz Hof-Plauen</name>
+      <Point><coordinates>11.8547856673184,50.2885675326422</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Hetzleser Berg</name>
+      <Point><coordinates>11.1624742468118,49.6421120865117</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Bamberg-Breitenau</name>
+      <Point><coordinates>10.9143642816401,49.9207091977111</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Vilseck Army Airfield</name>
+      <Point><coordinates>11.7659571958841,49.6347253696154</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Sonderlandeplatz Treuchtlingen-Bubenheim</name>
+      <Point><coordinates>10.885932,48.9949803</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Sonderlandeplatz Dinkelsbühl-Sinbronn</name>
+      <Point><coordinates>10.4012867,49.0647849</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Berching</name>
+      <Point><coordinates>11.4434233,49.130491</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Landeplatz Nördlingen</name>
+      <Point><coordinates>10.5056867,48.8704282</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Forst</name>
+      <Point><coordinates>11.4014445,49.2155595</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Segelfluggelände Ottenberg</name>
+      <Point><coordinates>11.4795203,49.3289492</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Segelflugplatz Post-Sportverein Nürnberg</name>
+      <Point><coordinates>11.4263369,49.390004</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>UL-Gelände Geilsheim</name>
+      <Point><coordinates>10.6580091,49.0244633</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Gersdorf UL</name>
+      <Point><coordinates>11.1410909,49.0317829</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Gunzenhausen-Reutberg</name>
+      <Point><coordinates>10.7820767,49.1120334</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Verkehrslandeplatz Rothenburg o.d. Tauber</name>
+      <Point><coordinates>10.2178384859839,49.3885851430526</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Segelflugplatz Hersbruck</name>
+      <Point><coordinates>11.4522006188863,49.5069932622981</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Segelflugplatz Hersbruck</name>
+      <Point><coordinates>11.4432992194905,49.5076296753407</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Sonderlandeplatz Ansbach-Petersdorf</name>
+      <Point><coordinates>10.6698759743292,49.3613128435206</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Illesheim Airfield</name>
+      <Point><coordinates>10.3844546605958,49.4728094481407</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Segelfluggelände Greding</name>
+      <Point><coordinates>11.2898409672108,49.0627925554431</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Ultraleichtflugplatz Unterschwaningen</name>
+      <Point><coordinates>10.6349849655769,49.0860560966528</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Segelflugplatz Weißenburg-Wülzburg</name>
+      <Point><coordinates>11.0182178460977,49.0258510563606</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Heeresflugplatz Roth</name>
+      <Point><coordinates>11.0963138451406,49.217739948965</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Günching</name>
+      <Point><coordinates>11.5724736924485,49.2677153205437</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Albrecht-Dürer-Airport NÃ¼rnberg</name>
+      <Point><coordinates>11.0771214417754,49.4980935702703</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Beilngries</name>
+      <Point><coordinates>11.4837583606171,49.0211136539982</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Eichstätt</name>
+      <Point><coordinates>11.1813298977117,48.8770395168618</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Sonderlandeplatz Neumarkt</name>
+      <Point><coordinates>11.44472768624,49.2855579841483</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Sonderlandeplatz Thalmässing-Waizenhofen</name>
+      <Point><coordinates>11.2086970964995,49.0643401405045</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Sonderlandeplatz Schwabach-Büchenbach</name>
+      <Point><coordinates>11.0101067803494,49.2684032331636</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Segelfluggelände Irsingen</name>
+      <Point><coordinates>10.5034599830968,49.0382854351809</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>UL-Flugplatz Litzlohe</name>
+      <Point><coordinates>11.48938636642,49.3518954434649</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Nittenau-Bruck</name>
+      <Point><coordinates>12.2969935,49.2230046</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Segelflugplatz Tirschenreuth</name>
+      <Point><coordinates>12.3284023,49.8739996</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Oberhinkofen</name>
+      <Point><coordinates>12.1475218,48.9521126</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Segelflugplatz Cham-Janahof</name>
+      <Point><coordinates>12.658928,49.211222</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Segelflugplatz Etting</name>
+      <Point><coordinates>11.4215025545366,48.8102192544296</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Segelflugplatz Charlottenhof</name>
+      <Point><coordinates>12.1848956703619,49.34060924267</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Fichtelbrunn</name>
+      <Point><coordinates>11.6575546331616,49.4982717408502</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Straubing-Wallmühle</name>
+      <Point><coordinates>12.5168576753241,48.9011776418951</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Luftsportgruppe Amberg e.V.</name>
+      <Point><coordinates>11.8112373811502,49.4406664391738</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Sonderlandeplatz Griesau</name>
+      <Point><coordinates>12.4207494336422,48.9544123746389</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Deggendorf</name>
+      <Point><coordinates>12.8804314931397,48.8300312716472</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Hohenfels Army Airfield</name>
+      <Point><coordinates>11.8374634026826,49.2160074303653</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Sonderlandeplatz Neuburg-Egweil</name>
+      <Point><coordinates>11.215988733163,48.7821956775037</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Arnbruck</name>
+      <Point><coordinates>12.9848043407258,49.1262019524252</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Arnschwang</name>
+      <Point><coordinates>12.7778843975821,49.2717109975935</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Sportflugplatz Schmidgaden</name>
+      <Point><coordinates>12.0988139649112,49.4296474185867</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Regensburg-Oberhub</name>
+      <Point><coordinates>12.0821660913514,49.1419651796102</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Hienheim</name>
+      <Point><coordinates>11.7597238433327,48.8778990805852</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Sportflugplatz Schwabmünchen</name>
+      <Point><coordinates>10.7090037,48.1802843</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Jesenwang</name>
+      <Point><coordinates>11.1254484,48.1742216</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Sportflugplatz Füssen</name>
+      <Point><coordinates>10.6875227,47.5834636</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Allgäu Airport Memmingen</name>
+      <Point><coordinates>10.2325378,47.9893477</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Günzburg Donauried</name>
+      <Point><coordinates>10.2830058,48.4861572</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Geratshof</name>
+      <Point><coordinates>10.8376174,47.9918235</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>UL-Flugplatz Wildberg</name>
+      <Point><coordinates>9.7417605,47.6004158</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Fliegerhorst Neuburg</name>
+      <Point><coordinates>11.2143598308068,48.7106193274748</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Fliegerhorst Kaufbeuren</name>
+      <Point><coordinates>10.6156559547164,47.8641074157559</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Donauwörth Helicopter Airport</name>
+      <Point><coordinates>10.769550979095,48.7076334511424</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Fliegerhorst Lechfeld</name>
+      <Point><coordinates>10.860907207126,48.1862023986536</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Mindelheim-Mattsies</name>
+      <Point><coordinates>10.5247273857882,48.1086033411458</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Offizierschule der Luftwaffe</name>
+      <Point><coordinates>11.2678197531439,48.203229196904</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Sonderlandeplatz Gundelfingen</name>
+      <Point><coordinates>10.3583468229637,48.5690381275333</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Bad Wörishofen</name>
+      <Point><coordinates>10.6148805577456,48.0163334046523</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Segelflugplatz Bad Wörishofen</name>
+      <Point><coordinates>10.5991301270642,48.026382870924</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Paterzell</name>
+      <Point><coordinates>11.061103124489,47.846043015686</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Kempten-Durach</name>
+      <Point><coordinates>10.3386332987852,47.6917963258368</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Burgheim</name>
+      <Point><coordinates>11.0334204079992,48.6922543118667</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Segelflugplatz Stillberghof</name>
+      <Point><coordinates>10.8336324613858,48.730882723633</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Agathazeller Moos</name>
+      <Point><coordinates>10.2728345534742,47.5545110612837</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Segelflugzentrum Ohlstadt</name>
+      <Point><coordinates>11.2349226070183,47.6583953642159</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Illertissen</name>
+      <Point><coordinates>10.1355280706558,48.2349167710442</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Weißenhorn</name>
+      <Point><coordinates>10.1387635919264,48.2893504413237</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Aichach</name>
+      <Point><coordinates>11.1350513369389,48.4730662499768</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Sonderflughafen Oberpfaffenhofen</name>
+      <Point><coordinates>11.2888952621967,48.0832401028773</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Donauwörth-Genderkingen</name>
+      <Point><coordinates>10.8527963088596,48.7033491098303</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Thannhausen</name>
+      <Point><coordinates>10.4436440704078,48.2903410947635</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Antdorf</name>
+      <Point><coordinates>11.3039189658735,47.7601227291394</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Heeresflugplatz Altenstadt</name>
+      <Point><coordinates>10.8698702881032,47.8356778473535</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flughafen Augsburg</name>
+      <Point><coordinates>10.9309187027798,48.4243846336477</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Altomünster</name>
+      <Point><coordinates>11.2731769708435,48.3823015358096</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Sonderlandeplatz Schönberg</name>
+      <Point><coordinates>12.5034009,48.0472981</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Segelflugplatz LSC Schliersee</name>
+      <Point><coordinates>11.9635431,47.6776378</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Ampfing Waldkraiburg</name>
+      <Point><coordinates>12.4105556,48.2630833</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Segelflugplatz Gammelsdorf</name>
+      <Point><coordinates>11.9334598,48.5702855</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Straßham UL</name>
+      <Point><coordinates>11.9276385,48.1799989</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Eggenfelden</name>
+      <Point><coordinates>12.7212611,48.3953916</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Osterwies</name>
+      <Point><coordinates>12.6494766,48.216581</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Vilsbiburg</name>
+      <Point><coordinates>12.3452778,48.4261093</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Kirchdorf/Inn Airport</name>
+      <Point><coordinates>12.9766674,48.2383347</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Pfarrkirchen</name>
+      <Point><coordinates>12.8647223,48.4202766</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Sonderlandeplatz Schleißheim</name>
+      <Point><coordinates>11.5589418,48.2390853</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Segelflugplatz Brannenburg</name>
+      <Point><coordinates>12.1163311,47.7390205</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Bad Endorf</name>
+      <Point><coordinates>12.2871915,47.9267912</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Sonderlandeplatz Vogtareuth</name>
+      <Point><coordinates>12.2043496,47.9462835</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Warngau</name>
+      <Point><coordinates>11.7044006,47.8247867</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>UL-Flugplatz Kleinhartpenning</name>
+      <Point><coordinates>11.6667536,47.8517272</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Segelflugplatz Hallertau</name>
+      <Point><coordinates>11.5962300624126,48.6489048425241</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Ingolstadt-Manching</name>
+      <Point><coordinates>11.5318124084019,48.7141970975552</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Dingolfing</name>
+      <Point><coordinates>12.4987286643756,48.6569347685498</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Mühldorf</name>
+      <Point><coordinates>12.502226102293,48.2794735185055</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Moosburg auf der Kippe</name>
+      <Point><coordinates>11.9418908586137,48.4569118912951</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Wasentegernbach</name>
+      <Point><coordinates>12.2178328927801,48.2733827308206</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Segelflugzentrum Königsdorf</name>
+      <Point><coordinates>11.4655450887856,47.8290405556585</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Antersberg</name>
+      <Point><coordinates>11.9969066362078,47.9619237293534</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Grabenstätt</name>
+      <Point><coordinates>12.5505071345445,47.852680736309</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Deutsche Alpen-Segelflugschule Unterwössen</name>
+      <Point><coordinates>12.4389899166889,47.7302907590474</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Landshut-Ellermühle</name>
+      <Point><coordinates>12.0352398036378,48.511865510739</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Benediktbeuern</name>
+      <Point><coordinates>11.3908824438189,47.7155732342909</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flugplatz Greiling</name>
+      <Point><coordinates>11.5942262740292,47.7646559638511</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Flughafen München</name>
+      <Point><coordinates>11.7818915485474,48.353448385101</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Dachau-Gröbenried</name>
+      <Point><coordinates>11.4228738122385,48.2286831095275</coordinates></Point>
+  </Placemark>
+</Folder>
+</Document></kml>
