@@ -38,7 +38,7 @@ bavaria$type <- ifelse(bavaria$type == "Landkreis", "District", "City")
 # load europe elevation raster
 europe_raster <- raster("../datasets/chapter_2/elevation1x1_new.tif")
 # load europe shapefiles
-europe_shape <- read_sf("../datasets/chapter_2/ne_50m_admin_0_countries/ne_50m_admin_0_countries.shp")
+europe_shape <- read_sf("../datasets/chapter_2/ne_50m_admin_0_countries.shp")
 europe_shape <- europe_shape[europe_shape$CONTINENT == "Europe",]
 # cities above populaiton of 1 million
 cities <- world.cities[world.cities$pop >= 1000000, ]
@@ -55,7 +55,7 @@ abbrev <- read_xlsx("../datasets/chapter_2/abbrev.xlsx")
 
 
 # tmap
-Thematic maps are geographical maps in which spatial data distributions are visualized. This pack-age offers a flexible, layer-based, and easy to use approach to create thematic maps, such as choropleths and bubble maps. It is based on the grammar of graphics, and resembles the syntax of **ggplot2**. For this chapter we will mainly be using the `tmap` package.
+Thematic maps are geographical maps in which spatial data distributions are visualized. This pack-age offers a flexible, layer-based, and easy to use approach to create thematic maps, such as choropleths and bubble maps. It is based on the grammar of graphics, and resembles the syntax of `ggplot2`. For this chapter we will mainly be using the `tmap` package.
 ```{r, eval=FALSE}
 # for loading and wrangling our data
 library(raster)
@@ -70,9 +70,9 @@ library(viridis)
 ```
 
 ## Static maps with tmap
-Most often, geographical data are displayed using static maps that can be saved as .png or .pdf files. Originally, data could only be visualized in this way in R, but the development of new packages, especially **sp**, has created new possibilities for displaying this data. Despite new methods like interactive maps, static maps are still the main focus of geospatial data visualization in R.
+Most often, geographical data are displayed using static maps that can be saved as .png or .pdf files. Originally, data could only be visualized in this way in R, but the development of new packages, especially `sp`, has created new possibilities for displaying this data. Despite new methods like interactive maps, static maps are still the main focus of geospatial data visualization in R.
 
-As mentioned above, the syntax of **tmap** is similar to that of **ggplot2**. This includes a strict separation between data and aesthetics. At the beginning, `tm_shape()` is passed a dataset, followed by one or more levels that define the type of display. Examples are `tm_fill()` and `tm_dots()` to plot data as polygons or points.
+As mentioned above, the syntax of `tmap` is similar to that of `ggplot2`. This includes a strict separation between data and aesthetics. At the beginning, `tm_shape()` is passed a dataset, followed by one or more levels that define the type of display. Examples are `tm_fill()` and `tm_dots()` to plot data as polygons or points.
 ```{r, eval=FALSE}
 tm_shape(bavaria) + tm_fill()
 tm_shape(bavaria) + tm_borders()
@@ -92,7 +92,7 @@ tmap_arrange(bav_1, bav_2, bav_3, ncol = 3)
 
 The passed object 'bavaria' has the class 'sf' and represents the individual cities and districts of Bavaria. `tm_fill()` fills the individual polygons, resulting in a filled outline of Bavaria. `tm_borders()` draws the borders of the individual polygons and `tm_polygons()` combines the two functions and displays both at the same time. The `+` operator can be used to add additional layers to visualize different types of geospatial data.
 
-With **tmap** objects can not only be plotted but can also be saved as objects of the class 'tmap'.
+With `tmap` objects can not only be plotted but can also be saved as objects of the class 'tmap'.
 ```{r}
 # save map as an object
 map_europe <- tm_shape(europe_raster) + tm_raster()
@@ -117,10 +117,10 @@ tmap_arrange(bav_1, bav_2, bav_3, ncol = 3)
 ```
 The user is not limited in the number of layers he is able to add. It should be noted, however, that too much information can quickly overwhelm the viewer.
 
-For the previous plots the default aesthetic settings of **tmap** were used. To create visually appealing maps, these can be overwritten. Two main types of map aesthetics exist:
+For the previous plots the default aesthetic settings of `tmap` were used. To create visually appealing maps, these can be overwritten. Two main types of map aesthetics exist:
     - Those that change with the data
     - Those that do not change with data
-Compared to **ggplot2** no helper function (`aes()`) is used to customize the design of the map. Instead, the arguments are passed directly. Some of the most useful arguments are the fill color (`col`), transparency (`alpha`), line width (`lwd`) and line style (`lty`).
+Compared to `ggplot2` no helper function (`aes()`) is used to customize the design of the map. Instead, the arguments are passed directly. Some of the most useful arguments are the fill color (`col`), transparency (`alpha`), line width (`lwd`) and line style (`lty`).
 
 ```{r, fig.align="center",fig.cap="Use of various arguments"}
 bav1 <- tm_shape(bavaria) + tm_fill(col = "aquamarine")
@@ -132,7 +132,7 @@ bav6 <- tm_shape(bavaria) + tm_polygons(col = "#E2E2E2", border.alpha = 0.5, lwd
 tmap_arrange(bav1, bav1, bav3, bav4, bav5, bav6, ncol = 3)
 ```
 
-Another difference to **ggplot2** is that the variable names must be passed as characters and the `$' operator cannot be used.
+Another difference to `ggplot2` is that the variable names must be passed as characters and the `$' operator cannot be used.
 ```{r, error=TRUE}
 tm_shape(bavaria) + tm_polygons(col = bavaria$pop_development)
 ```
@@ -155,7 +155,7 @@ plot(st_geometry(bavaria), col = pal(nrow(bavaria))[bavaria$order])  # works
 
 ```
 
-The example of the last two maps shows that **tmap** automatically selects a color palette and intervals. To use other intervals, you can either pass manual bins to the `breaks' argument or use `n' to specify the number of bins.
+The example of the last two maps shows that `tmap` automatically selects a color palette and intervals. To use other intervals, you can either pass manual bins to the `breaks' argument or use `n' to specify the number of bins.
 ```{r, eval = FALSE}
 tm_shape(bavaria) + tm_polygons(col = "mean_age")
 tm_shape(bavaria) + tm_polygons(col = "mean_age", breaks = c(40, 42, 46, 54))
@@ -193,7 +193,7 @@ ba9 <- tm_shape(bavaria) + tm_polygons(col = "type", style = "cat") + tm_credits
 tmap_arrange(ba4, ba5, ba6, ba7, ba8, ba9, ncol = 3)
 ```
 
-A further possibility to influence the appearance of a map is to choose the colour of the individual classes. The user can do this using the `palette` argument. The name of a palette from the **RColorBrewer** or **Viridis** package can be passed to this argument. If the order of the palette should be reversed, a `-` can be added at the beginning of the character.
+A further possibility to influence the appearance of a map is to choose the colour of the individual classes. The user can do this using the `palette` argument. The name of a palette from the `RColorBrewer` or `Viridis` package can be passed to this argument. If the order of the palette should be reversed, a `-` can be added at the beginning of the character.
 ```{r, eval = FALSE}
 tm_shape(bavaria) + tm_polygons(col = "unemployment_rate", palette = "viridis")
 tm_shape(bavaria) + tm_polygons(col = "unemployment_rate", palette = "-viridis")
@@ -268,7 +268,7 @@ bbox <- st_bbox(rosenheim, crs = 4326) %>%
 map_rosenheim <- tm_shape(rosenheim) + tm_polygons()
 bayern <- tm_shape(bavaria) + tm_polygons() + tm_shape(bbox) + tm_polygons(alpha = 0, border.col = "red", lwd = 3)
 ```
-```{r, include=TRUE, echo=TRUE, fig.align="center", fig.cap="Towns and communities of the County of Rosenheim"}
+```{r, include=TRUE, echo=TRUE, fig.align="center", fig.cap="Towns and communities of the district of Rosenheim"}
 map_rosenheim
 print(bayern, vp = grid::viewport(0.8, 0.185, width = 0.2, height = 0.45))
 ```
@@ -341,7 +341,7 @@ grid.lines(x = c(0, 1), y = c(0.58, 0.58), gp = gpar(lty = 2))
 grid.lines(x = c(0, 0.2), y = c(0.33, 0), gp = gpar(lty = 2))
 ```
 
-Besides the possibility to change different elements of the maps based on a variable, maps can be divided into several maps depending on a variable. What is done in **ggplot2** with `facet_wrap()` is done in **tmap** with `tm_facets()`. If a temporal variable is to be plotted, this is difficult to do with a map, because the geometries would often overlap. Especially in these cases the use of faceted maps is useful. The function has five important arguments:
+Besides the possibility to change different elements of the maps based on a variable, maps can be divided into several maps depending on a variable. What is done in `ggplot2` with `facet_wrap()` is done in `tmap` with `tm_facets()`. If a temporal variable is to be plotted, this is difficult to do with a map, because the geometries would often overlap. Especially in these cases the use of faceted maps is useful. The function has five important arguments:
 
 - `by`: According to which variable should be split?
 - `nrow / ncol`: The number of rows or columns of the facets
@@ -378,7 +378,7 @@ tm_shape(honey0912) + tm_polygons(col = "priceperlb", style = "cont",
   tm_layout(legend.outside.size = 0.2)
 ```
 
-One problem with this type of maps is that with more values of a variable, more maps are created, which quickly becomes confusing and makes it very difficult to distinguish between the individual maps. This problem is solved by using animated maps. They cannot be displayed in papers, but nowadays more and more information is being retrieved online, which reduces this problem. The author of an article can alternatively include a link to the animated map in his text. As already mentioned, an animated map can be created with the  'along' argument of the function `tm_facets()`. With the help of the function `tmap_animation()` the created animation can be saved as a GIF file, however, the software **ImageMagick** is required for this. The software can be installed using the **installr** package.  (`installr::install.imagemagick()`) The following animation also shows the average price of a pound of honing in US$, this time over a period of 15 years. You can use `delay` to specify how many milliseconds should elapse between each image. With `width` and `height` you can also specify the dimensions in pixels, with `loop` whether the GIF is an endless loop or ends after a certain number of rounds.
+One problem with this type of maps is that with more values of a variable, more maps are created, which quickly becomes confusing and makes it very difficult to distinguish between the individual maps. This problem is solved by using animated maps. They cannot be displayed in papers, but nowadays more and more information is being retrieved online, which reduces this problem. The author of an article can alternatively include a link to the animated map in his text. As already mentioned, an animated map can be created with the  'along' argument of the function `tm_facets()`. With the help of the function `tmap_animation()` the created animation can be saved as a GIF file, however, the software `ImageMagick` is required for this. The software can be installed using the `installr` package.  (`installr::install.imagemagick()`) The following animation also shows the average price of a pound of honing in US$, this time over a period of 15 years. You can use `delay` to specify how many milliseconds should elapse between each image. With `width` and `height` you can also specify the dimensions in pixels, with `loop` whether the GIF is an endless loop or ends after a certain number of rounds.
 
 ```{r, include = FALSE, eval=FALSE}
 tab <- table(honey$state)
@@ -438,7 +438,7 @@ image_resize(image_read("../datasets/chapter_2/honey.gif"), "1200x2400")
 ```
 
 ## Interactive maps with tmap
-A disadvantage of static maps is that they always depict the same thing. This means that only one area is shown and the entire information is displayed directly. Interactive maps improve normal maps in that they allow the viewer to influence the look of the maps and provide additional information. The most common type of interactivity is panning and zooming the displayed map and displaying supplementary information when clicking on individual geometric objects. In **tmap**, interactivity can be added to each map using the function 'map_mode("view")`. With `tmap_mode("plot")` this interactivity is removed again.
+A disadvantage of static maps is that they always depict the same thing. This means that only one area is shown and the entire information is displayed directly. Interactive maps improve normal maps in that they allow the viewer to influence the look of the maps and provide additional information. The most common type of interactivity is panning and zooming the displayed map and displaying supplementary information when clicking on individual geometric objects. In `tmap`, interactivity can be added to each map using the function 'map_mode("view")`. With `tmap_mode("plot")` this interactivity is removed again.
 ```{r, fig.align="center", fig.cap="Interactive map of Bavaria",eval=FALSE}
 tmap_mode("view")
 tm_shape(bavaria) + tm_polygons(col = "pop_development", midpoint = 0)
@@ -521,6 +521,5 @@ map_london
 htmltools::tags$iframe(src = "html_plots/chapter_2/tmap_4.html", width = "700px", height = "700px")
 ```
 
-=======
 ## Related links
-For more information on the use of **tmap** see https://geocompr.robinlovelace.net/adv-map.html. [@lovelace2019geocomputation]
+For more information on the use of `tmap` see https://geocompr.robinlovelace.net/adv-map.html. [@lovelace2019geocomputation]
