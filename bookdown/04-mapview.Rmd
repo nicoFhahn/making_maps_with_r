@@ -1,4 +1,3 @@
-
 # mapview
 Nowadays maps are often integrated into websites. There are also packages in R for this type of application. The `mapview` package was created with the goal of quickly creating interactive maps. The most important function is `mapview()` which is used to generate the maps.
 

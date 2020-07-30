@@ -1,0 +1,270 @@
+# mapdeck
+`mapdeck` is an R-package that allows you to create interactive maps using *mapbox GL* and *deck.gl*. Mapbox is a location data platform that can be used to create various applications. Deck.gl is a framework for visualizing large datasets.
+To use `mapdeck`, a Mapbox token is required. To obtain a Mapbox token, you must create a free Mapbox account at https://www.mapbox.com. After you have received your token, you can either set it globally with `set_token()` or you can set it manually for each plot with the `token` argument.
+```{r, include=FALSE}
+library(dotenv)
+try(load_dot_env("key.env"), silent = TRUE)
+token <- Sys.getenv("MAPBOX_KEY")
+```
+```{r, eval=FALSE}
+# for loading our data
+library(sf)
+# for datasets
+library(nycflights13)
+# for plotting
+library(mapdeck)
+library(RColorBrewer)
+# for data wrangling
+library(dplyr)
+```
+
+In this chapter we will use three datasets. The first two are both taken from OpenStreetMap and contain the road network of Hamburg and locations of bakeries in Europe. We will also use a dataset from the package `nycflights13`, which contains all flights from New York airports in 2013.
+```{r, eval=FALSE}
+roads_hamburg <- read_sf("hamburg.shp")
+bakeries <- read_sf("bakeries.kml")
+# count the number of flights from each origin to each destination
+flights_grouped <- flights %>%
+  count(dest, origin)
+colnames(airports)[1] <- "dest"
+# join the flight data with the coordinates of the destination airports
+flights_grouped <- flights_grouped %>%
+  right_join(airports[, c(1, 3:4)])
+colnames(flights_grouped)[4:5] <- c("lat_dest", "lon_dest")
+colnames(airports)[1] <- "origin"
+# join the flight data with the coordinates of the origin airports
+flights_grouped <- flights_grouped %>%
+  right_join(airports[, c(1, 3:4)])
+colnames(flights_grouped)[6:7] <- c("lat_origin", "lon_origin")
+# remove NAs
+flights_grouped <- flights_grouped[!is.na(flights_grouped$dest), ]
+```
+
+
+If you create a map with mapdeck, you can define a basemap style using `mapdeck_style()`. If you do not define a style, a default mapbox style is used. To create a map, start with `mapdeck()` and then add layers using the pipe operator `%>%`. For instance, we can visualize our flight data by adding an arc layer that represents the flight routes as raised arcs.
+
+```{r, fig.cap="Flüge von Denver aus in die einzelnen Bundestaaten, 1987-2008",eval=FALSE}
+ms <- mapdeck_style("satellite")
+mapdeck(data = flights_grouped, style = ms, pitch = 30, token = token) %>%
+  add_arc(
+    # coordinates of origin airports
+    origin = c("lon_origin", "lat_origin"),
+    # coordinates of destination airports
+    destination = c("lon_dest", "lat_dest"),
+    # color our strokes depending on the number of flights
+    stroke_from = "n",
+    stroke_to = "n",
+    palette = "viridis",
+    legend = TRUE
+    ) %>%
+  # set the view
+  mapdeck_view(
+    location = c(-110, 48),
+    # set the zoom level
+    zoom = 2,
+    # set the pitch angle
+    pitch = 45,
+  )
+```
+
+
+```{r, echo=FALSE}
+htmltools::includeHTML("html_plots/chapter_5/mapdeck1.html")
+```
+
+With `add_line()` we can also display our flights as straight lines from origin to destination.
+
+```{r, eval=FALSE}
+ms <- mapdeck_style("light")
+mapdeck(style = ms, token = token) %>%
+  add_line(
+    data = flights_grouped,
+    origin = c("lon_origin", "lat_origin"),
+    destination = c("lon_dest", "lat_dest"),
+    stroke_colour = "n",
+    stroke_width = 2,
+    palette = "plasma",
+    legend = TRUE
+  ) %>%
+  mapdeck_view(
+    location = c(-110, 48),
+    zoom = 2,
+    pitch = 45
+  )
+```
+
+```{r, echo=FALSE}
+htmltools::includeHTML("html_plots/chapter_5/mapdeck2.html")
+```
+
+We can even animate both of these plots with `add_animated_arc()` and `add_animated_line()`.
+```{r, eval=FALSE}
+ms <- mapdeck_style("outdoors")
+mapdeck(style = ms, token = token) %>%
+  add_animated_arc(
+    data = flights_grouped,
+    origin = c("lon_origin", "lat_origin"),
+    destination = c("lon_dest", "lat_dest"),
+    stroke_from = "n",
+    stroke_to = "n",
+    stroke_width = 3,
+    # set the length of the trails
+    trail_length = 10,
+    palette = "magenta2green",
+    legend = TRUE
+  ) %>%
+  mapdeck_view(
+    location = c(-110, 48),
+    zoom = 2,
+    pitch = 45
+  )
+```
+
+```{r, echo=FALSE}
+htmltools::includeHTML("html_plots/chapter_5/mapdeck3.html")
+```
+
+```{r, eval=FALSE}
+ms <- mapdeck_style("dark")
+mapdeck(style = ms, token = token) %>%
+  add_animated_line(
+    data = flights_grouped,
+    origin = c("lon_origin", "lat_origin"),
+    destination = c("lon_dest", "lat_dest"),
+    stroke_colour = "n",
+    stroke_width = 2,
+    # set the speed of the animation
+    animation_speed = 10,
+    palette = "viridis",
+    legend = TRUE
+  ) %>%
+  mapdeck_view(
+    location = c(-110, 48),
+    zoom = 2,
+    pitch = 45
+  )
+```
+
+```{r, echo=FALSE}
+htmltools::includeHTML("html_plots/chapter_5/mapdeck4.html")
+```
+
+To visualize a `LINESTRING` or `MULTILINESTRING` we can use the `add_path()` function. In the following, the road network of Hamburg is displayed using this function.
+```{r, eval=FALSE}
+mapdeck(token = token) %>%
+  add_path(
+    data = roads_hamburg,
+    stroke_colour = "#404040"
+    ) %>%
+  mapdeck_view(
+    location = c(10, 53.6),
+    zoom = 8
+  )
+```
+
+```{r, echo=FALSE}
+htmltools::includeHTML("html_plots/chapter_5/mapdeck5.html")
+```
+
+Next, we color our streets depending on the type of street with the argument `stroke_colour`. This time we will also use our custom palette, which we create with `colorRamp()`.
+
+
+```{r, eval=FALSE}
+mapdeck(style = ms, token = token) %>%
+  add_path(
+    data = roads_hamburg,
+    stroke_colour = "type",
+    stroke_width = 2,
+    legend = TRUE,
+    palette = colorRamp(c("#FFB17A", "#B967FF", "#05FFA1"))( (1:256)/256 )
+    ) %>%
+  mapdeck_view(
+    location = c(10, 53.6),
+    zoom = 8
+  )
+
+```
+
+```{r, echo=FALSE}
+htmltools::includeHTML("html_plots/chapter_5/mapdeck6.html")
+```
+
+Lastly, we will plot spatial `POINT` data, in this case a list of bakeries in Europe. We can plot these as different types of heatmaps using `add_grid()`, `add_hexagon()` or `add_heatmap()`.
+
+```{r, eval=FALSE}
+mapdeck(style = ms, token = token) %>%
+  add_grid(
+    data = bakeries,
+    # size of each cell in meters
+    cell_size = 1000,
+    # multiplier for the elevation of the cells
+    elevation_scale = 75,
+    colour_range = brewer.pal(6, "YlOrRd")
+    ) %>%
+  mapdeck_view(
+    location = c(10, 48),
+    zoom = 3,
+    pitch = 45,
+  )
+```
+```{r, echo=FALSE}
+htmltools::includeHTML("html_plots/chapter_5/mapdeck7.html")
+```
+```{r, eval=FALSE}
+mapdeck(style = ms, token = token) %>%
+  add_hexagon(
+    data = bakeries,
+    # radius of each cell in meters
+    radius = 1000,
+    # multiplier for the elevation of the cells
+    elevation_scale = 75,
+    colour_range = brewer.pal(6, "YlOrRd")
+  ) %>%
+  mapdeck_view(
+    location = c(10, 48),
+    zoom = 3,
+    pitch = 45,
+  )
+```
+```{r, echo=FALSE}
+htmltools::includeHTML("html_plots/chapter_5/mapdeck8.html")
+```
+```{r, eval=FALSE}
+mapdeck(style = ms, token = token) %>%
+  add_heatmap(
+    data = bakeries,
+    # radius of the circle in pixels
+    radius_pixels = 2,
+    colour_range = brewer.pal(6, "YlOrRd")
+  ) %>%
+  mapdeck_view(
+    location = c(10, 48),
+    zoom = 3,
+    pitch = 45,
+  )
+```
+```{r, echo=FALSE}
+htmltools::includeHTML("html_plots/chapter_5/mapdeck9.html")
+```
+
+The function `add_screengrid()` aggregates points into histogram bins and displays them as a grid. Each time you zoom in or out of the map, the map is re-rendered and the grid is updated.
+
+```{r, eval=FALSE}
+mapdeck(style = ms, token = token) %>%
+  add_screengrid(
+    data = bakeries,
+    cell_size = 20,
+    opacity = 0.3,
+    colour_range = brewer.pal(6, "YlOrRd")
+  ) %>%
+  mapdeck_view(
+    location = c(10, 48),
+    zoom = 3,
+    pitch = 45,
+  )
+```
+```{r, echo=FALSE}
+htmltools::includeHTML("html_plots/chapter_5/mapdeck10.html")
+```
+
+## Related links
+For more information on the use of `mapdeck` see https://symbolixau.github.io/mapdeck/index.html. [@mapdecklink]

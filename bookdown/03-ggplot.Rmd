@@ -24,6 +24,8 @@ library(ggspatial)
 library(patchwork)
 library(scico)
 library(vapoRwave)
+# for data wrangling
+library(dplyr)
 ```
 
 ## Data used
@@ -125,7 +127,8 @@ crs(gde_15) <- "+proj=somerc +lat_0=46.95240555555556
 map_data_fortified <- fortify(gde_15, region = "BFS_ID") %>% 
   mutate(id = as.numeric(id))
 # now we join the thematic data
-map_data <- map_data_fortified %>% left_join(data, by = c("id" = "bfs_id"))
+map_data <- map_data_fortified %>%
+  left_join(data, by = c("id" = "bfs_id"))
 # whole municipalities
 gde_15_political <- readOGR("switzerland/input/geodata/g1g15.shp", layer = "g1g15")
 crs(gde_15_political) <- "+proj=somerc +lat_0=46.95240555555556 
@@ -133,7 +136,8 @@ crs(gde_15_political) <- "+proj=somerc +lat_0=46.95240555555556
 +ellps=bessel +towgs84=674.374,15.056,405.346,0,0,0,0 +units=m +no_defs"
 map_data_political_fortified <- fortify(gde_15_political, region = "GMDNR") %>% 
   mutate(id = as.numeric(id))
-map_data_political <- map_data_political_fortified %>% left_join(data, by = c("id" = "bfs_id"))
+map_data_political <- map_data_political_fortified %>%
+  left_join(data, by = c("id" = "bfs_id"))
 map_data_political <- map_data_political[complete.cases(map_data_political),]
 # read in background relief
 relief <- raster("switzerland/input/geodata/02-relief-georef-clipped-resampled.tif")
