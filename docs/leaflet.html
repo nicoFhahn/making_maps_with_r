@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>6 leaflet | Making Maps with R</title>
+  <meta name="description" content="6 leaflet | Making Maps with R" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="6 leaflet | Making Maps with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="6 leaflet | Making Maps with R" />
+  
+  
+  
+
+<meta name="author" content="Nico Hahn" />
+
+
+<meta name="date" content="2020-07-30" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="mapdeck.html"/>
+<link rel="next" href="conclusion.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="tmap.html"><a href="tmap.html"><i class="fa fa-check"></i><b>2</b> tmap</a><ul>
+<li class="chapter" data-level="2.1" data-path="tmap.html"><a href="tmap.html#data-used"><i class="fa fa-check"></i><b>2.1</b> Data used</a></li>
+<li class="chapter" data-level="2.2" data-path="tmap.html"><a href="tmap.html#static-maps-with-tmap"><i class="fa fa-check"></i><b>2.2</b> Static maps with tmap</a></li>
+<li class="chapter" data-level="2.3" data-path="tmap.html"><a href="tmap.html#interactive-maps-with-tmap"><i class="fa fa-check"></i><b>2.3</b> Interactive maps with tmap</a></li>
+<li class="chapter" data-level="2.4" data-path="tmap.html"><a href="tmap.html#related-links"><i class="fa fa-check"></i><b>2.4</b> Related links</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="ggplot2.html"><a href="ggplot2.html"><i class="fa fa-check"></i><b>3</b> ggplot2</a><ul>
+<li class="chapter" data-level="3.1" data-path="tmap.html"><a href="tmap.html#data-used"><i class="fa fa-check"></i><b>3.1</b> Data used</a></li>
+<li class="chapter" data-level="3.2" data-path="ggplot2.html"><a href="ggplot2.html#using-ggplot2-to-create-maps"><i class="fa fa-check"></i><b>3.2</b> Using ggplot2 to create maps</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="mapview.html"><a href="mapview.html"><i class="fa fa-check"></i><b>4</b> mapview</a><ul>
+<li class="chapter" data-level="4.1" data-path="tmap.html"><a href="tmap.html#data-used"><i class="fa fa-check"></i><b>4.1</b> Data used</a></li>
+<li class="chapter" data-level="4.2" data-path="mapview.html"><a href="mapview.html#using-mapview-to-create-maps"><i class="fa fa-check"></i><b>4.2</b> Using mapview to create maps</a></li>
+<li class="chapter" data-level="4.3" data-path="tmap.html"><a href="tmap.html#related-links"><i class="fa fa-check"></i><b>4.3</b> Related links</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="mapdeck.html"><a href="mapdeck.html"><i class="fa fa-check"></i><b>5</b> mapdeck</a><ul>
+<li class="chapter" data-level="5.1" data-path="tmap.html"><a href="tmap.html#data-used"><i class="fa fa-check"></i><b>5.1</b> Data used</a></li>
+<li class="chapter" data-level="5.2" data-path="mapdeck.html"><a href="mapdeck.html#using-mapdeck-to-create-maps"><i class="fa fa-check"></i><b>5.2</b> Using mapdeck to create maps</a></li>
+<li class="chapter" data-level="5.3" data-path="tmap.html"><a href="tmap.html#related-links"><i class="fa fa-check"></i><b>5.3</b> Related links</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="leaflet.html"><a href="leaflet.html"><i class="fa fa-check"></i><b>6</b> leaflet</a><ul>
+<li class="chapter" data-level="6.1" data-path="tmap.html"><a href="tmap.html#data-used"><i class="fa fa-check"></i><b>6.1</b> Data used</a></li>
+<li class="chapter" data-level="6.2" data-path="leaflet.html"><a href="leaflet.html#using-leaflet-to-create-maps"><i class="fa fa-check"></i><b>6.2</b> Using leaflet to create maps</a></li>
+<li class="chapter" data-level="6.3" data-path="tmap.html"><a href="tmap.html#related-links"><i class="fa fa-check"></i><b>6.3</b> Related links</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
+<li class="chapter" data-level="8" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>8</b> References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Making Maps with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="leaflet" class="section level1">
+<h1><span class="header-section-number">6</span> leaflet</h1>
+<p><strong>leaflet</strong> is an open-source JavaScript library that is used to create dynamic online maps. The identically named R package makes it possible to create these kinds of maps in R as well. The syntax is identical to the <code>mapdeck</code> syntax. First the function <code>leaflet()</code> is called, followed by different layers with <code>add*()</code>. Again, the pipe operator <code>%&gt;%</code> is used to add layers on top of each other.</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="leaflet.html#cb61-1"></a><span class="co"># for loading our data</span></span>
+<span id="cb61-2"><a href="leaflet.html#cb61-2"></a><span class="kw">library</span>(readr)</span>
+<span id="cb61-3"><a href="leaflet.html#cb61-3"></a><span class="kw">library</span>(sf)</span>
+<span id="cb61-4"><a href="leaflet.html#cb61-4"></a><span class="co"># for plotting</span></span>
+<span id="cb61-5"><a href="leaflet.html#cb61-5"></a><span class="kw">library</span>(leaflet)</span>
+<span id="cb61-6"><a href="leaflet.html#cb61-6"></a><span class="kw">library</span>(leaflet.extras)</span>
+<span id="cb61-7"><a href="leaflet.html#cb61-7"></a><span class="co"># for more stuff</span></span>
+<span id="cb61-8"><a href="leaflet.html#cb61-8"></a><span class="kw">library</span>(dbscan)</span>
+<span id="cb61-9"><a href="leaflet.html#cb61-9"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb61-10"><a href="leaflet.html#cb61-10"></a><span class="kw">library</span>(openrouteservice)</span>
+<span id="cb61-11"><a href="leaflet.html#cb61-11"></a><span class="kw">library</span>(geosphere)</span>
+<span id="cb61-12"><a href="leaflet.html#cb61-12"></a><span class="kw">library</span>(magrittr)</span></code></pre></div>
+<div id="data-used" class="section level2">
+<h2><span class="header-section-number">6.1</span> Data used</h2>
+<p>All data used in this chapter is again taken from OpenStreetMap, and most of the data has been converted to shapefiles.</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="leaflet.html#cb62-1"></a>pharmacies &lt;-<span class="st"> </span><span class="kw">read_sf</span>(<span class="st">&quot;pharmacies.shp&quot;</span>)</span>
+<span id="cb62-2"><a href="leaflet.html#cb62-2"></a>streets &lt;-<span class="st"> </span><span class="kw">read_sf</span>(<span class="st">&quot;streets.shp&quot;</span>)</span></code></pre></div>
+</div>
+<div id="using-leaflet-to-create-maps" class="section level2">
+<h2><span class="header-section-number">6.2</span> Using leaflet to create maps</h2>
+<p>In this first example, we will record all pharmacies within a 20-minute travel time window by bicycle from a specific starting point in Munich. First we create our basemap with <code>leaflet()</code> and add different provider tiles and a layers control so that users can switch between the different basemaps.</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="leaflet.html#cb63-1"></a>basemap &lt;-<span class="st"> </span><span class="kw">leaflet</span>() <span class="op">%&gt;%</span></span>
+<span id="cb63-2"><a href="leaflet.html#cb63-2"></a><span class="st">  </span><span class="co"># add different provider tiles</span></span>
+<span id="cb63-3"><a href="leaflet.html#cb63-3"></a><span class="st">  </span><span class="kw">addProviderTiles</span>(</span>
+<span id="cb63-4"><a href="leaflet.html#cb63-4"></a>    <span class="st">&quot;OpenStreetMap&quot;</span>,</span>
+<span id="cb63-5"><a href="leaflet.html#cb63-5"></a>    <span class="co"># give the layer a name</span></span>
+<span id="cb63-6"><a href="leaflet.html#cb63-6"></a>    <span class="dt">group =</span> <span class="st">&quot;OpenStreetMap&quot;</span></span>
+<span id="cb63-7"><a href="leaflet.html#cb63-7"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb63-8"><a href="leaflet.html#cb63-8"></a><span class="st">  </span><span class="kw">addProviderTiles</span>(</span>
+<span id="cb63-9"><a href="leaflet.html#cb63-9"></a>    <span class="st">&quot;Stamen.Toner&quot;</span>,</span>
+<span id="cb63-10"><a href="leaflet.html#cb63-10"></a>    <span class="dt">group =</span> <span class="st">&quot;Stamen.Toner&quot;</span></span>
+<span id="cb63-11"><a href="leaflet.html#cb63-11"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb63-12"><a href="leaflet.html#cb63-12"></a><span class="st">  </span><span class="kw">addProviderTiles</span>(</span>
+<span id="cb63-13"><a href="leaflet.html#cb63-13"></a>    <span class="st">&quot;Stamen.Terrain&quot;</span>,</span>
+<span id="cb63-14"><a href="leaflet.html#cb63-14"></a>    <span class="dt">group =</span> <span class="st">&quot;Stamen.Terrain&quot;</span></span>
+<span id="cb63-15"><a href="leaflet.html#cb63-15"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb63-16"><a href="leaflet.html#cb63-16"></a><span class="st">  </span><span class="kw">addProviderTiles</span>(</span>
+<span id="cb63-17"><a href="leaflet.html#cb63-17"></a>    <span class="st">&quot;Esri.WorldStreetMap&quot;</span>,</span>
+<span id="cb63-18"><a href="leaflet.html#cb63-18"></a>    <span class="dt">group =</span> <span class="st">&quot;Esri.WorldStreetMap&quot;</span></span>
+<span id="cb63-19"><a href="leaflet.html#cb63-19"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb63-20"><a href="leaflet.html#cb63-20"></a><span class="st">  </span><span class="kw">addProviderTiles</span>(</span>
+<span id="cb63-21"><a href="leaflet.html#cb63-21"></a>    <span class="st">&quot;Wikimedia&quot;</span>,</span>
+<span id="cb63-22"><a href="leaflet.html#cb63-22"></a>    <span class="dt">group =</span> <span class="st">&quot;Wikimedia&quot;</span></span>
+<span id="cb63-23"><a href="leaflet.html#cb63-23"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb63-24"><a href="leaflet.html#cb63-24"></a><span class="st">  </span><span class="kw">addProviderTiles</span>(</span>
+<span id="cb63-25"><a href="leaflet.html#cb63-25"></a>    <span class="st">&quot;CartoDB.Positron&quot;</span>,</span>
+<span id="cb63-26"><a href="leaflet.html#cb63-26"></a>    <span class="dt">group =</span> <span class="st">&quot;CartoDB.Positron&quot;</span></span>
+<span id="cb63-27"><a href="leaflet.html#cb63-27"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb63-28"><a href="leaflet.html#cb63-28"></a><span class="st">  </span><span class="kw">addProviderTiles</span>(</span>
+<span id="cb63-29"><a href="leaflet.html#cb63-29"></a>    <span class="st">&quot;Esri.WorldImagery&quot;</span>,</span>
+<span id="cb63-30"><a href="leaflet.html#cb63-30"></a>    <span class="dt">group =</span> <span class="st">&quot;Esri.WorldImagery&quot;</span></span>
+<span id="cb63-31"><a href="leaflet.html#cb63-31"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb63-32"><a href="leaflet.html#cb63-32"></a><span class="co"># add a layers control</span></span>
+<span id="cb63-33"><a href="leaflet.html#cb63-33"></a><span class="st">  </span><span class="kw">addLayersControl</span>(</span>
+<span id="cb63-34"><a href="leaflet.html#cb63-34"></a>    <span class="dt">baseGroups =</span> <span class="kw">c</span>(</span>
+<span id="cb63-35"><a href="leaflet.html#cb63-35"></a>      <span class="st">&quot;OpenStreetMap&quot;</span>, <span class="st">&quot;Stamen.Toner&quot;</span>,</span>
+<span id="cb63-36"><a href="leaflet.html#cb63-36"></a>      <span class="st">&quot;Stamen.Terrain&quot;</span>, <span class="st">&quot;Esri.WorldStreetMap&quot;</span>,</span>
+<span id="cb63-37"><a href="leaflet.html#cb63-37"></a>      <span class="st">&quot;Wikimedia&quot;</span>, <span class="st">&quot;CartoDB.Positron&quot;</span>, <span class="st">&quot;Esri.WorldImagery&quot;</span></span>
+<span id="cb63-38"><a href="leaflet.html#cb63-38"></a>    ),</span>
+<span id="cb63-39"><a href="leaflet.html#cb63-39"></a>    <span class="co"># position it on the topleft</span></span>
+<span id="cb63-40"><a href="leaflet.html#cb63-40"></a>    <span class="dt">position =</span> <span class="st">&quot;topleft&quot;</span></span>
+<span id="cb63-41"><a href="leaflet.html#cb63-41"></a>  )</span></code></pre></div>
+<p>Next we add a marker for our starting point. To make it stand out from the markers we will add later, we create a unique looking marker with <code>makeAwesomeIcon()</code> and add it to our basemap with <code>addAwesomeMarkers()</code>. Notice how we can add layers to our <code>basemap</code> object using <code>%&gt;%</code>.</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="leaflet.html#cb64-1"></a>icon.fa &lt;-<span class="st"> </span><span class="kw">makeAwesomeIcon</span>(</span>
+<span id="cb64-2"><a href="leaflet.html#cb64-2"></a>  <span class="dt">icon =</span> <span class="st">&quot;flag&quot;</span>, <span class="dt">markerColor =</span> <span class="st">&quot;red&quot;</span>,</span>
+<span id="cb64-3"><a href="leaflet.html#cb64-3"></a>  <span class="dt">library =</span> <span class="st">&quot;fa&quot;</span>,</span>
+<span id="cb64-4"><a href="leaflet.html#cb64-4"></a>  <span class="dt">iconColor =</span> <span class="st">&quot;black&quot;</span></span>
+<span id="cb64-5"><a href="leaflet.html#cb64-5"></a>)</span>
+<span id="cb64-6"><a href="leaflet.html#cb64-6"></a></span>
+<span id="cb64-7"><a href="leaflet.html#cb64-7"></a>map_<span class="dv">1</span> &lt;-<span class="st"> </span>basemap <span class="op">%&gt;%</span></span>
+<span id="cb64-8"><a href="leaflet.html#cb64-8"></a><span class="st">  </span><span class="kw">addAwesomeMarkers</span>(</span>
+<span id="cb64-9"><a href="leaflet.html#cb64-9"></a>    <span class="dt">lat =</span> <span class="fl">48.1</span>,</span>
+<span id="cb64-10"><a href="leaflet.html#cb64-10"></a>    <span class="dt">lng =</span> <span class="fl">11.5</span>,</span>
+<span id="cb64-11"><a href="leaflet.html#cb64-11"></a>    <span class="dt">label =</span> <span class="st">&quot;Starting point&quot;</span>,</span>
+<span id="cb64-12"><a href="leaflet.html#cb64-12"></a>    <span class="dt">icon =</span> icon.fa</span>
+<span id="cb64-13"><a href="leaflet.html#cb64-13"></a>  )</span>
+<span id="cb64-14"><a href="leaflet.html#cb64-14"></a></span>
+<span id="cb64-15"><a href="leaflet.html#cb64-15"></a>map_<span class="dv">1</span></span></code></pre></div>
+<iframe src="html_plots/chapter_6/leaflet_1.html"></iframe>
+<p>Next, we have to calculate the drivetime window from our starting point. For this we will be using the <code>openrouteservice</code> package which can be used to calculate drivetime windows from a given point by foot, bike or car for instance. To use the package, you need a token which you can get for free at <a href="https://openrouteservice.org/" class="uri">https://openrouteservice.org/</a>. After calculating the isochrone, we calculate the intersection between the pharmacies in Munich and the drivetime window.</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="leaflet.html#cb65-1"></a>drivetime &lt;-<span class="st"> </span><span class="kw">ors_isochrones</span>(</span>
+<span id="cb65-2"><a href="leaflet.html#cb65-2"></a>  <span class="co"># set the starting point</span></span>
+<span id="cb65-3"><a href="leaflet.html#cb65-3"></a>  <span class="dt">locations =</span> <span class="kw">c</span>(<span class="fl">11.5</span>, <span class="fl">48.1</span>),</span>
+<span id="cb65-4"><a href="leaflet.html#cb65-4"></a>  <span class="co"># use a cycling profile</span></span>
+<span id="cb65-5"><a href="leaflet.html#cb65-5"></a>  <span class="dt">profile =</span> <span class="st">&quot;cycling-regular&quot;</span>,</span>
+<span id="cb65-6"><a href="leaflet.html#cb65-6"></a>  <span class="co"># 20 minutes drivetime</span></span>
+<span id="cb65-7"><a href="leaflet.html#cb65-7"></a>  <span class="dt">range =</span> <span class="dv">1200</span>,</span>
+<span id="cb65-8"><a href="leaflet.html#cb65-8"></a>  <span class="co"># return a sf object</span></span>
+<span id="cb65-9"><a href="leaflet.html#cb65-9"></a>  <span class="dt">output =</span> <span class="st">&quot;sf&quot;</span>,</span>
+<span id="cb65-10"><a href="leaflet.html#cb65-10"></a>  <span class="co"># token</span></span>
+<span id="cb65-11"><a href="leaflet.html#cb65-11"></a>  <span class="dt">api_key =</span> token</span>
+<span id="cb65-12"><a href="leaflet.html#cb65-12"></a>  )</span>
+<span id="cb65-13"><a href="leaflet.html#cb65-13"></a></span>
+<span id="cb65-14"><a href="leaflet.html#cb65-14"></a><span class="co"># get the pharmacies within the 20 minutes drivetime</span></span>
+<span id="cb65-15"><a href="leaflet.html#cb65-15"></a>pharmacies_inter &lt;-<span class="st"> </span><span class="kw">st_intersection</span>(drivetime, pharmacies)</span></code></pre></div>
+<p>We add our drivetime window to the map using <code>addPolygons()</code>. Finally, we add our pharmacies using <code>addMarkers()</code>. We create custom labels that will show on hover through the <code>label</code> argument. To get a grasp of how far away each points is from our starting point, we calculate the distance using <code>distHaversine()</code> from the <code>geosphere</code> package.
+We also add a legend, to show that we have calculated a 20 minute drivetime window.</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="leaflet.html#cb66-1"></a>pharmacies_inter<span class="op">$</span>distance &lt;-<span class="st"> </span><span class="kw">distHaversine</span>(<span class="kw">st_coordinates</span>(pharmacies_inter), <span class="kw">c</span>(<span class="fl">11.5</span>, <span class="fl">48.1</span>))</span>
+<span id="cb66-2"><a href="leaflet.html#cb66-2"></a>map_<span class="dv">2</span> &lt;-<span class="st"> </span>map_<span class="dv">1</span> <span class="op">%&gt;%</span></span>
+<span id="cb66-3"><a href="leaflet.html#cb66-3"></a><span class="st">  </span><span class="kw">addPolygons</span>(</span>
+<span id="cb66-4"><a href="leaflet.html#cb66-4"></a>    <span class="dt">data =</span> drivetime,</span>
+<span id="cb66-5"><a href="leaflet.html#cb66-5"></a>    <span class="co"># set the color of the polygon</span></span>
+<span id="cb66-6"><a href="leaflet.html#cb66-6"></a>    <span class="dt">color =</span> <span class="st">&quot;#E84A5F&quot;</span>,</span>
+<span id="cb66-7"><a href="leaflet.html#cb66-7"></a>    <span class="co"># set the opacity of the outline</span></span>
+<span id="cb66-8"><a href="leaflet.html#cb66-8"></a>    <span class="dt">opacity =</span> <span class="dv">1</span>,</span>
+<span id="cb66-9"><a href="leaflet.html#cb66-9"></a>    <span class="co"># set the stroke width in pixels</span></span>
+<span id="cb66-10"><a href="leaflet.html#cb66-10"></a>    <span class="dt">weight =</span> <span class="dv">1</span>,</span>
+<span id="cb66-11"><a href="leaflet.html#cb66-11"></a>    <span class="co"># set the fill opacity</span></span>
+<span id="cb66-12"><a href="leaflet.html#cb66-12"></a>    <span class="dt">fillOpacity =</span> <span class="fl">0.6</span></span>
+<span id="cb66-13"><a href="leaflet.html#cb66-13"></a>  )</span>
+<span id="cb66-14"><a href="leaflet.html#cb66-14"></a></span>
+<span id="cb66-15"><a href="leaflet.html#cb66-15"></a>map_<span class="dv">3</span> &lt;-<span class="st"> </span>map_<span class="dv">2</span> <span class="op">%&gt;%</span></span>
+<span id="cb66-16"><a href="leaflet.html#cb66-16"></a><span class="st">  </span><span class="co"># add pharmacies</span></span>
+<span id="cb66-17"><a href="leaflet.html#cb66-17"></a><span class="st">  </span><span class="kw">addMarkers</span>(</span>
+<span id="cb66-18"><a href="leaflet.html#cb66-18"></a>    <span class="dt">data =</span> pharmacies_inter,</span>
+<span id="cb66-19"><a href="leaflet.html#cb66-19"></a>    <span class="co"># create custom labels</span></span>
+<span id="cb66-20"><a href="leaflet.html#cb66-20"></a>    <span class="dt">label =</span> <span class="kw">paste</span>(</span>
+<span id="cb66-21"><a href="leaflet.html#cb66-21"></a>      <span class="st">&quot;Name: &quot;</span>, pharmacies_inter<span class="op">$</span>name, <span class="st">&quot;&lt;br&gt;&quot;</span>,</span>
+<span id="cb66-22"><a href="leaflet.html#cb66-22"></a>      <span class="st">&quot;Distance from location: &quot;</span>,</span>
+<span id="cb66-23"><a href="leaflet.html#cb66-23"></a>      <span class="kw">round</span>(pharmacies_inter<span class="op">$</span>distance, <span class="dv">1</span>), <span class="st">&quot; meters&quot;</span>, <span class="st">&quot;&lt;br&gt;&quot;</span>,</span>
+<span id="cb66-24"><a href="leaflet.html#cb66-24"></a>      <span class="st">&quot;Street: &quot;</span>, pharmacies_inter<span class="op">$</span>addr_st</span>
+<span id="cb66-25"><a href="leaflet.html#cb66-25"></a>    ) <span class="op">%&gt;%</span></span>
+<span id="cb66-26"><a href="leaflet.html#cb66-26"></a><span class="st">      </span><span class="kw">lapply</span>(htmltools<span class="op">::</span>HTML)</span>
+<span id="cb66-27"><a href="leaflet.html#cb66-27"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb66-28"><a href="leaflet.html#cb66-28"></a><span class="st">  </span><span class="co"># add a legend</span></span>
+<span id="cb66-29"><a href="leaflet.html#cb66-29"></a><span class="st">  </span><span class="kw">addLegend</span>(</span>
+<span id="cb66-30"><a href="leaflet.html#cb66-30"></a>    <span class="dt">colors =</span> <span class="st">&quot;#E84A5F&quot;</span>,</span>
+<span id="cb66-31"><a href="leaflet.html#cb66-31"></a>    <span class="dt">labels =</span> <span class="st">&quot;0 - 20 minutes&quot;</span>,</span>
+<span id="cb66-32"><a href="leaflet.html#cb66-32"></a>    <span class="dt">title =</span> <span class="st">&quot;Drivetime&quot;</span>,</span>
+<span id="cb66-33"><a href="leaflet.html#cb66-33"></a>    <span class="dt">opacity =</span> <span class="dv">1</span>, </span>
+<span id="cb66-34"><a href="leaflet.html#cb66-34"></a>    <span class="dt">position =</span> <span class="st">&quot;bottomleft&quot;</span></span>
+<span id="cb66-35"><a href="leaflet.html#cb66-35"></a>  )</span>
+<span id="cb66-36"><a href="leaflet.html#cb66-36"></a></span>
+<span id="cb66-37"><a href="leaflet.html#cb66-37"></a>map_<span class="dv">3</span></span></code></pre></div>
+<iframe src="html_plots/chapter_6/leaflet_2.html" width="100%" height="700vh"></iframe>
+<p>For our next example, we will cluster all the pharmacies in Munich using density based clustering and then display them nicely with a <code>leaflet</code> map. First, we cluster our points with <code>dbscan()</code> from the <code>dbscan</code> package. Next, we draw a polygon around the outermost points for each cluster.</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="leaflet.html#cb67-1"></a><span class="co"># apply dbscan to the coordinates of the pharmacies</span></span>
+<span id="cb67-2"><a href="leaflet.html#cb67-2"></a>pharmacies_db &lt;-<span class="st"> </span><span class="kw">dbscan</span>(<span class="kw">st_coordinates</span>(pharmacies), <span class="dt">eps =</span> <span class="fl">0.008</span>, <span class="dt">minPts =</span> <span class="dv">10</span>)</span>
+<span id="cb67-3"><a href="leaflet.html#cb67-3"></a><span class="co"># add a cluster variable</span></span>
+<span id="cb67-4"><a href="leaflet.html#cb67-4"></a>pharmacies<span class="op">$</span>cluster &lt;-<span class="st"> </span>pharmacies_db<span class="op">$</span>cluster</span>
+<span id="cb67-5"><a href="leaflet.html#cb67-5"></a><span class="co"># count the size of each cluster</span></span>
+<span id="cb67-6"><a href="leaflet.html#cb67-6"></a>pharmacies_count &lt;-<span class="st"> </span>pharmacies <span class="op">%&gt;%</span></span>
+<span id="cb67-7"><a href="leaflet.html#cb67-7"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">group_by</span>(cluster) <span class="op">%&gt;%</span></span>
+<span id="cb67-8"><a href="leaflet.html#cb67-8"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">count =</span> <span class="kw">n</span>())</span>
+<span id="cb67-9"><a href="leaflet.html#cb67-9"></a><span class="co"># split the pharmacies by cluster</span></span>
+<span id="cb67-10"><a href="leaflet.html#cb67-10"></a>pharmacies_split &lt;-<span class="st"> </span><span class="kw">split</span>(pharmacies_count, pharmacies_count<span class="op">$</span>cluster)</span>
+<span id="cb67-11"><a href="leaflet.html#cb67-11"></a><span class="co"># get the coordinates for all of the points that are in a cluster</span></span>
+<span id="cb67-12"><a href="leaflet.html#cb67-12"></a>pharmacies_split_coord &lt;-<span class="st"> </span><span class="kw">lapply</span>(pharmacies_split[<span class="dv">2</span><span class="op">:</span><span class="kw">length</span>(pharmacies_split)], st_coordinates)</span>
+<span id="cb67-13"><a href="leaflet.html#cb67-13"></a><span class="co"># compute which points lie on the convex hull of each cluster</span></span>
+<span id="cb67-14"><a href="leaflet.html#cb67-14"></a>pharmacies_split_chull &lt;-<span class="st"> </span><span class="kw">lapply</span>(pharmacies_split_coord, chull)</span>
+<span id="cb67-15"><a href="leaflet.html#cb67-15"></a><span class="co"># keep only those points</span></span>
+<span id="cb67-16"><a href="leaflet.html#cb67-16"></a>pharmacies_outer &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="kw">seq_len</span>(<span class="kw">length</span>(pharmacies_split_chull)), <span class="cf">function</span>(x, ...) {</span>
+<span id="cb67-17"><a href="leaflet.html#cb67-17"></a>  pharmacies_split_coord[[x]][pharmacies_split_chull[[x]], ]</span>
+<span id="cb67-18"><a href="leaflet.html#cb67-18"></a>})</span>
+<span id="cb67-19"><a href="leaflet.html#cb67-19"></a><span class="co"># turn these points into a slightly buffered polygon</span></span>
+<span id="cb67-20"><a href="leaflet.html#cb67-20"></a>pharmacies_outer_sf &lt;-<span class="st"> </span><span class="kw">lapply</span>(pharmacies_outer, <span class="cf">function</span>(x) {</span>
+<span id="cb67-21"><a href="leaflet.html#cb67-21"></a>  <span class="co"># append the last point so that a polygon can be drawn</span></span>
+<span id="cb67-22"><a href="leaflet.html#cb67-22"></a>  x &lt;-<span class="st"> </span><span class="kw">rbind</span>(x, x[<span class="dv">1</span>, ])</span>
+<span id="cb67-23"><a href="leaflet.html#cb67-23"></a>  <span class="co"># turn the points into a polygon</span></span>
+<span id="cb67-24"><a href="leaflet.html#cb67-24"></a>  poly &lt;-<span class="st"> </span><span class="kw">st_sfc</span>(<span class="kw">st_polygon</span>(<span class="kw">list</span>(x))) <span class="op">%&gt;%</span></span>
+<span id="cb67-25"><a href="leaflet.html#cb67-25"></a><span class="st">    </span><span class="kw">as.data.frame</span>() <span class="op">%&gt;%</span></span>
+<span id="cb67-26"><a href="leaflet.html#cb67-26"></a><span class="st">    </span><span class="co"># set the crs system of the points</span></span>
+<span id="cb67-27"><a href="leaflet.html#cb67-27"></a><span class="st">    </span><span class="kw">st_as_sf</span>(<span class="dt">crs =</span> <span class="dv">4326</span>) <span class="op">%&gt;%</span></span>
+<span id="cb67-28"><a href="leaflet.html#cb67-28"></a><span class="st">    </span><span class="co"># transform the polygons</span></span>
+<span id="cb67-29"><a href="leaflet.html#cb67-29"></a><span class="st">    </span><span class="kw">st_transform</span>(<span class="dv">3035</span>) <span class="op">%&gt;%</span></span>
+<span id="cb67-30"><a href="leaflet.html#cb67-30"></a><span class="st">    </span><span class="co"># buffer the polygons by 200 meters</span></span>
+<span id="cb67-31"><a href="leaflet.html#cb67-31"></a><span class="st">    </span><span class="kw">st_buffer</span>(<span class="dv">200</span>) <span class="op">%&gt;%</span></span>
+<span id="cb67-32"><a href="leaflet.html#cb67-32"></a><span class="st">    </span><span class="co"># re-transorm the polygons</span></span>
+<span id="cb67-33"><a href="leaflet.html#cb67-33"></a><span class="st">    </span><span class="kw">st_transform</span>(<span class="dv">4326</span>)</span>
+<span id="cb67-34"><a href="leaflet.html#cb67-34"></a>})</span>
+<span id="cb67-35"><a href="leaflet.html#cb67-35"></a></span>
+<span id="cb67-36"><a href="leaflet.html#cb67-36"></a><span class="co"># bind the polygons together</span></span>
+<span id="cb67-37"><a href="leaflet.html#cb67-37"></a>clusters &lt;-<span class="st"> </span><span class="kw">Reduce</span>(rbind, pharmacies_outer_sf)</span>
+<span id="cb67-38"><a href="leaflet.html#cb67-38"></a><span class="co"># set the count of points in no cluster to NA</span></span>
+<span id="cb67-39"><a href="leaflet.html#cb67-39"></a>pharmacies_count<span class="op">$</span>count[pharmacies_count<span class="op">$</span>cluster <span class="op">==</span><span class="st"> </span><span class="dv">0</span>] &lt;-<span class="st"> </span><span class="ot">NA</span></span></code></pre></div>
+<p>To create our map, we will first define a custom palette using the <code>colorNumeric()</code> function, since we will color our points depending on the size of the cluster they are in. Depending on the values that can be mapped to a palette, we can also use the functions <code>colorBin()</code>, as well as <code>colorQuantile()</code> for numeric variables or <code>colorFactor()</code> for factor/character variables.</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="leaflet.html#cb68-1"></a><span class="co"># define a custom palette</span></span>
+<span id="cb68-2"><a href="leaflet.html#cb68-2"></a>pal &lt;-<span class="st"> </span><span class="kw">colorNumeric</span>(</span>
+<span id="cb68-3"><a href="leaflet.html#cb68-3"></a>  <span class="kw">c</span>(<span class="st">&quot;#E1F5C4&quot;</span>, <span class="st">&quot;#EDE574&quot;</span>, <span class="st">&quot;#F9D423&quot;</span>, <span class="st">&quot;#FC913A&quot;</span>, <span class="st">&quot;#FF4E50&quot;</span>),</span>
+<span id="cb68-4"><a href="leaflet.html#cb68-4"></a>  <span class="co"># colors depend on the count variable</span></span>
+<span id="cb68-5"><a href="leaflet.html#cb68-5"></a>  <span class="dt">domain =</span> pharmacies_count<span class="op">$</span>count,</span>
+<span id="cb68-6"><a href="leaflet.html#cb68-6"></a>  )</span>
+<span id="cb68-7"><a href="leaflet.html#cb68-7"></a></span>
+<span id="cb68-8"><a href="leaflet.html#cb68-8"></a><span class="co"># corrected html and css to show NA nicely in the legend </span></span>
+<span id="cb68-9"><a href="leaflet.html#cb68-9"></a><span class="co"># CSS to correct spacing</span></span>
+<span id="cb68-10"><a href="leaflet.html#cb68-10"></a>css_fix &lt;-<span class="st"> &quot;div.info.legend.leaflet-control br {clear: both;}&quot;</span></span>
+<span id="cb68-11"><a href="leaflet.html#cb68-11"></a><span class="co"># Convert CSS to HTML</span></span>
+<span id="cb68-12"><a href="leaflet.html#cb68-12"></a>html_fix &lt;-<span class="st"> </span>htmltools<span class="op">::</span>tags<span class="op">$</span><span class="kw">style</span>(<span class="dt">type =</span> <span class="st">&quot;text/css&quot;</span>, css_fix)</span>
+<span id="cb68-13"><a href="leaflet.html#cb68-13"></a></span>
+<span id="cb68-14"><a href="leaflet.html#cb68-14"></a><span class="kw">leaflet</span>() <span class="op">%&gt;%</span></span>
+<span id="cb68-15"><a href="leaflet.html#cb68-15"></a><span class="st">  </span><span class="co"># add a dark basemap</span></span>
+<span id="cb68-16"><a href="leaflet.html#cb68-16"></a><span class="st">  </span><span class="kw">addProviderTiles</span>(<span class="st">&quot;CartoDB.DarkMatter&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb68-17"><a href="leaflet.html#cb68-17"></a><span class="st">  </span><span class="co"># add the polygons of the clusters</span></span>
+<span id="cb68-18"><a href="leaflet.html#cb68-18"></a><span class="st">  </span><span class="kw">addPolygons</span>(</span>
+<span id="cb68-19"><a href="leaflet.html#cb68-19"></a>    <span class="dt">data =</span> clusters,</span>
+<span id="cb68-20"><a href="leaflet.html#cb68-20"></a>    <span class="dt">color =</span> <span class="st">&quot;#E2E2E2&quot;</span>,</span>
+<span id="cb68-21"><a href="leaflet.html#cb68-21"></a>    <span class="co"># set the opacity of the outline</span></span>
+<span id="cb68-22"><a href="leaflet.html#cb68-22"></a>    <span class="dt">opacity =</span> <span class="dv">1</span>,</span>
+<span id="cb68-23"><a href="leaflet.html#cb68-23"></a>    <span class="co"># set the stroke width in pixels</span></span>
+<span id="cb68-24"><a href="leaflet.html#cb68-24"></a>    <span class="dt">weight =</span> <span class="dv">1</span>,</span>
+<span id="cb68-25"><a href="leaflet.html#cb68-25"></a>    <span class="co"># set the fill opacity</span></span>
+<span id="cb68-26"><a href="leaflet.html#cb68-26"></a>    <span class="dt">fillOpacity =</span> <span class="fl">0.2</span></span>
+<span id="cb68-27"><a href="leaflet.html#cb68-27"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb68-28"><a href="leaflet.html#cb68-28"></a><span class="st">  </span><span class="co"># add the pharmacies</span></span>
+<span id="cb68-29"><a href="leaflet.html#cb68-29"></a><span class="st">  </span><span class="kw">addCircleMarkers</span>(</span>
+<span id="cb68-30"><a href="leaflet.html#cb68-30"></a>    <span class="dt">data =</span> pharmacies_count,</span>
+<span id="cb68-31"><a href="leaflet.html#cb68-31"></a>    <span class="co"># color tthe circles depending on the count</span></span>
+<span id="cb68-32"><a href="leaflet.html#cb68-32"></a>    <span class="dt">color =</span> <span class="op">~</span><span class="kw">pal</span>(count),</span>
+<span id="cb68-33"><a href="leaflet.html#cb68-33"></a>    <span class="co"># set the opacity of the circles</span></span>
+<span id="cb68-34"><a href="leaflet.html#cb68-34"></a>    <span class="dt">opacity =</span> <span class="fl">0.65</span>,</span>
+<span id="cb68-35"><a href="leaflet.html#cb68-35"></a>    <span class="co"># set the radius of the circles</span></span>
+<span id="cb68-36"><a href="leaflet.html#cb68-36"></a>    <span class="dt">radius =</span> <span class="dv">4</span>,</span>
+<span id="cb68-37"><a href="leaflet.html#cb68-37"></a>    <span class="co"># create custom labels</span></span>
+<span id="cb68-38"><a href="leaflet.html#cb68-38"></a>    <span class="dt">label =</span> <span class="kw">paste</span>(</span>
+<span id="cb68-39"><a href="leaflet.html#cb68-39"></a>      <span class="st">&quot;Name:&quot;</span>,</span>
+<span id="cb68-40"><a href="leaflet.html#cb68-40"></a>      pharmacies_count<span class="op">$</span>name, <span class="st">&quot;&lt;br&gt;&quot;</span>,</span>
+<span id="cb68-41"><a href="leaflet.html#cb68-41"></a>      <span class="st">&quot;Cluster:&quot;</span>,</span>
+<span id="cb68-42"><a href="leaflet.html#cb68-42"></a>      pharmacies_count<span class="op">$</span>cluster, <span class="st">&quot;&lt;br&gt;&quot;</span>,</span>
+<span id="cb68-43"><a href="leaflet.html#cb68-43"></a>      <span class="st">&quot;Cluster size:&quot;</span>,</span>
+<span id="cb68-44"><a href="leaflet.html#cb68-44"></a>      pharmacies_count<span class="op">$</span>count, <span class="st">&quot;&lt;br&gt;&quot;</span>,</span>
+<span id="cb68-45"><a href="leaflet.html#cb68-45"></a>      <span class="st">&quot;Street: &quot;</span>,</span>
+<span id="cb68-46"><a href="leaflet.html#cb68-46"></a>      pharmacies_count<span class="op">$</span>addr_st</span>
+<span id="cb68-47"><a href="leaflet.html#cb68-47"></a>    ) <span class="op">%&gt;%</span></span>
+<span id="cb68-48"><a href="leaflet.html#cb68-48"></a><span class="st">      </span><span class="kw">lapply</span>(htmltools<span class="op">::</span>HTML),</span>
+<span id="cb68-49"><a href="leaflet.html#cb68-49"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb68-50"><a href="leaflet.html#cb68-50"></a><span class="st">  </span><span class="co"># add a legend</span></span>
+<span id="cb68-51"><a href="leaflet.html#cb68-51"></a><span class="st">  </span><span class="kw">addLegend</span>(</span>
+<span id="cb68-52"><a href="leaflet.html#cb68-52"></a>    <span class="dt">data =</span> pharmacies_count,</span>
+<span id="cb68-53"><a href="leaflet.html#cb68-53"></a>    <span class="dt">pal =</span> pal,</span>
+<span id="cb68-54"><a href="leaflet.html#cb68-54"></a>    <span class="dt">values =</span> <span class="op">~</span>count,</span>
+<span id="cb68-55"><a href="leaflet.html#cb68-55"></a>    <span class="dt">position =</span> <span class="st">&quot;bottomleft&quot;</span>,</span>
+<span id="cb68-56"><a href="leaflet.html#cb68-56"></a>    <span class="dt">title =</span> <span class="st">&quot;Cluster size:&quot;</span>,</span>
+<span id="cb68-57"><a href="leaflet.html#cb68-57"></a>    <span class="dt">opacity =</span> <span class="fl">0.9</span></span>
+<span id="cb68-58"><a href="leaflet.html#cb68-58"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb68-59"><a href="leaflet.html#cb68-59"></a><span class="st">  </span><span class="co"># add a minimap</span></span>
+<span id="cb68-60"><a href="leaflet.html#cb68-60"></a><span class="st">  </span><span class="kw">addMiniMap</span>(<span class="dt">tiles =</span> <span class="st">&quot;CartoDB.DarkMatter&quot;</span>) <span class="op">%&lt;&gt;%</span></span>
+<span id="cb68-61"><a href="leaflet.html#cb68-61"></a><span class="st">  </span><span class="co"># apply the fix</span></span>
+<span id="cb68-62"><a href="leaflet.html#cb68-62"></a><span class="st">  </span>htmlwidgets<span class="op">::</span><span class="kw">prependContent</span>(html_fix)</span></code></pre></div>
+<iframe src="html_plots/chapter_6/leaflet_3.html" width="100%" height="700vh"></iframe>
+<p>An extension of the <code>leaflet</code> package is <code>leaflet.extras</code>. This package can be used to display heatmaps, for instance. With <code>addMeasure()</code> a tape measure is added here to calculate the distance between two points or the area between several points.</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="leaflet.html#cb69-1"></a><span class="kw">leaflet</span>() <span class="op">%&gt;%</span></span>
+<span id="cb69-2"><a href="leaflet.html#cb69-2"></a><span class="st">  </span><span class="co"># add a dark basemap</span></span>
+<span id="cb69-3"><a href="leaflet.html#cb69-3"></a><span class="st">  </span><span class="kw">addProviderTiles</span>(<span class="st">&quot;CartoDB.DarkMatter&quot;</span>, <span class="dt">group =</span> <span class="st">&quot;CartoDB&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb69-4"><a href="leaflet.html#cb69-4"></a><span class="st">  </span><span class="co"># add the munich road network</span></span>
+<span id="cb69-5"><a href="leaflet.html#cb69-5"></a><span class="st">  </span><span class="kw">addPolylines</span>(</span>
+<span id="cb69-6"><a href="leaflet.html#cb69-6"></a>    <span class="dt">data =</span> streets,</span>
+<span id="cb69-7"><a href="leaflet.html#cb69-7"></a>    <span class="dt">opacity =</span> <span class="fl">0.5</span>,</span>
+<span id="cb69-8"><a href="leaflet.html#cb69-8"></a>    <span class="dt">weight =</span> <span class="dv">1</span>,</span>
+<span id="cb69-9"><a href="leaflet.html#cb69-9"></a>    <span class="dt">color =</span> <span class="st">&quot;white&quot;</span></span>
+<span id="cb69-10"><a href="leaflet.html#cb69-10"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb69-11"><a href="leaflet.html#cb69-11"></a><span class="st">  </span><span class="co"># add a heatmap</span></span>
+<span id="cb69-12"><a href="leaflet.html#cb69-12"></a><span class="st">  </span><span class="kw">addWebGLHeatmap</span>(</span>
+<span id="cb69-13"><a href="leaflet.html#cb69-13"></a>    <span class="dt">data =</span> pharmacies,</span>
+<span id="cb69-14"><a href="leaflet.html#cb69-14"></a>    <span class="dt">size =</span> <span class="dv">2000</span>,</span>
+<span id="cb69-15"><a href="leaflet.html#cb69-15"></a>    <span class="dt">units =</span> <span class="st">&quot;m&quot;</span>,</span>
+<span id="cb69-16"><a href="leaflet.html#cb69-16"></a>    <span class="dt">intensity =</span> <span class="fl">0.1</span>,</span>
+<span id="cb69-17"><a href="leaflet.html#cb69-17"></a>    <span class="dt">gradientTexture =</span> <span class="st">&quot;skyline&quot;</span>,</span>
+<span id="cb69-18"><a href="leaflet.html#cb69-18"></a>    <span class="dt">alphaRange =</span> <span class="dv">1</span>,</span>
+<span id="cb69-19"><a href="leaflet.html#cb69-19"></a>    <span class="dt">opacity =</span> <span class="fl">0.8</span></span>
+<span id="cb69-20"><a href="leaflet.html#cb69-20"></a>    ) <span class="op">%&gt;%</span></span>
+<span id="cb69-21"><a href="leaflet.html#cb69-21"></a><span class="st">  </span><span class="co"># add a measure control to the bottom left</span></span>
+<span id="cb69-22"><a href="leaflet.html#cb69-22"></a><span class="st">  </span><span class="kw">addMeasure</span>(</span>
+<span id="cb69-23"><a href="leaflet.html#cb69-23"></a>    <span class="dt">position =</span> <span class="st">&quot;bottomleft&quot;</span>,</span>
+<span id="cb69-24"><a href="leaflet.html#cb69-24"></a>    <span class="dt">primaryLengthUnit =</span> <span class="st">&quot;meters&quot;</span>,</span>
+<span id="cb69-25"><a href="leaflet.html#cb69-25"></a>    <span class="dt">primaryAreaUnit =</span> <span class="st">&quot;sqmeters&quot;</span>,</span>
+<span id="cb69-26"><a href="leaflet.html#cb69-26"></a>    <span class="dt">activeColor =</span> <span class="st">&quot;#0bd3d3&quot;</span>,</span>
+<span id="cb69-27"><a href="leaflet.html#cb69-27"></a>    <span class="dt">completedColor =</span> <span class="st">&quot;#f890e7&quot;</span></span>
+<span id="cb69-28"><a href="leaflet.html#cb69-28"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb69-29"><a href="leaflet.html#cb69-29"></a><span class="st">  </span><span class="kw">addMiniMap</span>(<span class="st">&quot;CartoDB.DarkMatter&quot;</span>)</span></code></pre></div>
+<iframe src="html_plots/leaflet_4.html" width="100%" height="700vh"></iframe>
+<p>Since ‘leaflet’ is a JavaScript library, JavaScript code can also be included. For example, if several background maps and a minimap are added, the first map is always displayed as the minimap even if a different background map is selected. To change this behavior, JavaScript can be included using the function <code>htmltools::onRender()</code>.</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="leaflet.html#cb70-1"></a>basemap <span class="op">%&gt;%</span></span>
+<span id="cb70-2"><a href="leaflet.html#cb70-2"></a><span class="st">  </span><span class="co"># add a minimap to our basemap</span></span>
+<span id="cb70-3"><a href="leaflet.html#cb70-3"></a><span class="st">  </span><span class="kw">addMiniMap</span>(</span>
+<span id="cb70-4"><a href="leaflet.html#cb70-4"></a>    <span class="co"># all the tiles in our basemap, display the first one</span></span>
+<span id="cb70-5"><a href="leaflet.html#cb70-5"></a>    <span class="dt">tiles =</span> <span class="kw">c</span>(</span>
+<span id="cb70-6"><a href="leaflet.html#cb70-6"></a>      <span class="st">&quot;OpenStreetMap&quot;</span>, <span class="st">&quot;Stamen.Toner&quot;</span>, <span class="st">&quot;Stamen.Terrain&quot;</span>,</span>
+<span id="cb70-7"><a href="leaflet.html#cb70-7"></a>      <span class="st">&quot;Esri.WorldStreetMap&quot;</span>, <span class="st">&quot;Wikimedia&quot;</span>, <span class="st">&quot;CartoDB.Positron&quot;</span>,</span>
+<span id="cb70-8"><a href="leaflet.html#cb70-8"></a>      <span class="st">&quot;Esri.WorldImagery&quot;</span></span>
+<span id="cb70-9"><a href="leaflet.html#cb70-9"></a>      )[<span class="dv">1</span>],</span>
+<span id="cb70-10"><a href="leaflet.html#cb70-10"></a>    <span class="dt">toggleDisplay =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></span>
+<span id="cb70-11"><a href="leaflet.html#cb70-11"></a><span class="st">  </span><span class="co"># add the pharmacies</span></span>
+<span id="cb70-12"><a href="leaflet.html#cb70-12"></a><span class="st">  </span><span class="kw">addMarkers</span>(</span>
+<span id="cb70-13"><a href="leaflet.html#cb70-13"></a>    <span class="dt">data =</span> pharmacies,</span>
+<span id="cb70-14"><a href="leaflet.html#cb70-14"></a>    <span class="co"># create custom labels</span></span>
+<span id="cb70-15"><a href="leaflet.html#cb70-15"></a>    <span class="dt">popup =</span> <span class="kw">paste</span>(</span>
+<span id="cb70-16"><a href="leaflet.html#cb70-16"></a>      <span class="st">&quot;Name: &quot;</span>, pharmacies<span class="op">$</span>name, <span class="st">&quot;&lt;br&gt;&quot;</span>,</span>
+<span id="cb70-17"><a href="leaflet.html#cb70-17"></a>      <span class="st">&quot;Street: &quot;</span>, pharmacies<span class="op">$</span>addr_st</span>
+<span id="cb70-18"><a href="leaflet.html#cb70-18"></a>    ) <span class="op">%&gt;%</span></span>
+<span id="cb70-19"><a href="leaflet.html#cb70-19"></a><span class="st">      </span><span class="kw">lapply</span>(htmltools<span class="op">::</span>HTML)</span>
+<span id="cb70-20"><a href="leaflet.html#cb70-20"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb70-21"><a href="leaflet.html#cb70-21"></a><span class="st">  </span><span class="co"># add javascript code</span></span>
+<span id="cb70-22"><a href="leaflet.html#cb70-22"></a><span class="st">  </span>htmlwidgets<span class="op">::</span><span class="kw">onRender</span>(<span class="st">&quot;</span></span>
+<span id="cb70-23"><a href="leaflet.html#cb70-23"></a><span class="st">    function(el, x) {</span></span>
+<span id="cb70-24"><a href="leaflet.html#cb70-24"></a><span class="st">      var myMap = this;</span></span>
+<span id="cb70-25"><a href="leaflet.html#cb70-25"></a><span class="st">      myMap.on(&#39;baselayerchange&#39;,</span></span>
+<span id="cb70-26"><a href="leaflet.html#cb70-26"></a><span class="st">        function (e) {</span></span>
+<span id="cb70-27"><a href="leaflet.html#cb70-27"></a><span class="st">          myMap.minimap.changeLayer(L.tileLayer.provider(e.name));</span></span>
+<span id="cb70-28"><a href="leaflet.html#cb70-28"></a><span class="st">        })</span></span>
+<span id="cb70-29"><a href="leaflet.html#cb70-29"></a><span class="st">    }&quot;</span>)</span></code></pre></div>
+<iframe src="html_plots/leaflet_5.html" width="100%" height="700vh"></iframe>
+<p>JavaScript can also be used to combine point data into clusters that expand when you click on the respective cluster:</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="leaflet.html#cb71-1"></a><span class="kw">leaflet</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb71-2"><a href="leaflet.html#cb71-2"></a><span class="st">  </span><span class="kw">addTiles</span>() <span class="op">%&gt;%</span></span>
+<span id="cb71-3"><a href="leaflet.html#cb71-3"></a><span class="st">  </span><span class="kw">addMarkers</span>(</span>
+<span id="cb71-4"><a href="leaflet.html#cb71-4"></a>    <span class="dt">data =</span> pharmacies,</span>
+<span id="cb71-5"><a href="leaflet.html#cb71-5"></a>    <span class="dt">clusterOptions =</span> <span class="kw">markerClusterOptions</span>(),</span>
+<span id="cb71-6"><a href="leaflet.html#cb71-6"></a>    <span class="dt">clusterId =</span> <span class="st">&quot;pointsCluster&quot;</span></span>
+<span id="cb71-7"><a href="leaflet.html#cb71-7"></a>    ) <span class="op">%&gt;%</span></span>
+<span id="cb71-8"><a href="leaflet.html#cb71-8"></a><span class="st">  </span><span class="kw">addEasyButton</span>(</span>
+<span id="cb71-9"><a href="leaflet.html#cb71-9"></a>    <span class="kw">easyButton</span>(</span>
+<span id="cb71-10"><a href="leaflet.html#cb71-10"></a>      <span class="dt">states =</span> <span class="kw">list</span>(</span>
+<span id="cb71-11"><a href="leaflet.html#cb71-11"></a>        <span class="kw">easyButtonState</span>(</span>
+<span id="cb71-12"><a href="leaflet.html#cb71-12"></a>          <span class="dt">stateName =</span> <span class="st">&quot;unfrozen-markers&quot;</span>,</span>
+<span id="cb71-13"><a href="leaflet.html#cb71-13"></a>          <span class="dt">icon =</span> <span class="st">&quot;ion-toggle&quot;</span>,</span>
+<span id="cb71-14"><a href="leaflet.html#cb71-14"></a>          <span class="dt">title =</span> <span class="st">&quot;Freeze Clusters&quot;</span>,</span>
+<span id="cb71-15"><a href="leaflet.html#cb71-15"></a>          <span class="dt">onClick =</span> <span class="kw">JS</span>(<span class="st">&quot;</span></span>
+<span id="cb71-16"><a href="leaflet.html#cb71-16"></a><span class="st">          function(btn, map) {</span></span>
+<span id="cb71-17"><a href="leaflet.html#cb71-17"></a><span class="st">            var clusterManager =</span></span>
+<span id="cb71-18"><a href="leaflet.html#cb71-18"></a><span class="st">              map.layerManager.getLayer(&#39;cluster&#39;, &#39;pointsCluster&#39;);</span></span>
+<span id="cb71-19"><a href="leaflet.html#cb71-19"></a><span class="st">            clusterManager.freezeAtZoom();</span></span>
+<span id="cb71-20"><a href="leaflet.html#cb71-20"></a><span class="st">            btn.state(&#39;frozen-markers&#39;);</span></span>
+<span id="cb71-21"><a href="leaflet.html#cb71-21"></a><span class="st">          }&quot;</span>)</span>
+<span id="cb71-22"><a href="leaflet.html#cb71-22"></a>        ),</span>
+<span id="cb71-23"><a href="leaflet.html#cb71-23"></a>        <span class="kw">easyButtonState</span>(</span>
+<span id="cb71-24"><a href="leaflet.html#cb71-24"></a>          <span class="dt">stateName =</span> <span class="st">&quot;frozen-markers&quot;</span>,</span>
+<span id="cb71-25"><a href="leaflet.html#cb71-25"></a>          <span class="dt">icon =</span> <span class="st">&quot;ion-toggle-filled&quot;</span>,</span>
+<span id="cb71-26"><a href="leaflet.html#cb71-26"></a>          <span class="dt">title =</span> <span class="st">&quot;UnFreeze Clusters&quot;</span>,</span>
+<span id="cb71-27"><a href="leaflet.html#cb71-27"></a>          <span class="dt">onClick =</span> <span class="kw">JS</span>(<span class="st">&quot;</span></span>
+<span id="cb71-28"><a href="leaflet.html#cb71-28"></a><span class="st">          function(btn, map) {</span></span>
+<span id="cb71-29"><a href="leaflet.html#cb71-29"></a><span class="st">            var clusterManager =</span></span>
+<span id="cb71-30"><a href="leaflet.html#cb71-30"></a><span class="st">              map.layerManager.getLayer(&#39;cluster&#39;, &#39;pointsCluster&#39;);</span></span>
+<span id="cb71-31"><a href="leaflet.html#cb71-31"></a><span class="st">            clusterManager.unfreeze();</span></span>
+<span id="cb71-32"><a href="leaflet.html#cb71-32"></a><span class="st">            btn.state(&#39;unfrozen-markers&#39;);</span></span>
+<span id="cb71-33"><a href="leaflet.html#cb71-33"></a><span class="st">          }&quot;</span>)</span>
+<span id="cb71-34"><a href="leaflet.html#cb71-34"></a>        )</span>
+<span id="cb71-35"><a href="leaflet.html#cb71-35"></a>      )</span>
+<span id="cb71-36"><a href="leaflet.html#cb71-36"></a>    )</span>
+<span id="cb71-37"><a href="leaflet.html#cb71-37"></a>  )</span></code></pre></div>
+<iframe src="html_plots/leaflet_6.html" width="100%" height="700vh"></iframe>
+</div>
+<div id="related-links" class="section level2">
+<h2><span class="header-section-number">6.3</span> Related links</h2>
+<p>For more information on the use of <code>leaflet</code> see <a href="https://rstudio.github.io/leaflet/" class="uri">https://rstudio.github.io/leaflet/</a>. <span class="citation">(Cheng, Karambelkar, and Xie 2015)</span></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="mapdeck.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="conclusion.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

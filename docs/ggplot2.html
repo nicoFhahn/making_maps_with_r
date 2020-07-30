@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 ggplot2 | Making Maps with R</title>
+  <meta name="description" content="3 ggplot2 | Making Maps with R" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 ggplot2 | Making Maps with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 ggplot2 | Making Maps with R" />
+  
+  
+  
+
+<meta name="author" content="Nico Hahn" />
+
+
+<meta name="date" content="2020-07-30" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="tmap.html"/>
+<link rel="next" href="mapview.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="tmap.html"><a href="tmap.html"><i class="fa fa-check"></i><b>2</b> tmap</a><ul>
+<li class="chapter" data-level="2.1" data-path="tmap.html"><a href="tmap.html#data-used"><i class="fa fa-check"></i><b>2.1</b> Data used</a></li>
+<li class="chapter" data-level="2.2" data-path="tmap.html"><a href="tmap.html#static-maps-with-tmap"><i class="fa fa-check"></i><b>2.2</b> Static maps with tmap</a></li>
+<li class="chapter" data-level="2.3" data-path="tmap.html"><a href="tmap.html#interactive-maps-with-tmap"><i class="fa fa-check"></i><b>2.3</b> Interactive maps with tmap</a></li>
+<li class="chapter" data-level="2.4" data-path="tmap.html"><a href="tmap.html#related-links"><i class="fa fa-check"></i><b>2.4</b> Related links</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="ggplot2.html"><a href="ggplot2.html"><i class="fa fa-check"></i><b>3</b> ggplot2</a><ul>
+<li class="chapter" data-level="3.1" data-path="tmap.html"><a href="tmap.html#data-used"><i class="fa fa-check"></i><b>3.1</b> Data used</a></li>
+<li class="chapter" data-level="3.2" data-path="ggplot2.html"><a href="ggplot2.html#using-ggplot2-to-create-maps"><i class="fa fa-check"></i><b>3.2</b> Using ggplot2 to create maps</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="mapview.html"><a href="mapview.html"><i class="fa fa-check"></i><b>4</b> mapview</a><ul>
+<li class="chapter" data-level="4.1" data-path="tmap.html"><a href="tmap.html#data-used"><i class="fa fa-check"></i><b>4.1</b> Data used</a></li>
+<li class="chapter" data-level="4.2" data-path="mapview.html"><a href="mapview.html#using-mapview-to-create-maps"><i class="fa fa-check"></i><b>4.2</b> Using mapview to create maps</a></li>
+<li class="chapter" data-level="4.3" data-path="tmap.html"><a href="tmap.html#related-links"><i class="fa fa-check"></i><b>4.3</b> Related links</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="mapdeck.html"><a href="mapdeck.html"><i class="fa fa-check"></i><b>5</b> mapdeck</a><ul>
+<li class="chapter" data-level="5.1" data-path="tmap.html"><a href="tmap.html#data-used"><i class="fa fa-check"></i><b>5.1</b> Data used</a></li>
+<li class="chapter" data-level="5.2" data-path="mapdeck.html"><a href="mapdeck.html#using-mapdeck-to-create-maps"><i class="fa fa-check"></i><b>5.2</b> Using mapdeck to create maps</a></li>
+<li class="chapter" data-level="5.3" data-path="tmap.html"><a href="tmap.html#related-links"><i class="fa fa-check"></i><b>5.3</b> Related links</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="leaflet.html"><a href="leaflet.html"><i class="fa fa-check"></i><b>6</b> leaflet</a><ul>
+<li class="chapter" data-level="6.1" data-path="tmap.html"><a href="tmap.html#data-used"><i class="fa fa-check"></i><b>6.1</b> Data used</a></li>
+<li class="chapter" data-level="6.2" data-path="leaflet.html"><a href="leaflet.html#using-leaflet-to-create-maps"><i class="fa fa-check"></i><b>6.2</b> Using leaflet to create maps</a></li>
+<li class="chapter" data-level="6.3" data-path="tmap.html"><a href="tmap.html#related-links"><i class="fa fa-check"></i><b>6.3</b> Related links</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
+<li class="chapter" data-level="8" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>8</b> References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Making Maps with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="ggplot2" class="section level1">
+<h1><span class="header-section-number">3</span> ggplot2</h1>
+<p><code>ggplot2</code> excels at visualizing all kinds of data and is the “go to package” for most applications, so it should come as no surprise that you can also visualize spatial data with it. For this chapter we will use several extensions to `ggplot2’ to create our plots.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="ggplot2.html#cb32-1"></a><span class="co"># for loading our data</span></span>
+<span id="cb32-2"><a href="ggplot2.html#cb32-2"></a><span class="kw">library</span>(jsonlite)</span>
+<span id="cb32-3"><a href="ggplot2.html#cb32-3"></a><span class="kw">library</span>(rgdal)</span>
+<span id="cb32-4"><a href="ggplot2.html#cb32-4"></a><span class="kw">library</span>(sf)</span>
+<span id="cb32-5"><a href="ggplot2.html#cb32-5"></a><span class="co"># for plotting</span></span>
+<span id="cb32-6"><a href="ggplot2.html#cb32-6"></a><span class="kw">library</span>(extrafont)</span>
+<span id="cb32-7"><a href="ggplot2.html#cb32-7"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb32-8"><a href="ggplot2.html#cb32-8"></a><span class="kw">library</span>(ggspatial)</span>
+<span id="cb32-9"><a href="ggplot2.html#cb32-9"></a><span class="kw">library</span>(patchwork)</span>
+<span id="cb32-10"><a href="ggplot2.html#cb32-10"></a><span class="kw">library</span>(scico)</span>
+<span id="cb32-11"><a href="ggplot2.html#cb32-11"></a><span class="kw">library</span>(vapoRwave)</span>
+<span id="cb32-12"><a href="ggplot2.html#cb32-12"></a><span class="co"># for data wrangling</span></span>
+<span id="cb32-13"><a href="ggplot2.html#cb32-13"></a><span class="kw">library</span>(dplyr)</span></code></pre></div>
+<div id="data-used" class="section level2">
+<h2><span class="header-section-number">3.1</span> Data used</h2>
+<p>We won’t be using a lot of data in this chapter.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="ggplot2.html#cb33-1"></a><span class="co"># load honey shapefile</span></span>
+<span id="cb33-2"><a href="ggplot2.html#cb33-2"></a>honey_sf &lt;-<span class="st"> </span><span class="kw">read_sf</span>(<span class="st">&quot;honey.shp&quot;</span>)</span>
+<span id="cb33-3"><a href="ggplot2.html#cb33-3"></a><span class="co"># get the data for 2008</span></span>
+<span id="cb33-4"><a href="ggplot2.html#cb33-4"></a>honey2008 &lt;-<span class="st"> </span>honey_sf[honey_sf<span class="op">$</span>year <span class="op">==</span><span class="st"> </span><span class="dv">2008</span>, ]</span>
+<span id="cb33-5"><a href="ggplot2.html#cb33-5"></a><span class="co"># create a MULTILINESTRING object</span></span>
+<span id="cb33-6"><a href="ggplot2.html#cb33-6"></a>honey2008_multiline &lt;-<span class="st"> </span><span class="kw">st_cast</span>(honey2008, <span class="st">&quot;MULTILINESTRING&quot;</span>)</span>
+<span id="cb33-7"><a href="ggplot2.html#cb33-7"></a><span class="co"># load state capitals of the US</span></span>
+<span id="cb33-8"><a href="ggplot2.html#cb33-8"></a>state_capitals &lt;-<span class="st"> </span><span class="kw">fromJSON</span>(</span>
+<span id="cb33-9"><a href="ggplot2.html#cb33-9"></a>  <span class="st">&quot;https://raw.githubusercontent.com/vega/vega/master/docs/data/us-state-capitals.json&quot;</span></span>
+<span id="cb33-10"><a href="ggplot2.html#cb33-10"></a>  )</span>
+<span id="cb33-11"><a href="ggplot2.html#cb33-11"></a><span class="co"># turn it into an sf object</span></span>
+<span id="cb33-12"><a href="ggplot2.html#cb33-12"></a>state_capitals_sf &lt;-<span class="st"> </span><span class="kw">st_as_sf</span>(state_capitals, <span class="dt">coords =</span> <span class="kw">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>), <span class="dt">crs =</span> <span class="dv">4326</span>)</span>
+<span id="cb33-13"><a href="ggplot2.html#cb33-13"></a><span class="co"># remove alaska and hawaii</span></span>
+<span id="cb33-14"><a href="ggplot2.html#cb33-14"></a>state_capitals_sf &lt;-<span class="st"> </span>state_capitals_sf[</span>
+<span id="cb33-15"><a href="ggplot2.html#cb33-15"></a>  <span class="op">!</span>state_capitals_sf<span class="op">$</span>state <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Alaska&quot;</span>, <span class="st">&quot;Hawaii&quot;</span>),</span>
+<span id="cb33-16"><a href="ggplot2.html#cb33-16"></a>  ]</span></code></pre></div>
+</div>
+<div id="using-ggplot2-to-create-maps" class="section level2">
+<h2><span class="header-section-number">3.2</span> Using ggplot2 to create maps</h2>
+<p>The easiest way to create spatial plots with ggplot is to use the <code>geom_sf()</code> function. By default there is no aesthetic mapping, but we can use arguments like <code>fill</code> to easily create choropleth maps.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="ggplot2.html#cb34-1"></a>usa_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> honey2008) <span class="op">+</span></span>
+<span id="cb34-2"><a href="ggplot2.html#cb34-2"></a><span class="st">  </span><span class="kw">geom_sf</span>()</span>
+<span id="cb34-3"><a href="ggplot2.html#cb34-3"></a>usa_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> honey2008) <span class="op">+</span></span>
+<span id="cb34-4"><a href="ggplot2.html#cb34-4"></a><span class="st">  </span><span class="kw">geom_sf</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> Price_per_lb)) <span class="op">+</span></span>
+<span id="cb34-5"><a href="ggplot2.html#cb34-5"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="dt">label =</span> <span class="st">&quot;The Honey crisis of 2008&quot;</span>, <span class="dt">subtitle =</span> <span class="st">&quot;Price per lb&quot;</span>)</span>
+<span id="cb34-6"><a href="ggplot2.html#cb34-6"></a>usa_<span class="dv">1</span> <span class="op">/</span><span class="st"> </span>usa_<span class="dv">2</span></span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-54"></span>
+<img src="_main_files/figure-html/unnamed-chunk-54-1.png" alt="Basic use of ggplot2 for spatial data" width="672" />
+<p class="caption">
+Figure 3.1: Basic use of ggplot2 for spatial data
+</p>
+</div>
+<p>Using the <code>annotation_*()</code> functions of <code>ggspatial</code> we can customize our maps by adding a base map or other elements to our map.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="ggplot2.html#cb35-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> honey2008) <span class="op">+</span></span>
+<span id="cb35-2"><a href="ggplot2.html#cb35-2"></a><span class="st">  </span><span class="kw">annotation_map_tile</span>(<span class="st">&quot;stamenwatercolor&quot;</span>) <span class="op">+</span></span>
+<span id="cb35-3"><a href="ggplot2.html#cb35-3"></a><span class="st">  </span><span class="kw">geom_sf</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> Price_per_lb), <span class="dt">alpha =</span> <span class="fl">0.8</span>) <span class="op">+</span></span>
+<span id="cb35-4"><a href="ggplot2.html#cb35-4"></a><span class="st">  </span><span class="kw">annotation_scale</span>() <span class="op">+</span></span>
+<span id="cb35-5"><a href="ggplot2.html#cb35-5"></a><span class="st">  </span><span class="kw">scale_fill_viridis_c</span>() <span class="op">+</span></span>
+<span id="cb35-6"><a href="ggplot2.html#cb35-6"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="dt">label =</span> <span class="st">&quot;The Honey crisis of 2008&quot;</span>, <span class="dt">subtitle =</span> <span class="st">&quot;Price per lb&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-55"></span>
+<img src="_main_files/figure-html/unnamed-chunk-55-1.png" alt="Adding a basemap and some elements" width="672" />
+<p class="caption">
+Figure 3.2: Adding a basemap and some elements
+</p>
+</div>
+<p>We can also use the packages <code>vapoRwave</code> and <code>extrafonts</code>, do some magic and then create some vibey maps.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="ggplot2.html#cb36-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> honey2008_multiline) <span class="op">+</span></span>
+<span id="cb36-2"><a href="ggplot2.html#cb36-2"></a><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">color =</span> <span class="st">&quot;#FF6B58&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.1</span>,  <span class="dt">size =</span> <span class="dv">4</span>) <span class="op">+</span></span>
+<span id="cb36-3"><a href="ggplot2.html#cb36-3"></a><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">color =</span> <span class="st">&quot;#FF6B58&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.1</span>,  <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span></span>
+<span id="cb36-4"><a href="ggplot2.html#cb36-4"></a><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">color =</span> <span class="st">&quot;#FF6B58&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.2</span>,  <span class="dt">size =</span> <span class="dv">2</span>) <span class="op">+</span></span>
+<span id="cb36-5"><a href="ggplot2.html#cb36-5"></a><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">color =</span> <span class="st">&quot;#FF6B58&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.2</span>,  <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></span>
+<span id="cb36-6"><a href="ggplot2.html#cb36-6"></a><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">color =</span> <span class="st">&quot;#FF6B58&quot;</span>, <span class="dt">alpha =</span> <span class="dv">1</span>,  <span class="dt">size =</span> <span class="fl">0.5</span>) <span class="op">+</span></span>
+<span id="cb36-7"><a href="ggplot2.html#cb36-7"></a><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">color =</span> <span class="st">&quot;#F8B660&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.1</span>, <span class="dt">size =</span> <span class="dv">6</span>, <span class="dt">data =</span> state_capitals_sf) <span class="op">+</span></span>
+<span id="cb36-8"><a href="ggplot2.html#cb36-8"></a><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">color =</span> <span class="st">&quot;#F8B660&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.1</span>, <span class="dt">size =</span> <span class="dv">5</span>, <span class="dt">data =</span> state_capitals_sf) <span class="op">+</span></span>
+<span id="cb36-9"><a href="ggplot2.html#cb36-9"></a><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">color =</span> <span class="st">&quot;#F8B660&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.2</span>, <span class="dt">size =</span> <span class="dv">4</span>, <span class="dt">data =</span> state_capitals_sf) <span class="op">+</span></span>
+<span id="cb36-10"><a href="ggplot2.html#cb36-10"></a><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">color =</span> <span class="st">&quot;#F8B660&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.2</span>, <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">data =</span> state_capitals_sf) <span class="op">+</span></span>
+<span id="cb36-11"><a href="ggplot2.html#cb36-11"></a><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">color =</span> <span class="st">&quot;#F8B660&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.4</span>, <span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">data =</span> state_capitals_sf) <span class="op">+</span></span>
+<span id="cb36-12"><a href="ggplot2.html#cb36-12"></a><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">color =</span> <span class="st">&quot;#F8B660&quot;</span>, <span class="dt">alpha =</span> <span class="dv">1</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">data =</span> state_capitals_sf) <span class="op">+</span></span>
+<span id="cb36-13"><a href="ggplot2.html#cb36-13"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">subtitle=</span><span class="st">&quot;An aesthetic look&quot;</span>,</span>
+<span id="cb36-14"><a href="ggplot2.html#cb36-14"></a>       <span class="dt">title=</span><span class="st">&quot;US States and their Captials&quot;</span>, </span>
+<span id="cb36-15"><a href="ggplot2.html#cb36-15"></a>       <span class="dt">caption =</span> <span class="st">&quot;Excluding Alaska and Hawaii&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb36-16"><a href="ggplot2.html#cb36-16"></a><span class="st">  </span><span class="kw">new_retro</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb36-17"><a href="ggplot2.html#cb36-17"></a><span class="st">  </span><span class="kw">scale_colour_newRetro</span>() <span class="op">+</span></span>
+<span id="cb36-18"><a href="ggplot2.html#cb36-18"></a><span class="st">  </span><span class="kw">guides</span>(<span class="dt">size =</span> <span class="kw">guide_legend</span>(<span class="dt">override.aes =</span> <span class="kw">list</span>(<span class="dt">colour =</span> <span class="st">&quot;#FA5F70FF&quot;</span>))) <span class="op">+</span></span>
+<span id="cb36-19"><a href="ggplot2.html#cb36-19"></a><span class="st">  </span><span class="kw">theme</span>(</span>
+<span id="cb36-20"><a href="ggplot2.html#cb36-20"></a>    <span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>()</span>
+<span id="cb36-21"><a href="ggplot2.html#cb36-21"></a>  )</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-56"></span>
+<img src="_main_files/figure-html/unnamed-chunk-56-1.png" alt="A E S T H E T I C" width="672" />
+<p class="caption">
+Figure 3.3: A E S T H E T I C
+</p>
+</div>
+<p>You can also go completely crazy, as Timo Grossenbacher did in his blog, and create maps like the one below.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="ggplot2.html#cb37-1"></a><span class="kw">ggplot</span>() <span class="op">+</span></span>
+<span id="cb37-2"><a href="ggplot2.html#cb37-2"></a><span class="st">    </span><span class="co"># raster comes as the first layer, municipalities on top</span></span>
+<span id="cb37-3"><a href="ggplot2.html#cb37-3"></a><span class="st">    </span><span class="kw">geom_raster</span>(</span>
+<span id="cb37-4"><a href="ggplot2.html#cb37-4"></a>      <span class="dt">data =</span> relief, <span class="kw">aes</span>(</span>
+<span id="cb37-5"><a href="ggplot2.html#cb37-5"></a>        <span class="dt">x =</span> x, </span>
+<span id="cb37-6"><a href="ggplot2.html#cb37-6"></a>        <span class="dt">y =</span> y, </span>
+<span id="cb37-7"><a href="ggplot2.html#cb37-7"></a>        <span class="dt">alpha =</span> value</span>
+<span id="cb37-8"><a href="ggplot2.html#cb37-8"></a>        )</span>
+<span id="cb37-9"><a href="ggplot2.html#cb37-9"></a>      ) <span class="op">+</span></span>
+<span id="cb37-10"><a href="ggplot2.html#cb37-10"></a><span class="st">    </span><span class="co"># use the &quot;alpha hack&quot;</span></span>
+<span id="cb37-11"><a href="ggplot2.html#cb37-11"></a><span class="st">    </span><span class="kw">scale_alpha</span>(<span class="dt">name =</span> <span class="st">&quot;&quot;</span>, <span class="dt">range =</span> <span class="kw">c</span>(<span class="fl">0.6</span>, <span class="dv">0</span>), <span class="dt">guide =</span> <span class="ot">FALSE</span>)  <span class="op">+</span><span class="st"> </span></span>
+<span id="cb37-12"><a href="ggplot2.html#cb37-12"></a><span class="st">    </span><span class="co"># municipality polygons</span></span>
+<span id="cb37-13"><a href="ggplot2.html#cb37-13"></a><span class="st">    </span><span class="kw">geom_polygon</span>(</span>
+<span id="cb37-14"><a href="ggplot2.html#cb37-14"></a>      <span class="dt">data =</span> map_data, <span class="kw">aes</span>(</span>
+<span id="cb37-15"><a href="ggplot2.html#cb37-15"></a>        <span class="dt">fill =</span> brks, </span>
+<span id="cb37-16"><a href="ggplot2.html#cb37-16"></a>        <span class="dt">x =</span> long, </span>
+<span id="cb37-17"><a href="ggplot2.html#cb37-17"></a>        <span class="dt">y =</span> lat, </span>
+<span id="cb37-18"><a href="ggplot2.html#cb37-18"></a>        <span class="dt">group =</span> group</span>
+<span id="cb37-19"><a href="ggplot2.html#cb37-19"></a>        )</span>
+<span id="cb37-20"><a href="ggplot2.html#cb37-20"></a>      ) <span class="op">+</span></span>
+<span id="cb37-21"><a href="ggplot2.html#cb37-21"></a><span class="st">    </span><span class="co"># municipality outline</span></span>
+<span id="cb37-22"><a href="ggplot2.html#cb37-22"></a><span class="st">    </span><span class="kw">geom_path</span>(</span>
+<span id="cb37-23"><a href="ggplot2.html#cb37-23"></a>      <span class="dt">data =</span> map_data, <span class="kw">aes</span>(</span>
+<span id="cb37-24"><a href="ggplot2.html#cb37-24"></a>        <span class="dt">x =</span> long, </span>
+<span id="cb37-25"><a href="ggplot2.html#cb37-25"></a>        <span class="dt">y =</span> lat, </span>
+<span id="cb37-26"><a href="ggplot2.html#cb37-26"></a>        <span class="dt">group =</span> group</span>
+<span id="cb37-27"><a href="ggplot2.html#cb37-27"></a>        ), </span>
+<span id="cb37-28"><a href="ggplot2.html#cb37-28"></a>      <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>,</span>
+<span id="cb37-29"><a href="ggplot2.html#cb37-29"></a>      <span class="dt">size =</span> <span class="fl">0.1</span></span>
+<span id="cb37-30"><a href="ggplot2.html#cb37-30"></a>      ) <span class="op">+</span></span>
+<span id="cb37-31"><a href="ggplot2.html#cb37-31"></a><span class="st">    </span><span class="co"># apart from that, nothing changes</span></span>
+<span id="cb37-32"><a href="ggplot2.html#cb37-32"></a><span class="st">    </span><span class="kw">coord_equal</span>() <span class="op">+</span></span>
+<span id="cb37-33"><a href="ggplot2.html#cb37-33"></a><span class="st">    </span><span class="kw">theme_map</span>() <span class="op">+</span></span>
+<span id="cb37-34"><a href="ggplot2.html#cb37-34"></a><span class="st">    </span><span class="kw">theme</span>(</span>
+<span id="cb37-35"><a href="ggplot2.html#cb37-35"></a>      <span class="dt">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
+<span id="cb37-36"><a href="ggplot2.html#cb37-36"></a>      <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb37-37"><a href="ggplot2.html#cb37-37"></a>      <span class="dt">plot.subtitle =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">0.5</span>)</span>
+<span id="cb37-38"><a href="ggplot2.html#cb37-38"></a>      ) <span class="op">+</span></span>
+<span id="cb37-39"><a href="ggplot2.html#cb37-39"></a><span class="st">    </span><span class="kw">labs</span>(</span>
+<span id="cb37-40"><a href="ggplot2.html#cb37-40"></a>      <span class="dt">x =</span> <span class="ot">NULL</span>, </span>
+<span id="cb37-41"><a href="ggplot2.html#cb37-41"></a>      <span class="dt">y =</span> <span class="ot">NULL</span>, </span>
+<span id="cb37-42"><a href="ggplot2.html#cb37-42"></a>      <span class="dt">title =</span> <span class="st">&quot;Switzerland&#39;s regional demographics&quot;</span>, </span>
+<span id="cb37-43"><a href="ggplot2.html#cb37-43"></a>      <span class="dt">subtitle =</span> <span class="st">&quot;Average age in Swiss municipalities, 2015&quot;</span>, </span>
+<span id="cb37-44"><a href="ggplot2.html#cb37-44"></a>      <span class="dt">caption =</span> <span class="st">&quot;Geometries: ThemaKart, BFS; Data: BFS, 2016; Relief: swisstopo, 2016&quot;</span></span>
+<span id="cb37-45"><a href="ggplot2.html#cb37-45"></a>      ) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb37-46"><a href="ggplot2.html#cb37-46"></a><span class="st">    </span><span class="kw">scale_fill_manual</span>(</span>
+<span id="cb37-47"><a href="ggplot2.html#cb37-47"></a>      <span class="dt">values =</span> <span class="kw">rev</span>(<span class="kw">scico</span>(<span class="dv">8</span>, <span class="dt">palette =</span> <span class="st">&quot;davos&quot;</span>)[<span class="dv">2</span><span class="op">:</span><span class="dv">7</span>]),</span>
+<span id="cb37-48"><a href="ggplot2.html#cb37-48"></a>      <span class="dt">breaks =</span> <span class="kw">rev</span>(brks_scale),</span>
+<span id="cb37-49"><a href="ggplot2.html#cb37-49"></a>      <span class="dt">name =</span> <span class="st">&quot;Average age&quot;</span>,</span>
+<span id="cb37-50"><a href="ggplot2.html#cb37-50"></a>      <span class="dt">drop =</span> <span class="ot">FALSE</span>,</span>
+<span id="cb37-51"><a href="ggplot2.html#cb37-51"></a>      <span class="dt">labels =</span> labels_scale,</span>
+<span id="cb37-52"><a href="ggplot2.html#cb37-52"></a>      <span class="dt">guide =</span> <span class="kw">guide_legend</span>(</span>
+<span id="cb37-53"><a href="ggplot2.html#cb37-53"></a>        <span class="dt">direction =</span> <span class="st">&quot;horizontal&quot;</span>,</span>
+<span id="cb37-54"><a href="ggplot2.html#cb37-54"></a>        <span class="dt">keyheight =</span> <span class="kw">unit</span>(<span class="dv">2</span>, <span class="dt">units =</span> <span class="st">&quot;mm&quot;</span>), </span>
+<span id="cb37-55"><a href="ggplot2.html#cb37-55"></a>        <span class="dt">keywidth =</span> <span class="kw">unit</span>(<span class="dv">70</span><span class="op">/</span><span class="kw">length</span>(labels), <span class="dt">units =</span> <span class="st">&quot;mm&quot;</span>),</span>
+<span id="cb37-56"><a href="ggplot2.html#cb37-56"></a>        <span class="dt">title.position =</span> <span class="st">&#39;top&#39;</span>,</span>
+<span id="cb37-57"><a href="ggplot2.html#cb37-57"></a>        <span class="dt">title.hjust =</span> <span class="fl">0.5</span>,</span>
+<span id="cb37-58"><a href="ggplot2.html#cb37-58"></a>        <span class="dt">label.hjust =</span> <span class="dv">1</span>,</span>
+<span id="cb37-59"><a href="ggplot2.html#cb37-59"></a>        <span class="dt">nrow =</span> <span class="dv">1</span>,</span>
+<span id="cb37-60"><a href="ggplot2.html#cb37-60"></a>        <span class="dt">byrow =</span> <span class="ot">TRUE</span>,</span>
+<span id="cb37-61"><a href="ggplot2.html#cb37-61"></a>        <span class="dt">reverse =</span> <span class="ot">TRUE</span>,</span>
+<span id="cb37-62"><a href="ggplot2.html#cb37-62"></a>        <span class="dt">label.position =</span> <span class="st">&quot;bottom&quot;</span></span>
+<span id="cb37-63"><a href="ggplot2.html#cb37-63"></a>      )</span>
+<span id="cb37-64"><a href="ggplot2.html#cb37-64"></a>    )</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-58"></span>
+<img src="_main_files/figure-html/unnamed-chunk-58-1.png" alt="Map of Switzerland using ggplot2" width="672" />
+<p class="caption">
+Figure 3.4: Map of Switzerland using ggplot2
+</p>
+</div>
+<p>Overall, <code>ggplot2</code> is a great way to easily create geographic maps if you don’t want to learn a new plotting package.</p>
+<p><span class="citation">(Grossenbacher 2016)</span></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="tmap.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="mapview.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

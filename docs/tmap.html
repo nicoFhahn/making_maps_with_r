@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 tmap | Making Maps with R</title>
+  <meta name="description" content="2 tmap | Making Maps with R" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 tmap | Making Maps with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 tmap | Making Maps with R" />
+  
+  
+  
+
+<meta name="author" content="Nico Hahn" />
+
+
+<meta name="date" content="2020-07-30" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introduction.html"/>
+<link rel="next" href="ggplot2.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="tmap.html"><a href="tmap.html"><i class="fa fa-check"></i><b>2</b> tmap</a><ul>
+<li class="chapter" data-level="2.1" data-path="tmap.html"><a href="tmap.html#data-used"><i class="fa fa-check"></i><b>2.1</b> Data used</a></li>
+<li class="chapter" data-level="2.2" data-path="tmap.html"><a href="tmap.html#static-maps-with-tmap"><i class="fa fa-check"></i><b>2.2</b> Static maps with tmap</a></li>
+<li class="chapter" data-level="2.3" data-path="tmap.html"><a href="tmap.html#interactive-maps-with-tmap"><i class="fa fa-check"></i><b>2.3</b> Interactive maps with tmap</a></li>
+<li class="chapter" data-level="2.4" data-path="tmap.html"><a href="tmap.html#related-links"><i class="fa fa-check"></i><b>2.4</b> Related links</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="ggplot2.html"><a href="ggplot2.html"><i class="fa fa-check"></i><b>3</b> ggplot2</a><ul>
+<li class="chapter" data-level="3.1" data-path="tmap.html"><a href="tmap.html#data-used"><i class="fa fa-check"></i><b>3.1</b> Data used</a></li>
+<li class="chapter" data-level="3.2" data-path="ggplot2.html"><a href="ggplot2.html#using-ggplot2-to-create-maps"><i class="fa fa-check"></i><b>3.2</b> Using ggplot2 to create maps</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="mapview.html"><a href="mapview.html"><i class="fa fa-check"></i><b>4</b> mapview</a><ul>
+<li class="chapter" data-level="4.1" data-path="tmap.html"><a href="tmap.html#data-used"><i class="fa fa-check"></i><b>4.1</b> Data used</a></li>
+<li class="chapter" data-level="4.2" data-path="mapview.html"><a href="mapview.html#using-mapview-to-create-maps"><i class="fa fa-check"></i><b>4.2</b> Using mapview to create maps</a></li>
+<li class="chapter" data-level="4.3" data-path="tmap.html"><a href="tmap.html#related-links"><i class="fa fa-check"></i><b>4.3</b> Related links</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="mapdeck.html"><a href="mapdeck.html"><i class="fa fa-check"></i><b>5</b> mapdeck</a><ul>
+<li class="chapter" data-level="5.1" data-path="tmap.html"><a href="tmap.html#data-used"><i class="fa fa-check"></i><b>5.1</b> Data used</a></li>
+<li class="chapter" data-level="5.2" data-path="mapdeck.html"><a href="mapdeck.html#using-mapdeck-to-create-maps"><i class="fa fa-check"></i><b>5.2</b> Using mapdeck to create maps</a></li>
+<li class="chapter" data-level="5.3" data-path="tmap.html"><a href="tmap.html#related-links"><i class="fa fa-check"></i><b>5.3</b> Related links</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="leaflet.html"><a href="leaflet.html"><i class="fa fa-check"></i><b>6</b> leaflet</a><ul>
+<li class="chapter" data-level="6.1" data-path="tmap.html"><a href="tmap.html#data-used"><i class="fa fa-check"></i><b>6.1</b> Data used</a></li>
+<li class="chapter" data-level="6.2" data-path="leaflet.html"><a href="leaflet.html#using-leaflet-to-create-maps"><i class="fa fa-check"></i><b>6.2</b> Using leaflet to create maps</a></li>
+<li class="chapter" data-level="6.3" data-path="tmap.html"><a href="tmap.html#related-links"><i class="fa fa-check"></i><b>6.3</b> Related links</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
+<li class="chapter" data-level="8" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>8</b> References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Making Maps with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="tmap" class="section level1">
+<h1><span class="header-section-number">2</span> tmap</h1>
+<p>Thematic maps are geographical maps in which spatial data distributions are visualized. This pack-age offers a flexible, layer-based, and easy to use approach to create thematic maps, such as choropleths and bubble maps. It is based on the grammar of graphics, and resembles the syntax of <code>ggplot2</code>. For this chapter we will mainly be using the <code>tmap</code> package.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="tmap.html#cb1-1"></a><span class="co"># for loading our data</span></span>
+<span id="cb1-2"><a href="tmap.html#cb1-2"></a><span class="kw">library</span>(raster)</span>
+<span id="cb1-3"><a href="tmap.html#cb1-3"></a><span class="kw">library</span>(readr)</span>
+<span id="cb1-4"><a href="tmap.html#cb1-4"></a><span class="kw">library</span>(readxl)</span>
+<span id="cb1-5"><a href="tmap.html#cb1-5"></a><span class="kw">library</span>(sf)</span>
+<span id="cb1-6"><a href="tmap.html#cb1-6"></a><span class="co"># for datasets</span></span>
+<span id="cb1-7"><a href="tmap.html#cb1-7"></a><span class="kw">library</span>(maps)</span>
+<span id="cb1-8"><a href="tmap.html#cb1-8"></a><span class="kw">library</span>(spData)</span>
+<span id="cb1-9"><a href="tmap.html#cb1-9"></a><span class="co"># for creating animations</span></span>
+<span id="cb1-10"><a href="tmap.html#cb1-10"></a><span class="kw">library</span>(magick)</span>
+<span id="cb1-11"><a href="tmap.html#cb1-11"></a><span class="co"># for plotting</span></span>
+<span id="cb1-12"><a href="tmap.html#cb1-12"></a><span class="kw">library</span>(grid)</span>
+<span id="cb1-13"><a href="tmap.html#cb1-13"></a><span class="kw">library</span>(tmap)</span>
+<span id="cb1-14"><a href="tmap.html#cb1-14"></a><span class="kw">library</span>(viridis)</span></code></pre></div>
+<div id="data-used" class="section level2">
+<h2><span class="header-section-number">2.1</span> Data used</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="tmap.html#cb2-1"></a><span class="co"># load shapefile for bavaria</span></span>
+<span id="cb2-2"><a href="tmap.html#cb2-2"></a>bavaria &lt;-<span class="st"> </span><span class="kw">read_sf</span>(<span class="st">&quot;bavaria.shp&quot;</span>)</span>
+<span id="cb2-3"><a href="tmap.html#cb2-3"></a><span class="co"># load raster file for europe</span></span>
+<span id="cb2-4"><a href="tmap.html#cb2-4"></a>europe_raster &lt;-<span class="st"> </span><span class="kw">raster</span>(<span class="st">&quot;elevation1x1_new.tif&quot;</span>)</span>
+<span id="cb2-5"><a href="tmap.html#cb2-5"></a><span class="co"># load shapefile for world</span></span>
+<span id="cb2-6"><a href="tmap.html#cb2-6"></a>world_shape &lt;-<span class="st"> </span><span class="kw">read_sf</span>(<span class="st">&quot;ne_50m_admin_0_countries.shp&quot;</span>)</span>
+<span id="cb2-7"><a href="tmap.html#cb2-7"></a><span class="co"># keep only europe</span></span>
+<span id="cb2-8"><a href="tmap.html#cb2-8"></a>europe_shape &lt;-<span class="st"> </span>world_shape[world_shape<span class="op">$</span>CONTINENT <span class="op">==</span><span class="st"> &quot;Europe&quot;</span>,]</span>
+<span id="cb2-9"><a href="tmap.html#cb2-9"></a><span class="co"># use world.cities from the maps package</span></span>
+<span id="cb2-10"><a href="tmap.html#cb2-10"></a><span class="co"># keep only cities with at least 1 million inhabitants</span></span>
+<span id="cb2-11"><a href="tmap.html#cb2-11"></a>cities &lt;-<span class="st"> </span>world.cities[world.cities<span class="op">$</span>pop <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1000000</span>, ]</span>
+<span id="cb2-12"><a href="tmap.html#cb2-12"></a><span class="co"># turn it into an sf object</span></span>
+<span id="cb2-13"><a href="tmap.html#cb2-13"></a>cities &lt;-<span class="st"> </span>cities <span class="op">%&gt;%</span></span>
+<span id="cb2-14"><a href="tmap.html#cb2-14"></a><span class="st">  </span><span class="kw">st_as_sf</span>(<span class="dt">coords =</span> <span class="kw">c</span>(<span class="st">&quot;long&quot;</span>, <span class="st">&quot;lat&quot;</span>), <span class="dt">crs =</span> <span class="dv">4326</span>) <span class="op">%&gt;%</span></span>
+<span id="cb2-15"><a href="tmap.html#cb2-15"></a><span class="st">  </span><span class="kw">st_cast</span>(<span class="st">&quot;POINT&quot;</span>)</span>
+<span id="cb2-16"><a href="tmap.html#cb2-16"></a><span class="co"># keep only the cities that are in europe</span></span>
+<span id="cb2-17"><a href="tmap.html#cb2-17"></a>cities &lt;-<span class="st"> </span><span class="kw">st_intersection</span>(cities, <span class="kw">st_union</span>(europe_shape))</span>
+<span id="cb2-18"><a href="tmap.html#cb2-18"></a><span class="co"># turn the europe object into a MULTILINESTRING</span></span>
+<span id="cb2-19"><a href="tmap.html#cb2-19"></a>europe_shape &lt;-<span class="st"> </span><span class="kw">st_cast</span>(europe_shape, <span class="st">&quot;MULTILINESTRING&quot;</span>)</span>
+<span id="cb2-20"><a href="tmap.html#cb2-20"></a>communities &lt;-<span class="st"> </span><span class="kw">read_sf</span>(<span class="st">&quot;gmd_ex.shp&quot;</span>)</span>
+<span id="cb2-21"><a href="tmap.html#cb2-21"></a><span class="co"># keep only the ones in rosenheim</span></span>
+<span id="cb2-22"><a href="tmap.html#cb2-22"></a>rosenheim &lt;-<span class="st"> </span>communities[communities<span class="op">$</span>BEZ_KRS <span class="op">==</span><span class="st"> &quot;Rosenheim&quot;</span>, ]</span>
+<span id="cb2-23"><a href="tmap.html#cb2-23"></a><span class="co"># load the csv file for honey production in the us</span></span>
+<span id="cb2-24"><a href="tmap.html#cb2-24"></a>honey_csv &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;honeyproduction.csv&quot;</span>)</span>
+<span id="cb2-25"><a href="tmap.html#cb2-25"></a><span class="co"># load the xlsx file for abbreviations of the us states</span></span>
+<span id="cb2-26"><a href="tmap.html#cb2-26"></a>abbrev &lt;-<span class="st"> </span><span class="kw">read_xlsx</span>(<span class="st">&quot;abbrev.xlsx&quot;</span>)</span>
+<span id="cb2-27"><a href="tmap.html#cb2-27"></a><span class="co"># load honey shapefile</span></span>
+<span id="cb2-28"><a href="tmap.html#cb2-28"></a>honey_sf &lt;-<span class="st"> </span><span class="kw">read_sf</span>(<span class="st">&quot;honey.shp&quot;</span>)</span></code></pre></div>
+</div>
+<div id="static-maps-with-tmap" class="section level2">
+<h2><span class="header-section-number">2.2</span> Static maps with tmap</h2>
+<p>Most often, geographical data are displayed using static maps that can be saved as .png or .pdf files. Originally, data could only be visualized in this way in R, but the development of new packages, especially <code>sp</code>, has created new possibilities for displaying this data. Despite new methods like interactive maps, static maps are still the main focus of geospatial data visualization in R.</p>
+<p>As mentioned above, the syntax of <code>tmap</code> is similar to that of <code>ggplot2</code>. This includes a strict separation between data and aesthetics. At the beginning, <code>tm_shape()</code> is passed a dataset, followed by one or more levels that define the type of display. Examples are <code>tm_fill()</code> and <code>tm_dots()</code> to plot data as polygons or points.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="tmap.html#cb3-1"></a><span class="kw">tm_shape</span>(bavaria) <span class="op">+</span></span>
+<span id="cb3-2"><a href="tmap.html#cb3-2"></a><span class="st">  </span><span class="kw">tm_fill</span>()</span>
+<span id="cb3-3"><a href="tmap.html#cb3-3"></a><span class="kw">tm_shape</span>(bavaria) <span class="op">+</span></span>
+<span id="cb3-4"><a href="tmap.html#cb3-4"></a><span class="st">  </span><span class="kw">tm_borders</span>()</span>
+<span id="cb3-5"><a href="tmap.html#cb3-5"></a><span class="kw">tm_shape</span>(bavaria) <span class="op">+</span></span>
+<span id="cb3-6"><a href="tmap.html#cb3-6"></a><span class="st">  </span><span class="kw">tm_polygons</span>()</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-6"></span>
+<img src="_main_files/figure-html/unnamed-chunk-6-1.png" alt="A simple example" width="672" />
+<p class="caption">
+Figure 2.1: A simple example
+</p>
+</div>
+<p>The passed object <code>bavaria</code> has the class <code>sf</code> and represents the individual cities and districts of Bavaria. <code>tm_fill()</code> fills the individual polygons, resulting in a filled outline of Bavaria. <code>tm_borders()</code> draws the borders of the individual polygons and <code>tm_polygons()</code> combines the two functions and displays both at the same time. The <code>+</code> operator can be used to add additional layers to visualize different types of geospatial data.</p>
+<p>With <code>tmap</code> objects can not only be plotted but can also be saved as objects of the class <code>tmap</code>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="tmap.html#cb4-1"></a><span class="co"># save map as an object</span></span>
+<span id="cb4-2"><a href="tmap.html#cb4-2"></a>map_europe &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(europe_raster) <span class="op">+</span></span>
+<span id="cb4-3"><a href="tmap.html#cb4-3"></a><span class="st">  </span><span class="kw">tm_raster</span>()</span>
+<span id="cb4-4"><a href="tmap.html#cb4-4"></a><span class="kw">class</span>(map_europe)</span></code></pre></div>
+<pre><code>## [1] &quot;tmap&quot;</code></pre>
+<p>The saved object can be easily extended or retrieved at a later time in the console. Furthermore, additional layers can be added to the object with <code>tm_shape()</code>, which allows several maps to be combined into one.
+The following code example is based on the above code, which represents a height grid of Europe. First the border lines of the individual states are added, followed by all cities with more than one million inhabitants.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="tmap.html#cb6-1"></a>map_europe2 &lt;-<span class="st"> </span>map_europe <span class="op">+</span></span>
+<span id="cb6-2"><a href="tmap.html#cb6-2"></a><span class="st">  </span><span class="kw">tm_shape</span>(europe_shape) <span class="op">+</span></span>
+<span id="cb6-3"><a href="tmap.html#cb6-3"></a><span class="st">  </span><span class="kw">tm_lines</span>(<span class="dt">alpha =</span> <span class="fl">0.3</span>)</span>
+<span id="cb6-4"><a href="tmap.html#cb6-4"></a>map_europe3 &lt;-<span class="st"> </span>map_europe2  <span class="op">+</span></span>
+<span id="cb6-5"><a href="tmap.html#cb6-5"></a><span class="st">  </span><span class="kw">tm_shape</span>(cities) <span class="op">+</span></span>
+<span id="cb6-6"><a href="tmap.html#cb6-6"></a><span class="st">  </span><span class="kw">tm_dots</span>(<span class="dt">size =</span> <span class="fl">0.3</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-10"></span>
+<img src="_main_files/figure-html/unnamed-chunk-10-1.png" alt="Use of several layers" width="672" />
+<p class="caption">
+Figure 2.2: Use of several layers
+</p>
+</div>
+<p>By saving individual maps as objects, they can also be displayed next to or on top of each other using the <code>map_arrange()</code> function.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="tmap.html#cb7-1"></a><span class="kw">tmap_arrange</span>(bav_<span class="dv">1</span>, bav_<span class="dv">2</span>, bav_<span class="dv">3</span>, <span class="dt">ncol =</span> <span class="dv">3</span>)</span></code></pre></div>
+<p>The user is not limited in the number of layers he is able to add. It should be noted, however, that too much information can quickly overwhelm the viewer.</p>
+<p>For the previous plots the default aesthetic settings of <code>tmap</code> were used. To create visually appealing maps, these can be overwritten. Two main types of map aesthetics exist:
+- Those that change with the data
+- Those that do not change with data
+Compared to <code>ggplot2</code> no helper function (<code>aes()</code>) is used to customize the design of the map. Instead, the arguments are passed directly. Some of the most useful arguments are the fill color (<code>col</code>), transparency (<code>alpha</code>), line width (<code>lwd</code>) and line style (<code>lty</code>).</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="tmap.html#cb8-1"></a>bav1 &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(bavaria) <span class="op">+</span></span>
+<span id="cb8-2"><a href="tmap.html#cb8-2"></a><span class="st">  </span><span class="kw">tm_fill</span>(<span class="dt">col =</span> <span class="st">&quot;aquamarine&quot;</span>)</span>
+<span id="cb8-3"><a href="tmap.html#cb8-3"></a>bav2 &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(bavaria) <span class="op">+</span></span>
+<span id="cb8-4"><a href="tmap.html#cb8-4"></a><span class="st">  </span><span class="kw">tm_fill</span>(<span class="dt">col =</span> <span class="st">&quot;aquamarine&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>)</span>
+<span id="cb8-5"><a href="tmap.html#cb8-5"></a>bav3 &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(bavaria) <span class="op">+</span></span>
+<span id="cb8-6"><a href="tmap.html#cb8-6"></a><span class="st">  </span><span class="kw">tm_polygons</span>(<span class="dt">col =</span> <span class="st">&quot;aquamarine&quot;</span>, <span class="dt">border.col =</span> <span class="st">&quot;darkolivegreen&quot;</span>)</span>
+<span id="cb8-7"><a href="tmap.html#cb8-7"></a>bav4 &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(bavaria) <span class="op">+</span></span>
+<span id="cb8-8"><a href="tmap.html#cb8-8"></a><span class="st">  </span><span class="kw">tm_borders</span>(<span class="dt">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb8-9"><a href="tmap.html#cb8-9"></a>bav5 &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(bavaria) <span class="op">+</span></span>
+<span id="cb8-10"><a href="tmap.html#cb8-10"></a><span class="st">  </span><span class="kw">tm_borders</span>(<span class="dt">lty =</span> <span class="dv">4</span>)</span>
+<span id="cb8-11"><a href="tmap.html#cb8-11"></a>bav6 &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(bavaria) <span class="op">+</span></span>
+<span id="cb8-12"><a href="tmap.html#cb8-12"></a><span class="st">  </span><span class="kw">tm_polygons</span>(<span class="dt">col =</span> <span class="st">&quot;#E2E2E2&quot;</span>, <span class="dt">border.alpha =</span> <span class="fl">0.5</span>, <span class="dt">lwd =</span> <span class="dv">3</span>)</span>
+<span id="cb8-13"><a href="tmap.html#cb8-13"></a><span class="kw">tmap_arrange</span>(bav1, bav1, bav3, bav4, bav5, bav6, <span class="dt">ncol =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-12"></span>
+<img src="_main_files/figure-html/unnamed-chunk-12-1.png" alt="Use of various arguments" width="672" />
+<p class="caption">
+Figure 2.3: Use of various arguments
+</p>
+</div>
+<p>Another difference to <code>ggplot2</code> is that the variable names must be passed as characters and the <code>$</code> operator cannot be used.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="tmap.html#cb9-1"></a><span class="kw">tm_shape</span>(bavaria) <span class="op">+</span></span>
+<span id="cb9-2"><a href="tmap.html#cb9-2"></a><span class="st">  </span><span class="kw">tm_polygons</span>(<span class="dt">col =</span> bavaria<span class="op">$</span>pop_development)</span></code></pre></div>
+<pre><code>## Error: Fill argument neither colors nor valid variable name(s)</code></pre>
+<p>The desired graphic is obtained with the following code:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="tmap.html#cb11-1"></a><span class="kw">tm_shape</span>(bavaria) <span class="op">+</span></span>
+<span id="cb11-2"><a href="tmap.html#cb11-2"></a><span class="st">  </span><span class="kw">tm_polygons</span>(<span class="dt">col =</span> <span class="st">&quot;pop_development&quot;</span>, <span class="dt">midpoint =</span> <span class="dv">0</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-15"></span>
+<img src="_main_files/figure-html/unnamed-chunk-15-1.png" alt="Population development in Bavaria from 2011 to 2015" width="672" />
+<p class="caption">
+Figure 2.4: Population development in Bavaria from 2011 to 2015
+</p>
+</div>
+The <code>midpoint</code> argument is used here to use the value 0 as the natural midpoint. The resulting map shows that the population in northern Bavaria is decreasing, while the population around Munich in particular is increasing rapidly.
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-16"></span>
+<img src="_main_files/figure-html/unnamed-chunk-16-1.png" alt="The same map in base R" width="672" />
+<p class="caption">
+Figure 2.5: The same map in base R
+</p>
+</div>
+<p>The example of the last two maps shows that <code>tmap</code> automatically selects a color palette and intervals. To use other intervals, you can either pass manual bins to the <code>breaks</code> argument or use <code>n</code> to specify the number of bins.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="tmap.html#cb12-1"></a><span class="kw">tm_shape</span>(bavaria) <span class="op">+</span></span>
+<span id="cb12-2"><a href="tmap.html#cb12-2"></a><span class="st">  </span><span class="kw">tm_polygons</span>(<span class="dt">col =</span> <span class="st">&quot;mean_age&quot;</span>)</span>
+<span id="cb12-3"><a href="tmap.html#cb12-3"></a><span class="kw">tm_shape</span>(bavaria) <span class="op">+</span></span>
+<span id="cb12-4"><a href="tmap.html#cb12-4"></a><span class="st">  </span><span class="kw">tm_polygons</span>(<span class="dt">col =</span> <span class="st">&quot;mean_age&quot;</span>, <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="dv">40</span>, <span class="dv">42</span>, <span class="dv">46</span>, <span class="dv">54</span>))</span>
+<span id="cb12-5"><a href="tmap.html#cb12-5"></a><span class="kw">tm_shape</span>(bavaria) <span class="op">+</span></span>
+<span id="cb12-6"><a href="tmap.html#cb12-6"></a><span class="st">  </span><span class="kw">tm_polygons</span>(<span class="dt">col =</span> <span class="st">&quot;mean_age&quot;</span>, <span class="dt">n =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-18"></span>
+<img src="_main_files/figure-html/unnamed-chunk-18-1.png" alt="Use of the breaks and n arguments" width="672" />
+<p class="caption">
+Figure 2.6: Use of the breaks and n arguments
+</p>
+</div>
+<p>An alternative is the <code>style</code> argument. This allows the user to automatically create breaks by specifying algorithms. Among others, the following styles can be passed:</p>
+<ul>
+<li><code>style = pretty</code>: Rounds interval boundaries to whole numbers. Default setting.</li>
+<li><code>style = equal</code>: Splits the variable into intervals of equal length.
+Should only be used if the variable follows an uniform distribution.</li>
+<li><code>style = quantile</code>: Splits the variable into quantiles.
+Consequently there are the same number of observations in each interval.</li>
+<li><code>style = jenks</code>: Identifies groups with similar values and
+maximizes the difference between them.</li>
+<li><code>style = cont</code>: Displays many colors over a continuous palette.</li>
+<li><code>style = cat</code>: Colors each category individually for categorical data.</li>
+</ul>
+<p>Other possibilities are <code>cat</code>, <code>fixed</code>, <code>sd</code>, <code>kmeans</code>, <code>hclust</code>, <code>bclust</code>, and <code>fisher</code>.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-19"></span>
+<img src="_main_files/figure-html/unnamed-chunk-19-1.png" alt="Diffrent styles" width="768" />
+<p class="caption">
+Figure 2.7: Diffrent styles
+</p>
+</div>
+<p>A further possibility to influence the appearance of a map is to choose the color of the individual classes. The user can do this using the <code>palette</code> argument. The name of a palette from the <code>RColorBrewer</code> or <code>Viridis</code> package can be passed to this argument. If the order of the palette should be reversed, a <code>-</code> can be added at the beginning of the character.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="tmap.html#cb13-1"></a><span class="kw">tm_shape</span>(bavaria) <span class="op">+</span></span>
+<span id="cb13-2"><a href="tmap.html#cb13-2"></a><span class="st">  </span><span class="kw">tm_polygons</span>(<span class="dt">col =</span> <span class="st">&quot;unemployment_rate&quot;</span>, <span class="dt">palette =</span> <span class="st">&quot;viridis&quot;</span>)</span>
+<span id="cb13-3"><a href="tmap.html#cb13-3"></a><span class="kw">tm_shape</span>(bavaria) <span class="op">+</span></span>
+<span id="cb13-4"><a href="tmap.html#cb13-4"></a><span class="st">  </span><span class="kw">tm_polygons</span>(<span class="dt">col =</span> <span class="st">&quot;unemployment_rate&quot;</span>, <span class="dt">palette =</span> <span class="st">&quot;-viridis&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-21"></span>
+<img src="_main_files/figure-html/unnamed-chunk-21-1.png" alt="Reversing a palette" width="672" />
+<p class="caption">
+Figure 2.8: Reversing a palette
+</p>
+</div>
+<p>The palettes from these packages can be divided into three types of palettes:
+- Sequential pallets: Follow a gradient from light to dark. Should be used for continuous variables.
+- Diverging pallets: Follow a gradient from dark to light, to dark. Should be used for continuous variables with a natural midpoint (<code>midpoint</code>).
+- Categorical palettes: Easily distinguishable colors, ideal for categorical data
+Alternatively, a custom palette can be passed, for this purpose HEX codes may be used.
+You should pay attention to the selection of your colors: Colors transfer feelings. For example, red is associated with negative things, while green is associated with positive things. This example can also be extended to geographical features. Green is associated with forests and blue with bodies of water. In addition, when using a palette, it should be clear which color stands for lower or higher values. In order for the widest possible range of people to be able to interpret a map, care should also be taken, if possible, to ensure that color-blind people can identify the differences between classes.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-22"></span>
+<img src="_main_files/figure-html/unnamed-chunk-22-1.png" alt="Sequential, diverging and categorical palettes" width="440" />
+<p class="caption">
+Figure 2.9: Sequential, diverging and categorical palettes
+</p>
+</div>
+<p>Besides the possibility of changing the map itself, there is also the option of editing other elements of the graphic. With the help of functions like <code>tm_compass()</code>, <code>tm_scale_bar()</code>, <code>tm_logo()</code>, <code>tm_style()</code> and <code>tm_layout()</code>, maps can be extended by various elements. The first three of these functions can be used to add a compass, a scale bar and images.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="tmap.html#cb14-1"></a><span class="kw">tm_shape</span>(bavaria) <span class="op">+</span></span>
+<span id="cb14-2"><a href="tmap.html#cb14-2"></a><span class="st">  </span><span class="kw">tm_polygons</span>(<span class="dt">col =</span> <span class="st">&quot;type&quot;</span>, <span class="dt">pal =</span> <span class="kw">c</span>(<span class="st">&quot;white&quot;</span>, <span class="st">&quot;skyblue&quot;</span>)) <span class="op">+</span></span>
+<span id="cb14-3"><a href="tmap.html#cb14-3"></a><span class="st">  </span><span class="kw">tm_logo</span>(<span class="st">&quot;datasets/chapter_2/bavaria.png&quot;</span>, <span class="dt">height =</span> <span class="dv">2</span>) <span class="op">+</span></span>
+<span id="cb14-4"><a href="tmap.html#cb14-4"></a><span class="st">  </span><span class="kw">tm_scale_bar</span>(<span class="dt">position =</span> <span class="kw">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;bottom&quot;</span>), <span class="dt">width =</span> <span class="fl">0.15</span>) <span class="op">+</span></span>
+<span id="cb14-5"><a href="tmap.html#cb14-5"></a><span class="st">  </span><span class="kw">tm_compass</span>(<span class="dt">position =</span> <span class="kw">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;top&quot;</span>), <span class="dt">size =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-24"></span>
+<img src="_main_files/figure-html/unnamed-chunk-24-1.png" alt="Map of Bavaria with additional elements" width="672" />
+<p class="caption">
+Figure 2.10: Map of Bavaria with additional elements
+</p>
+</div>
+<p>With the help of <code>tm_layout()</code> a variety of properties of the maps can be changed. You can add a title or a background color, change the scaling or remove the border and the legend.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="tmap.html#cb15-1"></a><span class="kw">tm_shape</span>(bavaria) <span class="op">+</span></span>
+<span id="cb15-2"><a href="tmap.html#cb15-2"></a><span class="st">  </span><span class="kw">tm_polygons</span>() <span class="op">+</span></span>
+<span id="cb15-3"><a href="tmap.html#cb15-3"></a><span class="st">  </span><span class="kw">tm_layout</span>(<span class="dt">title =</span> <span class="st">&quot;Bavaria&quot;</span>, <span class="dt">bg.color =</span> <span class="st">&quot;#228B22&quot;</span>)</span>
+<span id="cb15-4"><a href="tmap.html#cb15-4"></a><span class="kw">tm_shape</span>(bavaria) <span class="op">+</span></span>
+<span id="cb15-5"><a href="tmap.html#cb15-5"></a><span class="st">  </span><span class="kw">tm_polygons</span>() <span class="op">+</span></span>
+<span id="cb15-6"><a href="tmap.html#cb15-6"></a><span class="st">  </span><span class="kw">tm_layout</span>(<span class="dt">scale =</span> <span class="dv">3</span>, <span class="dt">frame =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb15-7"><a href="tmap.html#cb15-7"></a><span class="kw">tm_shape</span>(bavaria) <span class="op">+</span></span>
+<span id="cb15-8"><a href="tmap.html#cb15-8"></a><span class="st">  </span><span class="kw">tm_polygons</span>(<span class="dt">col =</span> <span class="st">&quot;type&quot;</span>) <span class="op">+</span></span>
+<span id="cb15-9"><a href="tmap.html#cb15-9"></a><span class="st">  </span><span class="kw">tm_layout</span>(<span class="dt">frame.lwd =</span> <span class="dv">3</span>, <span class="dt">legend.position =</span> <span class="kw">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;bottom&quot;</span>))</span>
+<span id="cb15-10"><a href="tmap.html#cb15-10"></a><span class="kw">tm_shape</span>(bavaria) <span class="op">+</span></span>
+<span id="cb15-11"><a href="tmap.html#cb15-11"></a><span class="st">  </span><span class="kw">tm_polygons</span>(<span class="dt">col =</span> <span class="st">&quot;type&quot;</span>) <span class="op">+</span></span>
+<span id="cb15-12"><a href="tmap.html#cb15-12"></a><span class="st">  </span><span class="kw">tm_layout</span>(<span class="dt">inner.margins =</span> <span class="fl">0.2</span>, <span class="dt">legend.show =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-26"></span>
+<img src="_main_files/figure-html/unnamed-chunk-26-1.png" alt="Some layout settings" width="672" />
+<p class="caption">
+Figure 2.11: Some layout settings
+</p>
+</div>
+<p>You can also change the font and font size, as well as further customize the look using visual filters, such as sepia or black and white.
+By using <code>tm_style()</code>, predefined styles can be used to give cards an old-school look, or to optimize them for color-blind people, for example. An overview of the available styles is provided by the <code>tmap_style_catalog()</code> function, which creates a folder containing different maps in the current working directory.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="tmap.html#cb16-1"></a><span class="kw">tm_shape</span>(bavaria) <span class="op">+</span></span>
+<span id="cb16-2"><a href="tmap.html#cb16-2"></a><span class="st">  </span><span class="kw">tm_polygons</span>(<span class="dt">col =</span> <span class="st">&quot;type&quot;</span>) <span class="op">+</span></span>
+<span id="cb16-3"><a href="tmap.html#cb16-3"></a><span class="st">  </span><span class="kw">tm_style</span>(<span class="st">&quot;classic&quot;</span>)</span>
+<span id="cb16-4"><a href="tmap.html#cb16-4"></a><span class="kw">tm_shape</span>(bavaria) <span class="op">+</span></span>
+<span id="cb16-5"><a href="tmap.html#cb16-5"></a><span class="st">  </span><span class="kw">tm_polygons</span>(<span class="dt">col =</span> <span class="st">&quot;type&quot;</span>) <span class="op">+</span></span>
+<span id="cb16-6"><a href="tmap.html#cb16-6"></a><span class="st">  </span><span class="kw">tm_style</span>(<span class="st">&quot;col_blind&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-28"></span>
+<img src="_main_files/figure-html/unnamed-chunk-28-1.png" alt="Classic and color-blind style" width="672" />
+<p class="caption">
+Figure 2.12: Classic and color-blind style
+</p>
+</div>
+<p>Sometimes not all information can be displayed effectively with a single map. With the help of the <code>print()</code> and <code>viewport()</code> functions, several smaller maps can be combined to form one large one. In the following example, the cities and municipalities of the Rosenheim district are shown. Since not all viewers may know where the county is located, a map of Bavaria with a bounding box around the county is added.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="tmap.html#cb17-1"></a>map_rosenheim</span>
+<span id="cb17-2"><a href="tmap.html#cb17-2"></a><span class="kw">print</span>(map_bavaria, <span class="dt">vp =</span> grid<span class="op">::</span><span class="kw">viewport</span>(<span class="fl">0.8</span>, <span class="fl">0.185</span>, <span class="dt">width =</span> <span class="fl">0.2</span>, <span class="dt">height =</span> <span class="fl">0.45</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-30"></span>
+<img src="_main_files/figure-html/unnamed-chunk-30-1.png" alt="Towns and communities of the district of Rosenheim" width="672" />
+<p class="caption">
+Figure 2.13: Towns and communities of the district of Rosenheim
+</p>
+</div>
+<p>Another field of application for this type of map is the representation of regions that are situated far away from each other. In the following example, all 50 states of the USA are displayed in one graphic, taking into account the sizes of the individual states. Since Hawaii and Alaska are too far away from the remaining 48 states, a single map would not be the best solution, thus three maps are created and merged.
+First, the projection of the 48 states is changed to an equal area projection, which the other two datasets already have.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="tmap.html#cb18-1"></a>us_states2163 &lt;-<span class="st"> </span><span class="kw">st_transform</span>(us_states, <span class="dv">2163</span>)</span></code></pre></div>
+<p>To display the maps as true to their size as possible, the difference between the largest and smallest y-value is calculated for each of the three maps. For this purpose, bounding boxes are used. Then the factors by which the maps of Alaska and Hawaii are larger or smaller than those of the remaining 48 states are calculated.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="tmap.html#cb19-1"></a>us_states_range &lt;-<span class="st"> </span><span class="kw">st_bbox</span>(us_states2163)[<span class="dv">4</span>] <span class="op">-</span><span class="st"> </span><span class="kw">st_bbox</span>(us_states2163)[<span class="dv">2</span>]</span>
+<span id="cb19-2"><a href="tmap.html#cb19-2"></a>hawaii_range &lt;-<span class="st"> </span><span class="kw">st_bbox</span>(hawaii)[<span class="dv">4</span>] <span class="op">-</span><span class="st"> </span><span class="kw">st_bbox</span>(hawaii)[<span class="dv">2</span>]</span>
+<span id="cb19-3"><a href="tmap.html#cb19-3"></a>alaska_range &lt;-<span class="st"> </span><span class="kw">st_bbox</span>(alaska)[<span class="dv">4</span>] <span class="op">-</span><span class="st"> </span><span class="kw">st_bbox</span>(alaska)[<span class="dv">2</span>]</span>
+<span id="cb19-4"><a href="tmap.html#cb19-4"></a>us_states_hawaii_ratio &lt;-<span class="st"> </span>hawaii_range <span class="op">/</span><span class="st"> </span>us_states_range</span>
+<span id="cb19-5"><a href="tmap.html#cb19-5"></a>us_states_alaska_ratio &lt;-<span class="st"> </span>alaska_range <span class="op">/</span><span class="st"> </span>us_states_range</span></code></pre></div>
+<p>Next, the three maps are created. <code>legend.is.portrait = FALSE</code> ensures that the legend is arranged horizontally instead of vertically.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="tmap.html#cb20-1"></a>us_states_map &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(us_states2163) <span class="op">+</span></span>
+<span id="cb20-2"><a href="tmap.html#cb20-2"></a><span class="st">  </span><span class="kw">tm_polygons</span>(</span>
+<span id="cb20-3"><a href="tmap.html#cb20-3"></a>    <span class="dt">col =</span> <span class="st">&quot;total_pop_15&quot;</span>,</span>
+<span id="cb20-4"><a href="tmap.html#cb20-4"></a>    <span class="dt">breaks =</span> <span class="kw">c</span>(</span>
+<span id="cb20-5"><a href="tmap.html#cb20-5"></a>      <span class="dv">0</span>, <span class="dv">5000000</span>, <span class="dv">10000000</span>, <span class="dv">15000000</span>, <span class="dv">20000000</span>,</span>
+<span id="cb20-6"><a href="tmap.html#cb20-6"></a>      <span class="dv">25000000</span>, <span class="dv">30000000</span>, <span class="dv">35000000</span>, <span class="dv">40000000</span></span>
+<span id="cb20-7"><a href="tmap.html#cb20-7"></a>      ),</span>
+<span id="cb20-8"><a href="tmap.html#cb20-8"></a>    <span class="dt">title =</span> <span class="st">&quot;Population 2015 in millions&quot;</span>,</span>
+<span id="cb20-9"><a href="tmap.html#cb20-9"></a>    <span class="dt">pal =</span> <span class="kw">c</span>(<span class="st">&quot;#E1F5C4&quot;</span>, <span class="st">&quot;#EDE574&quot;</span>, <span class="st">&quot;#F9D423&quot;</span>, <span class="st">&quot;#FC913A&quot;</span>, <span class="st">&quot;#FF4E50&quot;</span>),</span>
+<span id="cb20-10"><a href="tmap.html#cb20-10"></a>    <span class="dt">labels =</span> <span class="kw">c</span>(</span>
+<span id="cb20-11"><a href="tmap.html#cb20-11"></a>      <span class="st">&quot;0-5&quot;</span>, <span class="st">&quot;5-10&quot;</span>, <span class="st">&quot;10-15&quot;</span>, <span class="st">&quot;15-20&quot;</span>, <span class="st">&quot;20-25&quot;</span>,</span>
+<span id="cb20-12"><a href="tmap.html#cb20-12"></a>      <span class="st">&quot;25-30&quot;</span>, <span class="st">&quot;30-35&quot;</span>, <span class="st">&quot;35-40&quot;</span></span>
+<span id="cb20-13"><a href="tmap.html#cb20-13"></a>      ),</span>
+<span id="cb20-14"><a href="tmap.html#cb20-14"></a>    <span class="dt">legend.is.portrait =</span> <span class="ot">FALSE</span>) <span class="op">+</span></span>
+<span id="cb20-15"><a href="tmap.html#cb20-15"></a><span class="st">  </span><span class="kw">tm_layout</span>(</span>
+<span id="cb20-16"><a href="tmap.html#cb20-16"></a>    <span class="dt">frame =</span> <span class="ot">FALSE</span>,</span>
+<span id="cb20-17"><a href="tmap.html#cb20-17"></a>    <span class="dt">legend.outside =</span> <span class="ot">TRUE</span>,</span>
+<span id="cb20-18"><a href="tmap.html#cb20-18"></a>    <span class="dt">legend.outside.position =</span> <span class="st">&quot;bottom&quot;</span></span>
+<span id="cb20-19"><a href="tmap.html#cb20-19"></a>    )</span>
+<span id="cb20-20"><a href="tmap.html#cb20-20"></a>hawaii_map &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(hawaii) <span class="op">+</span></span>
+<span id="cb20-21"><a href="tmap.html#cb20-21"></a><span class="st">  </span><span class="kw">tm_polygons</span>(</span>
+<span id="cb20-22"><a href="tmap.html#cb20-22"></a>    <span class="dt">col =</span> <span class="st">&quot;total_pop_15&quot;</span>,</span>
+<span id="cb20-23"><a href="tmap.html#cb20-23"></a>    <span class="dt">breaks =</span> <span class="kw">c</span>(</span>
+<span id="cb20-24"><a href="tmap.html#cb20-24"></a>      <span class="dv">0</span>, <span class="dv">5000000</span>, <span class="dv">10000000</span>, <span class="dv">15000000</span>, <span class="dv">20000000</span>,</span>
+<span id="cb20-25"><a href="tmap.html#cb20-25"></a>      <span class="dv">25000000</span>, <span class="dv">30000000</span>, <span class="dv">35000000</span>, <span class="dv">40000000</span></span>
+<span id="cb20-26"><a href="tmap.html#cb20-26"></a>      ),</span>
+<span id="cb20-27"><a href="tmap.html#cb20-27"></a>    <span class="dt">pal =</span> <span class="kw">c</span>(<span class="st">&quot;#E1F5C4&quot;</span>, <span class="st">&quot;#EDE574&quot;</span>, <span class="st">&quot;#F9D423&quot;</span>, <span class="st">&quot;#FC913A&quot;</span>, <span class="st">&quot;#FF4E50&quot;</span>)) <span class="op">+</span></span>
+<span id="cb20-28"><a href="tmap.html#cb20-28"></a><span class="st">  </span><span class="kw">tm_layout</span>(</span>
+<span id="cb20-29"><a href="tmap.html#cb20-29"></a>    <span class="dt">title =</span> <span class="st">&quot;Hawaii&quot;</span>,</span>
+<span id="cb20-30"><a href="tmap.html#cb20-30"></a>    <span class="dt">frame =</span> <span class="ot">FALSE</span>,</span>
+<span id="cb20-31"><a href="tmap.html#cb20-31"></a>    <span class="dt">bg.color =</span> <span class="ot">NA</span>,</span>
+<span id="cb20-32"><a href="tmap.html#cb20-32"></a>    <span class="dt">legend.show =</span> <span class="ot">FALSE</span>,</span>
+<span id="cb20-33"><a href="tmap.html#cb20-33"></a>    <span class="dt">title.position =</span> <span class="kw">c</span>(<span class="st">&quot;LEFT&quot;</span>, <span class="st">&quot;BOTTOM&quot;</span>)</span>
+<span id="cb20-34"><a href="tmap.html#cb20-34"></a>    )</span>
+<span id="cb20-35"><a href="tmap.html#cb20-35"></a>alaska_map &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(alaska) <span class="op">+</span></span>
+<span id="cb20-36"><a href="tmap.html#cb20-36"></a><span class="st">  </span><span class="kw">tm_polygons</span>(</span>
+<span id="cb20-37"><a href="tmap.html#cb20-37"></a>    <span class="dt">col =</span> <span class="st">&quot;total_pop_15&quot;</span>,</span>
+<span id="cb20-38"><a href="tmap.html#cb20-38"></a>    <span class="dt">breaks =</span> <span class="kw">c</span>(</span>
+<span id="cb20-39"><a href="tmap.html#cb20-39"></a>      <span class="dv">0</span>, <span class="dv">5000000</span>, <span class="dv">10000000</span>, <span class="dv">15000000</span>, <span class="dv">20000000</span>,</span>
+<span id="cb20-40"><a href="tmap.html#cb20-40"></a>      <span class="dv">25000000</span>, <span class="dv">30000000</span>, <span class="dv">35000000</span>, <span class="dv">40000000</span>),</span>
+<span id="cb20-41"><a href="tmap.html#cb20-41"></a>    <span class="dt">pal =</span> <span class="kw">c</span>(<span class="st">&quot;#E1F5C4&quot;</span>, <span class="st">&quot;#EDE574&quot;</span>, <span class="st">&quot;#F9D423&quot;</span>, <span class="st">&quot;#FC913A&quot;</span>, <span class="st">&quot;#FF4E50&quot;</span>)) <span class="op">+</span></span>
+<span id="cb20-42"><a href="tmap.html#cb20-42"></a><span class="st">  </span><span class="kw">tm_layout</span>(</span>
+<span id="cb20-43"><a href="tmap.html#cb20-43"></a>    <span class="dt">title =</span> <span class="st">&quot;Alaska&quot;</span>,</span>
+<span id="cb20-44"><a href="tmap.html#cb20-44"></a>    <span class="dt">frame =</span> <span class="ot">FALSE</span>,</span>
+<span id="cb20-45"><a href="tmap.html#cb20-45"></a>    <span class="dt">bg.color =</span> <span class="ot">NA</span>,</span>
+<span id="cb20-46"><a href="tmap.html#cb20-46"></a>    <span class="dt">legend.show =</span> <span class="ot">FALSE</span>,</span>
+<span id="cb20-47"><a href="tmap.html#cb20-47"></a>    <span class="dt">title.position =</span> <span class="kw">c</span>(<span class="st">&quot;LEFT&quot;</span>, <span class="st">&quot;TOP&quot;</span>)</span>
+<span id="cb20-48"><a href="tmap.html#cb20-48"></a>    )</span></code></pre></div>
+<p>With <code>grid.layout</code>, a window with two rows and one column is defined. The height of each row depends on the ratio of the “height” of Alaska and the 48 states. After that the three maps are inserted, for Hawaii the “height” again depends on the ratio of the “height” of Alaska to the 48 states. With <code>grid.lines</code>, lines are added to better separate the maps from each other.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="tmap.html#cb21-1"></a><span class="kw">pushViewport</span>(</span>
+<span id="cb21-2"><a href="tmap.html#cb21-2"></a>  <span class="kw">viewport</span>(</span>
+<span id="cb21-3"><a href="tmap.html#cb21-3"></a>    <span class="dt">layout =</span> <span class="kw">grid.layout</span>(</span>
+<span id="cb21-4"><a href="tmap.html#cb21-4"></a>      <span class="dv">2</span>, <span class="dv">1</span>, <span class="dt">heights =</span> <span class="kw">unit</span>(<span class="kw">c</span>(us_states_alaska_ratio, <span class="dv">1</span>), <span class="st">&quot;null&quot;</span>)</span>
+<span id="cb21-5"><a href="tmap.html#cb21-5"></a>      )</span>
+<span id="cb21-6"><a href="tmap.html#cb21-6"></a>    )</span>
+<span id="cb21-7"><a href="tmap.html#cb21-7"></a>  )</span>
+<span id="cb21-8"><a href="tmap.html#cb21-8"></a><span class="kw">print</span>(</span>
+<span id="cb21-9"><a href="tmap.html#cb21-9"></a>  alaska_map,</span>
+<span id="cb21-10"><a href="tmap.html#cb21-10"></a>  <span class="dt">vp =</span> <span class="kw">viewport</span>(<span class="dt">layout.pos.row =</span> <span class="dv">1</span>)</span>
+<span id="cb21-11"><a href="tmap.html#cb21-11"></a>  )</span>
+<span id="cb21-12"><a href="tmap.html#cb21-12"></a><span class="kw">print</span>(</span>
+<span id="cb21-13"><a href="tmap.html#cb21-13"></a>  us_states_map,</span>
+<span id="cb21-14"><a href="tmap.html#cb21-14"></a>  <span class="dt">vp =</span> <span class="kw">viewport</span>(<span class="dt">layout.pos.row =</span> <span class="dv">2</span>)</span>
+<span id="cb21-15"><a href="tmap.html#cb21-15"></a>  )</span>
+<span id="cb21-16"><a href="tmap.html#cb21-16"></a><span class="kw">print</span>(</span>
+<span id="cb21-17"><a href="tmap.html#cb21-17"></a>  hawaii_map,</span>
+<span id="cb21-18"><a href="tmap.html#cb21-18"></a>  <span class="dt">vp =</span> <span class="kw">viewport</span>(</span>
+<span id="cb21-19"><a href="tmap.html#cb21-19"></a>    <span class="dt">x =</span> <span class="fl">0.1</span>, <span class="dt">y =</span> <span class="fl">0.07</span>,</span>
+<span id="cb21-20"><a href="tmap.html#cb21-20"></a>    <span class="dt">height =</span> us_states_hawaii_ratio <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(<span class="kw">c</span>(us_states_alaska_ratio, <span class="dv">1</span>))</span>
+<span id="cb21-21"><a href="tmap.html#cb21-21"></a>    )</span>
+<span id="cb21-22"><a href="tmap.html#cb21-22"></a>  )</span>
+<span id="cb21-23"><a href="tmap.html#cb21-23"></a><span class="kw">grid.lines</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">y =</span> <span class="kw">c</span>(<span class="fl">0.58</span>, <span class="fl">0.58</span>), <span class="dt">gp =</span> <span class="kw">gpar</span>(<span class="dt">lty =</span> <span class="dv">2</span>))</span>
+<span id="cb21-24"><a href="tmap.html#cb21-24"></a><span class="kw">grid.lines</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.2</span>), <span class="dt">y =</span> <span class="kw">c</span>(<span class="fl">0.33</span>, <span class="dv">0</span>), <span class="dt">gp =</span> <span class="kw">gpar</span>(<span class="dt">lty =</span> <span class="dv">2</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-34"></span>
+<img src="_main_files/figure-html/unnamed-chunk-34-1.png" alt="Population by state in the USA" width="672" />
+<p class="caption">
+Figure 2.14: Population by state in the USA
+</p>
+</div>
+<p>Besides the possibility to change different elements of the maps based on a variable, maps can be divided into several maps depending on a variable. What is done in <code>ggplot2</code> with <code>facet_wrap()</code> is done in <code>tmap</code> with <code>tm_facets()</code>. If a temporal variable is to be plotted, this is difficult to do with a map, because the geometries would often overlap. Especially in these cases the use of faceted maps is useful. The function has five important arguments:</p>
+<ul>
+<li><code>by</code>: According to which variable should be split?</li>
+<li><code>nrow / ncol</code>: The number of rows or columns of the facets</li>
+<li><code>free.cords</code>: Should each individual map have its own coordinate system?</li>
+<li><code>along</code>: Which variable should be used for animation?</li>
+</ul>
+<p>For the example below we will be using the honey dataset. We will be looking at the year 2009-2012. First we need to wrangle our data a bit, since there is no data for some states.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="tmap.html#cb22-1"></a><span class="co"># select the years starting in 2009</span></span>
+<span id="cb22-2"><a href="tmap.html#cb22-2"></a>honey0912 &lt;-<span class="st"> </span>honey_csv[honey_csv<span class="op">$</span>year <span class="op">&gt;</span><span class="st"> </span><span class="dv">2008</span>, ]</span>
+<span id="cb22-3"><a href="tmap.html#cb22-3"></a><span class="co"># bind missing data to the original data</span></span>
+<span id="cb22-4"><a href="tmap.html#cb22-4"></a>honey0912 &lt;-<span class="st"> </span><span class="kw">rbind</span>(</span>
+<span id="cb22-5"><a href="tmap.html#cb22-5"></a>  honey0912,</span>
+<span id="cb22-6"><a href="tmap.html#cb22-6"></a>  <span class="co"># create an empty matrix for all the states that are missing</span></span>
+<span id="cb22-7"><a href="tmap.html#cb22-7"></a>  <span class="kw">matrix</span>(</span>
+<span id="cb22-8"><a href="tmap.html#cb22-8"></a>    <span class="ot">NA</span>,</span>
+<span id="cb22-9"><a href="tmap.html#cb22-9"></a>    <span class="dt">ncol =</span> <span class="kw">ncol</span>(honey0912),</span>
+<span id="cb22-10"><a href="tmap.html#cb22-10"></a>    <span class="dt">nrow =</span> <span class="dv">4</span> <span class="op">*</span><span class="st"> </span><span class="kw">length</span>(</span>
+<span id="cb22-11"><a href="tmap.html#cb22-11"></a>      <span class="kw">unique</span>(abbrev<span class="op">$</span>state)[<span class="op">!</span><span class="kw">unique</span>(abbrev<span class="op">$</span>state) <span class="op">%in%</span><span class="st"> </span><span class="kw">unique</span>(honey0912<span class="op">$</span>state)]</span>
+<span id="cb22-12"><a href="tmap.html#cb22-12"></a>      ),</span>
+<span id="cb22-13"><a href="tmap.html#cb22-13"></a>    <span class="dt">dimnames =</span> <span class="kw">list</span>(</span>
+<span id="cb22-14"><a href="tmap.html#cb22-14"></a>      <span class="kw">c</span>(</span>
+<span id="cb22-15"><a href="tmap.html#cb22-15"></a>        <span class="kw">seq_len</span>(</span>
+<span id="cb22-16"><a href="tmap.html#cb22-16"></a>          <span class="dv">4</span> <span class="op">*</span><span class="st"> </span><span class="kw">length</span>(</span>
+<span id="cb22-17"><a href="tmap.html#cb22-17"></a>            <span class="kw">unique</span>(abbrev<span class="op">$</span>state)[<span class="op">!</span><span class="kw">unique</span>(abbrev<span class="op">$</span>state) <span class="op">%in%</span><span class="st"> </span><span class="kw">unique</span>(honey0912<span class="op">$</span>state)])</span>
+<span id="cb22-18"><a href="tmap.html#cb22-18"></a>          )</span>
+<span id="cb22-19"><a href="tmap.html#cb22-19"></a>        ),</span>
+<span id="cb22-20"><a href="tmap.html#cb22-20"></a>      <span class="kw">colnames</span>(honey0912)</span>
+<span id="cb22-21"><a href="tmap.html#cb22-21"></a>      )</span>
+<span id="cb22-22"><a href="tmap.html#cb22-22"></a>    )</span>
+<span id="cb22-23"><a href="tmap.html#cb22-23"></a>  )</span>
+<span id="cb22-24"><a href="tmap.html#cb22-24"></a><span class="co"># add the missing state names</span></span>
+<span id="cb22-25"><a href="tmap.html#cb22-25"></a>honey0912[</span>
+<span id="cb22-26"><a href="tmap.html#cb22-26"></a>  <span class="kw">is.na</span>(honey0912<span class="op">$</span>state), ]<span class="op">$</span>state &lt;-<span class="st"> </span><span class="kw">sort</span>(</span>
+<span id="cb22-27"><a href="tmap.html#cb22-27"></a>    <span class="kw">rep</span>(<span class="kw">unique</span>(abbrev<span class="op">$</span>state)[<span class="op">!</span><span class="kw">unique</span>(abbrev<span class="op">$</span>state) <span class="op">%in%</span><span class="st"> </span><span class="kw">unique</span>(honey0912<span class="op">$</span>state)], <span class="dv">4</span>)</span>
+<span id="cb22-28"><a href="tmap.html#cb22-28"></a>    )</span>
+<span id="cb22-29"><a href="tmap.html#cb22-29"></a><span class="co"># add the year for the missing states</span></span>
+<span id="cb22-30"><a href="tmap.html#cb22-30"></a>honey0912[<span class="kw">is.na</span>(honey0912<span class="op">$</span>year), ]<span class="op">$</span>year &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">2009</span><span class="op">:</span><span class="dv">2012</span>, <span class="dv">10</span>)</span>
+<span id="cb22-31"><a href="tmap.html#cb22-31"></a><span class="co"># merge the honey dataset with the state abbreviations</span></span>
+<span id="cb22-32"><a href="tmap.html#cb22-32"></a>honey0912 &lt;-<span class="st">  </span><span class="kw">merge.data.frame</span>(honey0912, abbrev, <span class="dt">by =</span> <span class="st">&quot;state&quot;</span>)</span>
+<span id="cb22-33"><a href="tmap.html#cb22-33"></a><span class="co"># change the colnames of our two datasets for merging</span></span>
+<span id="cb22-34"><a href="tmap.html#cb22-34"></a><span class="kw">colnames</span>(honey0912)[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">9</span>)] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;short&quot;</span>, <span class="st">&quot;State&quot;</span>)</span>
+<span id="cb22-35"><a href="tmap.html#cb22-35"></a><span class="co"># use the us_states data from spData</span></span>
+<span id="cb22-36"><a href="tmap.html#cb22-36"></a><span class="kw">colnames</span>(us_states)[<span class="dv">2</span>] &lt;-<span class="st"> &quot;State&quot;</span></span>
+<span id="cb22-37"><a href="tmap.html#cb22-37"></a><span class="co"># remove the district of columbia from the us_states dataset from spData</span></span>
+<span id="cb22-38"><a href="tmap.html#cb22-38"></a>us_states &lt;-<span class="st"> </span>us_states[us_states<span class="op">$</span>State <span class="op">!=</span><span class="st"> &quot;District of Columbia&quot;</span>, ]</span>
+<span id="cb22-39"><a href="tmap.html#cb22-39"></a><span class="co"># merge the data together</span></span>
+<span id="cb22-40"><a href="tmap.html#cb22-40"></a>honey0912 &lt;-<span class="st"> </span><span class="kw">merge</span>(honey0912, us_states[, <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">7</span>)], <span class="dt">by =</span> <span class="st">&quot;State&quot;</span>, <span class="dt">all.y =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb22-41"><a href="tmap.html#cb22-41"></a><span class="co"># turn it into an sf object</span></span>
+<span id="cb22-42"><a href="tmap.html#cb22-42"></a>honey0912 &lt;-<span class="st"> </span><span class="kw">st_as_sf</span>(honey0912)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="tmap.html#cb23-1"></a><span class="kw">tm_shape</span>(honey0912) <span class="op">+</span></span>
+<span id="cb23-2"><a href="tmap.html#cb23-2"></a><span class="st">  </span><span class="kw">tm_polygons</span>(</span>
+<span id="cb23-3"><a href="tmap.html#cb23-3"></a>    <span class="dt">col =</span> <span class="st">&quot;priceperlb&quot;</span>,</span>
+<span id="cb23-4"><a href="tmap.html#cb23-4"></a>    <span class="dt">style =</span> <span class="st">&quot;cont&quot;</span>,</span>
+<span id="cb23-5"><a href="tmap.html#cb23-5"></a>    <span class="dt">pal =</span> <span class="kw">viridis</span>(<span class="dv">10</span>, <span class="dt">direction =</span> <span class="dv">-1</span>),</span>
+<span id="cb23-6"><a href="tmap.html#cb23-6"></a>    <span class="dt">title =</span> <span class="st">&quot;Price in US$ per lb&quot;</span></span>
+<span id="cb23-7"><a href="tmap.html#cb23-7"></a>    ) <span class="op">+</span></span>
+<span id="cb23-8"><a href="tmap.html#cb23-8"></a><span class="st">  </span><span class="kw">tm_facets</span>(<span class="dt">by =</span> <span class="st">&quot;year&quot;</span>, <span class="dt">ncol =</span> <span class="dv">2</span>) <span class="op">+</span></span>
+<span id="cb23-9"><a href="tmap.html#cb23-9"></a><span class="st">  </span><span class="kw">tm_layout</span>(<span class="dt">legend.outside.size =</span> <span class="fl">0.2</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-36-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>One problem with this type of maps is that with more values of a variable, more maps are created, which quickly becomes confusing and makes it very difficult to distinguish between the individual maps. This problem is solved by using animated maps. They cannot be displayed in papers, but nowadays more and more information is being retrieved online, which reduces this problem. The author of an article can alternatively include a link to the animated map in his text. As already mentioned, an animated map can be created with the <code>along</code> argument of the function <code>tm_facets()</code>. With the help of the function <code>tmap_animation()</code> the created animation can be saved as a GIF file, however, the software <code>ImageMagick</code> is required for this. The software can be installed using the <code>installr</code> package. (<code>installr::install.imagemagick()</code>) The following animation also shows the average price of a pound of honing in US$, this time over a period of 15 years. You can use <code>delay</code> to specify how many milliseconds should elapse between each image. With <code>width</code> and <code>height</code> you can also specify the dimensions in pixels, with <code>loop</code> whether the GIF is an endless loop or ends after a certain number of rounds.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="tmap.html#cb24-1"></a>honey_animation &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(honey_sf) <span class="op">+</span></span>
+<span id="cb24-2"><a href="tmap.html#cb24-2"></a><span class="st">  </span><span class="kw">tm_polygons</span>(</span>
+<span id="cb24-3"><a href="tmap.html#cb24-3"></a>    <span class="dt">col =</span> <span class="st">&quot;Price_per_lb&quot;</span>,</span>
+<span id="cb24-4"><a href="tmap.html#cb24-4"></a>    <span class="dt">style =</span> <span class="st">&quot;cont&quot;</span>,</span>
+<span id="cb24-5"><a href="tmap.html#cb24-5"></a>    <span class="dt">pal =</span> <span class="kw">viridis</span>(<span class="dv">10</span>, <span class="dt">direction =</span> <span class="dv">-1</span>)</span>
+<span id="cb24-6"><a href="tmap.html#cb24-6"></a>    ) <span class="op">+</span></span>
+<span id="cb24-7"><a href="tmap.html#cb24-7"></a><span class="st">  </span><span class="kw">tm_facets</span>(<span class="dt">along =</span> <span class="st">&quot;year&quot;</span>) <span class="op">+</span></span>
+<span id="cb24-8"><a href="tmap.html#cb24-8"></a><span class="st">  </span><span class="kw">tm_layout</span>(<span class="dt">legend.position =</span> <span class="kw">c</span>(<span class="st">&quot;left&quot;</span>, <span class="st">&quot;bottom&quot;</span>))</span>
+<span id="cb24-9"><a href="tmap.html#cb24-9"></a><span class="kw">tmap_animation</span>(</span>
+<span id="cb24-10"><a href="tmap.html#cb24-10"></a>  honey_animation, <span class="dt">filename =</span> <span class="st">&quot;honey.gif&quot;</span>,</span>
+<span id="cb24-11"><a href="tmap.html#cb24-11"></a>  <span class="dt">delay =</span> <span class="dv">50</span>, <span class="dt">width =</span> <span class="dv">2400</span>, <span class="dt">height =</span> <span class="dv">1200</span></span>
+<span id="cb24-12"><a href="tmap.html#cb24-12"></a>  )</span></code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-39"></span>
+<img src="_main_files/figure-html/unnamed-chunk-39-1.gif" alt="Example of an animated map"  />
+<p class="caption">
+Figure 2.15: Example of an animated map
+</p>
+</div>
+</div>
+<div id="interactive-maps-with-tmap" class="section level2">
+<h2><span class="header-section-number">2.3</span> Interactive maps with tmap</h2>
+<p>A disadvantage of static maps is that they always depict the same thing. This means that only one area is shown and the entire information is displayed directly. Interactive maps improve normal maps in that they allow the viewer to influence the look of the maps and provide additional information. The most common type of interactivity is panning and zooming the displayed map and displaying supplementary information when clicking on individual geometric objects. In <code>tmap</code>, interactivity can be added to each map using the function <code>map_mode("view")</code>. With <code>tmap_mode("plot")</code> this interactivity is removed again.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="tmap.html#cb25-1"></a><span class="kw">tmap_mode</span>(<span class="st">&quot;view&quot;</span>)</span>
+<span id="cb25-2"><a href="tmap.html#cb25-2"></a><span class="kw">tm_shape</span>(bavaria) <span class="op">+</span><span class="st"> </span><span class="kw">tm_polygons</span>(<span class="dt">col =</span> <span class="st">&quot;pop_development&quot;</span>, <span class="dt">midpoint =</span> <span class="dv">0</span>)</span></code></pre></div>
+<p><iframe src="html_plots/chapter_2/tmap_1.html" width="700px" height="700px"></iframe>
+Alternatively, the map can also be created by <code>tmap_leaflet()</code>. As can be seen, there are several background maps to choose from for the map. To use a specific map as background, the function <code>tm_basemap()</code> can be used.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="tmap.html#cb26-1"></a><span class="kw">tm_shape</span>(bavaria) <span class="op">+</span></span>
+<span id="cb26-2"><a href="tmap.html#cb26-2"></a><span class="st">  </span><span class="kw">tm_polygons</span>(<span class="dt">col =</span> <span class="st">&quot;pop_development&quot;</span>, <span class="dt">midpoint =</span> <span class="dv">0</span>) <span class="op">+</span></span>
+<span id="cb26-3"><a href="tmap.html#cb26-3"></a><span class="st">  </span><span class="kw">tm_basemap</span>(<span class="st">&quot;Stamen.Watercolor&quot;</span>)</span></code></pre></div>
+<iframe src="html_plots/chapter_2/tmap_2.html" width="700px" height="400px"></iframe>
+<p>All cards and their names can be viewed under the following link:
+<a href="https://leaflet-extras.github.io/leaflet-providers/preview/" class="uri">https://leaflet-extras.github.io/leaflet-providers/preview/</a>
+
+Even faceted maps can be displayed in interactive mode:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="tmap.html#cb27-1"></a><span class="kw">tm_shape</span>(bavaria) <span class="op">+</span></span>
+<span id="cb27-2"><a href="tmap.html#cb27-2"></a><span class="st">  </span><span class="kw">tm_polygons</span>(<span class="dt">col =</span> <span class="st">&quot;unemployment_rate&quot;</span>) <span class="op">+</span></span>
+<span id="cb27-3"><a href="tmap.html#cb27-3"></a><span class="st">  </span><span class="kw">tm_facets</span>(<span class="dt">by =</span> <span class="st">&quot;Art&quot;</span>)</span></code></pre></div>
+<iframe src="html_plots/chapter_2/tmap_3.html" width="700px" height="700px"></iframe>
+<p>Interactive maps are also well suited to get a first overview of a dataset.
+The following example shows accidents in three London boroughs in 2017. First, the dataset is loaded and transformed into an <code>sf</code> object.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="tmap.html#cb28-1"></a>accidents &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;datasets/chapter_2/accidents.csv&quot;</span>)</span>
+<span id="cb28-2"><a href="tmap.html#cb28-2"></a>accidents &lt;-<span class="st"> </span>accidents <span class="op">%&gt;%</span></span>
+<span id="cb28-3"><a href="tmap.html#cb28-3"></a><span class="st">  </span><span class="kw">st_as_sf</span>(<span class="dt">coords =</span> <span class="kw">c</span>(<span class="st">&quot;Longitude&quot;</span>, <span class="st">&quot;Latitude&quot;</span>), <span class="dt">crs =</span> <span class="dv">4326</span>) <span class="op">%&gt;%</span></span>
+<span id="cb28-4"><a href="tmap.html#cb28-4"></a><span class="st">  </span><span class="kw">st_cast</span>(<span class="st">&quot;POINT&quot;</span>)</span></code></pre></div>
+<p>Then the London shapefiles are loaded and the intersections between the two datasets are calculated.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="tmap.html#cb29-1"></a>london &lt;-<span class="st"> </span><span class="kw">read_sf</span>(<span class="st">&quot;datasets/chapter_2/London_Borough_Excluding_MHW.shp&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb29-2"><a href="tmap.html#cb29-2"></a><span class="st">  </span><span class="kw">st_transform</span>(<span class="dv">4326</span>)</span>
+<span id="cb29-3"><a href="tmap.html#cb29-3"></a>london_union &lt;-<span class="st"> </span><span class="kw">st_union</span>(london)</span>
+<span id="cb29-4"><a href="tmap.html#cb29-4"></a>accidents_m &lt;-<span class="st"> </span><span class="kw">st_intersects</span>(london_union, accidents)</span>
+<span id="cb29-5"><a href="tmap.html#cb29-5"></a>accidents &lt;-<span class="st"> </span>accidents[<span class="kw">unlist</span>(accidents_m), ]</span></code></pre></div>
+<p>To avoid making things too confusing, only three city districts are selected.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="tmap.html#cb30-1"></a>london &lt;-<span class="st"> </span>london[london<span class="op">$</span>NAME <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;City of London&quot;</span>, <span class="st">&quot;Westminster&quot;</span>, <span class="st">&quot;Camden&quot;</span>), ]</span>
+<span id="cb30-2"><a href="tmap.html#cb30-2"></a>london &lt;-<span class="st"> </span><span class="kw">st_union</span>(london)</span>
+<span id="cb30-3"><a href="tmap.html#cb30-3"></a>accidents_m &lt;-<span class="st"> </span><span class="kw">st_intersects</span>(london, accidents)</span>
+<span id="cb30-4"><a href="tmap.html#cb30-4"></a>accidents &lt;-<span class="st"> </span>accidents[<span class="kw">unlist</span>(accidents_m), ]</span></code></pre></div>
+<p>Now only the map needs to be displayed. For this purpose, the variable <code>Light_Conditions</code> is first sorted for a neater legend before the map is plotted. Each point represents an accident and by clicking on it, more information is displayed.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="tmap.html#cb31-1"></a><span class="co"># do some ordering for the legend</span></span>
+<span id="cb31-2"><a href="tmap.html#cb31-2"></a>accidents<span class="op">$</span>Light_Conditions &lt;-<span class="st"> </span><span class="kw">ordered</span>(</span>
+<span id="cb31-3"><a href="tmap.html#cb31-3"></a>  accidents<span class="op">$</span>Light_Conditions,</span>
+<span id="cb31-4"><a href="tmap.html#cb31-4"></a>  <span class="dt">levels =</span> <span class="kw">c</span>(</span>
+<span id="cb31-5"><a href="tmap.html#cb31-5"></a>    <span class="st">&quot;Daylight&quot;</span>,</span>
+<span id="cb31-6"><a href="tmap.html#cb31-6"></a>    <span class="st">&quot;Darkness - lights lit&quot;</span>,</span>
+<span id="cb31-7"><a href="tmap.html#cb31-7"></a>    <span class="st">&quot;Darkness - lighting unknown&quot;</span>,</span>
+<span id="cb31-8"><a href="tmap.html#cb31-8"></a>    <span class="st">&quot;Darkness - lights unlit&quot;</span>,</span>
+<span id="cb31-9"><a href="tmap.html#cb31-9"></a>    <span class="st">&quot;Darkness - no lighting&quot;</span>,</span>
+<span id="cb31-10"><a href="tmap.html#cb31-10"></a>    <span class="st">&quot;Data missing or out of range&quot;</span></span>
+<span id="cb31-11"><a href="tmap.html#cb31-11"></a>    )</span>
+<span id="cb31-12"><a href="tmap.html#cb31-12"></a>  )</span>
+<span id="cb31-13"><a href="tmap.html#cb31-13"></a><span class="co"># define the map</span></span>
+<span id="cb31-14"><a href="tmap.html#cb31-14"></a>map_london &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(accidents) <span class="op">+</span></span>
+<span id="cb31-15"><a href="tmap.html#cb31-15"></a><span class="st">  </span><span class="kw">tm_dots</span>(</span>
+<span id="cb31-16"><a href="tmap.html#cb31-16"></a>    <span class="dt">group =</span> <span class="st">&quot;2017&quot;</span>,</span>
+<span id="cb31-17"><a href="tmap.html#cb31-17"></a>    <span class="dt">col =</span> <span class="st">&quot;Light_Conditions&quot;</span>,</span>
+<span id="cb31-18"><a href="tmap.html#cb31-18"></a>    <span class="dt">palette =</span> <span class="st">&quot;Dark2&quot;</span>,</span>
+<span id="cb31-19"><a href="tmap.html#cb31-19"></a>    <span class="dt">popup.vars =</span> <span class="ot">TRUE</span></span>
+<span id="cb31-20"><a href="tmap.html#cb31-20"></a>    ) <span class="op">+</span></span>
+<span id="cb31-21"><a href="tmap.html#cb31-21"></a><span class="st">  </span><span class="kw">tm_view</span>(</span>
+<span id="cb31-22"><a href="tmap.html#cb31-22"></a>    <span class="dt">alpha =</span> <span class="dv">1</span>,</span>
+<span id="cb31-23"><a href="tmap.html#cb31-23"></a>    <span class="dt">basemaps =</span> <span class="st">&quot;Esri.WorldTopoMap&quot;</span></span>
+<span id="cb31-24"><a href="tmap.html#cb31-24"></a>    )</span>
+<span id="cb31-25"><a href="tmap.html#cb31-25"></a>map_london</span></code></pre></div>
+<iframe src="html_plots/chapter_2/tmap_4.html" width="100%" height="700vh"></iframe>
+</div>
+<div id="related-links" class="section level2">
+<h2><span class="header-section-number">2.4</span> Related links</h2>
+<p>For more information on the use of <code>tmap</code> see <a href="https://geocompr.robinlovelace.net/adv-map.html" class="uri">https://geocompr.robinlovelace.net/adv-map.html</a>. <span class="citation">(Lovelace, Nowosad, and Muenchow 2019)</span></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ggplot2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
