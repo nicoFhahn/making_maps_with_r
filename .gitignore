@@ -15,3 +15,5 @@ shiny_apps/
 shiny_apps.zip
 bookdown/ggplot2.r
 bookdown/rosm.cache/
+*.env
+*.rar
