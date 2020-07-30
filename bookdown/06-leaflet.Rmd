@@ -91,8 +91,8 @@ map_1
 ```
 
 
-```{r, echo=FALSE}
-htmltools::tags$iframe(src = "html_plots/chapter_6/leaflet_1.html", width = "700px", height = "700px")
+```{r, fig.align="center", fig.cap="A simple leaflet map with different layers and one marker", echo=FALSE}
+htmltools::tags$iframe(src = "html_plots/chapter_6/leaflet_1.html")
 ```
 
 Next, we have to calculate the drivetime window from our starting point. For this we will be using the `openrouteservice` package which can be used to calculate drivetime windows from a given point by foot, bike or car for instance. To use the package, you need a token which you can get for free at https://openrouteservice.org/. After calculating the isochrone, we calculate the intersection between the pharmacies in Munich and the drivetime window.
@@ -157,8 +157,8 @@ map_3 <- map_2 %>%
 map_3
 ```
 
-```{r, echo=FALSE}
-htmltools::tags$iframe(src = "html_plots/chapter_6/leaflet_2.html", width = "700px", height = "700px")
+```{r, fig.align="center", fig.cap="Pharmacies within a 20 minutes drivetime window by bike", echo=FALSE}
+htmltools::tags$iframe(src = "html_plots/chapter_6/leaflet_2.html", width = "100%", height = "700vh")
 ```
 
 For our next example, we will cluster all the pharmacies in Munich using density based clustering and then display them nicely with a `leaflet` map. First, we cluster our points with `dbscan()` from the `dbscan` package. Next, we draw a polygon around the outermost points for each cluster.
@@ -274,13 +274,13 @@ leaflet() %>%
 ```
 
 
-```{r, echo=FALSE}
-htmltools::tags$iframe(src = "html_plots/chapter_6/leaflet_3.html", width = "700px", height = "700px")
+```{r, fig.align="center", fig.cap="Clustered pharmacies in Munich", echo=FALSE}
+htmltools::tags$iframe(src = "html_plots/chapter_6/leaflet_3.html", width = "100%", height = "700vh")
 ```
 
 An extension of the `leaflet` package is `leaflet.extras`. This package can be used to display heatmaps, for instance. With `addMeasure()` a tape measure is added here to calculate the distance between two points or the area between several points.
 
-```{r, fig.align="center", fig.cap="Heatmap der Apotheken in München mit Straßennetz", fig.height=9, eval=FALSE}
+```{r, eval=FALSE}
 leaflet() %>%
   # add a dark basemap
   addProviderTiles("CartoDB.DarkMatter", group = "CartoDB") %>%
@@ -312,8 +312,8 @@ leaflet() %>%
   addMiniMap("CartoDB.DarkMatter")
 ```
 
-```{r, echo=FALSE}
-htmltools::tags$iframe(src = "html_plots/leaflet_4.html", width = "700px", height = "700px")
+```{r, fig.align="center", fig.cap="Heatmap of pharmacies in Munich", echo=FALSE}
+htmltools::tags$iframe(src = "html_plots/leaflet_4.html", width = "100%", height = "700vh")
 ```
 
 Since 'leaflet' is a JavaScript library, JavaScript code can also be included. For example, if several background maps and a minimap are added, the first map is always displayed as the minimap even if a different background map is selected. To change this behavior, JavaScript can be included using the function `htmltools::onRender()`.
@@ -349,8 +349,8 @@ basemap %>%
         })
     }")
 ```
-```{r, echo=FALSE}
-htmltools::tags$iframe(src = "html_plots/leaflet_5.html", width = "700px", height = "700px")
+```{r, fig.align="center", fig.cap="Updating minimaps when the basemap is updated", echo=FALSE}
+htmltools::tags$iframe(src = "html_plots/leaflet_5.html", width = "100%", height = "700vh")
 ```
 
 JavaScript can also be used to combine point data into clusters that expand when you click on the respective cluster:
@@ -395,8 +395,8 @@ leaflet() %>%
   )
 ```
 
-```{r, echo=FALSE}
-htmltools::tags$iframe(src = "html_plots/leaflet_6.html", width = "700px", height = "700px")
+```{r, fig.align="center", fig.cap="Expanding clusters using JavaScript", echo=FALSE}
+htmltools::tags$iframe(src = "html_plots/leaflet_6.html", width = "100%", height = "700vh")
 ```
 
 

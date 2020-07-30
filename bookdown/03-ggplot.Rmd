@@ -38,17 +38,21 @@ honey2008 <- honey_sf[honey_sf$year == 2008, ]
 # create a MULTILINESTRING object
 honey2008_multiline <- st_cast(honey2008, "MULTILINESTRING")
 # load state capitals of the US
-state_capitals <- fromJSON("https://raw.githubusercontent.com/vega/vega/master/docs/data/us-state-capitals.json")
+state_capitals <- fromJSON(
+  "https://raw.githubusercontent.com/vega/vega/master/docs/data/us-state-capitals.json"
+  )
 # turn it into an sf object
 state_capitals_sf <- st_as_sf(state_capitals, coords = c("lon", "lat"), crs = 4326)
 # remove alaska and hawaii
-state_capitals_sf <- state_capitals_sf[!state_capitals_sf$state %in% c("Alaska", "Hawaii"), ]
+state_capitals_sf <- state_capitals_sf[
+  !state_capitals_sf$state %in% c("Alaska", "Hawaii"),
+  ]
 ```
 
 ## Using ggplot2 to create maps
-The easiest way to create spatial plots with ggplot is to use the `geom_sf()` function. By default there is no aesthetic mapping, but we can use arguments like `fill' to easily create choropleth maps.
+The easiest way to create spatial plots with ggplot is to use the `geom_sf()` function. By default there is no aesthetic mapping, but we can use arguments like `fill` to easily create choropleth maps.
 
-```{r, fig.cap="Basic use of ggplot2 for spatial data"}
+```{r, fig.align="center", fig.cap="Basic use of ggplot2 for spatial data"}
 usa_1 <- ggplot(data = honey2008) +
   geom_sf()
 usa_2 <- ggplot(data = honey2008) +
@@ -57,9 +61,9 @@ usa_2 <- ggplot(data = honey2008) +
 usa_1 / usa_2
 ```
 
-Using the `annotation_*()`` functions of `ggspatial` we can customize our maps by adding a base map or other elements to our map.
+Using the `annotation_*()` functions of `ggspatial` we can customize our maps by adding a base map or other elements to our map.
 
-```{r, fig.cap="Adding a basemap and some elements"}
+```{r, fig.align="center", fig.cap="Adding a basemap and some elements",warning=FALSE,message=FALSE}
 ggplot(data = honey2008) +
   annotation_map_tile("stamenwatercolor") +
   geom_sf(aes(fill = Price_per_lb), alpha = 0.8) +
@@ -70,7 +74,7 @@ ggplot(data = honey2008) +
 
 We can also use the packages `vapoRwave` and `extrafonts`, do some magic and then create some vibey maps.
 
-```{r,fig.cap= "A E S T H E T I C"}
+```{r, fig.align="center",fig.cap= "A E S T H E T I C"}
 ggplot(data = honey2008_multiline) +
   geom_sf(color = "#FF6B58", alpha = 0.1,  size = 4) +
   geom_sf(color = "#FF6B58", alpha = 0.1,  size = 3) +

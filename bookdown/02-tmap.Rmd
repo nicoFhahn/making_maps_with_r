@@ -225,25 +225,25 @@ An alternative is the `style` argument. This allows the user to automatically cr
 
 Other possibilities are `cat`, `fixed`, `sd`, `kmeans`, `hclust`, `bclust`, and `fisher`.
 
-```{r, fig.align="center",fig.cap="Unemployment rate in Bavaria and distribution of cities and districts", echo = FALSE, fig.width= 8, fig.height= 8, warning=FALSE, message=FALSE}
+```{r, fig.align="center",fig.cap="Diffrent styles", echo = FALSE, fig.width= 8, fig.height= 8, warning=FALSE, message=FALSE}
 ba4 <- tm_shape(bavaria) +
-  tm_polygons(col = "unemployment_rate", style = "pretty", title = "Aq") +
+  tm_polygons(col = "unemployment_rate", style = "pretty", title = "unemp_rate") +
   tm_credits('style = "pretty"', size = 1) +
   tm_layout(inner.margins = 0.1)
 ba5 <- tm_shape(bavaria) +
-  tm_polygons(col = "unemployment_rate", style = "equal", title = "Aq") +
+  tm_polygons(col = "unemployment_rate", style = "equal", title = "unemp_rate") +
   tm_credits('style = "equal"', size = 1) +
   tm_layout(inner.margins = 0.1)
 ba6 <- tm_shape(bavaria) +
-  tm_polygons(col = "unemployment_rate", style = "quantile", title = "Aq") +
+  tm_polygons(col = "unemployment_rate", style = "quantile", title = "unemp_rate") +
   tm_credits('style = "quantile"', size = 1) +
   tm_layout(inner.margins = 0.1)
 ba7 <- tm_shape(bavaria) +
-  tm_polygons(col = "unemployment_rate", style = "jenks", title = "Aq") +
+  tm_polygons(col = "unemployment_rate", style = "jenks", title = "unemp_rate") +
   tm_credits('style = "jenks"', size = 1) +
   tm_layout(inner.margins = 0.1)
 ba8 <- tm_shape(bavaria) +
-  tm_polygons(col = "unemployment_rate", style = "cont", title = "Aq") +
+  tm_polygons(col = "unemployment_rate", style = "cont", title = "unemp_rate") +
   tm_credits('style = "cont"', size = 1) +
   tm_layout(inner.margins = 0.1)
 ba9 <- tm_shape(bavaria) +
@@ -273,6 +273,8 @@ The palettes from these packages can be divided into three types of palettes:
     - Categorical palettes: Easily distinguishable colors, ideal for categorical data
 Alternatively, a custom palette can be passed, for this purpose HEX codes may be used.
 You should pay attention to the selection of your colors: Colors transfer feelings. For example, red is associated with negative things, while green is associated with positive things. This example can also be extended to geographical features. Green is associated with forests and blue with bodies of water. In addition, when using a palette, it should be clear which color stands for lower or higher values. In order for the widest possible range of people to be able to interpret a map, care should also be taken, if possible, to ensure that color-blind people can identify the differences between classes.
+  
+
 ```{r, fig.align="center",fig.cap="Sequential, diverging and categorical palettes", echo=FALSE}
 image_read("../datasets/chapter_2/palette.png")
 ```
@@ -433,7 +435,7 @@ alaska_map <- tm_shape(alaska) +
 
 With `grid.layout`, a window with two rows and one column is defined. The height of each row depends on the ratio of the "height" of Alaska and the 48 states. After that the three maps are inserted, for Hawaii the "height" again depends on the ratio of the "height" of Alaska to the 48 states. With `grid.lines`, lines are added to better separate the maps from each other.
 
-```{r, fig.align="center",fig.cap="State population in the USA"}
+```{r, fig.align="center",fig.cap="Population by state in the USA"}
 pushViewport(
   viewport(
     layout = grid.layout(
@@ -593,7 +595,7 @@ tmap_animation(
   delay = 50, width = 2400, height = 1200
   )
 ```
-```{r, fig.align="center",fig.cap="Animated map", echo=FALSE}
+```{r, fig.align="center",fig.cap="Example of an animated map", echo=FALSE}
 image_resize(image_read("../datasets/chapter_2/honey.gif"), "1200x2400")
 ```
 
@@ -613,7 +615,7 @@ tm_shape(bavaria) +
   tm_polygons(col = "pop_development", midpoint = 0) +
   tm_basemap("Stamen.Watercolor")
 ```
-```{r, echo=FALSE}
+```{r, echo=FALSE, fig.cap="Interactive map of Bavaria with a different basemap"}
 htmltools::tags$iframe(src = "html_plots/chapter_2/tmap_2.html", width = "700px", height = "400px")
 ```
 
@@ -622,12 +624,12 @@ All cards and their names can be viewed under the following link:
 \flushleft
 Even faceted maps can be displayed in interactive mode:
 
-```{r, warning=FALSE, fig.align="center", fig.cap="Faceted interactive map", eval = FALSE}
+```{r, warning=FALSE, fig.align="center", eval = FALSE}
 tm_shape(bavaria) +
   tm_polygons(col = "unemployment_rate") +
   tm_facets(by = "Art")
 ```
-```{r, echo=FALSE}
+```{r, echo=FALSE, fig.cap="Interactive faceted map"}
 htmltools::tags$iframe(src = "html_plots/chapter_2/tmap_3.html", width = "700px", height = "700px")
 ```
   
@@ -661,7 +663,7 @@ accidents <- accidents[unlist(accidents_m), ]
 
 Now only the map needs to be displayed. For this purpose, the variable `Light_Conditions` is first sorted for a neater legend before the map is plotted. Each point represents an accident and by clicking on it, more information is displayed.
 
-```{r, fig.align="center", fig.cap="center", eval=FALSE}
+```{r, fig.align="center", eval=FALSE}
 # do some ordering for the legend
 accidents$Light_Conditions <- ordered(
   accidents$Light_Conditions,
@@ -688,8 +690,8 @@ map_london <- tm_shape(accidents) +
     )
 map_london
 ```
-```{r, echo=FALSE}
-htmltools::tags$iframe(src = "html_plots/chapter_2/tmap_4.html", width = "700px", height = "700px")
+```{r, echo=FALSE, fig.align="center", fig.cap="Interactive crime map of three districts in London"}
+htmltools::tags$iframe(src = "html_plots/chapter_2/tmap_4.html", width = "100%", height = "700vh")
 ```
 
 ## Related links

@@ -43,7 +43,7 @@ flights_grouped <- flights_grouped[!is.na(flights_grouped$dest), ]
 ## Using mapdeck to create maps
 If you create a map with mapdeck, you can define a basemap style using `mapdeck_style()`. If you do not define a style, a default mapbox style is used. To create a map, start with `mapdeck()` and then add layers using the pipe operator `%>%`. For instance, we can visualize our flight data by adding an arc layer that represents the flight routes as raised arcs.
 
-```{r, fig.cap="Flüge von Denver aus in die einzelnen Bundestaaten, 1987-2008",eval=FALSE}
+```{r,eval=FALSE}
 ms <- mapdeck_style("satellite")
 mapdeck(data = flights_grouped, style = ms, pitch = 30, token = token) %>%
   add_arc(
@@ -68,8 +68,8 @@ mapdeck(data = flights_grouped, style = ms, pitch = 30, token = token) %>%
 ```
 
 
-```{r, echo=FALSE}
-htmltools::includeHTML("html_plots/chapter_5/mapdeck1.html")
+```{r, fig.align="center", fig.cap="Displaying flights as arcs",echo=FALSE}
+htmltools::includeHTML("html_plots/chapter_5/mapdeck_1.html", width = "100%", height = "700vh")
 ```
   
 
@@ -94,8 +94,8 @@ mapdeck(style = ms, token = token) %>%
   )
 ```
 
-```{r, echo=FALSE}
-htmltools::includeHTML("html_plots/chapter_5/mapdeck2.html")
+```{r, fig.align="center", fig.cap="Displaying flights as straight lines", echo=FALSE}
+htmltools::includeHTML("html_plots/chapter_5/mapdeck_2.html", width = "100%", height = "700vh")
 ```
   
 
@@ -122,8 +122,8 @@ mapdeck(style = ms, token = token) %>%
   )
 ```
 
-```{r, echo=FALSE}
-htmltools::includeHTML("html_plots/chapter_5/mapdeck3.html")
+```{r, fig.align="center", fig.cap="Displaying flights as animated arcs", echo=FALSE}
+htmltools::includeHTML("html_plots/chapter_5/mapdeck_3.html", width = "100%", height = "700vh")
 ```
   
 
@@ -147,8 +147,8 @@ mapdeck(style = ms, token = token) %>%
     pitch = 45
   )
 ```
-```{r, echo=FALSE}
-htmltools::includeHTML("html_plots/chapter_5/mapdeck4.html")
+```{r, fig.align="center", fig.cap="Displaying flights as animated lines", echo=FALSE}
+htmltools::includeHTML("html_plots/chapter_5/mapdeck_4.html", width = "100%", height = "700vh")
 ```
   
 
@@ -165,8 +165,8 @@ mapdeck(token = token) %>%
   )
 ```
 
-```{r, echo=FALSE}
-htmltools::includeHTML("html_plots/chapter_5/mapdeck5.html")
+```{r, fig.align="center", fig.cap="Displaying the road network of Hamburg", echo=FALSE}
+htmltools::includeHTML("html_plots/chapter_5/mapdeck_5.html", width = "100%", height = "700vh")
 ``` 
   
 
@@ -188,8 +188,8 @@ mapdeck(style = ms, token = token) %>%
 
 ```
 
-```{r, echo=FALSE}
-htmltools::includeHTML("html_plots/chapter_5/mapdeck6.html")
+```{r, fig.align="center", fig.cap="Coloring roads with a custom palette", echo=FALSE}
+htmltools::includeHTML("html_plots/chapter_5/mapdeck_6.html", width = "100%", height = "700vh")
 ```
   
 
@@ -211,8 +211,8 @@ mapdeck(style = ms, token = token) %>%
     pitch = 45,
   )
 ```
-```{r, echo=FALSE}
-htmltools::includeHTML("html_plots/chapter_5/mapdeck7.html")
+```{r, fig.align="center", fig.cap="Grid style heatmap of bakeries in Europe", echo=FALSE}
+htmltools::includeHTML("html_plots/chapter_5/mapdeck_7.html", width = "100%", height = "700vh")
 ```
   
 
@@ -232,8 +232,8 @@ mapdeck(style = ms, token = token) %>%
     pitch = 45,
   )
 ```
-```{r, echo=FALSE}
-htmltools::includeHTML("html_plots/chapter_5/mapdeck8.html")
+```{r, fig.align="center", fig.cap="Hexagon style heatmap of bakeries in Europe", echo=FALSE}
+htmltools::includeHTML("html_plots/chapter_5/mapdeck_8.html", width = "100%", height = "700vh")
 ```
   
 
@@ -251,8 +251,8 @@ mapdeck(style = ms, token = token) %>%
     pitch = 45,
   )
 ```
-```{r, echo=FALSE}
-htmltools::includeHTML("html_plots/chapter_5/mapdeck9.html")
+```{r, fig.align="center", fig.cap="Classic heatmap of bakeries in Europe", echo=FALSE}
+htmltools::includeHTML("html_plots/chapter_5/mapdeck_9.html", width = "100%", height = "700vh")
 ```
   
 
@@ -272,8 +272,8 @@ mapdeck(style = ms, token = token) %>%
     pitch = 45,
   )
 ```
-```{r, echo=FALSE}
-htmltools::includeHTML("html_plots/chapter_5/mapdeck10.html")
+```{r, fig.align="center", fig.cap="Screen grid style heatmap of bakeries in Europe", echo=FALSE}
+htmltools::includeHTML("html_plots/chapter_5/mapdeck_10.html", width = "100%", height = "700vh")
 ```
   
 
