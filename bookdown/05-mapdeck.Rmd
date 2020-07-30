@@ -18,6 +18,7 @@ library(RColorBrewer)
 library(dplyr)
 ```
 
+## Data used
 In this chapter we will use three datasets. The first two are both taken from OpenStreetMap and contain the road network of Hamburg and locations of bakeries in Europe. We will also use a dataset from the package `nycflights13`, which contains all flights from New York airports in 2013.
 ```{r, eval=FALSE}
 roads_hamburg <- read_sf("hamburg.shp")
@@ -39,7 +40,7 @@ colnames(flights_grouped)[6:7] <- c("lat_origin", "lon_origin")
 flights_grouped <- flights_grouped[!is.na(flights_grouped$dest), ]
 ```
 
-
+## Using mapdeck to create maps
 If you create a map with mapdeck, you can define a basemap style using `mapdeck_style()`. If you do not define a style, a default mapbox style is used. To create a map, start with `mapdeck()` and then add layers using the pipe operator `%>%`. For instance, we can visualize our flight data by adding an arc layer that represents the flight routes as raised arcs.
 
 ```{r, fig.cap="Flüge von Denver aus in die einzelnen Bundestaaten, 1987-2008",eval=FALSE}
@@ -70,6 +71,7 @@ mapdeck(data = flights_grouped, style = ms, pitch = 30, token = token) %>%
 ```{r, echo=FALSE}
 htmltools::includeHTML("html_plots/chapter_5/mapdeck1.html")
 ```
+  
 
 With `add_line()` we can also display our flights as straight lines from origin to destination.
 
@@ -95,6 +97,7 @@ mapdeck(style = ms, token = token) %>%
 ```{r, echo=FALSE}
 htmltools::includeHTML("html_plots/chapter_5/mapdeck2.html")
 ```
+  
 
 We can even animate both of these plots with `add_animated_arc()` and `add_animated_line()`.
 ```{r, eval=FALSE}
@@ -122,6 +125,7 @@ mapdeck(style = ms, token = token) %>%
 ```{r, echo=FALSE}
 htmltools::includeHTML("html_plots/chapter_5/mapdeck3.html")
 ```
+  
 
 ```{r, eval=FALSE}
 ms <- mapdeck_style("dark")
@@ -143,10 +147,10 @@ mapdeck(style = ms, token = token) %>%
     pitch = 45
   )
 ```
-
 ```{r, echo=FALSE}
 htmltools::includeHTML("html_plots/chapter_5/mapdeck4.html")
 ```
+  
 
 To visualize a `LINESTRING` or `MULTILINESTRING` we can use the `add_path()` function. In the following, the road network of Hamburg is displayed using this function.
 ```{r, eval=FALSE}
@@ -163,10 +167,10 @@ mapdeck(token = token) %>%
 
 ```{r, echo=FALSE}
 htmltools::includeHTML("html_plots/chapter_5/mapdeck5.html")
-```
+``` 
+  
 
 Next, we color our streets depending on the type of street with the argument `stroke_colour`. This time we will also use our custom palette, which we create with `colorRamp()`.
-
 
 ```{r, eval=FALSE}
 mapdeck(style = ms, token = token) %>%
@@ -187,6 +191,7 @@ mapdeck(style = ms, token = token) %>%
 ```{r, echo=FALSE}
 htmltools::includeHTML("html_plots/chapter_5/mapdeck6.html")
 ```
+  
 
 Lastly, we will plot spatial `POINT` data, in this case a list of bakeries in Europe. We can plot these as different types of heatmaps using `add_grid()`, `add_hexagon()` or `add_heatmap()`.
 
@@ -209,6 +214,8 @@ mapdeck(style = ms, token = token) %>%
 ```{r, echo=FALSE}
 htmltools::includeHTML("html_plots/chapter_5/mapdeck7.html")
 ```
+  
+
 ```{r, eval=FALSE}
 mapdeck(style = ms, token = token) %>%
   add_hexagon(
@@ -228,6 +235,8 @@ mapdeck(style = ms, token = token) %>%
 ```{r, echo=FALSE}
 htmltools::includeHTML("html_plots/chapter_5/mapdeck8.html")
 ```
+  
+
 ```{r, eval=FALSE}
 mapdeck(style = ms, token = token) %>%
   add_heatmap(
@@ -245,6 +254,7 @@ mapdeck(style = ms, token = token) %>%
 ```{r, echo=FALSE}
 htmltools::includeHTML("html_plots/chapter_5/mapdeck9.html")
 ```
+  
 
 The function `add_screengrid()` aggregates points into histogram bins and displays them as a grid. Each time you zoom in or out of the map, the map is re-rendered and the grid is updated.
 
@@ -265,6 +275,7 @@ mapdeck(style = ms, token = token) %>%
 ```{r, echo=FALSE}
 htmltools::includeHTML("html_plots/chapter_5/mapdeck10.html")
 ```
+  
 
 ## Related links
 For more information on the use of `mapdeck` see https://symbolixau.github.io/mapdeck/index.html. [@mapdecklink]

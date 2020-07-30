@@ -1,0 +1,8 @@
+# Conclusion
+So which package should be used? The packages have their strengths partly in different areas.
+
+For a work that is observed in a journal, for example, it can be assumed that interactive maps will not remain interactive. `tmap` and `ggplot2` with `ggspatial` would be very suitable for this. The former can be used to create an easy-to-read map that provides essential information with very little effort. If you are willing to put a little more effort into developing a map, `ggplot2` can be used to create very nice maps. However, `tmap` is usually sufficient.
+
+If the graphic is to be integrated into an HTML document or similar, it makes sense to make the map interactive. `tmap` offers the advantage that if you know the package with only one line of code each map can be made interactive. With `mapview`, `mapdeck` and `leaflet`, however, maps with more functionality can be created and the syntax is also easy to learn. Of these three packages, `mapview` is the easiest way to create maps. Of all packages, `leaflet` offers the most customization and can be enhanced with additional functionality by embedding JavaScript code. For large datasets, however, `mapdeck` is suitable because it is able to visualize them quite quickly.
+
+If the goal is only the exploration of one or more datasets, `shiny` is one of the best ways to visualize different facets of the data. The alternative of creating a new graph each time is simply not efficient enough. `leaflet` is very compatible with `shiny` and by combining the two packages, extremely attractive web apps can be created.

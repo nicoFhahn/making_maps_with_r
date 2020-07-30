@@ -253,7 +253,7 @@ ba9 <- tm_shape(bavaria) +
 tmap_arrange(ba4, ba5, ba6, ba7, ba8, ba9, ncol = 3)
 ```
 
-A further possibility to influence the appearance of a map is to choose the colour of the individual classes. The user can do this using the `palette` argument. The name of a palette from the `RColorBrewer` or `Viridis` package can be passed to this argument. If the order of the palette should be reversed, a `-` can be added at the beginning of the character.
+A further possibility to influence the appearance of a map is to choose the color of the individual classes. The user can do this using the `palette` argument. The name of a palette from the `RColorBrewer` or `Viridis` package can be passed to this argument. If the order of the palette should be reversed, a `-` can be added at the beginning of the character.
 ```{r, eval = FALSE}
 tm_shape(bavaria) +
   tm_polygons(col = "unemployment_rate", palette = "viridis")
@@ -272,7 +272,7 @@ The palettes from these packages can be divided into three types of palettes:
     - Diverging pallets: Follow a gradient from dark to light, to dark. Should be used for continuous variables with a natural midpoint (`midpoint`).
     - Categorical palettes: Easily distinguishable colors, ideal for categorical data
 Alternatively, a custom palette can be passed, for this purpose HEX codes may be used.
-You should pay attention to the selection of your colours: Colors transfer feelings. For example, red is associated with negative things, while green is associated with positive things. This example can also be extended to geographical features. Green is associated with forests and blue with bodies of water. In addition, when using a palette, it should be clear which colour stands for lower or higher values. In order for the widest possible range of people to be able to interpret a map, care should also be taken, if possible, to ensure that colour-blind people can identify the differences between classes.
+You should pay attention to the selection of your colors: Colors transfer feelings. For example, red is associated with negative things, while green is associated with positive things. This example can also be extended to geographical features. Green is associated with forests and blue with bodies of water. In addition, when using a palette, it should be clear which color stands for lower or higher values. In order for the widest possible range of people to be able to interpret a map, care should also be taken, if possible, to ensure that color-blind people can identify the differences between classes.
 ```{r, fig.align="center",fig.cap="Sequential, diverging and categorical palettes", echo=FALSE}
 image_read("../datasets/chapter_2/palette.png")
 ```
@@ -337,7 +337,7 @@ tm_shape(bavaria) +
   tm_polygons(col = "type") +
   tm_style("col_blind")
 ```
-```{r, echo=FALSE, fig.align="center", fig.cap="Classic and colour-blind style"}
+```{r, echo=FALSE, fig.align="center", fig.cap="Classic and color-blind style"}
 a1 <- tm_shape(bavaria) +
   tm_polygons(col = "type") +
   tm_style("classic")

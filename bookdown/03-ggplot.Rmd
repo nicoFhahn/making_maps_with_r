@@ -156,8 +156,8 @@ rm(map_data_fortified)
 rm(map_data_political_fortified)
 pretty_breaks <- c(40,42,44,46,48)
 # find the extremes
-minVal <- min(map_data$avg_age_15, na.rm = T)
-maxVal <- max(map_data$avg_age_15, na.rm = T)
+minVal <- min(map_data$avg_age_15, na.rm = TRUE)
+maxVal <- max(map_data$avg_age_15, na.rm = TRUE)
 # compute labels
 labels <- c()
 brks <- c(minVal, pretty_breaks, maxVal)
@@ -167,36 +167,54 @@ for(idx in 1:length(brks)){
 }
 labels <- labels[1:length(labels)-1]
 # define a new variable on the data set just as above
-map_data$brks <- cut(map_data$avg_age_15, 
-                     breaks = brks, 
-                     include.lowest = TRUE, 
-                     labels = labels)
+map_data$brks <- cut(
+  map_data$avg_age_15, 
+  breaks = brks, 
+  include.lowest = TRUE,
+  labels = labels
+  )
 brks_scale <- levels(map_data$brks)
 labels_scale <- rev(brks_scale)
 ```
 ```{r, fig.align="center",fig.cap="Map of Switzerland using ggplot2", warning=FALSE,message=FALSE}
 ggplot() +
     # raster comes as the first layer, municipalities on top
-    geom_raster(data = relief, aes(x = x, 
-                                  y = y, 
-                                  alpha = value)) +
+    geom_raster(
+      data = relief, aes(
+        x = x, 
+        y = y, 
+        alpha = value
+        )
+      ) +
     # use the "alpha hack"
-    scale_alpha(name = "", range = c(0.6, 0), guide = F)  + 
+    scale_alpha(name = "", range = c(0.6, 0), guide = FALSE)  + 
     # municipality polygons
-    geom_polygon(data = map_data, aes(fill = brks, 
-                                      x = long, 
-                                      y = lat, 
-                                      group = group)) +
+    geom_polygon(
+      data = map_data, aes(
+        fill = brks, 
+        x = long, 
+        y = lat, 
+        group = group
+        )
+      ) +
     # municipality outline
-    geom_path(data = map_data, aes(x = long, 
-                                   y = lat, 
-                                   group = group), 
-              color = "white", size = 0.1) +
+    geom_path(
+      data = map_data, aes(
+        x = long, 
+        y = lat, 
+        group = group
+        ), 
+      color = "white",
+      size = 0.1
+      ) +
     # apart from that, nothing changes
     coord_equal() +
     theme_map() +
-    theme(legend.position = "bottom", plot.title = element_text(hjust = 0.5),
-          plot.subtitle = element_text(hjust = 0.5)) +
+    theme(
+      legend.position = "bottom",
+      plot.title = element_text(hjust = 0.5),
+      plot.subtitle = element_text(hjust = 0.5)
+      ) +
     labs(
       x = NULL, 
       y = NULL, 
@@ -218,8 +236,8 @@ ggplot() +
         title.hjust = 0.5,
         label.hjust = 1,
         nrow = 1,
-        byrow = T,
-        reverse = T,
+        byrow = TRUE,
+        reverse = TRUE,
         label.position = "bottom"
       )
     )

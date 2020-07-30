@@ -1,0 +1,404 @@
+# leaflet
+**leaflet** is an open-source JavaScript library that is used to create dynamic online maps. The identically named R package makes it possible to create these kinds of maps in R as well. The syntax is identical to the `mapdeck` syntax. First the function `leaflet()` is called, followed by different layers with `add*()`. Again, the pipe operator `%>%` is used to add layers on top of each other.
+```{r, eval=FALSE}
+# for loading our data
+library(readr)
+library(sf)
+# for plotting
+library(leaflet)
+library(leaflet.extras)
+# for more stuff
+library(dbscan)
+library(dplyr)
+library(openrouteservice)
+library(geosphere)
+library(magrittr)
+```
+## Data used
+All data used in this chapter is again taken from OpenStreetMap, and most of the data has been converted to shapefiles.
+
+```{r, eval=FALSE}
+pharmacies <- read_sf("pharmacies.shp")
+streets <- read_sf("streets.shp")
+```
+  
+
+## Using leaflet to create maps
+In this first example, we will record all pharmacies within a 20-minute travel time window by bicycle from a specific starting point in Munich. First we create our basemap with `leaflet()` and add different provider tiles and a layers control so that users can switch between the different basemaps.
+```{r, eval=FALSE}
+basemap <- leaflet() %>%
+  # add different provider tiles
+  addProviderTiles(
+    "OpenStreetMap",
+    # give the layer a name
+    group = "OpenStreetMap"
+  ) %>%
+  addProviderTiles(
+    "Stamen.Toner",
+    group = "Stamen.Toner"
+  ) %>%
+  addProviderTiles(
+    "Stamen.Terrain",
+    group = "Stamen.Terrain"
+  ) %>%
+  addProviderTiles(
+    "Esri.WorldStreetMap",
+    group = "Esri.WorldStreetMap"
+  ) %>%
+  addProviderTiles(
+    "Wikimedia",
+    group = "Wikimedia"
+  ) %>%
+  addProviderTiles(
+    "CartoDB.Positron",
+    group = "CartoDB.Positron"
+  ) %>%
+  addProviderTiles(
+    "Esri.WorldImagery",
+    group = "Esri.WorldImagery"
+  ) %>%
+# add a layers control
+  addLayersControl(
+    baseGroups = c(
+      "OpenStreetMap", "Stamen.Toner",
+      "Stamen.Terrain", "Esri.WorldStreetMap",
+      "Wikimedia", "CartoDB.Positron", "Esri.WorldImagery"
+    ),
+    # position it on the topleft
+    position = "topleft"
+  )
+```
+  
+
+Next we add a marker for our starting point. To make it stand out from the markers we will add later, we create a unique looking marker with `makeAwesomeIcon()` and add it to our basemap with `addAwesomeMarkers()`. Notice how we can add layers to our `basemap` object using `%>%`.
+
+```{r, eval=FALSE}
+icon.fa <- makeAwesomeIcon(
+  icon = "flag", markerColor = "red",
+  library = "fa",
+  iconColor = "black"
+)
+
+map_1 <- basemap %>%
+  addAwesomeMarkers(
+    lat = 48.1,
+    lng = 11.5,
+    label = "Starting point",
+    icon = icon.fa
+  )
+
+map_1
+```
+
+
+```{r, echo=FALSE}
+htmltools::tags$iframe(src = "html_plots/chapter_6/leaflet_1.html", width = "700px", height = "700px")
+```
+
+Next, we have to calculate the drivetime window from our starting point. For this we will be using the `openrouteservice` package which can be used to calculate drivetime windows from a given point by foot, bike or car for instance. To use the package, you need a token which you can get for free at https://openrouteservice.org/. After calculating the isochrone, we calculate the intersection between the pharmacies in Munich and the drivetime window.
+
+```{r, eval=FALSE}
+drivetime <- ors_isochrones(
+  # set the starting point
+  locations = c(11.5, 48.1),
+  # use a cycling profile
+  profile = "cycling-regular",
+  # 20 minutes drivetime
+  range = 1200,
+  # return a sf object
+  output = "sf",
+  # token
+  api_key = token
+  )
+
+# get the pharmacies within the 20 minutes drivetime
+pharmacies_inter <- st_intersection(drivetime, pharmacies)
+```
+  
+We add our drivetime window to the map using `addPolygons()`. Finally, we add our pharmacies using `addMarkers()`. We create custom labels that will show on hover through the `label` argument. To get a grasp of how far away each points is from our starting point, we calculate the distance using `distHaversine()` from the `geosphere` package.
+We also add a legend, to show that we have calculated a 20 minute drivetime window.
+```{r, eval=FALSE}
+pharmacies_inter$distance <- distHaversine(st_coordinates(pharmacies_inter), c(11.5, 48.1))
+map_2 <- map_1 %>%
+  addPolygons(
+    data = drivetime,
+    # set the color of the polygon
+    color = "#E84A5F",
+    # set the opacity of the outline
+    opacity = 1,
+    # set the stroke width in pixels
+    weight = 1,
+    # set the fill opacity
+    fillOpacity = 0.6
+  )
+
+map_3 <- map_2 %>%
+  # add pharmacies
+  addMarkers(
+    data = pharmacies_inter,
+    # create custom labels
+    label = paste(
+      "Name: ", pharmacies_inter$name, "<br>",
+      "Distance from location: ",
+      round(pharmacies_inter$distance, 1), " meters", "<br>",
+      "Street: ", pharmacies_inter$addr_st
+    ) %>%
+      lapply(htmltools::HTML)
+  ) %>%
+  # add a legend
+  addLegend(
+    colors = "#E84A5F",
+    labels = "0 - 20 minutes",
+    title = "Drivetime",
+    opacity = 1, 
+    position = "bottomleft"
+  )
+
+map_3
+```
+
+```{r, echo=FALSE}
+htmltools::tags$iframe(src = "html_plots/chapter_6/leaflet_2.html", width = "700px", height = "700px")
+```
+
+For our next example, we will cluster all the pharmacies in Munich using density based clustering and then display them nicely with a `leaflet` map. First, we cluster our points with `dbscan()` from the `dbscan` package. Next, we draw a polygon around the outermost points for each cluster.
+
+```{r, eval=FALSE}
+# apply dbscan to the coordinates of the pharmacies
+pharmacies_db <- dbscan(st_coordinates(pharmacies), eps = 0.008, minPts = 10)
+# add a cluster variable
+pharmacies$cluster <- pharmacies_db$cluster
+# count the size of each cluster
+pharmacies_count <- pharmacies %>%
+  dplyr::group_by(cluster) %>%
+  dplyr::mutate(count = n())
+# split the pharmacies by cluster
+pharmacies_split <- split(pharmacies_count, pharmacies_count$cluster)
+# get the coordinates for all of the points that are in a cluster
+pharmacies_split_coord <- lapply(pharmacies_split[2:length(pharmacies_split)], st_coordinates)
+# compute which points lie on the convex hull of each cluster
+pharmacies_split_chull <- lapply(pharmacies_split_coord, chull)
+# keep only those points
+pharmacies_outer <- lapply(seq_len(length(pharmacies_split_chull)), function(x, ...) {
+  pharmacies_split_coord[[x]][pharmacies_split_chull[[x]], ]
+})
+# turn these points into a slightly buffered polygon
+pharmacies_outer_sf <- lapply(pharmacies_outer, function(x) {
+  # append the last point so that a polygon can be drawn
+  x <- rbind(x, x[1, ])
+  # turn the points into a polygon
+  poly <- st_sfc(st_polygon(list(x))) %>%
+    as.data.frame() %>%
+    # set the crs system of the points
+    st_as_sf(crs = 4326) %>%
+    # transform the polygons
+    st_transform(3035) %>%
+    # buffer the polygons by 200 meters
+    st_buffer(200) %>%
+    # re-transorm the polygons
+    st_transform(4326)
+})
+
+# bind the polygons together
+clusters <- Reduce(rbind, pharmacies_outer_sf)
+# set the count of points in no cluster to NA
+pharmacies_count$count[pharmacies_count$cluster == 0] <- NA
+```
+  
+
+To create our map, we will first define a custom palette using the `colorNumeric()` function, since we will color our points depending on the size of the cluster they are in. Depending on the values that can be mapped to a palette, we can also use the functions `colorBin()`, as well as `colorQuantile()` for numeric variables or `colorFactor()` for factor/character variables.
+
+```{r, eval=FALSE}
+# define a custom palette
+pal <- colorNumeric(
+  c("#E1F5C4", "#EDE574", "#F9D423", "#FC913A", "#FF4E50"),
+  # colors depend on the count variable
+  domain = pharmacies_count$count,
+  )
+
+# corrected html and css to show NA nicely in the legend 
+# CSS to correct spacing
+css_fix <- "div.info.legend.leaflet-control br {clear: both;}"
+# Convert CSS to HTML
+html_fix <- htmltools::tags$style(type = "text/css", css_fix)
+
+leaflet() %>%
+  # add a dark basemap
+  addProviderTiles("CartoDB.DarkMatter") %>%
+  # add the polygons of the clusters
+  addPolygons(
+    data = clusters,
+    color = "#E2E2E2",
+    # set the opacity of the outline
+    opacity = 1,
+    # set the stroke width in pixels
+    weight = 1,
+    # set the fill opacity
+    fillOpacity = 0.2
+  ) %>%
+  # add the pharmacies
+  addCircleMarkers(
+    data = pharmacies_count,
+    # color tthe circles depending on the count
+    color = ~pal(count),
+    # set the opacity of the circles
+    opacity = 0.65,
+    # set the radius of the circles
+    radius = 4,
+    # create custom labels
+    label = paste(
+      "Name:",
+      pharmacies_count$name, "<br>",
+      "Cluster:",
+      pharmacies_count$cluster, "<br>",
+      "Cluster size:",
+      pharmacies_count$count, "<br>",
+      "Street: ",
+      pharmacies_count$addr_st
+    ) %>%
+      lapply(htmltools::HTML),
+  ) %>%
+  # add a legend
+  addLegend(
+    data = pharmacies_count,
+    pal = pal,
+    values = ~count,
+    position = "bottomleft",
+    title = "Cluster size:",
+    opacity = 0.9
+  ) %>%
+  # add a minimap
+  addMiniMap(tiles = "CartoDB.DarkMatter") %<>%
+  # apply the fix
+  htmlwidgets::prependContent(html_fix)
+```
+
+
+```{r, echo=FALSE}
+htmltools::tags$iframe(src = "html_plots/chapter_6/leaflet_3.html", width = "700px", height = "700px")
+```
+
+An extension of the `leaflet` package is `leaflet.extras`. This package can be used to display heatmaps, for instance. With `addMeasure()` a tape measure is added here to calculate the distance between two points or the area between several points.
+
+```{r, fig.align="center", fig.cap="Heatmap der Apotheken in München mit Straßennetz", fig.height=9, eval=FALSE}
+leaflet() %>%
+  # add a dark basemap
+  addProviderTiles("CartoDB.DarkMatter", group = "CartoDB") %>%
+  # add the munich road network
+  addPolylines(
+    data = streets,
+    opacity = 0.5,
+    weight = 1,
+    color = "white"
+  ) %>%
+  # add a heatmap
+  addWebGLHeatmap(
+    data = pharmacies,
+    size = 2000,
+    units = "m",
+    intensity = 0.1,
+    gradientTexture = "skyline",
+    alphaRange = 1,
+    opacity = 0.8
+    ) %>%
+  # add a measure control to the bottom left
+  addMeasure(
+    position = "bottomleft",
+    primaryLengthUnit = "meters",
+    primaryAreaUnit = "sqmeters",
+    activeColor = "#0bd3d3",
+    completedColor = "#f890e7"
+  ) %>%
+  addMiniMap("CartoDB.DarkMatter")
+```
+
+```{r, echo=FALSE}
+htmltools::tags$iframe(src = "html_plots/leaflet_4.html", width = "700px", height = "700px")
+```
+
+Since 'leaflet' is a JavaScript library, JavaScript code can also be included. For example, if several background maps and a minimap are added, the first map is always displayed as the minimap even if a different background map is selected. To change this behavior, JavaScript can be included using the function `htmltools::onRender()`.
+
+```{r, eval=FALSE}
+basemap %>%
+  # add a minimap to our basemap
+  addMiniMap(
+    # all the tiles in our basemap, display the first one
+    tiles = c(
+      "OpenStreetMap", "Stamen.Toner", "Stamen.Terrain",
+      "Esri.WorldStreetMap", "Wikimedia", "CartoDB.Positron",
+      "Esri.WorldImagery"
+      )[1],
+    toggleDisplay = TRUE) %>%
+  # add the pharmacies
+  addMarkers(
+    data = pharmacies,
+    # create custom labels
+    popup = paste(
+      "Name: ", pharmacies$name, "<br>",
+      "Street: ", pharmacies$addr_st
+    ) %>%
+      lapply(htmltools::HTML)
+  ) %>%
+  # add javascript code
+  htmlwidgets::onRender("
+    function(el, x) {
+      var myMap = this;
+      myMap.on('baselayerchange',
+        function (e) {
+          myMap.minimap.changeLayer(L.tileLayer.provider(e.name));
+        })
+    }")
+```
+```{r, echo=FALSE}
+htmltools::tags$iframe(src = "html_plots/leaflet_5.html", width = "700px", height = "700px")
+```
+
+JavaScript can also be used to combine point data into clusters that expand when you click on the respective cluster:
+
+```{r, eval=FALSE}
+leaflet() %>% 
+  addTiles() %>%
+  addMarkers(
+    data = pharmacies,
+    clusterOptions = markerClusterOptions(),
+    clusterId = "pointsCluster"
+    ) %>%
+  addEasyButton(
+    easyButton(
+      states = list(
+        easyButtonState(
+          stateName = "unfrozen-markers",
+          icon = "ion-toggle",
+          title = "Freeze Clusters",
+          onClick = JS("
+          function(btn, map) {
+            var clusterManager =
+              map.layerManager.getLayer('cluster', 'pointsCluster');
+            clusterManager.freezeAtZoom();
+            btn.state('frozen-markers');
+          }")
+        ),
+        easyButtonState(
+          stateName = "frozen-markers",
+          icon = "ion-toggle-filled",
+          title = "UnFreeze Clusters",
+          onClick = JS("
+          function(btn, map) {
+            var clusterManager =
+              map.layerManager.getLayer('cluster', 'pointsCluster');
+            clusterManager.unfreeze();
+            btn.state('unfrozen-markers');
+          }")
+        )
+      )
+    )
+  )
+```
+
+```{r, echo=FALSE}
+htmltools::tags$iframe(src = "html_plots/leaflet_6.html", width = "700px", height = "700px")
+```
+
+
+## Related links
+For more information on the use of `leaflet` see https://rstudio.github.io/leaflet/. [@leafletlink]

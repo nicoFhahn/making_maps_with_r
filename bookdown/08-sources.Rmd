@@ -1,0 +1,69 @@
+# References
+[@lovelace2019geocomputation]
+[@ggplot2link]
+[@ggspatiallink]
+[@mapviewlink]
+[@mapdecklink]
+[@leafletlink]
+[@ggplot2]
+  * ggspatial [@ggspatial]
+  * grid [@R]
+  * htmltools [@htmltools]
+  * htmlwidgets [@htmlwidgets]
+  * lattice [@lattice]
+  * leaflet [@leaflet]
+  * leaflet.extras [@leaflet.extras]
+  * leafpop [@leafpop]
+  * mapdeck [@mapdeck]
+  * mapview [@mapview]
+  * raster [@raster]
+  * tmap [@tmap]
+
+Für Farbpaletten:
+
+  * RColorBrewer [@RColorBrewer]
+  * scico [@scico]
+  * viridis [@viridis]
+  
+Zum Laden und manipulieren von Daten:
+
+  * dplyr [@dplyr]
+  * plyr [@plyr]
+  * readr [@readr]
+  * readxl [@readxl]
+  * rgdal [@rgdal]
+  * rgeos [@rgeos]
+  * sf [@sf]
+  * stringr [@stringr]
+
+Für Datensätze:
+
+  * maps [@maps]
+  * spData [@spData]
+  * spDataLarge [@spDataLarge]
+
+Sonstiges: 
+
+  * magick [@magick]
+    
+Pakete in Verwendung mit den ShinyApps:
+
+  * colourpicker [@colourpicker]
+  * devtools [@devtools]
+  * furrr [@furrr]
+  * future [@future]
+  * geosphere [@geosphere]
+  * leafletplugins [@leafletplugins]
+  * openxlsx [@xlsx]
+  * osmdata [@osmdata]
+  * osrm [@osrm]
+  * rlist [@rlist]
+  * shiny [@shiny]
+  * shinydashboard [@shinydashboard]
+  * shinyjs [@shinyjs]
+  * shinyWidgets [@shinyWidgets]
+  * sp [@sp]
+  * spdep [@spdep]
+  
+# References
+    

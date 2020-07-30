@@ -1,15 +1,11 @@
 ```{r, include=FALSE}
-# packages we need
-# packages <- c("colourpicker", "plyr", "dplyr", "extrafont", "furrr", "future", "ggplot2", "ggspatial",
-#               "htmltools", "htmlwidgets", "lattice", "leaflet", "leaflet.extras", "leafpop",
-#               "jsonlite",
-#               "mapdeck", "magick", "maps", "mapview", "raster", "readr", "readxl", "patchwork",
-#               "RColorBrewer", "rgdal", "rgeos", "scico", "sf", "spData",
-#               "stplanr", "stringr", "tmap", "vapoRwave", "viridis", "bookdown")
-
 
 packages <- c(
-  "dplyr", "extrafont", "ggplot2", "ggspatial", "grid", "htmlwidgets", "jsonlite", "lattice", "leafpop", "magick", "maps", "patchwork", "raster", "readr", "readxl", "rgdal", "scico", "sf", "spData", "tmap", "vapoRwave", "viridis"
+  "dbscan", "dplyr", "extrafont", "geosphere", "ggplot2", "ggspatial", "grid",
+  "jsonlite", "lattice", "leaflet", "leaflet.extras", "leafpop", "magick", "mapdeck",
+  "magrittr", "maps", "mapview", "nycflights13", "openrouteservice", "patchwork",
+  "raster", "RColorBrewer", "readr", "readxl", "rgdal", "scico", "sf", "spData",
+  "tmap", "vapoRwave", "viridis"
 )
 # check which packages are not installed
 not_installed <- packages[!packages %in% installed.packages()[, "Package"]]
@@ -20,10 +16,9 @@ if (length(not_installed) > 1) {
 if (!"vapoRwave" %in% installed.packages()[, "Package"]) {
   devtools::install_github("moldach/vapoRwave")
 }
-if (!"spDataLarge" %in% installed.packages()[, "Package"]) {
-  install.packages("spDataLarge", repos = "https://nowosad.github.io/drat/", type = "source")
+if (!"openrouteservice" %in% installed.packages()[, "Package"]) {
+  devtools::install_github("GIScience/openrouteservice-R")
 }
-packages <- c(packages, "spDataLarge", "grid")
 # load the packages
 lapply(packages, library, character.only = TRUE)
 ```
@@ -32,9 +27,5 @@ lapply(packages, library, character.only = TRUE)
 One of the most important aspects of working with geographical data is the presentation and communication of the results. The former should be as creative as possible without losing intuitiveness. Visual effects help to understand trends, discover outliers and uncover patterns. Data visualization is essential for analyzing large amounts of information and making decisions based on data. Trends and outliers can be seen with just a quick glance at a graph. In comparison to a large Excel spreadsheet or similar, visual elements are much more effective in detecting trends. An important part of data analysis is geospatial analysis, i.e. the analysis of geographical data. In order to visualize this data, different packages can be used in **R**.
 This book will deal with these packages and how they can be used to represent geospatial data.
   
-All of the data used in this book is available in the github repo. HIER LINK EINFÜGEN DU LAPPEN
-SONST ÜBERALL LIBRARY ZU BEGINN
-color statt colour
-EVTL DATA WRANGLING
-pakete checken
+All of the data used in this book is available in the github repository. (https://github.com/nicoFhahn/geocomputation)
 plots beschreiben
