@@ -121,8 +121,8 @@ theme_map <- function(...) {
     ...
   )
 }
-data <- read.csv("switzerland/input/avg_age_15.csv", stringsAsFactors = FALSE)
-gde_15 <- readOGR("switzerland/input/geodata/gde-1-1-15.shp", layer = "gde-1-1-15")
+data <- read.csv("datasets/chapter_2/switzerland/input/avg_age_15.csv", stringsAsFactors = FALSE)
+gde_15 <- readOGR("datasets/chapter_2/switzerland/input/geodata/gde-1-1-15.shp", layer = "gde-1-1-15")
 # set crs to ch1903/lv03, just to make sure  (EPSG:21781)
 crs(gde_15) <- "+proj=somerc +lat_0=46.95240555555556 
 +lon_0=7.439583333333333 +k_0=1 +x_0=600000 +y_0=200000 
@@ -134,7 +134,7 @@ map_data_fortified <- fortify(gde_15, region = "BFS_ID") %>%
 map_data <- map_data_fortified %>%
   left_join(data, by = c("id" = "bfs_id"))
 # whole municipalities
-gde_15_political <- readOGR("switzerland/input/geodata/g1g15.shp", layer = "g1g15")
+gde_15_political <- readOGR("datasets/chapter_2/switzerland/input/geodata/g1g15.shp", layer = "g1g15")
 crs(gde_15_political) <- "+proj=somerc +lat_0=46.95240555555556 
 +lon_0=7.439583333333333 +k_0=1 +x_0=600000 +y_0=200000 
 +ellps=bessel +towgs84=674.374,15.056,405.346,0,0,0,0 +units=m +no_defs"
@@ -144,7 +144,7 @@ map_data_political <- map_data_political_fortified %>%
   left_join(data, by = c("id" = "bfs_id"))
 map_data_political <- map_data_political[complete.cases(map_data_political),]
 # read in background relief
-relief <- raster("switzerland/input/geodata/02-relief-georef-clipped-resampled.tif")
+relief <- raster("datasets/chapter_2/switzerland/input/geodata/02-relief-georef-clipped-resampled.tif")
 relief_spdf <- as(relief, "SpatialPixelsDataFrame")
 # relief is converted to a very simple data frame, 
 # just as the fortified municipalities.
@@ -180,6 +180,7 @@ map_data$brks <- cut(
 brks_scale <- levels(map_data$brks)
 labels_scale <- rev(brks_scale)
 ```
+
 ```{r, fig.align="center",fig.cap="Map of Switzerland using ggplot2", warning=FALSE,message=FALSE}
 ggplot() +
     # raster comes as the first layer, municipalities on top
