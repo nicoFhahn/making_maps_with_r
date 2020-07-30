@@ -1,7 +1,7 @@
 ```{r, echo=FALSE, include=FALSE}
 tmap_mode("plot")
 # load shapefile for bavaria
-bavaria <- read_sf("../datasets/chapter_2/bavaria.shp")
+bavaria <- read_sf("datasets/chapter_2/bavaria.shp")
 # nicer colnames
 colnames(bavaria) <- c(
   "place", "type", "gdp_per_capita", "mean_age",
@@ -10,9 +10,9 @@ colnames(bavaria) <- c(
   "students", "pop_development", "geometry"
 )
 # load europe elevation raster
-europe_raster <- raster("../datasets/chapter_2/elevation1x1_new.tif")
+europe_raster <- raster("datasets/chapter_2/elevation1x1_new.tif")
 # load europe shapefiles
-world_shape <- read_sf("../datasets/chapter_2/ne_50m_admin_0_countries.shp")
+world_shape <- read_sf("datasets/chapter_2/ne_50m_admin_0_countries.shp")
 europe_shape <- world_shape[world_shape$CONTINENT == "Europe",]
 # cities above population of 1 million
 cities <- world.cities[world.cities$pop >= 1000000, ]
@@ -21,15 +21,15 @@ cities <- cities %>% st_as_sf(coords = c("long", "lat"), crs = 4326) %>%
 cities <- st_intersection(cities, st_union(europe_shape))
 europe_shape <- st_cast(europe_shape, "MULTILINESTRING")
 # load the commonuties of bavaria
-communities <- read_sf("../datasets/chapter_2/gmd_ex.shp")
+communities <- read_sf("datasets/chapter_2/gmd_ex.shp")
 # keep only the communities of rosenheim
 rosenheim <- communities[communities$BEZ_KRS == "Rosenheim", ]
 # load the csv file for honey production in the us
-honey_csv <- read_csv("../datasets/chapter_2/honeyproduction.csv")
+honey_csv <- read_csv("datasets/chapter_2/honeyproduction.csv")
 # load the xlsx file for abbreviations of the us states
-abbrev <- read_xlsx("../datasets/chapter_2/abbrev.xlsx")
+abbrev <- read_xlsx("datasets/chapter_2/abbrev.xlsx")
 # load honey shapefile
-honey_sf <- read_sf("../datasets/chapter_2/honey.shp")
+honey_sf <- read_sf("datasets/chapter_2/honey.shp")
 colnames(honey_sf)[3:8] <- c(
   "Number_of_colonies", "Yield_per_colony",
   "Total_production", "Stocks","Price_per_lb",
@@ -276,14 +276,14 @@ You should pay attention to the selection of your colors: Colors transfer feelin
   
 
 ```{r, fig.align="center",fig.cap="Sequential, diverging and categorical palettes", echo=FALSE}
-image_read("../datasets/chapter_2/palette.png")
+image_read("datasets/chapter_2/palette.png")
 ```
 
 Besides the possibility of changing the map itself, there is also the option of editing other elements of the graphic. With the help of functions like `tm_compass()`, `tm_scale_bar()`, `tm_logo()`, `tm_style()` and `tm_layout()`, maps can be extended by various elements. The first three of these functions can be used to add a compass, a scale bar and images.
 ```{r, eval=FALSE, warning=FALSE}
 tm_shape(bavaria) +
   tm_polygons(col = "type", pal = c("white", "skyblue")) +
-  tm_logo("../datasets/chapter_2/bavaria.png", height = 2) +
+  tm_logo("datasets/chapter_2/bavaria.png", height = 2) +
   tm_scale_bar(position = c("left", "bottom"), width = 0.15) +
   tm_compass(position = c("left", "top"), size = 2)
 ```
@@ -291,7 +291,7 @@ tm_shape(bavaria) +
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align="center", fig.cap="Map of Bavaria with additional elements"}
 tm_shape(bavaria) +
   tm_polygons(col = "type", pal = c("white", "skyblue")) +
-  tm_logo("../datasets/chapter_2/bavaria.png", height = 2) +
+  tm_logo("datasets/chapter_2/bavaria.png", height = 2) +
   tm_scale_bar(position = c("left", "bottom"), width = 0.15) +
   tm_compass(position = c("left", "top"), size = 2)
 
@@ -579,7 +579,7 @@ us_states <- us_states[us_states$State != "District of Columbia", ]
 honey <- merge(honey, us_states[, c(2,7)], by = "State", all.y = TRUE)
 honey <- st_as_sf(honey)
 honey <- st_transform(honey, 4326)
-# write_sf(honey, "../datasets/chapter_2/honey.shp")
+# write_sf(honey, "datasets/chapter_2/honey.shp")
 ```
 ```{r, eval = FALSE}
 honey_animation <- tm_shape(honey_sf) +
@@ -596,7 +596,7 @@ tmap_animation(
   )
 ```
 ```{r, fig.align="center",fig.cap="Example of an animated map", echo=FALSE}
-image_resize(image_read("../datasets/chapter_2/honey.gif"), "1200x2400")
+image_resize(image_read("datasets/chapter_2/honey.gif"), "1200x2400")
 ```
 
 ## Interactive maps with tmap
@@ -638,7 +638,7 @@ Interactive maps are also well suited to get a first overview of a dataset.
 The following example shows accidents in three London boroughs in 2017. First, the dataset is loaded and transformed into an `sf` object.
 
 ```{r, message=FALSE, warning=FALSE}
-accidents <- read_csv("../datasets/chapter_2/accidents.csv")
+accidents <- read_csv("datasets/chapter_2/accidents.csv")
 accidents <- accidents %>%
   st_as_sf(coords = c("Longitude", "Latitude"), crs = 4326) %>%
   st_cast("POINT")
@@ -646,7 +646,7 @@ accidents <- accidents %>%
 
 Then the London shapefiles are loaded and the intersections between the two datasets are calculated.
 ```{r, message=FALSE, warning=FALSE}
-london <- read_sf("../datasets/chapter_2/London_Borough_Excluding_MHW.shp") %>%
+london <- read_sf("datasets/chapter_2/London_Borough_Excluding_MHW.shp") %>%
   st_transform(4326)
 london_union <- st_union(london)
 accidents_m <- st_intersects(london_union, accidents)

@@ -69,7 +69,7 @@ mapdeck(data = flights_grouped, style = ms, pitch = 30, token = token) %>%
 
 
 ```{r, fig.align="center", fig.cap="Displaying flights as arcs",echo=FALSE}
-htmltools::includeHTML("html_plots/chapter_5/mapdeck_1.html", width = "100%", height = "700vh")
+htmltools::includeHTML("html_plots/chapter_5/mapdeck_1.html")
 ```
   
 
@@ -95,7 +95,7 @@ mapdeck(style = ms, token = token) %>%
 ```
 
 ```{r, fig.align="center", fig.cap="Displaying flights as straight lines", echo=FALSE}
-htmltools::includeHTML("html_plots/chapter_5/mapdeck_2.html", width = "100%", height = "700vh")
+htmltools::includeHTML("html_plots/chapter_5/mapdeck_2.html")
 ```
   
 
@@ -123,7 +123,7 @@ mapdeck(style = ms, token = token) %>%
 ```
 
 ```{r, fig.align="center", fig.cap="Displaying flights as animated arcs", echo=FALSE}
-htmltools::includeHTML("html_plots/chapter_5/mapdeck_3.html", width = "100%", height = "700vh")
+htmltools::includeHTML("html_plots/chapter_5/mapdeck_3.html")
 ```
   
 
@@ -148,7 +148,7 @@ mapdeck(style = ms, token = token) %>%
   )
 ```
 ```{r, fig.align="center", fig.cap="Displaying flights as animated lines", echo=FALSE}
-htmltools::includeHTML("html_plots/chapter_5/mapdeck_4.html", width = "100%", height = "700vh")
+htmltools::includeHTML("html_plots/chapter_5/mapdeck_4.html")
 ```
   
 
@@ -166,7 +166,7 @@ mapdeck(token = token) %>%
 ```
 
 ```{r, fig.align="center", fig.cap="Displaying the road network of Hamburg", echo=FALSE}
-htmltools::includeHTML("html_plots/chapter_5/mapdeck_5.html", width = "100%", height = "700vh")
+htmltools::includeHTML("html_plots/chapter_5/mapdeck_5.html")
 ``` 
   
 
@@ -189,7 +189,7 @@ mapdeck(style = ms, token = token) %>%
 ```
 
 ```{r, fig.align="center", fig.cap="Coloring roads with a custom palette", echo=FALSE}
-htmltools::includeHTML("html_plots/chapter_5/mapdeck_6.html", width = "100%", height = "700vh")
+htmltools::includeHTML("html_plots/chapter_5/mapdeck_6.html")
 ```
   
 
@@ -212,7 +212,7 @@ mapdeck(style = ms, token = token) %>%
   )
 ```
 ```{r, fig.align="center", fig.cap="Grid style heatmap of bakeries in Europe", echo=FALSE}
-htmltools::includeHTML("html_plots/chapter_5/mapdeck_7.html", width = "100%", height = "700vh")
+htmltools::includeHTML("html_plots/chapter_5/mapdeck_7.html")
 ```
   
 
@@ -233,7 +233,7 @@ mapdeck(style = ms, token = token) %>%
   )
 ```
 ```{r, fig.align="center", fig.cap="Hexagon style heatmap of bakeries in Europe", echo=FALSE}
-htmltools::includeHTML("html_plots/chapter_5/mapdeck_8.html", width = "100%", height = "700vh")
+htmltools::includeHTML("html_plots/chapter_5/mapdeck_8.html")
 ```
   
 
@@ -252,7 +252,7 @@ mapdeck(style = ms, token = token) %>%
   )
 ```
 ```{r, fig.align="center", fig.cap="Classic heatmap of bakeries in Europe", echo=FALSE}
-htmltools::includeHTML("html_plots/chapter_5/mapdeck_9.html", width = "100%", height = "700vh")
+htmltools::includeHTML("html_plots/chapter_5/mapdeck_9.html")
 ```
   
 
@@ -273,7 +273,7 @@ mapdeck(style = ms, token = token) %>%
   )
 ```
 ```{r, fig.align="center", fig.cap="Screen grid style heatmap of bakeries in Europe", echo=FALSE}
-htmltools::includeHTML("html_plots/chapter_5/mapdeck_10.html", width = "100%", height = "700vh")
+htmltools::includeHTML("html_plots/chapter_5/mapdeck_10.html")
 ```
   
 

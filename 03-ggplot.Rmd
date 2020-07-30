@@ -1,5 +1,5 @@
 ```{r, echo=FALSE, include=FALSE}
-honey_sf <- read_sf("../datasets/chapter_3/honey.shp")
+honey_sf <- read_sf("datasets/chapter_3/honey.shp")
 colnames(honey_sf)[3:8] <- c("Number_of_colonies", "Yield_per_colony",
                           "Total_production", "Stocks","Price_per_lb",
                           "Value_of_production"
