@@ -28,3 +28,5 @@ One of the most important aspects of working with geographical data is the prese
 This book will deal with these packages and how they can be used to represent geospatial data.
   
 All of the data used in this book is available in the github repository. (https://github.com/nicoFhahn/geocomputation)
+  
+Please note that some of the html-plots in this book may take a few seconds to load.

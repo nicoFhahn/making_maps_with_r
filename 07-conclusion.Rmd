@@ -10,6 +10,10 @@ If the goal is only the exploration of one or more datasets, `shiny` is one of t
 If this book was helpful for you and you were able to create some beautiful maps and want to thank me, you can support me by buying me a coffee.
 
 \centering
+  
+
 https://www.buymeacoffee.com/nicohahn
 \flushleft
+  
+
 This is of course completely optional.
