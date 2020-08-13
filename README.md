@@ -1,6 +1,6 @@
 # Making Maps with R
 ## Introduction
-This repository hosts the code underlying Making Maps with R, a short book written by me with a lot of help by me, too. The online version of this book is free to read at https://bookdown.org/nico_hahn_1996_nh/making_maps_with_r/.
+This repository hosts the code underlying Making Maps with R, a short book written by me with a lot of help by me, too. The online version of this book is free to read at [https://bookdown.org/nicohahn/making_maps_with_r5](https://bookdown.org/nicohahn/making_maps_with_r5/docs/introduction.html)
 
 ## Contributing
 If you want to contribute, you can
